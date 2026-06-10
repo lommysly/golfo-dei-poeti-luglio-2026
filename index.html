@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Golfo dei Poeti Weekend — 17–19 Luglio 2026</title>
+  <meta name="description" content="Weekend in barca a vela nel Golfo dei Poeti. Calette nascoste, aperitivo al tramonto, cena alla Locanda Lorena sull'isola della Palmaria. Partenza da Porto Mirabello, La Spezia." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-wave">
+        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+          <path class="wave-path" d="M0,30 C50,0 100,60 150,30 C175,15 190,35 200,30" fill="none" stroke="#1CA7A8" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="preloader-text">GOLFO DEI POETI</div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <span class="logo-icon">—</span>
+        <span>Golfo dei Poeti</span>
+      </a>
+      <div class="nav-links">
+        <a href="#quota">Quote</a>
+        <a href="#itinerario">Itinerario</a>
+        <a href="#barche">La Barca</a>
+        <a href="#contatti">Info</a>
+        <span class="nav-divider"></span>
+        <a href="regole.html">Regole</a>
+        <a href="briefing.html">Briefing</a>
+        <a href="cambusa.html">Cambusa</a>
+        <a href="meteo.html">Meteo</a>
+        <a href="rotta.html">Rotta</a>
+        <span class="nav-divider"></span>
+        <a href="checkin.html">Check-in</a>
+        <a href="inventario.html">Inventario</a>
+      </div>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="#quota">Quote</a>
+      <a href="#itinerario">Itinerario</a>
+      <a href="#barche">La Barca</a>
+      <a href="#contatti">Info</a>
+      <a href="regole.html">Regole</a>
+      <a href="briefing.html">Briefing</a>
+      <a href="cambusa.html">Cambusa</a>
+      <a href="meteo.html">Meteo</a>
+      <a href="rotta.html">Rotta</a>
+      <a href="checkin.html">🔐 Check-in</a>
+      <a href="inventario.html">Inventario</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-img" style="background-image:url('img/porto-venere-la-spezia-italy-historic-town-skyli-2023-12-19-04-49-14-utc-scaled.jpg'); background-position: center 60%;"></div>
+      <div class="hero-gradient"></div>
+      <div class="hero-particles" id="heroParticles"></div>
+    </div>
+    <div class="hero-waves-top">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80Z" fill="rgba(255,255,255,0.03)"/></svg>
+    </div>
+
+    <div class="hero-content" id="heroContent">
+      <div class="hero-eyebrow reveal-up">
+        <span class="eyebrow-dot"></span>
+        Weekend del 17–19 Luglio 2026
+        <span class="eyebrow-dot"></span>
+      </div>
+      <h1 class="hero-title reveal-up d1">
+        Golfo<br/>
+        <em>dei Poeti</em><br/>
+        Weekend
+      </h1>
+      <p class="hero-sub reveal-up d2">
+        Tre giorni tra calette nascoste, aperitivo al tramonto<br/>
+        e cena con vista su Portovenere di notte.
+      </p>
+
+      <!-- Countdown -->
+      <div class="countdown reveal-up d3" id="countdown">
+        <div class="cd-block">
+          <span class="cd-num" id="cdDays">--</span>
+          <span class="cd-label">giorni</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cdHours">--</span>
+          <span class="cd-label">ore</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cdMins">--</span>
+          <span class="cd-label">min</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cdSecs">--</span>
+          <span class="cd-label">sec</span>
+        </div>
+      </div>
+
+      <div class="hero-badges reveal-up d4">
+        <span class="badge">⚓ Porto Mirabello · La Spezia</span>
+        <span class="badge">⛵ Beneteau Oceanis 45</span>
+        <span class="badge-availability">
+          <span class="avail-dot"></span>
+          9 posti · Prenotazione aperta
+        </span>
+      </div>
+
+      <div class="hero-ctas reveal-up d5">
+        <a href="#itinerario" class="btn-primary">Scopri l'itinerario</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-indicator">
+        <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+        <span>Scorri</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro" id="intro">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-copy">
+          <span class="label">Il Weekend</span>
+          <h2 class="h2">Il Golfo più bello della Liguria</h2>
+          <p>Il Golfo dei Poeti — tra La Spezia e Portovenere — è uno degli angoli più suggestivi del Mediterraneo. Calette nascoste raggiungibili solo via mare, acque trasparenti, borghi arroccati e tramonti mozzafiato.</p>
+          <p>Tre giorni a bordo di <strong>Atlantica</strong>, un Beneteau Oceanis 45 anno 2018, con 4 cabine doppie e tutti i comfort. Venerdì sera si salpa per l'aperitivo al tramonto, sabato si esplorano le calette, sabato sera cena prenotata alla <strong>Locanda Lorena</strong> sull'isola della Palmaria con vista su Portovenere illuminata.</p>
+          <p>Domenica si naviga ancora prima del rientro in porto. Un weekend perfetto per chi ama il mare vero.</p>
+        </div>
+        <div class="intro-stats">
+          <div class="stat">
+            <div class="stat-n">3</div>
+            <div class="stat-l">Giorni in Barca</div>
+          </div>
+          <div class="stat highlight">
+            <div class="stat-n">9</div>
+            <div class="stat-l">Persone a Bordo</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">13.9</div>
+            <div class="stat-l">Metri di Lunghezza</div>
+          </div>
+          <div class="stat">
+            <div class="stat-n">4</div>
+            <div class="stat-l">Cabine Doppie</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERIA FOTO -->
+  <section class="galleria" id="galleria">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:40px;">
+        <span class="label">Il Golfo</span>
+        <h2 class="h2">I Luoghi che Esplorerai</h2>
+        <p class="section-desc">Calette raggiungibili solo via mare, borghi arroccati sulle scogliere, acque cristalline e tramonti da cartolina.</p>
+      </div>
+      <div class="galleria-grid">
+        <div class="gal-item large" style="background-image:url('img/palmaria.jpg'); background-position:center;">
+          <div class="gal-label">Isola della Palmaria</div>
+        </div>
+        <div class="gal-item" style="background-image:url('img/Chiesa-di-San-Pietro-vista-dai-Mulini-a-Portovenere.webp'); background-position:center top;">
+          <div class="gal-label">Chiesa di San Pietro</div>
+        </div>
+        <div class="gal-item" style="background-image:url('img/CALETTA-LERICI-LIGURIA.webp');">
+          <div class="gal-label">Calette di Lerici</div>
+        </div>
+        <div class="gal-item" style="background-image:url('img/Reef_Snorkelling_on_the_Great_Barrier_Reef.jpg'); background-position:center;">
+          <div class="gal-label">Fondali &amp; Snorkeling</div>
+        </div>
+        <div class="gal-item" style="background-image:url('img/navigazione-al-tramonto.jpg'); background-position:center;">
+          <div class="gal-label">Navigazione al Tramonto</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LE CALETTE -->
+  <section class="calette" id="calette" style="padding:80px 0; background:var(--bg-light);">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:48px;">
+        <span class="label">Solo via mare</span>
+        <h2 class="h2">Le Calette del Golfo</h2>
+        <p class="section-desc">Raggiungibili solo in barca. Acque trasparenti, scogliere selvagge, niente folla. Il cuore del Golfo dei Poeti.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+
+        <div class="regola-card reveal-up" style="text-align:left;">
+          <div style="width:100%;height:120px;border-radius:10px;margin-bottom:12px;background-image:url('img/cala-del-terrizzo.jpg');background-size:cover;background-position:center;"></div>
+          <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; margin-bottom:8px;">Cala del Terrizzo</h4>
+          <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;">La caletta più riparata dell'isola Palmaria. Ideale per il relax e il sole, con fondali bassi e acqua verde smeraldo. Ormeggio comodo anche con barca a vela.</p>
+          <div style="margin-top:10px; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--turq);">📍 Isola Palmaria</div>
+        </div>
+
+        <div class="regola-card reveal-up d1" style="text-align:left;">
+          <div style="width:100%;height:120px;border-radius:10px;margin-bottom:12px;background-image:url('img/cala-della-fornace.jpg');background-size:cover;background-position:center;"></div>
+          <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; margin-bottom:8px;">Cala della Fornace</h4>
+          <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;">Acque cristalline con fondali rocciosi ricchi di posidonia e fauna marina. Una delle migliori calette del golfo per lo snorkeling. Accessibile solo dal mare.</p>
+          <div style="margin-top:10px; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--turq);">📍 Isola Palmaria · snorkeling</div>
+        </div>
+
+        <div class="regola-card reveal-up d2" style="text-align:left;">
+          <div style="width:100%;height:120px;border-radius:10px;margin-bottom:12px;background-image:url('img/palmaria.jpg');background-size:cover;background-position:center;"></div>
+          <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; margin-bottom:8px;">Il Pozzale</h4>
+          <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;">La spiaggia selvaggia per eccellenza della Palmaria. Ciottoli bianchi, acque profonde e trasparenti, circondata da pineta. Nessuna struttura, nessuna folla.</p>
+          <div style="margin-top:10px; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--turq);">📍 Isola Palmaria · spiaggia selvaggia</div>
+        </div>
+
+        <div class="regola-card reveal-up" style="text-align:left;">
+          <div style="width:100%;height:120px;border-radius:10px;margin-bottom:12px;background-image:url('img/cala-maramozza.jpg');background-size:cover;background-position:center;"></div>
+          <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; margin-bottom:8px;">Cala Maramozza</h4>
+          <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;">La gemma nascosta di Fiascherino. Scogliere a strapiombo, acque di un blu profondo, totalmente selvaggia. Raggiungibile solo a nuoto dalla riva o in barca. Imperdibile.</p>
+          <div style="margin-top:10px; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--turq);">📍 Fiascherino · selvaggia</div>
+        </div>
+
+        <div class="regola-card reveal-up d1" style="text-align:left;">
+          <div style="width:100%;height:120px;border-radius:10px;margin-bottom:12px;background-image:url('img/baia-blu-marinella.jpg');background-size:cover;background-position:center;"></div>
+          <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; margin-bottom:8px;">Baia Blu &amp; Marinella</h4>
+          <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;">Insenature con fondali sabbiosi tra Punta Santa Teresa e Lerici. Acque basse e protette, ottime per ancorare la sera. Una delle soste preferite dagli skipper locali.</p>
+          <div style="margin-top:10px; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--turq);">📍 Lerici · ancoraggio notturno</div>
+        </div>
+
+        <div class="regola-card reveal-up d2" style="text-align:left;">
+          <div style="width:100%;height:120px;border-radius:10px;margin-bottom:12px;background-image:url('img/isole-tino-tinetto.jpg');background-size:cover;background-position:center;"></div>
+          <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; margin-bottom:8px;">Isole Tino &amp; Tinetto</h4>
+          <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;">Le isole più a sud del golfo, zona di riserva marina. Acque selvagge e incontaminate, fondo di corallo e posidonia. Perfette per ancorare e fare snorkeling lontano da tutto.</p>
+          <div style="margin-top:10px; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--turq);">📍 Sud Palmaria · riserva marina</div>
+        </div>
+
+      </div>
+      <div style="margin-top:32px; padding:18px 24px; background:rgba(200,168,75,.08); border:1px solid rgba(200,168,75,.25); border-radius:16px; font-size:.88rem; color:var(--text-mid); line-height:1.7;">
+        ⚠️ <strong>Attenzione vivai:</strong> Nella zona tra la Palmaria e Fezzano sono presenti vivai di mitili (cozze). Navigare con attenzione e non ancorare in quell'area. · <strong>Periodo ideale:</strong> fine maggio–ottobre, con possibilità di estendere verso le Cinque Terre se le condizioni meteo lo permettono.
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTA DI PARTECIPAZIONE -->
+  <section class="quota" id="quota">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">Costi</span>
+        <h2 class="h2">Quota di Partecipazione</h2>
+      </div>
+      <div class="quota-grid">
+        <div class="quota-card incluso reveal-up">
+          <div class="quota-card-title">Incluso nella quota (€330)</div>
+          <ul class="quota-list">
+            <li>Noleggio barca (venerdì–domenica)</li>
+            <li>Pulizie finali</li>
+            <li>Tender incluso</li>
+            <li>Gestione charter e consegna barca</li>
+          </ul>
+          <div style="margin-top:20px; padding:14px 16px; background:rgba(28,167,168,.06); border-radius:12px; border:1px solid rgba(28,167,168,.2);">
+            <div style="font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:var(--turq); margin-bottom:8px;">Pagamento</div>
+            <p style="font-size:.88rem; color:var(--text-mid); line-height:1.6;"><strong>€300 bonifico</strong> — intestatario Silvio Lomastro<br/>IBAN: IT42 K036 6901 6007 4359 4726 935<br/>Causale: Nome + Weekend 27/29 Luglio 2026<br/><strong>€30 in contanti</strong> il giorno dell'imbarco (quota charter/pulizie)</p>
+          </div>
+        </div>
+        <div class="quota-card non-incluso reveal-up d1">
+          <div class="quota-card-title">Non incluso</div>
+          <ul class="quota-list">
+            <li>Lenzuola e asciugamani: <strong>€60 a cabina</strong> (kit per 2 — obbligatorio per entrambi)</li>
+            <li>Cambusa (spesa da dividere tra l'equipaggio)</li>
+            <li>Gasolio per la navigazione</li>
+            <li>Eventuali porti / ormeggi</li>
+            <li>Cene e pranzi a terra</li>
+            <li>Transfer da/per il porto</li>
+            <li>Cauzione rimborsabile: <strong>€3.500 totali</strong> (~€440 a persona) in contanti al check-in</li>
+            <li>Assicurazione cauzione: <strong>€30 a persona</strong> — facoltativa, tutto il gruppo o nessuno</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ITINERARIO -->
+  <section class="itinerario" id="itinerario">
+    <div class="itinerario-bg"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="section-header centered">
+        <span class="label light">Il Piano</span>
+        <h2 class="h2 light">Itinerario del Weekend</h2>
+        <p class="section-desc" style="color:rgba(255,255,255,.6)">Tre giorni tra le acque del Golfo dei Poeti. Un programma di massima — il mare ha sempre l'ultima parola.</p>
+      </div>
+
+      <div class="timeline-v">
+
+        <!-- G1 — Venerdì -->
+        <div class="tl-item reveal-up">
+          <div class="tl-date">
+            <div class="tl-day">27</div>
+            <div class="tl-month">GIU</div>
+            <div class="tl-wd">VEN</div>
+          </div>
+          <div class="tl-line">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-tag">Check-in &amp; Partenza</div>
+            <h3>Porto Mirabello → Prima Caletta al Tramonto</h3>
+            <p>Check-in a <strong>Porto Mirabello ore 17:00</strong>. Sistemazione cabine, briefing equipaggio, cambusa a bordo. Si salpa nel tardo pomeriggio verso est — direzione <strong>Lerici</strong>.</p>
+            <p>Prima tappa: la <strong>Caletta di Lerici (vicino a Maralunga)</strong> — una piccola insenatura di ghiaia incastonata tra le rocce, raggiungibile solo via mare. Fondali limpidissimi, il castello di Lerici sullo sfondo. Primo tuffo, aperitivo in rada.</p>
+            <p>Ormeggio notturno alla <strong>Baia Blu o Marinella</strong> — insenature con fondali sabbiosi tra Punta Santa Teresa e Lerici, acque protette e calme, le preferite dagli skipper locali.</p>
+            <div class="tl-tags">
+              <span>⚓ Check-in ore 17:00</span>
+              <span>🏊 Caletta di Lerici</span>
+              <span>🍷 Aperitivo in rada</span>
+              <span>🌙 Ormeggio Lerici</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- G2 — Sabato -->
+        <div class="tl-item reveal-up d1">
+          <div class="tl-date">
+            <div class="tl-day">28</div>
+            <div class="tl-month">GIU</div>
+            <div class="tl-wd">SAB</div>
+          </div>
+          <div class="tl-line">
+            <div class="tl-dot star-dot"></div>
+          </div>
+          <div class="tl-card star-card">
+            <div class="tl-card-tag star-tag">Giornata Principale</div>
+            <h3>Calette, Isole &amp; Cena alla Locanda Lorena</h3>
+            <p><strong>Mattina:</strong> navigazione verso <strong>Fiascherino</strong>. Sosta alla <strong>Cala Maramozza</strong> — la gemma nascosta di Fiascherino, scogliere a strapiombo, acque blu profondo, totalmente selvaggia e raggiungibile solo in barca. Poi si costeggia verso <strong>Tellaro</strong>, uno dei borghi più belli d'Italia aggrappato alla scogliera.</p>
+            <p><strong>Tarda mattina:</strong> si doppia la Palmaria e si ancora alla <strong>Cala della Fornace</strong> o alla <strong>Cala del Terrizzo</strong> — le due calette più belle dell'isola, fondali cristallini ideali per snorkeling. Chi vuole può esplorare a nuoto fino al <strong>Pozzale</strong>, la spiaggia selvaggia con ciottoli bianchi e pineta.</p>
+            <p><strong>Pomeriggio:</strong> navigazione verso <strong>Portovenere</strong>. Sosta panoramica sotto la scogliera della <strong>chiesa di San Pietro</strong> e nel canale con le case colorate. Passaggio davanti alla <strong>Grotta di Byron</strong>, raggiungibile solo dal mare. Ormeggio davanti alla Palmaria con vista su Portovenere illuminata.</p>
+            <div class="tl-tags">
+              <span>🦅 Cala Maramozza · Fiascherino</span>
+              <span>🤿 Cala della Fornace · snorkeling</span>
+              <span>🏖️ Il Pozzale · Palmaria</span>
+              <span>⛪ San Pietro · Grotta di Byron</span>
+            </div>
+            <div class="cambusa-note">
+              <strong>🍽️ Cena prenotata · Locanda Lorena</strong> — ristorante sull'isola della Palmaria, veranda con vista diretta su Portovenere illuminata di notte. Una delle esperienze più suggestive del golfo. Cena non inclusa nella quota.
+            </div>
+            <div class="tl-overnight">Notte ormeggiati davanti alla Palmaria · luci di Portovenere riflesse sul mare</div>
+          </div>
+        </div>
+
+        <!-- G3 — Domenica -->
+        <div class="tl-item reveal-up d2">
+          <div class="tl-date">
+            <div class="tl-day">29</div>
+            <div class="tl-month">GIU</div>
+            <div class="tl-wd">DOM</div>
+          </div>
+          <div class="tl-line">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-tag">Ultimo Giorno</div>
+            <h3>Mattina Libera → Rientro via San Terenzo</h3>
+            <p><strong>Mattina:</strong> colazione a bordo con vista sulla Palmaria. Ultima sosta — la <strong>Spiaggia di Fiascherino</strong>, tratto di costa selvaggia e incontaminata accessibile solo via mare o attraverso un sentiero panoramico. Bagno finale, relax, niente fretta.</p>
+            <p>Navigazione di rientro con passaggio davanti a <strong>San Terenzo</strong> — borgo marinaro affacciato sul golfo, una delle cartoline più belle della costa ligure. Rientro a <strong>Porto Mirabello entro le 17:00</strong>.</p>
+            <p style="font-size:.85rem; color:rgba(255,255,255,.55); margin-top:8px;">Chi vuole può restare in barca domenica sera con rientro entro le <strong>09:00 di lunedì</strong>.</p>
+            <div class="tl-tags">
+              <span>🏖️ Spiaggia di Fiascherino</span>
+              <span>⛵ San Terenzo</span>
+              <span>⚓ Check-out ore 17:00</span>
+              <span>🌙 Opzione pernotto dom sera</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LA BARCA -->
+  <section class="barche" id="barche">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">La Nostra Barca</span>
+        <h2 class="h2">Atlantica — Beneteau Oceanis 45</h2>
+        <p class="section-desc">Un monoscafo moderno, confortevole e performante. Anno 2018, 4 cabine doppie, tutti i comfort per un weekend perfetto.</p>
+      </div>
+      <div class="barche-grid" style="max-width:700px; margin:0 auto;">
+        <div class="barca-card featured reveal-up">
+          <div class="barca-visual">
+            <div class="barca-visual-inner oceanis" style="background-image:url('img/atlantica.jpg'); background-size:cover; background-position:center;"></div>
+          </div>
+          <div class="barca-body">
+            <div class="barca-header">
+              <div>
+                <div class="barca-badge">Monoscafo · 2018</div>
+                <h3 class="barca-name">Atlantica</h3>
+                <div class="barca-model">Beneteau Oceanis 45</div>
+              </div>
+            </div>
+            <div class="barca-specs">
+              <div class="bs-item"><span class="bs-val">13.94 m</span><span class="bs-label">Lunghezza</span></div>
+              <div class="bs-item"><span class="bs-val">4</span><span class="bs-label">Cabine</span></div>
+              <div class="bs-item"><span class="bs-val">10</span><span class="bs-label">Posti letto</span></div>
+              <div class="bs-item"><span class="bs-val">2</span><span class="bs-label">Bagni</span></div>
+              <div class="bs-item"><span class="bs-val">57 HP</span><span class="bs-label">Motore Yanmar</span></div>
+              <div class="bs-item"><span class="bs-val">12"</span><span class="bs-label">GPS Touch</span></div>
+            </div>
+            <div class="barca-features">
+              <span>Tender incluso</span>
+              <span>Piattaforma bagno</span>
+              <span>Doccia esterna acqua calda</span>
+              <span>Stereo int/ext</span>
+              <span>Pilota automatico</span>
+              <span>Elica di prua</span>
+              <span>Riscaldamento Webasto</span>
+              <span>Prendisole + cuscini</span>
+              <span>Pozzetto in teak</span>
+              <span>Bimini top</span>
+              <span>Frigorifero</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LA TUA SEZIONE -->
+  <section class="page-links" id="pagine">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label light">Documentazione</span>
+        <p class="section-desc light">Leggi le regole di bordo, accetta e compila il modulo crew list. Scarica il PDF per il charter.</p>
+      </div>
+      <div style="display:flex; justify-content:center; margin-top:40px;">
+        <a href="atlantica.html" class="pl-card reveal-up" style="max-width:420px; width:100%;">
+          <div class="pl-img" style="background-image:url('img/atlantica.jpg'); background-color:#0b3c5d;"></div>
+          <div class="pl-body">
+            <div class="pl-label">Monoscafo · Beneteau Oceanis 45</div>
+            <div class="pl-title">Atlantica</div>
+            <div class="pl-desc">Regole di bordo, cosa portare e crew list per l'equipaggio di Atlantica.</div>
+            <div class="pl-cta">Entra nella tua sezione →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section class="contatti" id="contatti">
+    <div class="contatti-bg"></div>
+    <div class="container">
+      <div class="contatti-inner">
+        <div class="contatti-copy">
+          <span class="label light">Info</span>
+          <h2 class="h2 light">Domande?</h2>
+          <p>Per qualsiasi informazione sul weekend, sulla barca, sui pagamenti o sulla crew list — scrivici su WhatsApp.</p>
+          <div class="contatti-info">
+            <div class="ci-item">
+              <span>📍</span>
+              <div><strong>Punto di Partenza</strong>Porto Mirabello — La Spezia</div>
+            </div>
+            <div class="ci-item">
+              <span>📅</span>
+              <div><strong>Date</strong>Check-in ven 17 luglio ore 17:00 · Check-out dom 19 luglio ore 17:00</div>
+            </div>
+            <div class="ci-item">
+              <span>⛵</span>
+              <div><strong>Barca</strong>Atlantica — Beneteau Oceanis 45 · anno 2018</div>
+            </div>
+            <div class="ci-item">
+              <span>💰</span>
+              <div><strong>Quota</strong>€330 a persona (€300 bonifico + €30 contanti)</div>
+            </div>
+          </div>
+          <div class="avail-warning">
+            <span>⚠️</span>
+            Manda la contabile dopo il bonifico
+          </div>
+        </div>
+        <div class="contatti-form">
+          <div class="cf-title">Scrivi allo Skipper</div>
+          <div class="contatti-cards">
+            <div class="cc-card reveal-left">
+              <div class="cc-icon">—</div>
+              <div class="cc-label">Punto di Partenza</div>
+              <div class="cc-val">Porto Mirabello — La Spezia</div>
+            </div>
+            <div class="cc-card reveal-up d1">
+              <div class="cc-icon">—</div>
+              <div class="cc-label">Check-in</div>
+              <div class="cc-val">Venerdì 17 Luglio · ore 17:00</div>
+            </div>
+            <div class="cc-card reveal-up d2">
+              <div class="cc-icon">—</div>
+              <div class="cc-label">Check-out</div>
+              <div class="cc-val">Domenica 19 Luglio · ore 17:00</div>
+            </div>
+          </div>
+          <div class="contatti-btns reveal-up">
+            <a href="https://wa.me/393518447888?text=Ciao!%20Ti%20scrivo%20per%20il%20weekend%20Golfo%20dei%20Poeti%20%E2%9B%B5" class="btn-wa-big" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              <span>Scrivici su WhatsApp</span>
+            </a>
+            <a href="tel:+393518447888" class="btn-call-big">📞 Chiama</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">Golfo dei Poeti Weekend</div>
+      <p>Porto Mirabello · La Spezia · 17–19 Luglio 2026</p>
+      <div class="footer-links">
+        <a href="#itinerario">Itinerario</a>
+        <a href="atlantica.html">Atlantica</a>
+        <a href="#quota">Quote</a>
+      </div>
+      <p class="footer-copy">© 2026 Golfo dei Poeti Weekend — Tutti i diritti riservati</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp FAB -->
+  <a href="https://wa.me/393518447888?text=Ciao!%20Ti%20scrivo%20per%20il%20weekend%20Golfo%20dei%20Poeti%20%E2%9B%B5" class="whatsapp-btn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>

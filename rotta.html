@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rotta &amp; Passage Plan · Golfo dei Poeti Weekend</title>
+  <meta name="description" content="Passage Plan dettagliato per il weekend 17–19 Luglio 2026 nel Golfo dei Poeti. Tappe, distanze, tempi di navigazione e condizioni." />
+  <link rel="stylesheet" href="styles.css?v=20260627" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    body { background: var(--ocean); color: #fff; min-height: 100vh; }
+    .rt-wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+
+    .route-strip {
+      background: rgba(28,167,168,.10);
+      border-top: 1px solid rgba(28,167,168,.25);
+      border-bottom: 1px solid rgba(28,167,168,.25);
+      padding: 14px 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .route-row {
+      display: flex; align-items: center; gap: 6px;
+      min-width: max-content;
+      font-size: .82rem; font-weight: 600;
+    }
+    .route-port { color: #fff; white-space: nowrap; flex-shrink: 0; }
+    .route-seg { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+    .route-arrow { color: var(--turq); font-size: .9rem; }
+    .route-nm { font-size: .67rem; font-weight: 400; color: rgba(255,255,255,.38); }
+    @media (max-width: 600px) {
+      .route-strip { padding: 10px 18px; }
+      .route-row { flex-direction: column; align-items: flex-start; min-width: 0; gap: 0; }
+      .route-port { font-size: .9rem; padding: 5px 0; }
+      .route-seg { flex-direction: row; align-items: center; padding: 2px 0 2px 4px; gap: 6px; }
+      .route-arrow { font-size: .75rem; color: rgba(28,167,168,.7); }
+      .route-nm { font-size: .7rem; }
+    }
+
+    .day-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .day-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,.05);
+      cursor: pointer; user-select: none;
+    }
+    .day-emoji { font-size: 2rem; flex-shrink: 0; }
+    .day-header-text { flex: 1; }
+    .day-date { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--turq); }
+    .day-title { font-size: 1.05rem; font-weight: 700; margin: 2px 0; }
+    .day-subtitle { font-size: .78rem; color: rgba(255,255,255,.45); }
+    .day-badge { background: rgba(28,167,168,.15); border: 1px solid rgba(28,167,168,.3); color: var(--turq-light); font-size: .72rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+    .day-body { padding: 0 20px 20px; }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+    .pill {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 30px; padding: 6px 12px;
+      font-size: .78rem; font-weight: 500;
+    }
+    .pill .icon { font-size: 1rem; }
+    .pill.highlight { background: rgba(28,167,168,.12); border-color: rgba(28,167,168,.3); color: var(--turq-light); }
+    .pill.warn { background: rgba(251,146,60,.1); border-color: rgba(251,146,60,.3); color: #fdba74; }
+
+    .astro-bar {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin: 14px 0;
+    }
+    .astro-block {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px; padding: 12px 14px;
+    }
+    .astro-icon { font-size: 1.4rem; margin-bottom: 4px; display: block; }
+    .astro-times { display: flex; justify-content: space-between; margin-top: 4px; }
+    .astro-time { text-align: center; }
+    .astro-time .t { font-size: .92rem; font-weight: 700; color: #fff; }
+    .astro-time .l { font-size: .62rem; color: rgba(255,255,255,.38); text-transform: uppercase; letter-spacing: .08em; }
+    .astro-label { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 6px; }
+
+    .leg-card {
+      background: rgba(28,167,168,.06);
+      border: 1px solid rgba(28,167,168,.2);
+      border-radius: 18px; padding: 18px 18px 14px;
+      margin: 14px 0;
+    }
+    .leg-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .leg-title { font-size: .85rem; font-weight: 700; color: var(--turq-light); }
+    .leg-nm { font-size: 1.6rem; font-weight: 700; line-height: 1; }
+    .leg-nm span { font-size: .72rem; color: rgba(255,255,255,.4); font-weight: 400; }
+    .leg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .leg-stat { text-align: center; }
+    .leg-stat .val { font-size: 1rem; font-weight: 700; color: #fff; }
+    .leg-stat .lbl { font-size: .68rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .06em; }
+
+    .section-label { font-size: .68rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--turq); margin: 44px 0 18px; display: block; }
+
+    .note-box { display: flex; gap: 14px; align-items: flex-start; padding: 18px 22px; background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.2); border-radius: 16px; margin: 24px 0 40px; }
+    .note-box span { font-size: 1.3rem; flex-shrink: 0; }
+    .note-box div { font-size: .85rem; color: rgba(255,255,255,.7); line-height: 1.65; }
+
+    @media (max-width: 600px) {
+      .leg-grid { grid-template-columns: 1fr; }
+      .astro-bar { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Golfo dei Poeti</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#quota">Quote</a>
+      <a href="index.html#itinerario">Itinerario</a>
+      <a href="atlantica.html">La Barca</a>
+      <a href="index.html#contatti">Info</a>
+      <span class="nav-divider"></span>
+      <a href="regole.html">Regole</a>
+      <a href="briefing.html">Briefing</a>
+      <a href="cambusa.html">Cambusa</a>
+      <a href="meteo.html">Meteo</a>
+      <a href="rotta.html" class="active">Rotta</a>
+      <span class="nav-divider"></span>
+      <a href="checkin.html">Check-in</a>
+      <a href="inventario.html">Inventario</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="index.html#quota">Quote</a>
+    <a href="index.html#itinerario">Itinerario</a>
+    <a href="atlantica.html">La Barca</a>
+    <a href="index.html#contatti">Info</a>
+    <a href="regole.html">Regole</a>
+    <a href="briefing.html">Briefing</a>
+    <a href="cambusa.html">Cambusa</a>
+    <a href="meteo.html">Meteo</a>
+    <a href="rotta.html" style="color:var(--turq);font-weight:700;">Rotta →</a>
+    <a href="checkin.html">🔐 Check-in</a>
+    <a href="inventario.html">Inventario</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('img/portovenere.jpg');background-color:#0b3c5d;"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <a href="index.html" class="back-link">← Torna alla home</a>
+    <span class="label light">Passage Plan · 17–19 Luglio 2026</span>
+    <h1 class="page-hero-title">Rotta &amp; Percorso</h1>
+    <p class="page-hero-sub">Golfo dei Poeti — <strong>3 giorni, 6 tappe, ~25 miglia</strong></p>
+  </div>
+</div>
+
+<!-- ROUTE STRIP -->
+<div class="route-strip">
+  <div class="route-row">
+    <span class="route-port">Porto Mirabello</span>
+    <span class="route-seg"><span class="route-arrow">→</span><span class="route-nm">3 nm</span></span>
+    <span class="route-port">Porto Venere</span>
+    <span class="route-seg"><span class="route-arrow">→</span><span class="route-nm">2 nm</span></span>
+    <span class="route-port">Palmaria</span>
+    <span class="route-seg"><span class="route-arrow">→</span><span class="route-nm">5 nm</span></span>
+    <span class="route-port">Lerici</span>
+    <span class="route-seg"><span class="route-arrow">→</span><span class="route-nm">3 nm</span></span>
+    <span class="route-port">Tellaro</span>
+    <span class="route-seg"><span class="route-arrow">→</span><span class="route-nm">5 nm</span></span>
+    <span class="route-port">Porto Mirabello</span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<section style="background: var(--ocean); padding: 52px 0 80px;">
+  <div class="rt-wrap">
+
+    <span class="section-label">Itinerario Giorno per Giorno</span>
+
+    <!-- GIORNO 1 -->
+    <div class="day-card">
+      <div class="day-header" onclick="this.parentElement.classList.toggle('open');this.nextElementSibling.style.display=this.parentElement.classList.contains('open')?'block':'none';">
+        <div class="day-emoji">🌅</div>
+        <div class="day-header-text">
+          <div class="day-date">Venerdì 17 Luglio</div>
+          <div class="day-title">Imbarco e aperitivo al tramonto</div>
+          <div class="day-subtitle">Porto Mirabello → Porto Venere</div>
+        </div>
+        <div class="day-badge">3 NM</div>
+      </div>
+      <div class="day-body">
+        <div class="pill-row">
+          <div class="pill highlight">🌊 Mare calmo</div>
+          <div class="pill">💨 SW 6-10 kn</div>
+          <div class="pill">☀️ Tramonto 21:10</div>
+        </div>
+        <div class="astro-bar">
+          <div class="astro-block">
+            <div class="astro-label">Alba / Tramonto</div>
+            <div class="astro-times">
+              <div class="astro-time"><div class="t">05:42</div><div class="l">Alba</div></div>
+              <div class="astro-time"><div class="t">21:10</div><div class="l">Tramonto</div></div>
+            </div>
+          </div>
+          <div class="astro-block">
+            <div class="astro-label">Luna</div>
+            <div class="astro-times">
+              <div class="astro-time"><div class="t">Luna Piena</div><div class="l">Fase</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="leg-card">
+          <div class="leg-header">
+            <div class="leg-title">Porto Mirabello → Porto Venere</div>
+            <div class="leg-nm">3 <span>nm</span></div>
+          </div>
+          <div class="leg-grid">
+            <div class="leg-stat"><div class="val">45 min</div><div class="lbl">Tempo stimato</div></div>
+            <div class="leg-stat"><div class="val">4 kn</div><div class="lbl">Velocità media</div></div>
+            <div class="leg-stat"><div class="val">240°</div><div class="lbl">Rotta</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GIORNO 2 -->
+    <div class="day-card">
+      <div class="day-header" onclick="this.parentElement.classList.toggle('open');this.nextElementSibling.style.display=this.parentElement.classList.contains('open')?'block':'none';">
+        <div class="day-emoji">☀️</div>
+        <div class="day-header-text">
+          <div class="day-date">Sabato 18 Luglio</div>
+          <div class="day-title">Calette, snorkeling e cena alla Locanda Lorena</div>
+          <div class="day-subtitle">Porto Venere → Palmaria → Lerici</div>
+        </div>
+        <div class="day-badge">7 NM</div>
+      </div>
+      <div class="day-body">
+        <div class="pill-row">
+          <div class="pill highlight">🌊 Mare poco mosso</div>
+          <div class="pill">💨 W 8-12 kn</div>
+          <div class="pill warn">🍽️ Prenotazione cena</div>
+        </div>
+        <div class="astro-bar">
+          <div class="astro-block">
+            <div class="astro-label">Alba / Tramonto</div>
+            <div class="astro-times">
+              <div class="astro-time"><div class="t">05:42</div><div class="l">Alba</div></div>
+              <div class="astro-time"><div class="t">21:10</div><div class="l">Tramonto</div></div>
+            </div>
+          </div>
+          <div class="astro-block">
+            <div class="astro-label">Luna</div>
+            <div class="astro-times">
+              <div class="astro-time"><div class="t">Luna Piena</div><div class="l">Fase</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="leg-card">
+          <div class="leg-header">
+            <div class="leg-title">Porto Venere → Cala del Terrizzo</div>
+            <div class="leg-nm">1.5 <span>nm</span></div>
+          </div>
+          <div class="leg-grid">
+            <div class="leg-stat"><div class="val">20 min</div><div class="lbl">Tempo</div></div>
+            <div class="leg-stat"><div class="val">4.5 kn</div><div class="lbl">Velocità</div></div>
+            <div class="leg-stat"><div class="val">270°</div><div class="lbl">Rotta</div></div>
+          </div>
+        </div>
+        <div class="leg-card">
+          <div class="leg-header">
+            <div class="leg-title">Palmaria → Lerici / Baia Blu</div>
+            <div class="leg-nm">5 <span>nm</span></div>
+          </div>
+          <div class="leg-grid">
+            <div class="leg-stat"><div class="val">1h 15m</div><div class="lbl">Tempo</div></div>
+            <div class="leg-stat"><div class="val">4 kn</div><div class="lbl">Velocità</div></div>
+            <div class="leg-stat"><div class="val">135°</div><div class="lbl">Rotta</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GIORNO 3 -->
+    <div class="day-card">
+      <div class="day-header" onclick="this.parentElement.classList.toggle('open');this.nextElementSibling.style.display=this.parentElement.classList.contains('open')?'block':'none';">
+        <div class="day-emoji">🏠</div>
+        <div class="day-header-text">
+          <div class="day-date">Domenica 19 Luglio</div>
+          <div class="day-title">Tellaro e rientro</div>
+          <div class="day-subtitle">Lerici → Tellaro → Porto Mirabello</div>
+        </div>
+        <div class="day-badge">8 NM</div>
+      </div>
+      <div class="day-body">
+        <div class="pill-row">
+          <div class="pill highlight">🌊 Mare calmo</div>
+          <div class="pill">💨 SW 5-8 kn</div>
+          <div class="pill">☀️ Sole pieno</div>
+        </div>
+        <div class="astro-bar">
+          <div class="astro-block">
+            <div class="astro-label">Alba / Tramonto</div>
+            <div class="astro-times">
+              <div class="astro-time"><div class="t">05:43</div><div class="l">Alba</div></div>
+              <div class="astro-time"><div class="t">21:10</div><div class="l">Tramonto</div></div>
+            </div>
+          </div>
+          <div class="astro-block">
+            <div class="astro-label">Luna</div>
+            <div class="astro-times">
+              <div class="astro-time"><div class="t">Luna Piena</div><div class="l">Fase</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="leg-card">
+          <div class="leg-header">
+            <div class="leg-title">Lerici → Tellaro</div>
+            <div class="leg-nm">3 <span>nm</span></div>
+          </div>
+          <div class="leg-grid">
+            <div class="leg-stat"><div class="val">45 min</div><div class="lbl">Tempo</div></div>
+            <div class="leg-stat"><div class="val">4 kn</div><div class="lbl">Velocità</div></div>
+            <div class="leg-stat"><div class="val">180°</div><div class="lbl">Rotta</div></div>
+          </div>
+        </div>
+        <div class="leg-card">
+          <div class="leg-header">
+            <div class="leg-title">Tellaro → Porto Mirabello</div>
+            <div class="leg-nm">5 <span>nm</span></div>
+          </div>
+          <div class="leg-grid">
+            <div class="leg-stat"><div class="val">1h 15m</div><div class="lbl">Tempo</div></div>
+            <div class="leg-stat"><div class="val">4 kn</div><div class="lbl">Velocità</div></div>
+            <div class="leg-stat"><div class="val">060°</div><div class="lbl">Rotta</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTE -->
+    <div class="note-box">
+      <span>ℹ️</span>
+      <div><strong>Distanza totale stimata:</strong> ~25 miglia nautiche. <strong>Tempo totale in navigazione:</strong> ~6 ore. Le condizioni meteo definitive vengono confermate 48h prima della partenza su <strong>Windy.com</strong>. In caso di peggioramento, il programma viene adattato in sicurezza.</div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Golfo dei Poeti</a>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#itinerario">Itinerario</a>
+        <a href="atlantica.html">La Barca</a>
+        <a href="regole.html">Regole</a>
+        <a href="briefing.html">Briefing</a>
+        <a href="cambusa.html">Cambusa</a>
+        <a href="checkin.html">Check-in</a>
+        <a href="meteo.html">Meteo</a>
+        <a href="rotta.html">Rotta</a>
+      </div>
+      <p class="footer-copy">© 2026 Golfo dei Poeti Weekend — Tutti i diritti riservati</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

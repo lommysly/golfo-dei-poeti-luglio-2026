@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meteo &amp; Passage Plan · Golfo dei Poeti Weekend</title>
+  <meta name="description" content="Previsioni meteo e Passage Plan per il weekend 17–19 Luglio 2026 nel Golfo dei Poeti. Vento, mare, temperatura e tappe giorno per giorno." />
+  <link rel="stylesheet" href="styles.css?v=20260627" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    body { background: var(--ocean); color: #fff; min-height: 100vh; }
+    .mp-wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+
+    .status-banner { display: flex; align-items: center; gap: 18px; padding: 24px 28px; border-radius: 20px; background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3); margin-bottom: 32px; }
+    .status-banner .sb-icon { font-size: 2.8rem; flex-shrink: 0; }
+    .status-banner .sb-title { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: #fff; }
+    .status-banner .sb-sub { font-size: .88rem; color: rgba(255,255,255,.6); margin-top: 4px; }
+    .status-banner .sb-badge { margin-left: auto; padding: 8px 18px; border-radius: 30px; background: #34d399; color: #0b3c5d; font-weight: 800; font-size: .82rem; letter-spacing: .06em; white-space: nowrap; }
+
+    .check-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 36px; }
+    .check-pill { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 30px; background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.25); font-size: .85rem; color: rgba(255,255,255,.85); }
+    .check-pill .cp-icon { font-size: 1rem; }
+
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; font-weight: 300; margin-bottom: 20px; }
+    .section-title span { color: var(--turq); }
+
+    .pp-timeline { position: relative; padding-left: 32px; }
+    .pp-timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--turq), rgba(28,167,168,.1)); border-radius: 2px; }
+    .pp-day { position: relative; margin-bottom: 28px; }
+    .pp-day::before { content: ''; position: absolute; left: -26px; top: 18px; width: 10px; height: 10px; border-radius: 50%; background: var(--turq); border: 2px solid var(--ocean); }
+    .pp-day-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 20px 22px; transition: border-color .2s; }
+    .pp-day-card:hover { border-color: rgba(28,167,168,.4); }
+    .pp-day-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+    .pp-day-date { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: #fff; }
+    .pp-day-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--turq); }
+    .pp-day-route { font-size: .85rem; color: rgba(255,255,255,.5); margin-left: auto; }
+    .pp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .pp-pill { padding: 4px 12px; border-radius: 20px; font-size: .78rem; font-weight: 600; }
+    .pp-pill.sun { background: rgba(251,191,36,.12); color: #fcd34d; border: 1px solid rgba(251,191,36,.2); }
+    .pp-pill.wind { background: rgba(147,197,253,.12); color: #93c5fd; border: 1px solid rgba(147,197,253,.2); }
+    .pp-pill.sea { background: rgba(28,167,168,.12); color: #5eead4; border: 1px solid rgba(28,167,168,.2); }
+    .pp-pill.temp { background: rgba(248,113,113,.12); color: #fca5a5; border: 1px solid rgba(248,113,113,.2); }
+    .pp-pill.warn { background: rgba(251,146,60,.12); color: #fdba74; border: 1px solid rgba(251,146,60,.2); }
+    .pp-desc { font-size: .87rem; color: rgba(255,255,255,.65); line-height: 1.65; }
+    .pp-spots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .pp-spot { padding: 5px 13px; border-radius: 20px; font-size: .78rem; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.7); }
+
+    .forecast-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 36px; }
+    .fc-day { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 20px; text-align: center; transition: border-color .2s; }
+    .fc-day:hover { border-color: rgba(28,167,168,.4); }
+    .fc-day.active-day { border-color: var(--turq); background: rgba(28,167,168,.06); }
+    .fc-date { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--turq); margin-bottom: 10px; }
+    .fc-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .fc-temp { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: #fff; }
+    .fc-wind { font-size: .8rem; color: rgba(255,255,255,.55); margin-top: 6px; }
+    .fc-sea { font-size: .75rem; color: rgba(255,255,255,.4); margin-top: 2px; }
+    .fc-note { font-size: .72rem; color: rgba(255,255,255,.45); margin-top: 8px; font-weight: 600; }
+
+    .water-card { display: flex; align-items: center; gap: 20px; padding: 22px 28px; background: rgba(28,167,168,.08); border: 1px solid rgba(28,167,168,.25); border-radius: 18px; margin-bottom: 36px; }
+    .water-card .wc-temp { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 300; color: var(--turq); line-height: 1; }
+    .water-card .wc-label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.5); margin-bottom: 6px; }
+    .water-card .wc-desc { font-size: .88rem; color: rgba(255,255,255,.7); }
+
+    .meteo-note { display: flex; gap: 14px; align-items: flex-start; padding: 18px 22px; background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.2); border-radius: 16px; margin-bottom: 40px; }
+    .meteo-note span { font-size: 1.3rem; flex-shrink: 0; }
+    .meteo-note div { font-size: .85rem; color: rgba(255,255,255,.7); line-height: 1.65; }
+
+    @media (max-width: 600px) {
+      .status-banner { flex-direction: column; text-align: center; }
+      .status-banner .sb-badge { margin: 0 auto; }
+      .forecast-grid { grid-template-columns: 1fr; }
+      .pp-day-route { margin-left: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Golfo dei Poeti</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#quota">Quote</a>
+      <a href="index.html#itinerario">Itinerario</a>
+      <a href="atlantica.html">La Barca</a>
+      <a href="index.html#contatti">Info</a>
+      <span class="nav-divider"></span>
+      <a href="regole.html">Regole</a>
+      <a href="briefing.html">Briefing</a>
+      <a href="cambusa.html">Cambusa</a>
+      <a href="meteo.html" class="active">Meteo</a>
+      <a href="rotta.html">Rotta</a>
+      <span class="nav-divider"></span>
+      <a href="checkin.html">Check-in</a>
+      <a href="inventario.html">Inventario</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="index.html#quota">Quote</a>
+    <a href="index.html#itinerario">Itinerario</a>
+    <a href="atlantica.html">La Barca</a>
+    <a href="index.html#contatti">Info</a>
+    <a href="regole.html">Regole</a>
+    <a href="briefing.html">Briefing</a>
+    <a href="cambusa.html">Cambusa</a>
+    <a href="meteo.html" style="color:var(--turq);font-weight:700;">Meteo →</a>
+    <a href="rotta.html">Rotta</a>
+    <a href="checkin.html">🔐 Check-in</a>
+    <a href="inventario.html">Inventario</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('img/portovenere.jpg');background-color:#0b3c5d;"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <a href="index.html" class="back-link">← Torna alla home</a>
+    <span class="label light">Skipper Briefing · 17–19 Luglio 2026</span>
+    <h1 class="page-hero-title">Meteo &amp; Passage Plan</h1>
+    <p class="page-hero-sub">Golfo dei Poeti — <strong>27 / 29 Luglio 2026</strong></p>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<section style="background: var(--ocean); padding: 52px 0 80px;">
+  <div class="mp-wrap">
+
+    <!-- STATUS BANNER -->
+    <div class="status-banner">
+      <div class="sb-icon">☀️</div>
+      <div>
+        <div class="sb-title">Condizioni estive ideali</div>
+        <div class="sb-sub">Alta pressione stabile · mare calmo · temperature estive · brezze termiche pomeridiane</div>
+      </div>
+      <div class="sb-badge">FAVOREVOLE</div>
+    </div>
+
+    <!-- CHECK PILLS -->
+    <div class="check-row">
+      <div class="check-pill"><span class="cp-icon">✅</span> Alta pressione sul Tirreno</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Temperature 22–30°C</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Mare calmo / poco mosso</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Vento 5–12 nodi (brezze)</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Zero fronti in vista</div>
+    </div>
+
+    <!-- FORECAST GRID -->
+    <div class="section-title"><span>Forecast</span> — Panoramica</div>
+    <div class="forecast-grid">
+      <div class="fc-day">
+        <div class="fc-date">Ven 27</div>
+        <div class="fc-icon">🌤</div>
+        <div class="fc-temp">28°C</div>
+        <div class="fc-wind">SW 8 kn</div>
+        <div class="fc-sea">0.2 m</div>
+        <div class="fc-note">Imbarco 17:00</div>
+      </div>
+      <div class="fc-day active-day">
+        <div class="fc-date">Sab 28</div>
+        <div class="fc-icon">☀️</div>
+        <div class="fc-temp">30°C</div>
+        <div class="fc-wind">W 10 kn</div>
+        <div class="fc-sea">0.3 m</div>
+        <div class="fc-note">Calette &amp; Cena</div>
+      </div>
+      <div class="fc-day">
+        <div class="fc-date">Dom 29</div>
+        <div class="fc-icon">☀️</div>
+        <div class="fc-temp">29°C</div>
+        <div class="fc-wind">SW 6 kn</div>
+        <div class="fc-sea">0.2 m</div>
+        <div class="fc-note">Rientro</div>
+      </div>
+    </div>
+
+    <!-- TEMPERATURA ACQUA -->
+    <div class="section-title"><span>Temperatura</span> dell'Acqua</div>
+    <div class="water-card">
+      <div class="wc-temp">23–25°C</div>
+      <div>
+        <div class="wc-label">Golfo dei Poeti · Fine Giugno</div>
+        <div class="wc-desc">Acqua calda e invitante. Perfetta per snorkeling, bagno e doccia da marinaio. 🏊‍♂️</div>
+      </div>
+    </div>
+
+    <!-- PASSAGE PLAN -->
+    <div class="section-title"><span>Passage Plan</span> — Itinerario</div>
+    <div class="pp-timeline">
+
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Venerdì 17 Luglio</div>
+            <div class="pp-day-label">GIORNO 1</div>
+            <div class="pp-day-route">Porto Mirabello → Porto Venere</div>
+          </div>
+          <div class="pp-pills">
+            <div class="pp-pill sun">☀️ Sole</div>
+            <div class="pp-pill wind">💨 SW 6-10 kn</div>
+            <div class="pp-pill sea">🌊 Mare calmo</div>
+            <div class="pp-pill temp">🌡️ 28°C</div>
+          </div>
+          <div class="pp-desc">
+            <strong>17:00 — Imbarco</strong> a Porto Mirabello, La Spezia. Briefing di sicurezza e sistemazione a bordo.<br/>
+            <strong>18:30 — Uscita</strong> in rada di Porto Venere per l'aperitivo al tramonto.<br/>
+            <strong>20:30 — Cena</strong> in rada o a terra a Porto Venere (opzionale).
+          </div>
+          <div class="pp-spots">
+            <span class="pp-spot">⚓ Porto Mirabello</span>
+            <span class="pp-spot">🌅 Porto Venere</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Sabato 18 Luglio</div>
+            <div class="pp-day-label">GIORNO 2</div>
+            <div class="pp-day-route">Porto Venere → Isola Palmaria → Lerici</div>
+          </div>
+          <div class="pp-pills">
+            <div class="pp-pill sun">☀️ Sole pieno</div>
+            <div class="pp-pill wind">💨 W 8-12 kn</div>
+            <div class="pp-pill sea">🌊 Mare poco mosso</div>
+            <div class="pp-pill temp">🌡️ 30°C</div>
+          </div>
+          <div class="pp-desc">
+            <strong>Mattina — Navigazione</strong> verso le calette dell'isola della Palmaria (Cala del Terrizzo, Pozzale, Maramozza). Snorkeling e relax.<br/>
+            <strong>Pranzo — A bordo</strong> con prodotti locali.<br/>
+            <strong>Pomeriggio — Rotta</strong> verso Lerici / Baia Blu per l'ancoraggio notturno.<br/>
+            <strong>20:00 — Cena</strong> alla Locanda Lorena sull'isola della Palmaria (prenotazione obbligatoria).
+          </div>
+          <div class="pp-spots">
+            <span class="pp-spot">🏖️ Cala del Terrizzo</span>
+            <span class="pp-spot">🏖️ Il Pozzale</span>
+            <span class="pp-spot">🏖️ Cala Maramozza</span>
+            <span class="pp-spot">🍽️ Locanda Lorena</span>
+            <span class="pp-spot">⚓ Baia Blu / Lerici</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Domenica 19 Luglio</div>
+            <div class="pp-day-label">GIORNO 3</div>
+            <div class="pp-day-route">Lerici → Tellaro → Porto Mirabello</div>
+          </div>
+          <div class="pp-pills">
+            <div class="pp-pill sun">☀️ Sole</div>
+            <div class="pp-pill wind">💨 SW 5-8 kn</div>
+            <div class="pp-pill sea">🌊 Mare calmo</div>
+            <div class="pp-pill temp">🌡️ 29°C</div>
+          </div>
+          <div class="pp-desc">
+            <strong>Mattina — Bagno</strong> e colazione in rada.<br/>
+            <strong>11:00 — Passaggio</strong> a Tellaro per un giro nel borgo marinario.<br/>
+            <strong>13:00 — Rientro</strong> a Porto Mirabello. Disimbarco entro le 15:00.
+          </div>
+          <div class="pp-spots">
+            <span class="pp-spot">🏘️ Tellaro</span>
+            <span class="pp-spot">⚓ Porto Mirabello</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NOTE -->
+    <div class="meteo-note">
+      <span>ℹ️</span>
+      <div><strong>Aggiornamento finale 48h prima della partenza.</strong> Consulta <strong>Windy.com</strong> (modelli GFS/ECMWF/ICON) e <strong>Navily</strong> per le previsioni definitive. In caso di peggioramento, il programma viene adattato in sicurezza.</div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Golfo dei Poeti</a>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#itinerario">Itinerario</a>
+        <a href="atlantica.html">La Barca</a>
+        <a href="regole.html">Regole</a>
+        <a href="briefing.html">Briefing</a>
+        <a href="cambusa.html">Cambusa</a>
+        <a href="checkin.html">Check-in</a>
+        <a href="meteo.html">Meteo</a>
+        <a href="rotta.html">Rotta</a>
+      </div>
+      <p class="footer-copy">© 2026 Golfo dei Poeti Weekend — Tutti i diritti riservati</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
