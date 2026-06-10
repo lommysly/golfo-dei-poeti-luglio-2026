@@ -499,8 +499,8 @@
 const ADMIN_PWD = 'Skipper2026';
 const CI_AUTH_KEY = 'auth_ci_at_ts';
 const CI_AUTH_TTL = 14 * 24 * 60 * 60 * 1000;
-const INV_API = 'https://script.google.com/macros/s/AKfycbzKBO...'; // DA CONFIGURARE CON URL REALE
-const CHECKIN_API = 'https://script.google.com/macros/s/AKfycbxP4UKTts8LtwOAp3VIYeqjKPLUbKlYYM2zec9tMakjmFTgjKIK1hEOgA7BJRBmCcM2/exec';
+const INV_API = (typeof CONFIG !== 'undefined' && CONFIG.CREW_SHEETS_URL) ? CONFIG.CREW_SHEETS_URL : '';
+const CHECKIN_API = INV_API;
 const FIXED_BOAT = 'atlantica';
 
 const BOATS = {

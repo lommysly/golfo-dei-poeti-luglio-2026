@@ -457,7 +457,7 @@
 const ADMIN_PWD = 'Skipper2026';
 const CI_AUTH_KEY = 'auth_ci_oc_ts';
 const CI_AUTH_TTL = 14 * 24 * 60 * 60 * 1000;
-const INV_API = 'https://script.google.com/macros/s/AKfycbzKBOL-cQpkTA-B9bUiHLwK8n02xsZOcMCSfckDA_Wk4RCTTdNa5ObZiHyDNokiDJcOwQ/exec';
+const INV_API = (typeof CONFIG !== 'undefined' && CONFIG.CREW_SHEETS_URL) ? CONFIG.CREW_SHEETS_URL : '';
 const INV_LS = 'inv_oc_ci_state';
 let invState = {};
 let invExtraTimers = {};
@@ -560,7 +560,7 @@ const SECTIONS_BASE = [
 ];
 
 // ── Config ──────────────────────────────────────────
-const CHECKIN_API = 'https://script.google.com/macros/s/AKfycbyJfr1x_EmQhsoVb2_57bxTtR0GF4P4ECvt9mgyUjJEcsTzqRplfL1GZbLJGSRCYZUNRQ/exec';
+const CHECKIN_API = INV_API;
 const BOATS = {
   Lagoon40:  { name: 'Lagoon 40',          sections: SECTIONS_BASE },
   Oceanis48: { name: 'Beneteau Oceanis 48', sections: SECTIONS_BASE }

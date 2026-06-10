@@ -2,11 +2,11 @@
    GOLFO DEI POETI WEEKEND — Script
    ══════════════════════════════════════════════════ */
 
-/* ── Google Sheets API ──────────────────────────── */
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxP4UKTts8LtwOAp3VIYeqjKPLUbKlYYM2zec9tMakjmFTgjKIK1hEOgA7BJRBmCcM2/exec';
+/* ── Configurazione ─────────────────────────────── */
+const SHEETS_URL = (typeof CONFIG !== 'undefined' && CONFIG.CREW_SHEETS_URL) ? CONFIG.CREW_SHEETS_URL : '';
 const ADMIN_PASSWORDS = {
-  atlantica: 'Skipper2026',
-  sharel:    'Skipper2026'
+  atlantica: (typeof CONFIG !== 'undefined' && CONFIG.ADMIN_PASSWORD) ? CONFIG.ADMIN_PASSWORD : 'Skipper2026',
+  sharel:    (typeof CONFIG !== 'undefined' && CONFIG.ADMIN_PASSWORD) ? CONFIG.ADMIN_PASSWORD : 'Skipper2026'
 };
 
 /* ── Stato live equipaggio ──────────────────────── */
@@ -16,6 +16,11 @@ async function loadCrewStatus(boat) {
   // Se siamo nell'index, carica contatori per entrambe le barche
   const atlanticaCountEl = document.getElementById('crewCountAtlantica');
   const sharelCountEl    = document.getElementById('crewCountSharel');
+  // Se nessun URL configurato, esci silenziosamente (i contatori mostreranno '?')
+  if (!SHEETS_URL) {
+    if (listEl) listEl.innerHTML = '<span style="color:rgba(255,255,255,.3); font-size:.85rem;">⚠️ Configura Google Sheet in config.js per sincronizzare</span>';
+    return;
+  }
   if (atlanticaCountEl || sharelCountEl) {
     for (const b of ['atlantica', 'sharel']) {
       const el = b === 'atlantica' ? atlanticaCountEl : sharelCountEl;
@@ -450,28 +455,30 @@ async function saveMemberToSheets(boat) {
 
   saveToStorage(boat);
 
-  // Invio tramite form hidden su iframe (bypass CORS garantito)
-  let iframe = document.getElementById('_submitFrame');
-  if (!iframe) {
-    iframe = document.createElement('iframe');
-    iframe.name = '_submitFrame';
-    iframe.id = '_submitFrame';
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
+  // Se URL configurato, invia anche a Google Sheets
+  if (SHEETS_URL) {
+    let iframe = document.getElementById('_submitFrame');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = '_submitFrame';
+      iframe.id = '_submitFrame';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = SHEETS_URL;
+    form.target = '_submitFrame';
+    form.style.display = 'none';
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'payload';
+    input.value = JSON.stringify(data);
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(() => form.remove(), 3000);
   }
-  const form = document.createElement('form');
-  form.method = 'POST';
-  form.action = SHEETS_URL;
-  form.target = '_submitFrame';
-  form.style.display = 'none';
-  const input = document.createElement('input');
-  input.type = 'hidden';
-  input.name = 'payload';
-  input.value = JSON.stringify(data);
-  form.appendChild(input);
-  document.body.appendChild(form);
-  form.submit();
-  setTimeout(() => form.remove(), 3000);
 
   // Mostra conferma immediata
   const container2 = document.getElementById('members-' + boat);
@@ -513,6 +520,7 @@ window._showFormAgain = function(boat) {
 function adminDownloadPDF(boat) {
   const pwd = prompt('Password amministratore:');
   if (pwd !== ADMIN_PASSWORDS[boat]) { alert('Password errata.'); return; }
+  if (!SHEETS_URL) { alert('Google Sheet non configurato. Aggiungi l\'URL in config.js per generare il PDF.'); return; }
   const url = SHEETS_URL + '?action=pdf&boat=' + boat;
   const a = document.createElement('a');
   a.href = url;

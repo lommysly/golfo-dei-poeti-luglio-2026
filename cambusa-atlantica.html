@@ -208,7 +208,7 @@
 
 <script>
 const KB_PWD = 'Skipper2026';
-const KB_API = 'https://script.google.com/macros/s/AKfycbxP4UKTts8LtwOAp3VIYeqjKPLUbKlYYM2zec9tMakjmFTgjKIK1hEOgA7BJRBmCcM2/exec';
+const KB_API = (typeof CONFIG !== 'undefined' && CONFIG.CAMBUSA_SHEETS_URL) ? CONFIG.CAMBUSA_SHEETS_URL : '';
 const KB_BOAT = 'atlantica';
 
 let kbState = {};
@@ -362,6 +362,7 @@ function saveKBItem(name, done) {
 }
 </script>
 
+<script src="config.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
