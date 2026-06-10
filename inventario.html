@@ -3,103 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inventario Atlantica · Golfo dei Poeti Weekend</title>
-  <link rel="stylesheet" href="styles.css?v=20260528i" />
+  <title>Inventario · Golfo dei Poeti Weekend</title>
+  <link rel="stylesheet" href="styles.css?v=20260717" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
   <style>
     body { background: var(--ocean); color: #fff; min-height: 100vh; }
-
-    .inv-wrap { max-width: 900px; margin: 0 auto; padding: 52px 20px 100px; }
-
-    /* Header barca */
-    .inv-header { text-align: center; margin-bottom: 36px; }
-    .inv-header .label { display: block; margin-bottom: 10px; color: var(--turq); font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
-    .inv-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 7vw, 4.4rem); font-weight: 300; margin-bottom: 8px; }
-    .inv-boat-info { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 20px; color: rgba(255,255,255,.55); font-size: .82rem; margin-bottom: 6px; }
-    .inv-boat-info span { display: flex; align-items: center; gap: 5px; }
-
-    /* Warning box 220V */
-    .inv-warning { background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.35); border-radius: 16px; padding: 14px 18px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 12px; }
-    .inv-warning .icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 1px; }
-    .inv-warning p { color: rgba(255,255,255,.88); font-size: .88rem; line-height: 1.5; margin: 0; font-weight: 600; }
-
-    /* Ore motore */
-    .inv-ore { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
-    .inv-ore-block { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 14px 16px; }
-    .inv-ore-block label { display: block; font-size: .7rem; color: rgba(255,255,255,.45); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 6px; }
-    .inv-ore-block input { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,.2); color: #fff; font-size: 1.2rem; font-weight: 600; outline: none; padding: 2px 0; }
-    .inv-ore-block input::placeholder { color: rgba(255,255,255,.2); font-weight: 300; font-size: 1rem; }
-
-    /* Progress */
-    .inv-progress { margin-bottom: 28px; padding: 16px 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; }
-    .inv-progress-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-    .inv-progress-label { font-size: .85rem; color: rgba(255,255,255,.65); }
-    .inv-progress-pct { font-size: .85rem; font-weight: 700; color: var(--turq-light); }
-    .inv-progress-track { height: 8px; background: rgba(255,255,255,.08); border-radius: 20px; overflow: hidden; }
-    .inv-progress-fill { height: 100%; width: 0; background: var(--turq); border-radius: 20px; transition: width .3s ease; }
-    .inv-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-    .inv-btn { border: none; border-radius: 10px; padding: 9px 16px; font-weight: 700; font-size: .82rem; cursor: pointer; }
-    .inv-btn.primary { background: var(--turq); color: #fff; }
-    .inv-btn.secondary { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.7); }
-    .inv-btn.danger { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.25); color: #f87171; }
-
-    /* Sections */
-    .inv-section { margin-bottom: 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 20px; overflow: hidden; }
-    .inv-section-head { display: flex; align-items: center; gap: 12px; padding: 16px 18px; cursor: pointer; background: rgba(255,255,255,.05); user-select: none; }
-    .inv-section-head:hover { background: rgba(255,255,255,.08); }
-    .inv-section-head .emoji { font-size: 1.3rem; }
-    .inv-section-head h2 { flex: 1; font-size: 1rem; font-weight: 700; }
-    .inv-section-count { font-size: .78rem; color: rgba(255,255,255,.4); }
-    .inv-section-count.done { color: #4ade80; }
-    .inv-chevron { color: rgba(255,255,255,.35); font-size: .85rem; transition: transform .2s; }
-    .inv-section.open .inv-chevron { transform: rotate(180deg); }
-    .inv-section-body { display: none; }
-    .inv-section.open .inv-section-body { display: block; }
-
-    /* Section note */
-    .inv-section-note { padding: 10px 18px; background: rgba(239,68,68,.07); border-bottom: 1px solid rgba(255,255,255,.06); font-size: .8rem; color: rgba(255,180,180,.8); }
-
-    /* Items */
-    .inv-item { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: start; padding: 10px 18px; border-top: 1px solid rgba(255,255,255,.05); transition: background .15s; }
-    .inv-item:hover { background: rgba(255,255,255,.03); }
-    .inv-item input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--turq); margin-top: 2px; cursor: pointer; flex-shrink: 0; }
-    .inv-item-text { min-width: 0; }
-    .inv-item-it { display: block; color: rgba(255,255,255,.85); font-size: .88rem; line-height: 1.3; }
-    .inv-item.checked .inv-item-it { color: rgba(255,255,255,.32); text-decoration: line-through; }
-    .inv-item-en { display: block; font-size: .73rem; color: rgba(255,255,255,.3); margin-top: 2px; font-style: italic; }
-    .inv-item.checked .inv-item-en { color: rgba(255,255,255,.18); }
-    .inv-badge { display: inline-block; padding: 2px 8px; border-radius: 7px; font-size: .72rem; font-weight: 700; white-space: nowrap; }
-    .inv-badge.qty { background: rgba(255,255,255,.07); color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.1); }
-    .inv-badge.verify { background: rgba(251,191,36,.1); color: #fbbf24; border: 1px solid rgba(251,191,36,.2); }
-    .inv-item.checked .inv-badge { opacity: .35; }
-
-    /* Notes */
-    .inv-notes { margin-top: 28px; }
-    .inv-notes h3 { font-size: .75rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 10px; }
-    .inv-notes textarea { width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; color: #fff; padding: 14px 16px; font-size: .88rem; line-height: 1.6; resize: vertical; min-height: 100px; outline: none; box-sizing: border-box; }
-    .inv-notes textarea::placeholder { color: rgba(255,255,255,.22); }
-    .inv-notes textarea:focus { border-color: var(--turq); }
-    .inv-lock { text-align: center; padding: 70px 20px; color: #fff; }
-    .inv-lock .lock-icon { font-size: 3rem; margin-bottom: 16px; }
-    .inv-lock p { color: rgba(255,255,255,.65); margin-bottom: 22px; }
-    .inv-lock input { display: block; margin: 0 auto 14px; padding: 12px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); color: #fff; font-size: 1rem; width: 260px; text-align: center; outline: none; }
-    .inv-lock button { padding: 12px 32px; background: var(--turq); color: #fff; border: none; border-radius: 10px; font-size: .95rem; font-weight: 600; cursor: pointer; }
-    .inv-lock .err { color: #f87171; font-size: .85rem; margin-top: 10px; display: none; }
-
-    @media (max-width: 600px) {
-      .inv-ore { grid-template-columns: 1fr; }
-    }
-    @media print {
-      nav, .inv-actions, .inv-btn { display: none !important; }
-      .inv-section { break-inside: avoid; }
-      .inv-section-body { display: block !important; }
-      body { background: #fff !important; color: #000 !important; }
-    }
+    .hub-wrap { max-width: 720px; margin: 0 auto; padding: 60px 20px 100px; text-align: center; }
+    .hub-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 300; margin-bottom: 8px; }
+    .hub-sub { color: rgba(255,255,255,.5); font-size: .95rem; margin-bottom: 48px; }
+    .hub-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .hub-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 24px; overflow: hidden; transition: transform .3s, border-color .3s; text-decoration: none; color: inherit; display: block; }
+    .hub-card:hover { transform: translateY(-6px); border-color: rgba(42,159,214,.3); }
+    .hub-img { height: 200px; background-size: cover; background-position: center; position: relative; }
+    .hub-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(11,60,93,.85), transparent 60%); }
+    .hub-img-text { position: absolute; bottom: 16px; left: 20px; z-index: 1; }
+    .hub-img-text .label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--turq); }
+    .hub-img-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: #fff; margin: 4px 0 0; }
+    .hub-body { padding: 20px 22px 24px; }
+    .hub-body p { font-size: .88rem; color: rgba(255,255,255,.55); line-height: 1.6; margin: 0 0 16px; }
+    .hub-cta { display: inline-block; background: var(--turq); color: #fff; padding: 10px 24px; border-radius: 50px; font-size: .85rem; font-weight: 600; }
+    @media (max-width: 600px) { .hub-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
+
 <nav class="nav scrolled" id="nav">
   <div class="nav-inner">
     <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Golfo dei Poeti</span></a>
@@ -107,7 +36,7 @@
       <a href="index.html">Home</a>
       <a href="index.html#quota">Quote</a>
       <a href="index.html#itinerario">Itinerario</a>
-      <a href="atlantica.html">La Barca</a>
+      <a href="index.html#barche">La Barca</a>
       <a href="index.html#contatti">Info</a>
       <span class="nav-divider"></span>
       <a href="regole.html">Regole</a>
@@ -125,7 +54,7 @@
     <a href="index.html">Home</a>
     <a href="index.html#quota">Quote</a>
     <a href="index.html#itinerario">Itinerario</a>
-    <a href="atlantica.html">La Barca</a>
+    <a href="index.html#barche">La Barca</a>
     <a href="index.html#contatti">Info</a>
     <a href="regole.html">Regole</a>
     <a href="briefing.html">Briefing</a>
@@ -137,351 +66,72 @@
   </div>
 </nav>
 
-<div class="inv-wrap">
-  <div class="inv-header">
-    <span class="label">Golfo dei Poeti</span>
-    <h1>Inventario Atlantica 45</h1>
-    <div class="inv-boat-info">
-      <span>⛵ Atlantica 45</span>
-      <span>📍 Golfo dei Poeti (La Spezia)</span>
-      <span>📻 VHF Porto CH 73</span>
-    </div>
-  </div>
-
-  <!-- Lock screen -->
-  <div id="invLock" class="inv-lock">
-    <div class="lock-icon">🔒</div>
-    <p>Inserisci la password skipper per accedere all'inventario</p>
-    <input type="password" id="invPwdInput" placeholder="Password" onkeydown="if(event.key==='Enter')unlockInventory()" />
-    <button onclick="unlockInventory()">Accedi</button>
-    <div class="err" id="invLockErr">Password errata</div>
-  </div>
-
-  <!-- Main content -->
-  <div id="invContent" style="display:none">
-  
-  <div class="inv-warning">
-    <span class="icon">⚡</span>
-    <p>NON ACCENDERE IL MOTORE quando la barca è allacciata alla 220V<br>
-    <span style="font-weight:400;font-size:.83rem;color:rgba(255,255,255,.65)">Do not turn engine on when connected to 220V shore power</span></p>
-  </div>
-
-  <div class="inv-ore">
-    <div class="inv-ore-block">
-      <label>Ore motore al CHECK-IN</label>
-      <input type="number" id="oreIn" placeholder="es. 1234" />
-    </div>
-    <div class="inv-ore-block">
-      <label>Ore motore al CHECK-OUT</label>
-      <input type="number" id="oreOut" placeholder="es. 1251" />
-    </div>
-  </div>
-
-  <div class="inv-progress">
-    <div class="inv-progress-row">
-      <span class="inv-progress-label" id="progressLabel">0 / 0 voci verificate</span>
-      <span class="inv-progress-pct" id="progressPct">0%</span>
-    </div>
-    <div class="inv-progress-track"><div class="inv-progress-fill" id="progressFill"></div></div>
-    <div class="inv-actions">
-      <button class="inv-btn secondary" onclick="expandAll()">Espandi tutto</button>
-      <button class="inv-btn secondary" onclick="collapseAll()">Comprimi tutto</button>
-      <button class="inv-btn danger" onclick="resetAll()">↺ Azzera checklist</button>
-      <button class="inv-btn secondary" onclick="window.print()">🖨️ Stampa</button>
-    </div>
-  </div>
-
-  <div id="sectionsContainer"></div>
-
-  <div class="inv-notes">
-    <h3>Note di Check-in / Check-in Remarks</h3>
-    <textarea id="noteCheckin" placeholder="Annotare qui eventuali anomalie, danni o mancanze riscontrate al check-in…"></textarea>
+<div class="page-hero" style="min-height:35vh;">
+  <div class="page-hero-bg" style="background-image:url('img/navigazione-al-tramonto.jpg');background-color:#0b3c5d;"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <a href="index.html" class="back-link">← Torna alla home</a>
+    <span class="label light">17–19 Luglio 2026</span>
+    <h1 class="page-hero-title">Inventario</h1>
+    <p class="page-hero-sub">Scegli la tua barca per accedere all'inventario completo</p>
   </div>
 </div>
-</div>
 
-<script src="script.js?v=20260528i"></script>
-<script>
-const INV_ADMIN_PWD = 'Skipper2026';
-function unlockInventory() {
-  const val = document.getElementById('invPwdInput').value;
-  if (val === INV_ADMIN_PWD) {
-    document.getElementById('invLock').style.display = 'none';
-    document.getElementById('invContent').style.display = 'block';
-    loadInventory();
-  } else {
-    document.getElementById('invLockErr').style.display = 'block';
-  }
-}
+<section style="background:var(--ocean); padding: 60px 0 100px;">
+  <div class="hub-wrap">
+    <h2 class="hub-title">Scegli la Barca</h2>
+    <p class="hub-sub">Ogni barca ha il proprio inventario con ore motore, dotazioni e checklist.</p>
+    <div class="hub-grid">
 
-document.getElementById('navBurger').addEventListener('click', () => {
-  document.getElementById('navMobile').classList.toggle('open');
-});
-
-/* ---- DATI INVENTARIO ATLANTICA 45 ---- */
-const SECTIONS = [
-  {
-    id: 'esterno', label: 'Esterno — Coperta', emoji: '⚓',
-    items: [
-      { id:'e01', it:'Carburante Diesel',             en:'Fuel filling (Diesel)',              qty:'×2' },
-      { id:'e02', it:'Rifornimento Acqua',             en:'Water Filling (330l+165l+165l)',     qty:'×3 serbatoi' },
-      { id:'e03', it:'Aspirapolvere (gavone poppa dx)',en:'Vacuum cleaner — Stern locker dx',   qty:'×1' },
-      { id:'e04', it:'Ancora di rispetto',             en:'Small Anchor',                       qty:'×1' },
-      { id:'e05', it:'Cime ormeggio',                  en:'Chain and Rope',                     qty:'×4' },
-      { id:'e06', it:'Barra emergenza',                en:'Emergency Tiller',                   qty:'×1' },
-      { id:'e07', it:'Gonfiatore',                     en:'Pump',                               qty:'×1' },
-      { id:'e08', it:'Remi',                           en:'Oars',                               qty:'×2' },
-      { id:'e09', it:'Mezzomarinaio',                  en:'Oarlocks',                           qty:'×1' },
-      { id:'e10', it:'Scopa',                          en:'Deck Brush',                         qty:'×1' },
-      { id:'e11', it:'Posacenere',                     en:'Ashtray',                            qty:'×1' },
-      { id:'e12', it:'Sacca portascarpe',              en:'Shoe Bag',                           qty:'' },
-      { id:'e13', it:'Manichetta acqua',               en:'Water hose',                         qty:'×1' },
-      { id:'e14', it:'Coperchi strumenti',             en:'Instrument covers',                  qty:'×6' },
-      { id:'e15', it:'Pistola manichetta',             en:'Water hose pistol',                  qty:'×1' },
-      { id:'e16', it:'Secchio',                        en:'Plastic Bucket',                     qty:'×1' },
-      { id:'e17', it:'Spugna',                         en:'Sponge',                             qty:'×1' },
-      { id:'e18', it:'Detersivo scafo',                en:'Hull Shampoo',                       qty:'×1' },
-      { id:'e19', it:'Pelle di daino',                 en:'Chamois Leather',                    qty:'×1' },
-      { id:'e20', it:'Imbuto per carburante',          en:'Fuel tunnel',                        qty:'×1' },
-      { id:'e21', it:'Tanica benzina 5lt',             en:'Jerrycan gasoline 5lt',              qty:'×1' },
-      { id:'e22', it:'Tasche manovelle winch',         en:'Winch Handle holders',               qty:'×2' },
-      { id:'e23', it:'Pompa di sentina manuale',       en:'Hand bilge pump',                    qty:'×1' },
-      { id:'e24', it:'Leva della pompa',               en:'Bilge pump handle',                  qty:'×1' },
-      { id:'e25', it:'Adattatore 220V',                en:'Adaptor 220V',                       qty:'×1' },
-      { id:'e26', it:'Segnali diurni — Cono',          en:'Day signals-cone',                   qty:'×1' },
-      { id:'e27', it:'Segnali diurni — Sfera',         en:'Day signals-sphere',                 qty:'×1' },
-      { id:'e28', it:'Salvagente anulare',             en:'Horseshoe life buoys',               qty:'×1' },
-      { id:'e29', it:'Boetta luminosa',                en:'Light automatic',                    qty:'×1' },
-      { id:'e30', it:'Cavo 220V',                      en:'220V shore power cable',             qty:'×1' },
-      { id:'e31', it:"Scaletta d'emergenza",           en:'Emergency ladder (Draglie)',          qty:'×1' },
-      { id:'e32', it:'Asta + bandiera italiana',       en:'Flag pole and Italian flag',          qty:'×1' },
-    ]
-  },
-  {
-    id: 'motore', label: 'Motore — Accensione', emoji: '⚙️',
-    note: '⚠️ Accendere e tenere acceso il motore durante questa sezione',
-    items: [
-      { id:'m01', it:'Strumenti controllo motore',   en:"Engine's controls",           check:true },
-      { id:'m02', it:'Controllare scarico',           en:'Check exhaust pipe',           check:true },
-      { id:'m03', it:'Provare marcia avanti/indietro',en:'Run engine forward/back',      check:true },
-      { id:'m04', it:'Elica di prua (Bow Thruster)',  en:'Bow Thruster',                 check:true, qty:'×1' },
-      { id:'m05', it:'Calavele',                      en:'Sail locker',                  qty:'×1' },
-      { id:'m06', it:'Olio motore di riserva',        en:'Extra engine oil',             qty:'×1' },
-      { id:'m07', it:'Ancora e catena (60 mt)',       en:'Anchor with chain (60mt)',      qty:'×1' },
-      { id:'m08', it:'Verricello-Salpaancora',        en:'Windlass',                     check:true },
-      { id:'m09', it:'Manovella ancora',              en:'Hand lever for windlass',       qty:'×1' },
-      { id:'m10', it:'Telecomando salpancora',        en:'Windlass remote control',       check:true },
-      { id:'m11', it:'Apertura spiaggetta poppa',     en:'Swimming platform opening',    check:true },
-      { id:'m12', it:'Doccia esterna',                en:'External shower',              qty:'×1' },
-      { id:'m13', it:'Bombole gas',                   en:'Gas bottles',                  qty:'×2' },
-      { id:'m14', it:'Frigoriferi',                   en:'Electric refrigerator',        qty:'×1' },
-      { id:'m15', it:'Autogonfiabile 11 Pax',         en:'Life raft 11 Pax',             qty:'' },
-      { id:'m16', it:'Pilota automatico',             en:'Autopilot',                    check:true },
-    ]
-  },
-  {
-    id: 'coperta', label: 'Strumenti & Coperta', emoji: '🧭',
-    note: '🔴 Spegnere il motore prima di questa sezione',
-    items: [
-      { id:'c01', it:'Freno ruota del timone',        en:'Steering wheel friction',      check:true },
-      { id:'c02', it:'Bussola magnetica',             en:'Magnetic Compass',             qty:'×2' },
-      { id:'c03', it:'Ecoscandaglio + Log',           en:'Depth sounder + Log',          check:true },
-      { id:'c04', it:'Anemometro',                    en:'Wind indicator',               check:true },
-      { id:'c05', it:'GPS-Plotter',                   en:'GPS-Plotter',                  check:true, qty:'×1+2' },
-      { id:'c06', it:'AIS — MMSI 247-13507-0',        en:'AIS transponder',              qty:'' },
-      { id:'c07', it:'Parabordi laterali',            en:'Side Fenders',                 qty:'×8' },
-      { id:'c08', it:'Parabordi-palla',               en:'Round fenders',                qty:'×2' },
-      { id:'c09', it:'Scarico Webasto',               en:'Heating exhaust position',     qty:'×3' },
-      { id:'c10', it:'Tender (gommone)',               en:'Dinghy',                       qty:'×1' },
-      { id:'c11', it:'Bimini',                        en:'Bimini',                       qty:'×1' },
-      { id:'c12', it:'Sprayhood',                     en:'Sprayhood',                    qty:'×1' },
-      { id:'c13', it:'Vele (rullate)',                en:'Sails (furled)',                qty:'×1' },
-      { id:'c14', it:'Winch prua',                    en:'Bow winch',                    qty:'×2' },
-      { id:'c15', it:'Winch poppa',                   en:'Stern winch',                   qty:'×2' },
-      { id:'c16', it:'Manovelle winch',               en:'Winch handles',                qty:'×4' },
-      { id:'c17', it:'Bozzelli',                      en:'Clutches',                     qty:'×6' },
-      { id:'c18', it:'Stopper',                        en:'Stoppers',                     qty:'×6' },
-      { id:'c19', it:'Cime di scotta',                 en:'Sheets',                       qty:'×6' },
-      { id:'c20', it:'Parabolezza',                   en:'Spinnaker pole',                qty:'×1' },
-    ]
-  },
-  {
-    id: 'interni', label: 'Interni — Sottocoperta', emoji: '🏠',
-    items: [
-      { id:'i01', it:'Luci interne',                  en:'Interior lights',               qty:'×12' },
-      { id:'i02', it:'Prese 12V',                      en:'12V outlets',                  qty:'×8' },
-      { id:'i03', it:'Prese 220V',                     en:'220V outlets',                 qty:'×4' },
-      { id:'i04', it:'Frigorifero',                    en:'Refrigerator',                 qty:'×1' },
-      { id:'i05', it:'Freezer',                        en:'Freezer',                      qty:'×1' },
-      { id:'i06', it:'Pompa sentina elettrica',       en:'Electric bilge pump',          qty:'×2' },
-      { id:'i07', it:'Pompa sentina manuale',         en:'Manual bilge pump',            qty:'×1' },
-      { id:'i08', it:'Pompa WC elettrica',            en:'Electric toilet pump',           qty:'×2' },
-      { id:'i09', it:'Docce interne',                 en:'Interior shower',              qty:'×2' },
-      { id:'i10', it:'Watermaker',                     en:'Water maker',                   qty:'×1' },
-      { id:'i11', it:'Aria condizionata',              en:'Air conditioning',            qty:'×1' },
-      { id:'i12', it:'Riscaldatore',                   en:'Heater',                      qty:'×1' },
-      { id:'i13', it:'TV',                            en:'TV',                           qty:'×1' },
-      { id:'i14', it:'Sound system',                   en:'Sound system',                 qty:'×1' },
-      { id:'i15', it:'Cucina',                        en:'Galley',                       qty:'×1' },
-      { id:'i16', it:'Dinette',                       en:'Dinette',                      qty:'×1' },
-      { id:'i17', it:'Cabine (×4)',                   en:'Cabins (×4)',                  qty:'×4' },
-      { id:'i18', it:'Bagni (×2)',                    en:'Heads (×2)',                   qty:'×2' },
-    ]
-  },
-  {
-    id: 'sicurezza', label: 'Sicurezza', emoji: '🦺',
-    items: [
-      { id:'s01', it:'Giubbotti salvataggio',          en:'Life jackets',                 qty:'×12' },
-      { id:'s02', it:'Cinture di sicurezza',          en:'Safety harnesses',              qty:'×12' },
-      { id:'s03', it:'Zattera di salvataggio',          en:'Life raft',                     qty:'×1' },
-      { id:'s04', it:'Asta uomo a mare',              en:'Man overboard pole',             qty:'×1' },
-      { id:'s05', it:'Fuochi di segnalazione',        en:'Signal flares',                qty:'×4' },
-      { id:'s06', it:'Boette fumogene',               en:'Smoke signals',                 qty:'×2' },
-      { id:'s07', it:'Estintori',                     en:'Fire extinguishers',            qty:'×3' },
-      { id:'s08', it:'Cassetta pronto soccorso',       en:'First aid kit',                 qty:'×1' },
-      { id:'s09', it:'EPIRB',                         en:'EPIRB',                        qty:'×1' },
-      { id:'s10', it:'VHF fisso',                     en:'Fixed VHF',                    qty:'×1' },
-      { id:'s11', it:'VHF portatile',                 en:'Portable VHF',                  qty:'×1' },
-      { id:'s12', it:'Razzi luminosi',                 en:'Rocket flares',                 qty:'×4' },
-      { id:'s13', it:'Specchio di segnalazione',      en:'Signaling mirror',              qty:'×1' },
-      { id:'s14', it:'Corno di nebbia',                en:'Fog horn',                     qty:'×1' },
-      { id:'s15', it:'Luci di navigazione',           en:'Navigation lights',             qty:'×5' },
-      { id:'s16', it:'Luci di ancoraggio',             en:'Anchor lights',                qty:'×2' },
-    ]
-  },
-  {
-    id: 'documenti', label: 'Documenti', emoji: '📋',
-    items: [
-      { id:'d01', it:'Libro di bordo',                 en:'Logbook',                      qty:'×1' },
-      { id:'d02', it:'Manuale utente barca',          en:'Owner manual',                  qty:'×1' },
-      { id:'d03', it:'Manuale motore',                en:'Engine manual',                 qty:'×1' },
-      { id:'d04', it:'Manuale VHF',                   en:'VHF manual',                   qty:'×1' },
-      { id:'d05', it:'Polizza assicurativa',           en:'Insurance policy',              qty:'×1' },
-      { id:'d06', it:'Licenza di navigazione',         en:'Navigation license',             qty:'×1' },
-      { id:'d07', it:'Certificato di immatricolazione', en:'Registration certificate',      qty:'×1' },
-      { id:'d08', it:'Kit documenti',                 en:'Documents kit',                qty:'×1' },
-    ]
-  }
-];
-
-let invState = {};
-
-function loadInventory() {
-  try {
-    invState = JSON.parse(localStorage.getItem('inv_state_atlantica') || '{}');
-  } catch(e) {
-    invState = {};
-  }
-  renderSections();
-  updateProgress();
-}
-
-function renderSections() {
-  const container = document.getElementById('sectionsContainer');
-  container.innerHTML = '';
-  
-  SECTIONS.forEach((sec, idx) => {
-    const doneCount = sec.items.filter(item => invState[item.id]).length;
-    const div = document.createElement('div');
-    div.className = 'inv-section' + (idx === 0 ? ' open' : '');
-    div.id = 'sec-' + idx;
-    
-    const noteHtml = sec.note 
-      ? `<div class="inv-section-note">${sec.note}</div>` 
-      : '';
-    
-    const itemsHtml = sec.items.map(item => {
-      const checked = !!invState[item.id];
-      const badge = item.check 
-        ? `<span class="inv-badge verify">VERIFICA</span>` 
-        : (item.qty ? `<span class="inv-badge qty">${item.qty}</span>` : '');
-      
-      return `
-        <div class="inv-item ${checked ? 'checked' : ''}">
-          <input type="checkbox" id="inv-${item.id}" ${checked ? 'checked' : ''} onchange="toggleItem('${item.id}', this.checked)" />
-          <div class="inv-item-text">
-            <span class="inv-item-it">${item.it}</span>
-            <span class="inv-item-en">${item.en}</span>
+      <a href="inventario-atlantica.html" class="hub-card">
+        <div class="hub-img" style="background-image:url('img/atlantica.jpg');">
+          <div class="hub-img-text">
+            <div class="label">Monoscafo · 2018</div>
+            <h3>Atlantica</h3>
           </div>
-          ${badge}
         </div>
-      `;
-    }).join('');
-    
-    div.innerHTML = `
-      <div class="inv-section-head" onclick="toggleSection(${idx})">
-        <span class="emoji">${sec.emoji}</span>
-        <h2>${sec.label}</h2>
-        <span class="inv-section-count ${doneCount === sec.items.length ? 'done' : ''}">${doneCount}/${sec.items.length}</span>
-        <span class="inv-chevron">▶</span>
+        <div class="hub-body">
+          <p>Beneteau Oceanis 45 · Max 10 persone<br/>Inventario completo con ore motore e checklist.</p>
+          <span class="hub-cta">Inventario Atlantica →</span>
+        </div>
+      </a>
+
+      <a href="inventario-sharel.html" class="hub-card">
+        <div class="hub-img" style="background-image:url('img/sharel.jpg');">
+          <div class="hub-img-text">
+            <div class="label">Monoscafo · 2018</div>
+            <h3>Sharel</h3>
+          </div>
+        </div>
+        <div class="hub-body">
+          <p>Beneteau Oceanis 48 · Max 12 persone<br/>Inventario completo con ore motore e checklist.</p>
+          <span class="hub-cta">Inventario Sharel →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Golfo dei Poeti</a>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#itinerario">Itinerario</a>
+        <a href="index.html#barche">La Barca</a>
+        <a href="regole.html">Regole</a>
+        <a href="briefing.html">Briefing</a>
+        <a href="cambusa.html">Cambusa</a>
+        <a href="meteo.html">Meteo</a>
+        <a href="rotta.html">Rotta</a>
       </div>
-      ${noteHtml}
-      <div class="inv-section-body">
-        ${itemsHtml}
-      </div>
-    `;
-    
-    container.appendChild(div);
-  });
-}
+      <p class="footer-copy">© 2026 Golfo dei Poeti Weekend — Tutti i diritti riservati</p>
+    </div>
+  </div>
+</footer>
 
-function toggleSection(idx) {
-  const sec = document.getElementById('sec-' + idx);
-  sec.classList.toggle('open');
-}
-
-function toggleItem(id, checked) {
-  if (checked) {
-    invState[id] = true;
-  } else {
-    delete invState[id];
-  }
-  try {
-    localStorage.setItem('inv_state_atlantica', JSON.stringify(invState));
-  } catch(e) {}
-  
-  const itemEl = document.getElementById('inv-' + id);
-  itemEl.closest('.inv-item').classList.toggle('checked', checked);
-  
-  // Update section count
-  const sectionEl = itemEl.closest('.inv-section');
-  const sectionIdx = Array.from(document.querySelectorAll('.inv-section')).indexOf(sectionEl);
-  const sec = SECTIONS[sectionIdx];
-  const doneCount = sec.items.filter(item => invState[item.id]).length;
-  const countEl = sectionEl.querySelector('.inv-section-count');
-  countEl.textContent = doneCount + '/' + sec.items.length;
-  countEl.classList.toggle('done', doneCount === sec.items.length);
-  
-  updateProgress();
-}
-
-function updateProgress() {
-  const total = SECTIONS.reduce((n, sec) => n + sec.items.length, 0);
-  const done = Object.keys(invState).length;
-  const pct = total ? Math.round(done / total * 100) : 0;
-  
-  document.getElementById('progressLabel').textContent = `${done} / ${total} voci verificate`;
-  document.getElementById('progressPct').textContent = `${pct}%`;
-  document.getElementById('progressFill').style.width = `${pct}%`;
-}
-
-function expandAll() {
-  document.querySelectorAll('.inv-section').forEach(sec => sec.classList.add('open'));
-}
-
-function collapseAll() {
-  document.querySelectorAll('.inv-section').forEach(sec => sec.classList.remove('open'));
-}
-
-function resetAll() {
-  if (!confirm('Azzerare tutta la checklist inventario?')) return;
-  invState = {};
-  try {
-    localStorage.setItem('inv_state_atlantica', '{}');
-  } catch(e) {}
-  renderSections();
-  updateProgress();
-}
-</script>
+<script src="script.js"></script>
 </body>
 </html>
