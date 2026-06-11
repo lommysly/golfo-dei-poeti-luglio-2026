@@ -23,7 +23,7 @@ const CONFIG = {
   // ── CREW LIST (sincronizzata tra dispositivi) ───────────
   // Se vuoto '', la Crew List usa solo localStorage (non sincronizzata)
   // Se compilato con URL Google Apps Script, i dati vanno sul foglio
-  CREW_SHEETS_URL: '',
+  CREW_SHEETS_URL: 'https://script.google.com/macros/s/AKfycbyAnJF9btUcKFHJc-aQ-LPRSaFvOI0J2_iGq-0-ouPA08i65FgwNjTmiiFjWGG7bWL8/exec',
 
   // Password per download PDF (da usare con Google Sheets)
   ADMIN_PASSWORD: 'Skipper2026',
