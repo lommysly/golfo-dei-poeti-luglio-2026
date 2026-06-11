@@ -3,7 +3,11 @@
    ══════════════════════════════════════════════════ */
 
 /* ── Configurazione ─────────────────────────────── */
-const SHEETS_URL = (typeof CONFIG !== 'undefined' && CONFIG.CREW_SHEETS_URL) ? CONFIG.CREW_SHEETS_URL : '';
+function getSheetsUrl(boat) {
+  if (typeof CONFIG === 'undefined') return '';
+  if (boat === 'sharel') return CONFIG.CREW_SHEETS_URL_SHAREL || '';
+  return CONFIG.CREW_SHEETS_URL_ATLANTICA || '';
+}
 const ADMIN_PASSWORDS = {
   atlantica: (typeof CONFIG !== 'undefined' && CONFIG.ADMIN_PASSWORD) ? CONFIG.ADMIN_PASSWORD : 'Skipper2026',
   sharel:    (typeof CONFIG !== 'undefined' && CONFIG.ADMIN_PASSWORD) ? CONFIG.ADMIN_PASSWORD : 'Skipper2026'
@@ -16,8 +20,9 @@ async function loadCrewStatus(boat) {
   // Se siamo nell'index, carica contatori per entrambe le barche
   const atlanticaCountEl = document.getElementById('crewCountAtlantica');
   const sharelCountEl    = document.getElementById('crewCountSharel');
-  // Se nessun URL configurato, esci silenziosamente (i contatori mostreranno '?')
-  if (!SHEETS_URL) {
+  // Se nessun URL configurato per questa barca, esci silenziosamente
+  const url = getSheetsUrl(boat || 'atlantica');
+  if (!url) {
     if (listEl) listEl.innerHTML = '<span style="color:rgba(255,255,255,.3); font-size:.85rem;">⚠️ Configura Google Sheet in config.js per sincronizzare</span>';
     return;
   }
@@ -25,8 +30,10 @@ async function loadCrewStatus(boat) {
     for (const b of ['atlantica', 'sharel']) {
       const el = b === 'atlantica' ? atlanticaCountEl : sharelCountEl;
       if (!el) continue;
+      const bUrl = getSheetsUrl(b);
+      if (!bUrl) continue;
       try {
-        const res = await fetch(SHEETS_URL + '?boat=' + b);
+        const res = await fetch(bUrl + '?boat=' + b);
         const json = await res.json();
         const members = (json.members || []).filter(m => m.nome && m.nome.trim());
         el.textContent = members.length;
@@ -38,7 +45,7 @@ async function loadCrewStatus(boat) {
   if (!listEl) return;
   listEl.innerHTML = '<span style="color:rgba(255,255,255,.3); font-size:.85rem;">Caricamento...</span>';
   try {
-    const res = await fetch(SHEETS_URL + '?boat=' + (boat || 'atlantica'));
+    const res = await fetch(url + '?boat=' + (boat || 'atlantica'));
     const json = await res.json();
     const members = (json.members || []).filter(m => m.nome && m.nome.trim());
     if (members.length === 0) {
@@ -456,7 +463,8 @@ async function saveMemberToSheets(boat) {
   saveToStorage(boat);
 
   // Se URL configurato, invia anche a Google Sheets
-  if (SHEETS_URL) {
+  const sheetsUrl = getSheetsUrl(boat);
+  if (sheetsUrl) {
     let iframe = document.getElementById('_submitFrame');
     if (!iframe) {
       iframe = document.createElement('iframe');
@@ -467,7 +475,7 @@ async function saveMemberToSheets(boat) {
     }
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = SHEETS_URL;
+    form.action = sheetsUrl;
     form.target = '_submitFrame';
     form.style.display = 'none';
     const input = document.createElement('input');
@@ -520,8 +528,9 @@ window._showFormAgain = function(boat) {
 function adminDownloadPDF(boat) {
   const pwd = prompt('Password amministratore:');
   if (pwd !== ADMIN_PASSWORDS[boat]) { alert('Password errata.'); return; }
-  if (!SHEETS_URL) { alert('Google Sheet non configurato. Aggiungi l\'URL in config.js per generare il PDF.'); return; }
-  const url = SHEETS_URL + '?action=pdf&boat=' + boat;
+  const sheetsUrl = getSheetsUrl(boat);
+  if (!sheetsUrl) { alert('Google Sheet non configurato. Aggiungi l\'URL in config.js per generare il PDF.'); return; }
+  const url = sheetsUrl + '?action=pdf&boat=' + boat;
   const a = document.createElement('a');
   a.href = url;
   a.target = '_blank';
