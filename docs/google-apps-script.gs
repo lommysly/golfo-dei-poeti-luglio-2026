@@ -8,17 +8,71 @@
    2. Vai su Estensioni → Apps Script
    3. Incolla questo codice nel file Code.gs
    4. Clicca su Salva (icona disco)
-   5. Clicca su Esegui (▶️) per autorizzare l'app (solo la prima volta)
-   6. Vai su Distribuisci → Nuova distribuzione
+   5. TORNA AL FOGLIO GOOGLE: vedrai il menu "Crew List"
+   6. Clicca su Crew List → Setup (crea il foglio automaticamente)
+   7. Vai su Distribuisci → Nuova distribuzione
       - Tipo: Applicazione web
       - Esegui come: IO
       - Chi ha accesso: Tutti
-   7. Copia l'URL di deployment
-   8. Incolla l'URL in config.js alla riga CREW_SHEETS_URL
+   8. Copia l'URL di deployment
+   9. Incolla l'URL in config.js (CREW_SHEETS_URL_ATLANTICA o SHAREL)
    ────────────────────────────────────────────────────────── */
 
 const SHEET_NAME = 'Crew';
 
+/* ── Menu nel foglio Google ──────────────────────────── */
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu('Crew List')
+    .addItem('Setup (crea foglio Crew)', 'setup')
+    .addToUi();
+}
+
+/* ── Setup automatico ────────────────────────────────── */
+function setup() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(SHEET_NAME);
+
+  if (sheet) {
+    SpreadsheetApp.getUi().alert('Il foglio "Crew" esiste già. Nessuna modifica necessaria.');
+    return;
+  }
+
+  sheet = ss.insertSheet(SHEET_NAME);
+  sheet.appendRow([
+    'timestamp', 'boat', 'nome', 'sesso', 'nascita', 'luogo',
+    'nazionalita', 'residenza', 'cap', 'tipoDoc', 'numDoc',
+    'scadDoc', 'ruolo', 'cf', 'regolaAccettata'
+  ]);
+
+  // Formatta intestazione
+  const headerRange = sheet.getRange(1, 1, 1, 15);
+  headerRange.setBackground('#0b3c5d');
+  headerRange.setFontColor('#ffffff');
+  headerRange.setFontWeight('bold');
+  headerRange.setHorizontalAlignment('center');
+
+  // Adatta larghezza colonne
+  sheet.setColumnWidth(1, 160);  // timestamp
+  sheet.setColumnWidth(2, 100);  // boat
+  sheet.setColumnWidth(3, 180);  // nome
+  sheet.setColumnWidth(4, 70);   // sesso
+  sheet.setColumnWidth(5, 120);  // nascita
+  sheet.setColumnWidth(6, 180);  // luogo
+  sheet.setColumnWidth(7, 120);  // nazionalita
+  sheet.setColumnWidth(8, 250);  // residenza
+  sheet.setColumnWidth(9, 70);   // cap
+  sheet.setColumnWidth(10, 80);  // tipoDoc
+  sheet.setColumnWidth(11, 120); // numDoc
+  sheet.setColumnWidth(12, 120); // scadDoc
+  sheet.setColumnWidth(13, 120); // ruolo
+  sheet.setColumnWidth(14, 140); // cf
+  sheet.setColumnWidth(15, 120); // regolaAccettata
+
+  SpreadsheetApp.getUi().alert('Foglio "Crew" creato con successo!');
+}
+
+/* ── API: GET (legge dati) ──────────────────────────── */
 function doGet(e) {
   const boat = e.parameter.boat || 'atlantica';
   const action = e.parameter.action || '';
@@ -32,6 +86,7 @@ function doGet(e) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+/* ── API: POST (salva membro) ────────────────────────── */
 function doPost(e) {
   try {
     const payload = JSON.parse(e.parameter.payload || '{}');
@@ -45,12 +100,12 @@ function doPost(e) {
   }
 }
 
+/* ── Legge dati dal foglio ────────────────────────────── */
 function getCrewData(boat) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
-    sheet.appendRow(['timestamp', 'boat', 'nome', 'sesso', 'nascita', 'luogo', 'nazionalita', 'residenza', 'cap', 'tipoDoc', 'numDoc', 'scadDoc', 'ruolo', 'cf', 'regolaAccettata']);
+    return {members: [], count: 0, error: 'Foglio Crew non trovato. Esegui il setup dal menu.'};
   }
   const data = sheet.getDataRange().getValues();
   const members = [];
@@ -66,12 +121,12 @@ function getCrewData(boat) {
   return {members, count: members.length};
 }
 
+/* ── Salva membro nel foglio ─────────────────────────── */
 function saveMember(boat, data) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
-    sheet.appendRow(['timestamp', 'boat', 'nome', 'sesso', 'nascita', 'luogo', 'nazionalita', 'residenza', 'cap', 'tipoDoc', 'numDoc', 'scadDoc', 'ruolo', 'cf', 'regolaAccettata']);
+    throw new Error('Foglio Crew non trovato. Esegui il setup dal menu Crew List → Setup.');
   }
   sheet.appendRow([
     new Date().toISOString(),
@@ -83,6 +138,7 @@ function saveMember(boat, data) {
   ]);
 }
 
+/* ── Genera PDF crew list ─────────────────────────────── */
 function generatePDF(boat) {
   const data = getCrewData(boat);
   const html = `<!DOCTYPE html>

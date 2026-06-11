@@ -2,22 +2,17 @@
    CONFIGURAZIONE CENTRALIZZATA — Golfo dei Poeti Luglio 2026
    ═══════════════════════════════════════════════════════════
 
-   ISTRUZIONI PER LA CREW LIST (sincronizzata):
+   ISTRUZIONI CREW LIST — NUOVO FLUSSO AUTOMATICO:
    ──────────────────────────────────────────────────────────
    1. Crea un nuovo Google Spreadsheet vuoto
    2. Vai su Estensioni → Apps Script
-   3. Incolla il codice che trovi in docs/google-apps-script.gs
-   4. Pubblica → Distribuisci come app web (esegui come: IO, accesso: TUTTI)
-   5. Copia l'URL di deployment e incollalo qui sotto
-
-   ISTRUZIONI PER LA CAMBUSA (opzionale):
-   ──────────────────────────────────────────────────────────
-   Se vuoi sincronizzare la cambusa tra dispositivi, crea un altro
-   Google Spreadsheet con lo stesso procedimento e incolla l'URL.
-   Altrimenti la cambusa funziona in localStorage (browser).
-
-   Tutto il resto (Check-in, Inventario) usa localStorage.
-   ═══════════════════════════════════════════════════════════ */
+   3. Incolla il codice da docs/google-apps-script.gs
+   4. Salva, poi TORNA AL FOGLIO GOOGLE
+   5. Vedrai il menu "Crew List" → clicca "Setup" (crea foglio auto)
+   6. Vai su Distribuisci → Nuova distribuzione → Applicazione web
+      - Esegui come: IO | Chi ha accesso: Tutti
+   7. Copia l'URL e incollalo qui sotto (uno per barca)
+   ────────────────────────────────────────────────────────── */
 
 const CONFIG = {
   // ── CREW LIST (sincronizzata tra dispositivi) ───────────
