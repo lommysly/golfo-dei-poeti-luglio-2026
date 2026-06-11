@@ -2,41 +2,30 @@
    GOOGLE APPS SCRIPT — Crew List · Golfo dei Poeti Luglio 2026
    ═══════════════════════════════════════════════════════════
 
-   ISTRUZIONI (2 minuti):
+   ISTRUZIONI (1 minuto):
    ──────────────────────────────────────────────────────────
    1. Crea un nuovo Google Spreadsheet vuoto
    2. Vai su Estensioni → Apps Script
    3. Incolla questo codice nel file Code.gs
    4. Clicca su Salva (icona disco)
-   5. TORNA AL FOGLIO GOOGLE: vedrai il menu "Crew List"
-   6. Clicca su Crew List → Setup (crea il foglio automaticamente)
-   7. Vai su Distribuisci → Nuova distribuzione
+   5. Vai su Distribuisci → Nuova distribuzione
       - Tipo: Applicazione web
       - Esegui come: IO
       - Chi ha accesso: Tutti
-   8. Copia l'URL di deployment
-   9. Incolla l'URL in config.js (CREW_SHEETS_URL_ATLANTICA o SHAREL)
+   6. Copia l'URL di deployment
+   7. Incolla l'URL in config.js (CREW_SHEETS_URL_ATLANTICA o SHAREL)
+
+   Il foglio "Crew" viene creato AUTOMATICAMENTE alla prima
+   chiamata dal sito web. Non serve fare nulla a mano.
    ────────────────────────────────────────────────────────── */
 
 const SHEET_NAME = 'Crew';
 
-/* ── Menu nel foglio Google ──────────────────────────── */
-function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('Crew List')
-    .addItem('Setup (crea foglio Crew)', 'setup')
-    .addToUi();
-}
-
-/* ── Setup automatico ────────────────────────────────── */
-function setup() {
+/* ── Crea foglio se non esiste (chiamato automaticamente) ─ */
+function ensureSheet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(SHEET_NAME);
-
-  if (sheet) {
-    SpreadsheetApp.getUi().alert('Il foglio "Crew" esiste già. Nessuna modifica necessaria.');
-    return;
-  }
+  if (sheet) return sheet;
 
   sheet = ss.insertSheet(SHEET_NAME);
   sheet.appendRow([
@@ -45,31 +34,29 @@ function setup() {
     'scadDoc', 'ruolo', 'cf', 'regolaAccettata'
   ]);
 
-  // Formatta intestazione
   const headerRange = sheet.getRange(1, 1, 1, 15);
   headerRange.setBackground('#0b3c5d');
   headerRange.setFontColor('#ffffff');
   headerRange.setFontWeight('bold');
   headerRange.setHorizontalAlignment('center');
 
-  // Adatta larghezza colonne
-  sheet.setColumnWidth(1, 160);  // timestamp
-  sheet.setColumnWidth(2, 100);  // boat
-  sheet.setColumnWidth(3, 180);  // nome
-  sheet.setColumnWidth(4, 70);   // sesso
-  sheet.setColumnWidth(5, 120);  // nascita
-  sheet.setColumnWidth(6, 180);  // luogo
-  sheet.setColumnWidth(7, 120);  // nazionalita
-  sheet.setColumnWidth(8, 250);  // residenza
-  sheet.setColumnWidth(9, 70);   // cap
-  sheet.setColumnWidth(10, 80);  // tipoDoc
-  sheet.setColumnWidth(11, 120); // numDoc
-  sheet.setColumnWidth(12, 120); // scadDoc
-  sheet.setColumnWidth(13, 120); // ruolo
-  sheet.setColumnWidth(14, 140); // cf
-  sheet.setColumnWidth(15, 120); // regolaAccettata
+  sheet.setColumnWidth(1, 160);
+  sheet.setColumnWidth(2, 100);
+  sheet.setColumnWidth(3, 180);
+  sheet.setColumnWidth(4, 70);
+  sheet.setColumnWidth(5, 120);
+  sheet.setColumnWidth(6, 180);
+  sheet.setColumnWidth(7, 120);
+  sheet.setColumnWidth(8, 250);
+  sheet.setColumnWidth(9, 70);
+  sheet.setColumnWidth(10, 80);
+  sheet.setColumnWidth(11, 120);
+  sheet.setColumnWidth(12, 120);
+  sheet.setColumnWidth(13, 120);
+  sheet.setColumnWidth(14, 140);
+  sheet.setColumnWidth(15, 120);
 
-  SpreadsheetApp.getUi().alert('Foglio "Crew" creato con successo!');
+  return sheet;
 }
 
 /* ── API: GET (legge dati) ──────────────────────────── */
@@ -81,9 +68,15 @@ function doGet(e) {
     return generatePDF(boat);
   }
 
-  const data = getCrewData(boat);
-  return ContentService.createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
+  try {
+    const data = getCrewData(boat);
+    return ContentService.createTextOutput(JSON.stringify(data))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({
+      members: [], count: 0, error: err.message
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
 }
 
 /* ── API: POST (salva membro) ────────────────────────── */
@@ -102,11 +95,7 @@ function doPost(e) {
 
 /* ── Legge dati dal foglio ────────────────────────────── */
 function getCrewData(boat) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getSheetByName(SHEET_NAME);
-  if (!sheet) {
-    return {members: [], count: 0, error: 'Foglio Crew non trovato. Esegui il setup dal menu.'};
-  }
+  const sheet = ensureSheet();
   const data = sheet.getDataRange().getValues();
   const members = [];
   for (let i = 1; i < data.length; i++) {
@@ -123,11 +112,7 @@ function getCrewData(boat) {
 
 /* ── Salva membro nel foglio ─────────────────────────── */
 function saveMember(boat, data) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getSheetByName(SHEET_NAME);
-  if (!sheet) {
-    throw new Error('Foglio Crew non trovato. Esegui il setup dal menu Crew List → Setup.');
-  }
+  const sheet = ensureSheet();
   sheet.appendRow([
     new Date().toISOString(),
     boat,

@@ -261,7 +261,8 @@ body {
 .btn-primary.full { width: 100%; justify-content: center; }
 .btn-primary.mt { margin-top: 32px; }
 
-.btn-ghost {
+.btn-ghost,
+.btn-secondary {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(255,255,255,.08); color: rgba(255,255,255,.85);
   font-weight: 600; font-size: 1rem;
@@ -269,23 +270,23 @@ body {
   text-decoration: none; border: 1px solid rgba(255,255,255,.15);
   transition: var(--t) var(--ease); backdrop-filter: blur(8px);
 }
-.btn-ghost:hover { background: rgba(255,255,255,.14); transform: translateY(-2px); }
+.btn-ghost:hover,
+.btn-secondary:hover { background: rgba(255,255,255,.14); transform: translateY(-2px); }
 
 .hero-badges {
   display: flex; align-items: center; justify-content: center;
   flex-wrap: wrap; gap: 10px;
 }
 .badge {
-  font-size: .82rem; font-weight: 500; color: rgba(255,255,255,.72);
-  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-  border-radius: 50px; padding: 7px 16px;
-  backdrop-filter: blur(8px);
+  font-size: .82rem; font-weight: 500; color: #fff;
+  background: rgba(11, 31, 58, .82); border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50px; padding: 8px 18px;
 }
 .badge-availability {
   display: flex; align-items: center; gap: 8px;
-  font-size: .82rem; font-weight: 600; color: var(--sunset-warm);
-  background: rgba(6,182,212,.1); border: 1px solid rgba(6,182,212,.3);
-  border-radius: 50px; padding: 7px 16px;
+  font-size: .82rem; font-weight: 600; color: #fff;
+  background: rgba(11, 31, 58, .82); border: 1px solid rgba(94, 234, 212, .35);
+  border-radius: 50px; padding: 8px 18px;
 }
 .avail-dot {
   width: 8px; height: 8px; border-radius: 50%;
