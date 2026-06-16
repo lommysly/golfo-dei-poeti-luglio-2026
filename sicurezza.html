@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sicurezza — Corsica Sailing Experience</title>
+  <meta name="description" content="Regole di bordo, briefing di sicurezza e check-in tecnico per il weekend in barca a vela verso la Corsica." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Corsica Experience</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="esperienza.html">L'Esperienza</a>
+      <a href="organizzazione.html">Organizzazione</a>
+      <a href="sicurezza.html" class="active">Sicurezza</a>
+      <div class="dropdown" id="navDropdown">
+        <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
+        <div class="dropdown-menu">
+          <a href="checkin.html">Check-in</a>
+          <a href="inventario.html">Inventario</a>
+          <a href="meteo.html">Meteo</a>
+        </div>
+      </div>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="esperienza.html">L'Esperienza</a>
+    <a href="organizzazione.html">Organizzazione</a>
+    <a href="sicurezza.html" style="color:var(--turq);font-weight:700;">Sicurezza →</a>
+    <a href="regole.html">Regole di Bordo</a>
+    <a href="briefing.html">Briefing Pre-Crociera</a>
+    <a href="checkin.html">Check-in</a>
+    <a href="inventario.html">Inventario</a>
+    <a href="meteo.html">Meteo</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <video class="page-hero-video" autoplay muted loop playsinline poster="img/hero.jpg">
+    <source src="img/mare.mp4" type="video/mp4">
+  </video>
+  <div class="page-hero-bg" style="background-color:#0b3c5d;"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <a href="index.html" class="back-link">← Torna alla Home</a>
+    <span class="label light">Protezione</span>
+    <h1 class="page-hero-title">Sicurezza</h1>
+    <p class="page-hero-sub">Regole di bordo, briefing di sicurezza e strumenti operativi. La tua responsabilità è anche la tua protezione.</p>
+  </div>
+</div>
+
+<div class="container" style="padding: 60px 20px 80px;">
+  <div class="section-header centered" style="margin-bottom:48px;">
+    <span class="label">Aree</span>
+    <h2 class="h2">Sicurezza a bordo</h2>
+    <p class="section-desc">Regole, briefing e strumenti per un weekend senza sorprese.</p>
+  </div>
+
+  <div class="regole-grid">
+    <a href="regole.html" class="hub-card coral reveal-up">
+      <div class="rc-icon" style="background:rgba(239,68,68,.15);color:#f87171;">⚠️</div>
+      <h4>Regole di Bordo</h4>
+      <p>Le <strong>10 regole fondamentali</strong> per convivere in sicurezza: movimenti, scarpe, quiet zone, alcol, turni.</p>
+      <span class="hub-cta">Leggi le regole →</span>
+    </a>
+    <a href="briefing.html" class="hub-card ocean reveal-up d1">
+      <div class="rc-icon" style="background:rgba(42,159,214,.15);color:#60a5fa;">📋</div>
+      <h4>Briefing Pre-Crociera</h4>
+      <p>Il <strong>briefing obbligatorio</strong>: salvataggio, VHF, incendi, movimenti, oblò e WC.</p>
+      <span class="hub-cta">Vai al briefing →</span>
+    </a>
+    <a href="briefing.html#valigia" class="hub-card gold reveal-up d2">
+      <div class="rc-icon" style="background:rgba(251,191,36,.15);color:#fbbf24;">🎒</div>
+      <h4>Cosa Portare</h4>
+      <p>La <strong>preparazione valigia</strong>: bagagli morbidi, scarpe, temperature, 12V.</p>
+      <span class="hub-cta">Preparati →</span>
+    </a>
+    <a href="checkin.html" class="hub-card turq reveal-up">
+      <div class="rc-icon" style="background:rgba(52,211,153,.15);color:#6ee7b7;">🔐</div>
+      <h4>Check-in Tecnico Barca</h4>
+      <p>La <strong>checklist pre-partenza</strong> per lo skipper: dotazioni, motori, sicurezza.</p>
+      <span class="hub-cta">Riservato skipper →</span>
+    </a>
+    <a href="inventario.html" class="hub-card ocean reveal-up d1">
+      <div class="rc-icon" style="background:rgba(167,139,250,.15);color:#a78bfa;">📦</div>
+      <h4>Inventario Dotazioni</h4>
+      <p>L'<strong>inventario completo</strong> della barca: sicurezza, cucina, elettronica, cime.</p>
+      <span class="hub-cta">Riservato skipper →</span>
+    </a>
+    <a href="meteo.html" class="hub-card turq reveal-up d2">
+      <div class="rc-icon" style="background:rgba(56,189,248,.15);color:#38bdf8;">🌤️</div>
+      <h4>Meteo Operativo</h4>
+      <p>Il <strong>passage plan operativo</strong> con previsioni e consigli per l'equipaggio.</p>
+      <span class="hub-cta">Controlla →</span>
+    </a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">Corsica Sailing Experience</div>
+    <p>Weekend 17–19 Luglio 2026</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="esperienza.html">L'Esperienza</a>
+      <a href="organizzazione.html">Organizzazione</a>
+      <a href="sicurezza.html">Sicurezza</a>
+      <a href="valigia.html">Valigia</a>
+      <a href="cambusa.html">Cambusa</a>
+      <a href="checkin.html">Check-in</a>
+    </div>
+    <p class="footer-copy">© 2026 Corsica Sailing Experience · Tutti i diritti riservati</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

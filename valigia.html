@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valigia Intelligente — Corsica Sailing Experience</title>
+  <meta name="description" content="Cosa mettere in valigia per un weekend in barca a vela verso la Corsica. Lista smart packing con checklist interattiva." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    body { background: var(--ocean); color: #fff; min-height: 100vh; }
+    .val-wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px 80px; }
+    .borsa-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin: 28px 0; }
+    .borsa-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 18px; padding: 24px 20px; text-align: center; transition: transform .2s, background .2s; }
+    .borsa-card:hover { background: rgba(255,255,255,.07); transform: translateY(-4px); }
+    .borsa-emoji { font-size: 2.4rem; margin-bottom: 12px; display: block; }
+    .borsa-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; color: #fff; }
+    .borsa-card p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; margin: 0; }
+    .borsa-tag { display: inline-block; margin-top: 10px; padding: 4px 10px; border-radius: 20px; background: rgba(28,167,168,.12); border: 1px solid rgba(28,167,168,.25); color: var(--turq-light); font-size: .72rem; font-weight: 700; }
+    .principi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin: 28px 0; }
+    .principio-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 18px; padding: 24px 20px; }
+    .principio-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--turq); line-height: 1; margin-bottom: 10px; }
+    .principio-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; color: #fff; }
+    .principio-card p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; margin: 0; }
+    .tip-bar { display: flex; gap: 14px; align-items: flex-start; padding: 18px 22px; background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.2); border-radius: 16px; margin: 28px 0; }
+    .tip-bar span { font-size: 1.4rem; flex-shrink: 0; }
+    .tip-bar div { font-size: .88rem; color: rgba(255,255,255,.75); line-height: 1.6; }
+    .tip-bar strong { color: #fbbf24; }
+    .no-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
+    .no-card { background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.15); border-radius: 14px; padding: 18px 16px; display: flex; align-items: flex-start; gap: 12px; }
+    .no-card .icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+    .no-card h4 { font-size: .9rem; font-weight: 700; color: rgba(255,255,255,.85); margin-bottom: 4px; }
+    .no-card p { font-size: .82rem; color: rgba(255,255,255,.5); line-height: 1.5; margin: 0; }
+    @media (max-width: 900px) { .borsa-grid, .principi-grid { grid-template-columns: repeat(2, 1fr); } .no-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .borsa-grid, .principi-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Corsica Experience</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="esperienza.html">L'Esperienza</a>
+      <a href="organizzazione.html">Organizzazione</a>
+      <a href="sicurezza.html">Sicurezza</a>
+      <div class="dropdown" id="navDropdown">
+        <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
+        <div class="dropdown-menu">
+          <a href="checkin.html">Check-in</a>
+          <a href="inventario.html">Inventario</a>
+          <a href="meteo.html">Meteo</a>
+        </div>
+      </div>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="esperienza.html">L'Esperienza</a>
+    <a href="organizzazione.html">Organizzazione</a>
+    <a href="sicurezza.html">Sicurezza</a>
+    <a href="valigia.html" style="color:var(--turq);font-weight:700;">Valigia Intelligente →</a>
+    <a href="cambusa.html">Cambusa</a>
+    <a href="crewlist.html">Crew List</a>
+    <a href="meteo.html">Meteo</a>
+    <a href="rotta.html">Rotta</a>
+    <a href="checkin.html">Check-in</a>
+    <a href="inventario.html">Inventario</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <video class="page-hero-video" autoplay muted loop playsinline poster="img/hero.jpg">
+    <source src="img/mare.mp4" type="video/mp4">
+  </video>
+  <div class="page-hero-bg" style="background-color:#0b3c5d;"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <a href="organizzazione.html" class="back-link">← Torna a Organizzazione</a>
+    <span class="label light">Preparazione</span>
+    <h1 class="page-hero-title">Valigia Intelligente</h1>
+    <p class="page-hero-sub">Cosa mettere in valigia per un weekend in barca a vela. Principi smart packing e lista pratica.</p>
+  </div>
+</div>
+
+<div class="val-wrap">
+
+  <span class="section-label" style="margin-top:18px;margin-bottom:10px">🎒 La Borsa Giusta</span>
+  <div class="borsa-grid">
+    <div class="borsa-card reveal-up">
+      <span class="borsa-emoji">🎒</span>
+      <h4>Duffle Bag Morbida</h4>
+      <p>40–60 litri, senza trolley. Le valigie rigide non entrano negli armadietti.</p>
+      <span class="borsa-tag">Indispensabile</span>
+    </div>
+    <div class="borsa-card reveal-up d1">
+      <span class="borsa-emoji">🛡️</span>
+      <h4>Dry Bag 10–20L</h4>
+      <p>Per elettronica, documenti e oggetti che non devono bagnarsi.</p>
+      <span class="borsa-tag">Consigliata</span>
+    </div>
+    <div class="borsa-card reveal-up d2">
+      <span class="borsa-emoji">📦</span>
+      <h4>Packing Cubes</h4>
+      <p>Set da 3–4 sacchetti. Dividi per categoria: indumenti, mare, notte.</p>
+      <span class="borsa-tag">Smart</span>
+    </div>
+    <div class="borsa-card reveal-up d3">
+      <span class="borsa-emoji">🧴</span>
+      <h4>Sacchetti Zip</h4>
+      <p>Impermeabili per costume bagnato, scarpe sporche, oggetti umidi.</p>
+      <span class="borsa-tag">Utile</span>
+    </div>
+  </div>
+
+  <span class="section-label" style="margin-top:44px;margin-bottom:10px">🧠 Smart Packing — I 4 Principi</span>
+  <div class="principi-grid">
+    <div class="principio-card reveal-up">
+      <div class="principio-num">01</div>
+      <h4>Roll, Don't Fold</h4>
+      <p>Arrotola gli indumenti. Meno spazio, meno grinze.</p>
+    </div>
+    <div class="principio-card reveal-up d1">
+      <div class="principio-num">02</div>
+      <h4>Layer System</h4>
+      <p>1 giacca + 2 maglie tecniche è meglio di 3 felpe.</p>
+    </div>
+    <div class="principio-card reveal-up d2">
+      <div class="principio-num">03</div>
+      <h4>+1 / −1</h4>
+      <p>Uno in più di scorta, uno in meno del solito. Non esagerare.</p>
+    </div>
+    <div class="principio-card reveal-up d3">
+      <div class="principio-num">04</div>
+      <h4>Palette 2 Colori</h4>
+      <p>Tutto mescolabile. Navy + bianco. Zero stress.</p>
+    </div>
+  </div>
+
+  <div class="tip-bar reveal-up">
+    <span>💡</span>
+    <div><strong>Pro-tip dello skipper:</strong> la sera prima del weekend, stendi tutto sul letto e fotografalo. Se non entra in una duffle bag da 60L, togli qualcosa. In barca <strong>meno è meglio</strong>.</div>
+  </div>
+
+  <span class="section-label" style="margin-top:44px;margin-bottom:10px">✅ Lista Weekend — 3 Giorni / 2 Notti</span>
+  <p style="color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:20px;">
+    La lista completa è disponibile nel <a href="briefing.html#valigia" style="color:var(--turq);font-weight:700;">Briefing Pre-Crociera</a> — con checklist interattiva per ogni categoria.
+  </p>
+
+  <span class="section-label" style="margin-top:44px;margin-bottom:10px">🚫 Cosa NON Mettere in Valigia</span>
+  <div class="no-grid">
+    <div class="no-card reveal-up">
+      <span class="icon">🧳</span>
+      <div>
+        <h4>Valigia Rigida / Trolley</h4>
+        <p>Non entra negli armadietti. Diventa un ingombro morto.</p>
+      </div>
+    </div>
+    <div class="no-card reveal-up d1">
+      <span class="icon">🔌</span>
+      <div>
+        <h4>Phon, Ferro da Stiro, 220V</h4>
+        <p>La barca ha solo 12V. Consumano troppo.</p>
+      </div>
+    </div>
+    <div class="no-card reveal-up d2">
+      <span class="icon">👖</span>
+      <div>
+        <h4>Troppi Jeans</h4>
+        <p>Pesanti, asciugano in eterno. Portane al massimo uno.</p>
+      </div>
+    </div>
+    <div class="no-card reveal-up">
+      <span class="icon">👠</span>
+      <div>
+        <h4>Tacchi e Scarpe Nuove</h4>
+        <p>In barca sono inutili e pericolosi. Vesciche = inferno.</p>
+      </div>
+    </div>
+    <div class="no-card reveal-up d1">
+      <span class="icon">🧴</span>
+      <div>
+        <h4>Profumi e Bagnoschiuma Grandi</h4>
+        <p>Spazio docce limitato. Porta flaconi da viaggio.</p>
+      </div>
+    </div>
+    <div class="no-card reveal-up d2">
+      <span class="icon">🍾</span>
+      <div>
+        <h4>Alcol in Grandi Quantità</h4>
+        <p>Pesa, occupa spazio. Meglio comprare in loco.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">Corsica Sailing Experience</div>
+    <p>Weekend 17–19 Luglio 2026</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="esperienza.html">L'Esperienza</a>
+      <a href="organizzazione.html">Organizzazione</a>
+      <a href="sicurezza.html">Sicurezza</a>
+      <a href="valigia.html">Valigia</a>
+      <a href="cambusa.html">Cambusa</a>
+      <a href="checkin.html">Check-in</a>
+    </div>
+    <p class="footer-copy">© 2026 Corsica Sailing Experience · Tutti i diritti riservati</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

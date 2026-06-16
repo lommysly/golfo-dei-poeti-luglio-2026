@@ -17,37 +17,44 @@
         <span class="logo-icon">—</span>
         <span>Corsica Experience</span>
       </a>
-      <div class="nav-links">
+            <div class="nav-links">
         <a href="index.html">Home</a>
-        <a href="index.html#itinerario">Itinerario</a>
-        <a href="index.html#meteo">Meteo</a>
-        <a href="cambusa.html">Cambusa</a>
-        <a href="briefing.html">Briefing</a>
-        <a href="lagoon.html">Lagoon 40</a>
-        <a href="atlantica.html">Atlantica 45</a>
-        <a href="checkin.html" style="color:var(--turq);font-weight:600">🔐 Check-in</a>
-        <a href="rotta.html">🗺️ Rotta</a>
-      </div>
-      <button class="nav-burger" id="navBurger" aria-label="Menu">
+        <a href="esperienza.html">L'Esperienza</a>
+        <a href="organizzazione.html">Organizzazione</a>
+        <a href="sicurezza.html">Sicurezza</a>
+        <div class="dropdown" id="navDropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="checkin.html">Check-in</a>
+            <a href="inventario.html">Inventario</a>
+            <a href="meteo.html">Meteo</a>
+          </div>
+        </div>
+      </div><button class="nav-burger" id="navBurger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
-    <div class="nav-mobile" id="navMobile">
+        <div class="nav-mobile" id="navMobile">
       <a href="index.html">Home</a>
-      <a href="index.html#itinerario">Itinerario</a>
-      <a href="index.html#meteo">Meteo</a>
+      <a href="esperienza.html">L'Esperienza</a>
+      <a href="organizzazione.html">Organizzazione</a>
+      <a href="sicurezza.html">Sicurezza</a>
+      <a href="valigia.html">Valigia Intelligente</a>
       <a href="cambusa.html">Cambusa</a>
-      <a href="briefing.html">Briefing</a>
-      <a href="lagoon.html">Lagoon 40</a>
-      <a href="atlantica.html">Atlantica 45</a>
-      <a href="checkin.html" style="color:var(--turq);font-weight:600">🔐 Check-in</a>
-      <a href="rotta.html">🗺️ Rotta</a>
+      <a href="crewlist.html">Crew List</a>
+      <a href="meteo.html">Meteo</a>
+      <a href="rotta.html">Rotta</a>
+      <a href="checkin.html">Check-in</a>
+      <a href="inventario.html">Inventario</a>
     </div>
   </nav>
 
   <!-- PAGE HERO -->
   <div class="page-hero">
-    <div class="page-hero-bg" style="background-image:url('img/oceanis48.jpg')"></div>
+      <video class="page-hero-video" autoplay muted loop playsinline poster="img/oceanis48.jpg">
+    <source src="img/hero-video.mp4" type="video/mp4">
+  </video>
+  <div class="page-hero-bg" style="background-color:#0b3c5d;"></div>
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <a href="index.html" class="back-link">← Torna alla home</a>

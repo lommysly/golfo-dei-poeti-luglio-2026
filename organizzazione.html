@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organizzazione — Corsica Sailing Experience</title>
+  <meta name="description" content="Tutto quello che devi sapere per organizzare il tuo weekend in barca a vela verso la Corsica." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Corsica Experience</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="esperienza.html">L'Esperienza</a>
+      <a href="organizzazione.html" class="active">Organizzazione</a>
+      <a href="sicurezza.html">Sicurezza</a>
+      <div class="dropdown" id="navDropdown">
+        <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
+        <div class="dropdown-menu">
+          <a href="checkin.html">Check-in</a>
+          <a href="inventario.html">Inventario</a>
+          <a href="meteo.html">Meteo</a>
+        </div>
+      </div>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="esperienza.html">L'Esperienza</a>
+    <a href="organizzazione.html" style="color:var(--turq);font-weight:700;">Organizzazione →</a>
+    <a href="sicurezza.html">Sicurezza</a>
+    <a href="valigia.html">Valigia Intelligente</a>
+    <a href="cambusa.html">Cambusa</a>
+    <a href="crewlist.html">Crew List</a>
+    <a href="meteo.html">Meteo</a>
+    <a href="rotta.html">Rotta</a>
+    <a href="checkin.html">Check-in</a>
+    <a href="inventario.html">Inventario</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <video class="page-hero-video" autoplay muted loop playsinline poster="img/hero.jpg">
+    <source src="img/barcaferma.mp4" type="video/mp4">
+  </video>
+  <div class="page-hero-bg" style="background-color:#0b3c5d;"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <a href="index.html" class="back-link">← Torna alla Home</a>
+    <span class="label light">Preparazione</span>
+    <h1 class="page-hero-title">Organizzazione</h1>
+    <p class="page-hero-sub">Tutto quello che devi fare prima e durante il weekend. Checklist, liste e pratiche.</p>
+  </div>
+</div>
+
+<div class="container" style="padding: 60px 20px 80px;">
+  <div class="section-header centered" style="margin-bottom:48px;">
+    <span class="label">Aree</span>
+    <h2 class="h2">Cosa ti serve organizzare</h2>
+    <p class="section-desc">Dalla valigia alla crew list, tutto a portata di click.</p>
+  </div>
+
+  <div class="regole-grid">
+    <a href="valigia.html" class="hub-card turq reveal-up">
+      <div class="rc-icon" style="background:rgba(28,167,168,.15);color:var(--turq-light);">🎒</div>
+      <h4>Valigia Intelligente</h4>
+      <p>La <strong>checklist interattiva</strong> completa: cosa mettere in valigia, smart packing, tracciamento progresso.</p>
+      <span class="hub-cta">Checklist interattiva →</span>
+    </a>
+    <a href="briefing.html#valigia" class="hub-card gold reveal-up d1">
+      <div class="rc-icon" style="background:rgba(251,191,36,.15);color:#fbbf24;">📋</div>
+      <h4>Cosa Portare</h4>
+      <p>Le <strong>regole d'oro</strong> del packing per la barca: bagagli morbidi, scarpe, temperature, 12V.</p>
+      <span class="hub-cta">Leggi le regole →</span>
+    </a>
+    <a href="cambusa.html" class="hub-card turq reveal-up d2">
+      <div class="rc-icon" style="background:rgba(52,211,153,.15);color:#6ee7b7;">🛒</div>
+      <h4>Cambusa</h4>
+      <p>La <strong>lista della spesa condivisa</strong> per l'equipaggio. Sincronizza con il foglio Google.</p>
+      <span class="hub-cta">Lista spesa →</span>
+    </a>
+    <a href="crewlist.html" class="hub-card ocean reveal-up">
+      <div class="rc-icon" style="background:rgba(167,139,250,.15);color:#a78bfa;">👥</div>
+      <h4>Crew List</h4>
+      <p>Compila il <strong>modulo equipaggio</strong> per il charter. Scarica il PDF da consegnare in porto.</p>
+      <span class="hub-cta">Compila ora →</span>
+    </a>
+    <a href="index.html#quota" class="hub-card coral reveal-up d1">
+      <div class="rc-icon" style="background:rgba(248,113,113,.15);color:#f87171;">💶</div>
+      <h4>Pagamenti</h4>
+      <p><strong>€330 a persona</strong>: €300 bonifico + €30 contanti. IBAN e dettagli.</p>
+      <span class="hub-cta">Vedi quote →</span>
+    </a>
+    <a href="index.html#contatti" class="hub-card gold reveal-up d2">
+      <div class="rc-icon" style="background:rgba(56,189,248,.15);color:#38bdf8;">📞</div>
+      <h4>Contatti</h4>
+      <p>WhatsApp dello skipper, porto, orari. Contattaci prima della partenza.</p>
+      <span class="hub-cta">Info contatti →</span>
+    </a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">Corsica Sailing Experience</div>
+    <p>Weekend 17–19 Luglio 2026</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="esperienza.html">L'Esperienza</a>
+      <a href="organizzazione.html">Organizzazione</a>
+      <a href="sicurezza.html">Sicurezza</a>
+      <a href="valigia.html">Valigia</a>
+      <a href="cambusa.html">Cambusa</a>
+      <a href="checkin.html">Check-in</a>
+    </div>
+    <p class="footer-copy">© 2026 Corsica Sailing Experience · Tutti i diritti riservati</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
