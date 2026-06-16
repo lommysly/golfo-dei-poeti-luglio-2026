@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cambusa Atlantica — Corsica Experience</title>
+  <link rel="stylesheet" href="styles.css?v=20260526i" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    body { background: var(--ocean); color: #fff; min-height: 100vh; }
+    .kb-wrap { max-width: 1040px; margin: 0 auto; padding: 52px 20px 90px; }
+    .kb-header { text-align: center; margin-bottom: 30px; }
+    .kb-header .label { display: block; margin-bottom: 10px; color: var(--turq); font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .kb-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem, 7vw, 4.4rem); font-weight: 300; margin-bottom: 10px; }
+    .kb-header p { max-width: 680px; margin: 0 auto; color: rgba(255,255,255,.65); line-height: 1.7; }
+    .kb-back { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,.5); font-size: .82rem; text-decoration: none; margin-bottom: 24px; }
+    .kb-back:hover { color: var(--turq-light); }
+    .kb-lock { max-width: 420px; margin: 70px auto; padding: 34px 28px; border-radius: 22px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); text-align: center; }
+    .kb-lock .icon { font-size: 3rem; margin-bottom: 14px; }
+    .kb-lock p { color: rgba(255,255,255,.62); margin-bottom: 20px; line-height: 1.6; }
+    .kb-lock input { width: 100%; padding: 13px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08); color: #fff; text-align: center; font-size: 1rem; outline: none; margin-bottom: 12px; }
+    .kb-lock button, .kb-action { border: none; border-radius: 12px; background: var(--turq); color: #fff; padding: 12px 20px; font-weight: 700; cursor: pointer; }
+    .kb-err { display: none; margin-top: 12px; color: #f87171; font-size: .86rem; }
+
+    /* Tabs */
+    .kb-tabs { display: flex; gap: 8px; margin-bottom: 22px; }
+    .kb-tab { flex: 1; padding: 13px; border: none; border-radius: 14px; cursor: pointer; font-weight: 700; font-size: .9rem; background: rgba(255,255,255,.07); color: rgba(255,255,255,.5); transition: background .2s, color .2s; }
+    .kb-tab.active { background: var(--turq); color: #fff; }
+
+    /* Spesa toolbar */
+    .kb-toolbar { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-bottom: 22px; padding: 16px 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; }
+    .kb-progress { flex: 1; min-width: 220px; }
+    .kb-progress-label { font-size: .85rem; color: rgba(255,255,255,.65); margin-bottom: 8px; }
+    .kb-progress-track { height: 8px; background: rgba(255,255,255,.08); border-radius: 20px; overflow: hidden; }
+    .kb-progress-fill { height: 100%; width: 0; background: var(--turq); transition: width .25s ease; }
+    .kb-sync { display: flex; align-items: center; gap: 6px; font-size: .78rem; padding: 6px 12px; border-radius: 20px; background: rgba(255,255,255,.06); color: rgba(255,255,255,.55); }
+    .kb-sync.ok { color: #4ade80; background: rgba(74,222,128,.08); }
+    .kb-sync.busy { color: var(--turq-light); }
+    .kb-sync.local { color: rgba(255,255,255,.4); }
+    .kb-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .kb-action.secondary { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.75); }
+
+    /* Spesa grid */
+    .kb-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .kb-section { background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; overflow: hidden; }
+    .kb-section-head { display: flex; align-items: center; gap: 12px; padding: 17px 18px; background: rgba(255,255,255,.055); }
+    .kb-section-head .emoji { font-size: 1.35rem; }
+    .kb-section-head h2 { flex: 1; font-size: 1rem; font-weight: 700; }
+    .kb-count { color: rgba(255,255,255,.45); font-size: .8rem; }
+    .kb-list { padding: 8px 0; }
+    .kb-item { display: grid; grid-template-columns: 22px 1fr auto; gap: 12px; align-items: start; padding: 11px 18px; border-top: 1px solid rgba(255,255,255,.055); }
+    .kb-item input { width: 20px; height: 20px; accent-color: var(--turq); margin-top: 2px; cursor: pointer; }
+    .kb-item-name { display: block; color: rgba(255,255,255,.86); font-size: .9rem; line-height: 1.35; }
+    .kb-item.done .kb-item-name { color: rgba(255,255,255,.38); text-decoration: line-through; }
+    .kb-qty { color: var(--turq-light); font-size: .78rem; font-weight: 700; white-space: nowrap; }
+    .kb-nota { display: block; font-size: .72rem; color: rgba(255,255,255,.36); margin-top: 2px; font-weight: 400; }
+    .kb-meta { margin-top: 22px; color: rgba(255,255,255,.45); font-size: .8rem; text-align: center; }
+
+    /* Menu giornaliero */
+    .day-grid { display: grid; gap: 16px; }
+    .day-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; overflow: hidden; }
+    .day-head { display: flex; align-items: center; gap: 14px; padding: 15px 18px; background: rgba(255,255,255,.055); }
+    .day-date { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; font-weight: 600; flex: 1; }
+    .day-badge { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--turq); background: rgba(0,180,180,.12); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(0,180,180,.2); }
+    .pasto-block { padding: 12px 18px; border-top: 1px solid rgba(255,255,255,.06); }
+    .pasto-label { font-size: .7rem; color: rgba(255,255,255,.38); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 3px; }
+    .pasto-piatto { font-weight: 600; color: rgba(255,255,255,.88); font-size: .95rem; margin-bottom: 8px; }
+    .ing-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+    .ing-pill { font-size: .73rem; padding: 3px 9px; border-radius: 7px; background: rgba(255,255,255,.06); color: rgba(255,255,255,.58); border: 1px solid rgba(255,255,255,.09); }
+    .ing-pill strong { color: var(--turq-light); margin-right: 3px; }
+    .menu-empty { text-align: center; padding: 60px 20px; color: rgba(255,255,255,.42); line-height: 1.9; }
+    /* Edit mode */
+    .kb-add-form { display: none; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.15); border-radius: 16px; padding: 16px 18px; margin-bottom: 18px; }
+    .kb-add-form.visible { display: block; }
+    .kb-add-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: stretch; }
+    .kb-add-input { flex: 1; min-width: 130px; padding: 10px 13px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.07); color: #fff; font-size: .88rem; outline: none; }
+    .kb-add-input::placeholder { color: rgba(255,255,255,.28); }
+    .kb-add-select { padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18); background: rgba(20,40,70,.95); color: #fff; font-size: .82rem; outline: none; cursor: pointer; }
+    .kb-add-btn { padding: 10px 18px; border-radius: 10px; border: none; background: var(--turq); color: #fff; font-weight: 700; cursor: pointer; white-space: nowrap; font-size: .88rem; }
+    .kb-del { display: none; border: none; background: rgba(248,113,113,.12); color: #f87171; border-radius: 7px; width: 28px; height: 28px; cursor: pointer; font-size: .85rem; align-items: center; justify-content: center; flex-shrink: 0; align-self: center; }
+    body.edit-mode .kb-del { display: flex; }
+    body.edit-mode .kb-item { grid-template-columns: 22px 1fr auto 32px; }
+    .kb-action.edit-on { background: rgba(255,200,0,.15); border-color: rgba(255,200,0,.3) !important; color: #fcd34d !important; }
+    .kb-sheet-banner { text-align: center; margin-bottom: 28px; }
+    .kb-sheet-banner a { display: inline-flex; align-items: center; gap: 9px; padding: 11px 22px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.13); color: rgba(255,255,255,.68); text-decoration: none; font-size: .86rem; transition: background .2s, border-color .2s, color .2s; }
+    .kb-sheet-banner a:hover { background: rgba(255,255,255,.11); border-color: var(--turq); color: #fff; }
+
+    @media (max-width: 820px) { .kb-grid { grid-template-columns: 1fr; } .kb-toolbar { align-items: stretch; } .kb-actions { width: 100%; } .kb-action { flex: 1; } }
+    @media print { .nav, .kb-lock, .kb-toolbar, .kb-back, .kb-tabs { display: none !important; } body { background: #fff !important; color: #111 !important; } .kb-wrap { max-width: 100%; padding: 10mm !important; } .kb-header h1 { color: #0b3c5d !important; } .kb-header p, .kb-header .label { color: #555 !important; } .kb-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } .kb-section { break-inside: avoid; background: #fff !important; border: 1px solid #ddd !important; } .kb-section-head { background: #f8f9fa !important; } .kb-section-head h2 { color: #0b3c5d !important; } .kb-item-name { color: #333 !important; } .kb-item.done .kb-item-name { color: #999 !important; } .kb-qty { color: #666 !important; } .kb-nota { color: #777 !important; } }
+  </style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="logo-icon">—</span>
+      <span>Corsica Experience</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#itinerario">Itinerario</a>
+      <a href="index.html#meteo">Meteo</a>
+      <a href="cambusa.html">Cambusa</a>
+      <a href="briefing.html">Briefing</a>
+      <a href="lagoon.html">Lagoon 40</a>
+      <a href="oceanis.html">Oceanis 48</a>
+      <a href="checkin.html" style="color:var(--turq);font-weight:600">🔐 Check-in</a>
+      <a href="rotta.html">🗺️ Rotta</a>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="index.html#itinerario">Itinerario</a>
+    <a href="index.html#meteo">Meteo</a>
+    <a href="cambusa.html">Cambusa</a>
+    <a href="briefing.html">Briefing</a>
+    <a href="lagoon.html">Lagoon 40</a>
+    <a href="oceanis.html">Oceanis 48</a>
+    <a href="checkin.html" style="color:var(--turq);font-weight:600">🔐 Check-in</a>
+    <a href="rotta.html">🗺️ Rotta</a>
+  </div>
+</nav>
+
+<div class="kb-wrap">
+  <a href="index.html" class="kb-back">← Torna alla home</a>
+  
+  <div class="kb-header">
+    <span class="label">Golfo dei Poeti</span>
+    <h1>Cambusa Atlantica 45</h1>
+    <p>Lista spesa e menu giornaliero per Atlantica 45 — sincronizzato con il foglio Google Sheets dedicato.</p>
+  </div>
+
+  <!-- Lock screen -->
+  <div id="kbLock" class="kb-lock">
+    <div class="icon">🔒</div>
+    <p>Inserisci la password per accedere alla cambusa</p>
+    <input type="password" id="kbPwd" placeholder="Password" onkeydown="if(event.key==='Enter')unlockKB()" />
+    <button onclick="unlockKB()">Accedi</button>
+    <div class="kb-err" id="kbErr">Password errata</div>
+  </div>
+
+  <!-- Main content -->
+  <div id="kbMain" style="display:none">
+    
+    <div class="kb-sheet-banner">
+      <a href="https://docs.google.com/spreadsheets/d/..." target="_blank">
+        📊 Apri il foglio Google Sheets →
+      </a>
+    </div>
+
+    <!-- Tabs -->
+    <div class="kb-tabs">
+      <button class="kb-tab active" onclick="switchKBTab(0)">🛒 Lista Spesa</button>
+      <button class="kb-tab" onclick="switchKBTab(1)">📅 Menu Giornaliero</button>
+    </div>
+
+    <!-- TAB 0: Lista Spesa -->
+    <div id="kbTab0">
+      <div class="kb-toolbar">
+        <div class="kb-progress">
+          <div class="kb-progress-label">Progresso spesa</div>
+          <div class="kb-progress-track">
+            <div class="kb-progress-fill" id="kbProgressFill"></div>
+          </div>
+        </div>
+        <div class="kb-sync" id="kbSync">
+          <span>—</span>
+        </div>
+        <div class="kb-actions">
+          <button class="kb-action secondary" onclick="toggleEditMode()">✏️ Modifica</button>
+          <button class="kb-action" onclick="syncFromSheets()">🔄 Sincronizza</button>
+        </div>
+      </div>
+
+      <div class="kb-grid" id="kbGrid">
+        <!-- Sections will be populated by JS -->
+      </div>
+
+      <div class="kb-meta">
+        <p id="kbMeta">Ultimo aggiornamento: —</p>
+      </div>
+    </div>
+
+    <!-- TAB 1: Menu Giornaliero -->
+    <div id="kbTab1" style="display:none">
+      <div class="day-grid" id="dayGrid">
+        <!-- Menu will be populated by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const KB_PWD = 'Skipper2026';
+const KB_API = 'https://script.google.com/macros/s/AKfycbxP4UKTts8LtwOAp3VIYeqjKPLUbKlYYM2zec9tMakjmFTgjKIK1hEOgA7BJRBmCcM2/exec';
+const KB_BOAT = 'atlantica';
+
+let kbState = {};
+let editMode = false;
+
+function unlockKB() {
+  const pwd = document.getElementById('kbPwd').value;
+  if (pwd === KB_PWD) {
+    document.getElementById('kbLock').style.display = 'none';
+    document.getElementById('kbMain').style.display = 'block';
+    loadKBData();
+  } else {
+    document.getElementById('kbErr').style.display = 'block';
+    document.getElementById('kbPwd').value = '';
+  }
+}
+
+function switchKBTab(idx) {
+  document.querySelectorAll('.kb-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.getElementById('kbTab0').style.display = idx === 0 ? 'block' : 'none';
+  document.getElementById('kbTab1').style.display = idx === 1 ? 'block' : 'none';
+}
+
+function toggleEditMode() {
+  editMode = !editMode;
+  document.body.classList.toggle('edit-mode', editMode);
+  const btn = document.querySelector('.kb-action.edit-on');
+  if (btn) btn.classList.toggle('edit-on', editMode);
+}
+
+function loadKBData() {
+  // Placeholder - implementare caricamento dati da Google Sheets
+  setKBSync('loading', 'Caricamento...');
+  
+  const cbName = '_kb_load_' + Date.now();
+  window[cbName] = function(res) {
+    delete window[cbName];
+    if (res.ok) {
+      kbState = res.data || {};
+      renderKBList();
+      renderMenu();
+      setKBSync('ok', 'Sincronizzato');
+    } else {
+      setKBSync('err', 'Errore caricamento');
+    }
+  };
+  
+  const s = document.createElement('script');
+  s.src = KB_API + '?action=getCambusa&boat=' + KB_BOAT + '&callback=' + cbName;
+  document.head.appendChild(s);
+}
+
+function renderKBList() {
+  const grid = document.getElementById('kbGrid');
+  grid.innerHTML = '';
+  
+  // Placeholder structure - da completare con dati reali
+  const sections = [
+    { emoji: '🥛', name: 'Latte e Derivati', items: [
+      { name: 'Latte fresco', qty: '2L', done: false },
+      { name: 'Yogurt', qty: '6pz', done: false },
+      { name: 'Burro', qty: '250g', done: false },
+    ]},
+    { emoji: '🥖', name: 'Pane e Dolci', items: [
+      { name: 'Pane', qty: '2kg', done: false },
+      { name: 'Biscotti', qty: '2pk', done: false },
+      { name: 'Marmellata', qty: '1v', done: false },
+    ]},
+    { emoji: '🥩', name: 'Carne e Pesce', items: [
+      { name: 'Manzo', qty: '1kg', done: false },
+      { name: 'Pollo', qty: '1kg', done: false },
+      { name: 'Pesce', qty: '1kg', done: false },
+    ]},
+    { emoji: '🥬', name: 'Verdura e Frutta', items: [
+      { name: 'Pomodori', qty: '1kg', done: false },
+      { name: 'Insalata', qty: '2pk', done: false },
+      { name: 'Frutta', qty: '2kg', done: false },
+    ]},
+  ];
+  
+  sections.forEach(sec => {
+    const doneCount = sec.items.filter(i => kbState[i.name]?.done).length;
+    const div = document.createElement('div');
+    div.className = 'kb-section';
+    div.innerHTML = `
+      <div class="kb-section-head">
+        <span class="emoji">${sec.emoji}</span>
+        <h2>${sec.name}</h2>
+        <span class="kb-count">${doneCount}/${sec.items.length}</span>
+      </div>
+      <div class="kb-list">
+        ${sec.items.map(item => {
+          const done = kbState[item.name]?.done || false;
+          return `
+            <div class="kb-item ${done ? 'done' : ''}">
+              <input type="checkbox" ${done ? 'checked' : ''} onchange="toggleKBItem('${item.name}', this.checked)" />
+              <span class="kb-item-name">${item.name}</span>
+              <span class="kb-qty">${item.qty}</span>
+              ${editMode ? '<button class="kb-del" onclick="deleteKBItem(\'' + item.name + '\')">×</button>' : ''}
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+    grid.appendChild(div);
+  });
+  
+  updateKBProgress();
+}
+
+function renderMenu() {
+  const grid = document.getElementById('dayGrid');
+  grid.innerHTML = '<div class="menu-empty">Menu giornaliero - DA COMPLETARE CON DATI REALI</div>';
+}
+
+function toggleKBItem(name, done) {
+  if (!kbState[name]) kbState[name] = {};
+  kbState[name].done = done;
+  renderKBList();
+  saveKBItem(name, done);
+}
+
+function deleteKBItem(name) {
+  if (confirm('Eliminare ' + name + '?')) {
+    delete kbState[name];
+    renderKBList();
+  }
+}
+
+function updateKBProgress() {
+  const allItems = document.querySelectorAll('.kb-item input');
+  const checked = document.querySelectorAll('.kb-item input:checked');
+  const pct = allItems.length ? Math.round(checked.length / allItems.length * 100) : 0;
+  document.getElementById('kbProgressFill').style.width = pct + '%';
+}
+
+function setKBSync(status, text) {
+  const sync = document.getElementById('kbSync');
+  sync.className = 'kb-sync ' + status;
+  sync.innerHTML = '<span>' + text + '</span>';
+}
+
+function syncFromSheets() {
+  loadKBData();
+}
+
+function saveKBItem(name, done) {
+  // Placeholder - implementare salvataggio su Google Sheets
+  setKBSync('busy', 'Salvataggio...');
+  setTimeout(() => setKBSync('ok', 'Salvato'), 500);
+}
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

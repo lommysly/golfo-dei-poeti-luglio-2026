@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Check-in Atlantica 45 · Corsica Experience</title>
+  <link rel="stylesheet" href="styles.css?v=20260525i" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    body { background: var(--ocean); color: #fff; min-height: 100vh; }
+    .ci-wrap { max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; }
+    .ci-header { text-align: center; padding: 40px 0 32px; }
+    .ci-header .label { font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--turq); font-weight: 600; display: block; margin-bottom: 10px; }
+    .ci-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; margin-bottom: 8px; }
+    .ci-header p { font-size: .9rem; color: rgba(255,255,255,.6); }
+
+    /* Boat selector */
+    .boat-select { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+    .boat-btn { flex: 1; min-width: 140px; padding: 14px 16px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15); border-radius: 12px; color: rgba(255,255,255,.7); font-size: .88rem; cursor: pointer; text-align: center; transition: all .2s; }
+    .boat-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
+    .boat-btn.active { background: var(--turq); border-color: var(--turq); color: #fff; font-weight: 600; }
+
+    /* Tab navigation */
+    .tab-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 24px; }
+    .tab-btn { padding: 7px 13px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; color: rgba(255,255,255,.6); font-size: .78rem; cursor: pointer; white-space: nowrap; transition: all .2s; }
+    .tab-btn:hover { background: rgba(255,255,255,.13); color: #fff; }
+    .tab-btn.active { background: var(--turq); border-color: var(--turq); color: #fff; font-weight: 600; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Info card (for non-checklist tabs) */
+    .info-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 20px 24px; margin-bottom: 16px; }
+    .info-card h3 { font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--turq); margin-bottom: 12px; }
+    .info-card p, .info-card li { font-size: .87rem; color: rgba(255,255,255,.75); line-height: 1.6; }
+    .info-card ul { padding-left: 18px; }
+    .info-card li { margin-bottom: 4px; }
+    .info-card .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: .72rem; font-weight: 600; margin-right: 4px; }
+    .tag-red { background: rgba(248,113,113,.2); color: #fca5a5; }
+    .tag-orange { background: rgba(251,146,60,.2); color: #fdba74; }
+    .tag-green { background: rgba(52,211,153,.2); color: #6ee7b7; }
+
+    /* Progress bar */
+    .ci-progress { background: rgba(255,255,255,.08); border-radius: 20px; height: 6px; margin-bottom: 8px; overflow: hidden; }
+    .ci-progress-fill { height: 100%; background: var(--turq); border-radius: 20px; transition: width .3s ease; }
+    .ci-progress-label { font-size: .78rem; color: rgba(255,255,255,.5); margin-bottom: 28px; }
+
+    /* Sections */
+    .ci-section { margin-bottom: 20px; border-radius: 16px; overflow: hidden; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); }
+    .ci-section-header { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: rgba(255,255,255,.05); cursor: pointer; user-select: none; }
+    .ci-section-header .icon { font-size: 1.3rem; }
+    .ci-section-header .title { font-weight: 600; font-size: .95rem; flex: 1; }
+    .ci-section-header .count { font-size: .78rem; color: rgba(255,255,255,.45); }
+    .ci-section-header .arrow { font-size: .8rem; color: rgba(255,255,255,.35); transition: transform .2s; }
+    .ci-section.open .arrow { transform: rotate(90deg); }
+    .ci-section-body { display: none; padding: 8px 0; }
+    .ci-section.open .ci-section-body { display: block; }
+
+    /* Items */
+    .ci-item { display: flex; align-items: flex-start; gap: 14px; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,.05); transition: background .15s; }
+    .ci-item:last-child { border-bottom: none; }
+    .ci-item:hover { background: rgba(255,255,255,.04); }
+    .ci-item input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--turq); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+    .ci-item-body { flex: 1; }
+    .ci-item-label { font-size: .88rem; color: rgba(255,255,255,.8); line-height: 1.4; cursor: pointer; display: block; }
+    .ci-item.checked .ci-item-label { color: rgba(255,255,255,.35); text-decoration: line-through; }
+    .ci-item .hint { font-size: .75rem; color: rgba(255,255,255,.3); display: block; margin-top: 2px; }
+    .ci-item-note { width: 100%; margin-top: 7px; padding: 6px 10px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; color: rgba(255,255,255,.7); font-size: .78rem; resize: none; outline: none; font-family: inherit; transition: border-color .2s; }
+    .ci-item-note:focus { border-color: var(--turq); }
+    .ci-item-note::placeholder { color: rgba(255,255,255,.25); }
+    /* Sync indicator */
+    .sync-bar { display: flex; align-items: center; gap: 8px; font-size: .75rem; color: rgba(255,255,255,.4); margin-bottom: 16px; min-height: 20px; }
+    .sync-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.2); flex-shrink: 0; }
+    .sync-dot.ok { background: #34d399; }
+    .sync-dot.err { background: #f87171; }
+    .sync-dot.loading { background: var(--turq); animation: pulse .8s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    /* Boat tabs for checklist */
+    .boat-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+    .boat-tab { flex: 1; padding: 12px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; color: rgba(255,255,255,.6); font-size: .85rem; font-weight: 600; cursor: pointer; text-align: center; transition: all .2s; }
+    .boat-tab.active { background: var(--turq); border-color: var(--turq); color: #fff; }
+
+    /* Actions */
+    .ci-actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+    .ci-btn { flex: 1; min-width: 140px; padding: 13px 18px; border: none; border-radius: 12px; font-size: .85rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+    .ci-btn-reset { background: rgba(255,255,255,.08); color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.15); }
+    .ci-btn-reset:hover { background: rgba(255,255,255,.14); color: #fff; }
+    .ci-btn-print { background: var(--turq); color: #fff; }
+    .ci-btn-print:hover { background: #17898a; }
+
+    /* Lock screen */
+    .ci-lock { text-align: center; padding: 60px 20px; }
+    .ci-lock .lock-icon { font-size: 3rem; margin-bottom: 16px; }
+    .ci-lock p { color: rgba(255,255,255,.6); font-size: .9rem; margin-bottom: 24px; }
+    .ci-lock input { display: block; margin: 0 auto 16px; padding: 12px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); color: #fff; font-size: 1rem; width: 260px; text-align: center; outline: none; }
+    .ci-lock input::placeholder { color: rgba(255,255,255,.35); }
+    .ci-lock button { padding: 12px 32px; background: var(--turq); color: #fff; border: none; border-radius: 10px; font-size: .95rem; font-weight: 600; cursor: pointer; }
+    .ci-lock .err { color: #f87171; font-size: .85rem; margin-top: 10px; display: none; }
+
+    /* Print styles */
+    @media print {
+      body { background: #fff !important; color: #111 !important; }
+      .ci-wrap { padding: 10mm 12mm !important; max-width: 100% !important; }
+      .ci-header { padding: 0 0 16px !important; }
+      .ci-header h1 { color: #0b3c5d !important; font-size: 1.8rem !important; }
+      .ci-header p, .ci-header .label { color: #555 !important; }
+      .boat-select, .boat-tabs, .tab-nav, .sync-bar, .ci-actions, .ci-lock { display: none !important; }
+      .ci-progress, .ci-progress-label { display: none !important; }
+      .ci-section { border: 1px solid #c0cdd8 !important; background: #fff !important; margin-bottom: 12px !important; break-inside: avoid; }
+      .ci-section-body { display: block !important; }
+      .ci-section-header { background: #e8f0f7 !important; cursor: default; }
+      .ci-section-header .title { color: #0b3c5d !important; }
+      .ci-section-header .arrow { display: none; }
+      .ci-item { border-bottom: 1px solid #eee !important; padding: 9px 16px !important; }
+      .ci-item-label { color: #333 !important; font-size: .85rem !important; }
+      .ci-item.checked .ci-item-label { color: #888 !important; }
+      .hint { color: #666 !important; }
+      .ci-item-note { border: none !important; background: transparent !important; color: #333 !important; padding: 3px 0 !important; min-height: auto !important; }
+      .ci-item input[type=checkbox] { accent-color: #1ca7a8; }
+      .print-meta { display: block !important; }
+    }
+    .print-meta { display: none; font-size: .75rem; color: #999; text-align: right; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <span class="logo-icon">—</span>
+      <span class="logo-text">Corsica Experience</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="lagoon.html">Lagoon 40</a>
+      <a href="oceanis.html">Oceanis 48</a>
+      <a href="rotta.html">🗺️ Rotta</a>
+    </div>
+  </div>
+</nav>
+
+<div class="ci-wrap">
+  <div class="ci-header">
+    <span class="label">Skipper Tool</span>
+    <h1>Check-in Atlantica 45</h1>
+    <p>Verifica pre-partenza dedicata — Atlantica 45</p>
+  </div>
+
+  <!-- Lock screen -->
+  <div id="lockScreen" class="ci-lock">
+    <div class="lock-icon">🔒</div>
+    <p>Inserisci la password skipper per accedere alla checklist</p>
+    <input type="password" id="pwdInput" placeholder="Password" onkeydown="if(event.key==='Enter')unlock()" />
+    <button onclick="unlock()">Accedi</button>
+    <div class="err" id="lockErr">Password errata. Riprova.</div>
+  </div>
+
+  <!-- Main content (hidden until unlocked) -->
+  <div id="mainContent" style="display:none">
+
+    <!-- Tab navigation -->
+    <div class="tab-nav" id="tabNav">
+      <button class="tab-btn active" onclick="switchTab(0)">🚨 Check-in Barca</button>
+      <button class="tab-btn" onclick="switchTab(1)">👥 Briefing</button>
+      <button class="tab-btn" onclick="switchTab(2)">⛵ Prima di Salpare</button>
+      <button class="tab-btn" onclick="switchTab(3)">🔍 Diagnostica 72h</button>
+      <button class="tab-btn" onclick="switchTab(4)">📅 Verifiche Quotidiane</button>
+      <button class="tab-btn" onclick="switchTab(5)">🆘 Shock Anafilattico</button>
+      <button class="tab-btn" onclick="switchTab(6)">💊 Pronto Soccorso</button>
+      <button class="tab-btn" onclick="switchTab(7)">🧯 Estintori</button>
+      <button class="tab-btn" onclick="switchTab(8)">🍽️ Cambusa</button>
+      <button class="tab-btn" onclick="switchTab(9)">📦 Inventario Velamica</button>
+    </div>
+
+    <!-- TAB 0: Check-in Barca (checklist) -->
+    <div class="tab-panel active" id="tab-0">
+      <div class="info-card" style="border-color:rgba(28,167,168,.35); background:rgba(28,167,168,.08)">
+        <h3>⛵ Barca selezionata</h3>
+        <p><strong>Atlantica 45</strong> — questa pagina salva e legge esclusivamente il check-in di questa barca.</p>
+      </div>
+      <div class="sync-bar"><div class="sync-dot" id="syncDot"></div><span id="syncLabel">—</span></div>
+      <div class="ci-progress"><div class="ci-progress-fill" id="progressFill"></div></div>
+      <div class="ci-progress-label" id="progressLabel">0 / 0 voci completate</div>
+      <div id="checklistContainer"></div>
+      <div class="ci-actions">
+        <button class="ci-btn ci-btn-reset" onclick="resetChecklist()">↺ Azzera tutto</button>
+        <button class="ci-btn ci-btn-print" onclick="printChecklist()">🖨️ Stampa Check-in</button>
+      </div>
+    </div>
+
+    <!-- TAB 1: Briefing equipaggio -->
+    <div class="tab-panel" id="tab-1">
+      <div class="info-card">
+        <h3>📋 Info Briefing</h3>
+        <p><strong>Durata:</strong> 20 minuti — in parte sottocoperta, in parte in coperta</p>
+        <p><strong>Owner:</strong> Skipper</p>
+        <p><strong>Audience:</strong> Tutti presenti e attenti, no musica. I neofiti devono poter vedere/toccare.</p>
+      </div>
+      <div class="ci-section open">
+        <div class="ci-section-header" onclick="this.parentElement.classList.toggle('open')">
+          <span class="icon">👥</span><span class="title">Argomenti da trattare</span><span class="arrow">▶</span>
+        </div>
+        <div class="ci-section-body" style="display:block">
+          <div class="ci-item"><label>🔍 <strong>Conoscere equipaggio</strong> — chi sa nuotare, problemi fisici/allergie, esperienza precedente, nominare un "Secondo" (obbligo di legge)</label></div>
+          <div class="ci-item"><label>🗺️ <strong>Intro</strong> — Presentazione crociera e ruolo skipper</label></div>
+          <div class="ci-item"><label>🤝 <strong>Vita di bordo</strong> — Regole per stare bene insieme. Assegnazione compiti e ruoli</label></div>
+          <div class="ci-item"><label>⚠️ <strong>Sicurezza base</strong> — Occhio al boma, tenersi in navigazione, winch e stopper</label></div>
+          <div class="ci-item"><label>🦺 <strong>Dotazioni sicurezza</strong> — Dove sono i giubbotti e cinture, come si usano e regolano <span class="tag tag-red">IMPORTANTE</span></label></div>
+          <div class="ci-item"><label>💊 <strong>Cassetta pronto soccorso</strong> — Localizzazione, contenuto e uso</label></div>
+          <div class="ci-item"><label>🔥 <strong>Fuochi</strong> — Localizzazione, differenze boette/razzi/fuochi, modalità d'uso</label></div>
+          <div class="ci-item"><label>🧯 <strong>Pericoli (fuoco)</strong> — Estintori: dove sono, tipo, come si usano</label></div>
+          <div class="ci-item"><label>🌊 <strong>Uomo in mare</strong> — Cosa fare, man over board, tasto Distress, lanciare anulare</label></div>
+          <div class="ci-item"><label>📻 <strong>Emergenza / Mayday</strong> — Cosa dire, canale VHF 16, posizione barca, EPIRB, scialuppa</label></div>
+          <div class="ci-item"><label>💧 <strong>Condotta di buon senso</strong> — Acqua, elettricità, pulizia e ordine a bordo</label></div>
+          <div class="ci-item"><label>❄️ <strong>Frigorifero</strong> — Aperto non raffredda; rifornire quando si preleva; radiatore ben areato</label></div>
+          <div class="ci-item"><label>🚽 <strong>Scarichi WC, acqua e luci</strong> — No carta igienica nello scarico, risparmio acqua, spegnere luci</label></div>
+          <div class="ci-item"><label>📦 <strong>Robe appese</strong> — Roba non legata vola, quella appoggiata cade; attenzione pentole in navigazione</label></div>
+          <div class="ci-item"><label>🗺️ <strong>Tavolo carteggio</strong> — Plancia libera da riviste, creme, occhiali, fotocamere</label></div>
+          <div class="ci-item"><label>🌙 <strong>Sempre pronti a salpare</strong> — La notte l'imbarcazione deve essere pronta a salpare</label></div>
+          <div class="ci-item"><label>🚤 <strong>Tender</strong> — Spiegazione e rischi; remi a bordo, luce la sera, pieno di carburante</label></div>
+          <div class="ci-item"><label>💰 <strong>Cassa e deposito cauzionale</strong> — Raccogliere deposito, spiegare gestione cassa comune</label></div>
+          <div class="ci-item"><label>⚓ <strong>Ormeggio e ancoraggio</strong> — Ruoli, nodi principali, mezzo marinaio, parabordi, lancio cime</label></div>
+          <div class="ci-item"><label>📻 <strong>Reperibilità skipper</strong> — VHF ch 72 / cellulare. Chiavi accensione sempre nel quadro</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Controlli prima di salpare -->
+    <div class="tab-panel" id="tab-2">
+      <div class="ci-section open">
+        <div class="ci-section-header" onclick="this.parentElement.classList.toggle('open')">
+          <span class="icon">⛵</span><span class="title">Controlli Prima di Salpare</span><span class="arrow">▶</span>
+        </div>
+        <div class="ci-section-body" style="display:block">
+          <div class="ci-item"><label>⛽ <strong>Carburante</strong> — Verificare livello serbatoio diesel</label></div>
+          <div class="ci-item"><label>💧 <strong>Acqua</strong> — Verificare livello serbatoi acqua dolce</label></div>
+          <div class="ci-item"><label>🔋 <strong>Batterie</strong> — Verificare stato carica batterie di servizio</label></div>
+          <div class="ci-item"><label>📻 <strong>VHF</strong> — Test canale 16 e 72, verifica antenna</label></div>
+          <div class="ci-item"><label>🧭 <strong>GPS/Chartplotter</strong> — Verificare funzionamento e posizione</label></div>
+          <div class="ci-item"><label>⚓ <strong>Ancora e catena</strong> — Verificare catena, ancora, e meccanismo di salita</label></div>
+          <div class="ci-item"><label>🚤 <strong>Tender</strong> — Verificare carburante, remi, luce, cime</label></div>
+          <div class="ci-item"><label>🦺 <strong>Giubbotti salvataggio</strong> — Contare e verificare stato</label></div>
+          <div class="ci-item"><label>🔥 <strong>Estintori</strong> — Verificare pressione e scadenza</label></div>
+          <div class="ci-item"><label>💊 <strong>Pronto soccorso</strong> — Verificare scadenze e completezza</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Diagnostica 72h -->
+    <div class="tab-panel" id="tab-3">
+      <div class="info-card">
+        <h3>🔍 Diagnostica 72h Pre-Partenza</h3>
+        <p>Controlli da effettuare 72 ore prima della partenza per identificare problemi potenziali.</p>
+      </div>
+      <div class="ci-section open">
+        <div class="ci-section-header" onclick="this.parentElement.classList.toggle('open')">
+          <span class="icon">⚙️</span><span class="title">Motore e Propulsione</span><span class="arrow">▶</span>
+        </div>
+        <div class="ci-section-body" style="display:block">
+          <div class="ci-item"><label>🔧 <strong>Verificare olio motore</strong> — Livello e colore</label></div>
+          <div class="ci-item"><label>❄️ <strong>Verificare liquido raffreddamento</strong> — Livello e perdite</label></div>
+          <div class="ci-item"><label>⚙️ <strong>Verificare trasmissione</strong> — Olio e funzionamento</label></div>
+          <div class="ci-item"><label>🔋 <strong>Verificare batterie motore</strong> — Tensione e collegamenti</label></div>
+          <div class="ci-item"><label>⛽ <strong>Verificare filtri carburante</strong> — Controllare sedimenti</label></div>
+        </div>
+      </div>
+      <div class="ci-section">
+        <div class="ci-section-header" onclick="this.parentElement.classList.toggle('open')">
+          <span class="icon">⚡</span><span class="title">Impianto Elettrico</span><span class="arrow">▶</span>
+        </div>
+        <div class="ci-section-body">
+          <div class="ci-item"><label>🔋 <strong>Verificare batterie di servizio</strong> — Tensione e stato</label></div>
+          <div class="ci-item"><label>☀️ <strong>Verificare pannelli solari</strong> (se presenti) — Produzione</label></div>
+          <div class="ci-item"><label>🔌 <strong>Verificare caricabatterie</strong> — Funzionamento</label></div>
+          <div class="ci-item"><label>💡 <strong>Verificare luci di navigazione</strong> — Tutte funzionanti</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: Verifiche Quotidiane -->
+    <div class="tab-panel" id="tab-4">
+      <div class="info-card">
+        <h3>📅 Verifiche Quotidiane</h3>
+        <p>Controlli da effettuare ogni mattina durante la crociera.</p>
+      </div>
+      <div class="ci-section open">
+        <div class="ci-section-header" onclick="this.parentElement.classList.toggle('open')">
+          <span class="icon">☀️</span><span class="title">Mattina</span><span class="arrow">▶</span>
+        </div>
+        <div class="ci-section-body" style="display:block">
+          <div class="ci-item"><label>🌡️ <strong>Temperatura motore</strong> — Verificare durante avviamento</label></div>
+          <div class="ci-item"><label>⛽ <strong>Livello carburante</strong> — Verificare autonomia</label></div>
+          <div class="ci-item"><label>💧 <strong>Livello acqua</strong> — Verificare serbatoi</label></div>
+          <div class="ci-item"><label>🔋 <strong>Batterie</strong> — Verificare tensione</label></div>
+          <div class="ci-item"><label>📻 <strong>VHF</strong> — Test canale 16</label></div>
+        </div>
+      </div>
+      <div class="ci-section">
+        <div class="ci-section-header" onclick="this.parentElement.classList.toggle('open')">
+          <span class="icon">🌙</span><span class="title">Sera</span><span class="arrow">▶</span>
+        </div>
+        <div class="ci-section-body">
+          <div class="ci-item"><label>⚓ <strong>Verificare ormeggio</strong> — Cime tese, parabordi posizionati</label></div>
+          <div class="ci-item"><label>🚤 <strong>Tender</strong> — Legato e illuminato</label></div>
+          <div class="ci-item"><label>🔌 <strong>220V</strong> — Se in porto, verificare collegamento</label></div>
+          <div class="ci-item"><label>🔒 <strong>Sicurezza</strong> — Chiudere oblò e portelli</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: Shock Anafilattico -->
+    <div class="tab-panel" id="tab-5">
+      <div class="info-card">
+        <h3>🆘 Shock Anafilattico — Procedure di Emergenza</h3>
+        <p><strong>Tempo critico:</strong> 5-15 minuti per intervenire. <span class="tag tag-red">URGENZA ASSOLUTA</span></p>
+      </div>
+      <div class="info-card">
+        <h3>⚠️ Sintomi da Riconoscere</h3>
+        <ul>
+          <li><strong>Cute:</strong> orticaria, prurito, gonfiore (labbra, lingua, gola)</li>
+          <li><strong>Respiratorio:</strong> respiro sibilante, difficoltà respiratorie, senso di soffocamento</li>
+          <li><strong>Cardiovascolare:</strong> ipotensione, tachicardia, vertigini, svenimento</li>
+          <li><strong>GI:</strong> vomito, diarrea, crampi</li>
+          <li><strong>Sistema nervoso:</strong> capogiri, svenimento</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>✅ Cosa Fare — Procedura</h3>
+        <ul>
+          <li><span class="tag tag-red">1</span> Mettere la barca in sicurezza, incaricare 2 membri per continuare la navigazione</li>
+          <li><span class="tag tag-red">2</span> Rimuovere contatto con l'allergene (es. rimuovere pungiglione)</li>
+          <li><span class="tag tag-orange">3</span> Posizionare: seduto se difficoltà respiratorie; posizione laterale di sicurezza se privo di conoscenza</li>
+          <li><span class="tag tag-red">4</span> Usare autoiniettore di adrenalina se disponibile (ripetere dopo 5-15 min se no miglioramenti)</li>
+          <li><span class="tag tag-orange">5</span> Contattare CIRM (Centro Internazionale Radio Medico) — VHF ch 16</li>
+          <li><span class="tag tag-red">6</span> Rientro in porto urgente per pronto soccorso</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 6: Cassetta pronto soccorso -->
+    <div class="tab-panel" id="tab-6">
+      <div class="info-card">
+        <h3>💊 Cassetta Pronto Soccorso — Oltre 12 Miglia</h3>
+        <p style="margin-bottom:12px;font-size:.8rem;color:rgba(255,255,255,.5)">D.M. 03/2022 in vigore dal 8/6/22 — Contenitore PVC arancio stagna e galleggiante</p>
+        <ul>
+          <li>1 medicinale per mal di mare</li>
+          <li>1 medicinale per cefalee</li>
+          <li>1 antinfiammatorio generico</li>
+          <li>1 flacone Clorexidina 5% (0,5L)</li>
+          <li>1 flacone acqua ossigenata 250ml</li>
+          <li>1 Neoxidina alcolica-Clorexidina 0,5% 500ml</li>
+          <li>1 laccio piatto emostatico in nitrile</li>
+          <li>1 cinghia emostatica</li>
+          <li>10 bende garza orlata h 10cm</li>
+          <li>5 garze idrofile sterili 18×40cm</li>
+          <li>5 garze idrofile sterili 20×20cm</li>
+          <li>5 suture steri strip 6×38mm</li>
+          <li>1 busta ghiaccio istantaneo</li>
+          <li>2 cerotti medicati 10×6cm</li>
+          <li>1 pallone di rianimazione + maschere adulto e bambino</li>
+          <li>1 cotone idrofilo 1kg</li>
+          <li>1 forbici Lister 14,5cm</li>
+          <li>Guanti sterili latex free (tg L ×1, tg M ×5)</li>
+          <li>1 contenitore porta rifiuti taglienti</li>
+          <li>1 sfigmomanometro con fonendo</li>
+          <li>1 pulsiossimetro</li>
+          <li>1 termometro</li>
+          <li>1 coperta isotermica</li>
+          <li>1 stecca per frattura</li>
+          <li>1 manuale pronto soccorso multilingua</li>
+          <li>1 copia Decreto Ministeriale</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>📦 Specifiche Valigetta</h3>
+        <ul>
+          <li>Stagna e galleggiante con guarnizione certificata</li>
+          <li>Alta resistenza a sabbia, polveri e agenti marini</li>
+          <li>Valvola automatica di pressurizzazione</li>
+          <li>Pareti ad alto spessore, cerniera lungo tutto il profilo</li>
+          <li>Chiusure di sicurezza a doppio step</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 7: Estintori -->
+    <div class="tab-panel" id="tab-7">
+      <div class="info-card">
+        <h3>🧯 Classi di Incendio e Estinguenti</h3>
+        <ul>
+          <li><span class="tag tag-orange">Classe A</span> Materiali solidi (legno, tessuti) → Acqua, schiuma, polveri chimiche</li>
+          <li><span class="tag tag-red">Classe B</span> Liquidi infiammabili (petrolio, oli, vernici) → Schiuma, CO₂, polveri chimiche</li>
+          <li><span class="tag tag-orange">Classe C</span> Gas → CO₂, polveri chimiche, idrocarburi alogenati</li>
+          <li><span class="tag tag-red">Classe D</span> Metalli → Polveri specifiche</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>📍 A Bordo — Posizioni Obbligatorie</h3>
+        <ul>
+          <li>1 estintore vicino alla plancia di comando (coperta)</li>
+          <li>1 estintore vicino al carteggio (sottocoperta)</li>
+          <li>1 estintore vicino alla sala macchine (sottocoperta)</li>
+          <li><strong>Minimo 2 sottocoperta + 1 in pozzetto</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 8: Cambusa -->
+    <div class="tab-panel" id="tab-8">
+      <div class="info-card">
+        <h3>❄️ In Frigo — Come Disporre</h3>
+        <ul>
+          <li><strong>Sopra:</strong> Insalata, uova, cibi fragili e confezioni già aperte — in sacchetti di plastica o pellicola (NO carta)</li>
+          <li><strong>A metà:</strong> Formaggi, affettati, yogurt, frutta e verdura non fragile — in sacchetti/pellicola</li>
+          <li><strong>Sotto:</strong> Vino, acqua, bibite, latte — disporre in piedi</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>🗄️ Fuori dal Frigo — Come Disporre</h3>
+        <ul>
+          <li><strong>Sotto i paioli / divani dinette:</strong> Bevande e cibi in vetro, plastica o metallo — TOGLIERE dai contenitori in carta o cartone</li>
+          <li><strong>Stipetti lato opposto al divano:</strong> Cibi salati (pasta, riso, sughi, tonno, pane) — cose pesanti sotto, leggere sopra</li>
+          <li><strong>Stipetti lato opposto al divano:</strong> Cibi dolci (biscotti, caffè, cereali, Nutella) — cose pesanti sotto, leggere sopra</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TAB 9: Inventario Velamica -->
+    <div class="tab-panel" id="tab-9">
+      <div class="info-card" style="border-color:rgba(28,167,168,.35);background:rgba(28,167,168,.08);margin-bottom:14px">
+        <h3>⛵ ATLANTICA — Atlantica 45</h3>
+        <p>Modello: Atlantica 45 · Monoscafo<br>
+        Golfo dei Poeti (La Spezia) · VHF Porto CH 73<br>
+        <small style="color:rgba(255,255,255,.4)">Sincronizzato con il foglio Cambusa Atlantica · tab "inventario"</small></p>
+      </div>
+      <div style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.35);border-radius:14px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:1.4rem;flex-shrink:0">⚡</span>
+        <p style="margin:0;font-size:.85rem;font-weight:600;color:rgba(255,255,255,.88)">NON accendere il motore quando la barca è allacciata alla 220V</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+        <div class="info-card" style="padding:12px 14px">
+          <h3>Ore motore CHECK-IN</h3>
+          <input type="number" id="invOreIn" placeholder="es. 1234" style="background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.2);color:#fff;font-size:1.15rem;font-weight:600;outline:none;width:100%;padding:3px 0;margin-top:4px" oninput="scheduleInvExtra('ore_in',this.value)" />
+        </div>
+        <div class="info-card" style="padding:12px 14px">
+          <h3>Ore motore CHECK-OUT</h3>
+          <input type="number" id="invOreOut" placeholder="es. 1251" style="background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.2);color:#fff;font-size:1.15rem;font-weight:600;outline:none;width:100%;padding:3px 0;margin-top:4px" oninput="scheduleInvExtra('ore_out',this.value)" />
+        </div>
+      </div>
+      <div class="sync-bar"><div class="sync-dot" id="invSyncDot"></div><span id="invSyncLabel">—</span></div>
+      <div class="ci-progress"><div class="ci-progress-fill" id="invProgressFill"></div></div>
+      <div class="ci-progress-label" id="invProgressLabel">0 / 155 voci verificate</div>
+      <div id="invContainer"></div>
+      <div style="margin-top:18px">
+        <p style="font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:7px">Note di Check-in / Check-in Remarks</p>
+        <textarea id="invNoteCheckin" rows="3" placeholder="Annotare anomalie, danni o mancanze al check-in…" style="width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;color:#fff;padding:11px 14px;font-size:.85rem;line-height:1.6;resize:vertical;outline:none;box-sizing:border-box;font-family:inherit" oninput="scheduleInvExtra('note_checkin',this.value)"></textarea>
+      </div>
+      <div class="ci-actions">
+        <button class="ci-btn ci-btn-reset" onclick="resetInv()">↺ Azzera inventario</button>
+        <button class="ci-btn ci-btn-print" onclick="window.print()">🖨️ Stampa</button>
+      </div>
+    </div>
+
+    <div class="print-meta" id="printMeta"></div>
+  </div>
+</div>
+
+<script>
+const ADMIN_PWD = 'Skipper2026';
+const CI_AUTH_KEY = 'auth_ci_at_ts';
+const CI_AUTH_TTL = 14 * 24 * 60 * 60 * 1000;
+const INV_API = 'https://script.google.com/macros/s/AKfycbzKBO...'; // DA CONFIGURARE CON URL REALE
+const CHECKIN_API = 'https://script.google.com/macros/s/AKfycbxP4UKTts8LtwOAp3VIYeqjKPLUbKlYYM2zec9tMakjmFTgjKIK1hEOgA7BJRBmCcM2/exec';
+const FIXED_BOAT = 'atlantica';
+
+const BOATS = {
+  atlantica: {
+    name: 'Atlantica 45',
+    sections: [
+      {
+        id: 'esterno', label: 'Esterno — Coperta', emoji: '⚓',
+        items: [
+          { id:'e01', text:'Carburante Diesel — livello serbatoio', note:'Verificare autonomia' },
+          { id:'e02', text:'Acqua dolce — serbatoi pieni', note:'330l+165l+165l' },
+          { id:'e03', text:'Aspirapolvere — gavone poppa dx', note:'' },
+          { id:'e04', text:'Ancora di rispetto', note:'Ancora piccola di emergenza' },
+          { id:'e05', text:'Cime ormeggio', note:'Verificare stato e lunghezza' },
+          { id:'e06', text:'Barra emergenza', note:'Timone di emergenza' },
+          { id:'e07', text:'Gonfiatore', note:'Pompa elettrica' },
+          { id:'e08', text:'Remi tender', note:'×2' },
+          { id:'e09', text:'Mezzomarinaio', note:'×1' },
+          { id:'e10', text:'Scopa coperta', note:'×1' },
+          { id:'e11', text:'Posacenere', note:'×1' },
+          { id:'e12', text:'Sacca portascarpe', note:'' },
+          { id:'e13', text:'Manichetta acqua', note:'×1' },
+          { id:'e14', text:'Coperchi strumenti', note:'×6' },
+          { id:'e15', text:'Pistola manichetta', note:'×1' },
+          { id:'e16', text:'Secchio', note:'×1' },
+          { id:'e17', text:'Spugna', note:'×1' },
+          { id:'e18', text:'Detersivo scafo', note:'×1' },
+          { id:'e19', text:'Pelle di daino', note:'×1' },
+          { id:'e20', text:'Imbuto per carburante', note:'×1' },
+          { id:'e21', text:'Tanica benzina 5lt', note:'×1 per tender' },
+          { id:'e22', text:'Tasche manovelle winch', note:'×2' },
+          { id:'e23', text:'Pompa di sentina manuale', note:'×1' },
+          { id:'e24', text:'Leva della pompa', note:'×1' },
+          { id:'e25', text:'Adattatore 220V', note:'×1' },
+          { id:'e26', text:'Segnali diurni — Cono', note:'×1' },
+          { id:'e27', text:'Segnali diurni — Sfera', note:'×1' },
+          { id:'e28', text:'Salvagente anulare', note:'×1' },
+          { id:'e29', text:'Boetta luminosa', note:'×1' },
+          { id:'e30', text:'Cavo 220V', note:'×1' },
+          { id:'e31', text:'Scaletta d\'emergenza', note:'×1' },
+          { id:'e32', text:'Asta + bandiera italiana', note:'×1' },
+        ]
+      },
+      {
+        id: 'motore', label: 'Motore — Accensione', emoji: '⚙️',
+        note: '⚠️ Accendere e tenere acceso il motore durante questa sezione',
+        items: [
+          { id:'m01', text:'Strumenti controllo motore', note:'Pressione olio, temperatura', check:true },
+          { id:'m02', text:'Controllare scarico', note:'Verificare uscita acqua', check:true },
+          { id:'m03', text:'Livello olio motore', note:'Verificare con astina', check:true },
+          { id:'m04', text:'Livello liquido raffreddamento', note:'Verificare serbatoio', check:true },
+          { id:'m05', text:'Alternatore', note:'Verificare carica batterie', check:true },
+          { id:'m06', text:'Trasmissione', note:'Invertitore marcia/avanti', check:true },
+          { id:'m07', text:'Elica', note:'Verificare stato e fissaggio', check:true },
+          { id:'m08', text:'Filtro carburante', note:'Verificare sedimenti', check:true },
+        ]
+      },
+      {
+        id: 'sicurezza', label: 'Sicurezza', emoji: '🦺',
+        items: [
+          { id:'s01', text:'Giubbotti salvataggio', note:'Contare e verificare stato' },
+          { id:'s02', text:'Cinture di sicurezza', note:'Verificare meccanismi' },
+          { id:'s03', text:'Zattera di salvataggio', note:'Verificare sagola assicurata' },
+          { id:'s04', text:'Asta uomo a mare', note:'Verificare funzionamento' },
+          { id:'s05', text:'Fuochi e segnali', note:'Verificare scadenze' },
+          { id:'s06', text:'Estintori', note:'Verificare pressione e scadenza' },
+          { id:'s07', text:'Cassetta pronto soccorso', note:'Verificare completezza' },
+          { id:'s08', text:'EPIRB', note:'Verificare batteria e registrazione' },
+          { id:'s09', text:'VHF fisso', note:'Test canale 16' },
+          { id:'s10', text:'VHF portatile', note:'Test funzionamento' },
+        ]
+      },
+      {
+        id: 'elettronica', label: 'Elettronica', emoji: '📻',
+        items: [
+          { id:'el01', text:'GPS/Chartplotter', note:'Verificare funzionamento' },
+          { id:'el02', text:'Radar', note:'Se presente, verificare' },
+          { id:'el03', text:'AIS', note:'Se presente, verificare' },
+          { id:'el04', text:'Echo sounder', note:'Verificare profondimetro' },
+          { id:'el05', text:'Autopilota', note:'Verificare funzionamento' },
+          { id:'el06', text:'Vento - anemometro', note:'Verificare indicazioni' },
+          { id:'el07', text:'Speedo/Log', note:'Verificare funzionamento' },
+          { id:'el08', text:'Luci di navigazione', note:'Verificare tutte' },
+        ]
+      },
+      {
+        id: 'interni', label: 'Interni', emoji: '🏠',
+        items: [
+          { id:'i01', text:'Frigorifero', note:'Verificare temperatura' },
+          { id:'i02', text:'Pompa sentina elettrica', note:'Test funzionamento' },
+          { id:'i03', text:'Pompa WC', note:'Verificare funzionamento' },
+          { id:'i04', text:'Docce', note:'Verificare acqua calda' },
+          { id:'i05', text:'Luci interne', note:'Verificare tutte' },
+          { id:'i06', text:'Prese elettriche 12V', note:'Verificare funzionamento' },
+          { id:'i07', text:'Prese 220V', note:'Se in porto, verificare' },
+          { id:'i08', text:'Aria condizionata', note:'Se presente, verificare' },
+        ]
+      },
+      {
+        id: 'tender', label: 'Tender', emoji: '🚤',
+        items: [
+          { id:'t01', text:'Carburante tender', note:'Verificare livello' },
+          { id:'t02', text:'Motore tender', note:'Avviamento e funzionamento' },
+          { id:'t03', text:'Remi', note:'Verificare integrità' },
+          { id:'t04', text:'Luce tender', note:'Verificare funzionamento' },
+          { id:'t05', text:'Cime tender', note:'Verificare stato' },
+          { id:'t06', text:'Gancio di traino', note:'Verificare fissaggio' },
+        ]
+      }
+    ]
+  }
+};
+
+// ══════════════════════════════════════════════════════
+// AUTH & LOCK SCREEN
+// ══════════════════════════════════════════════════════
+
+function unlock() {
+  const pwd = document.getElementById('pwdInput').value;
+  if (pwd === ADMIN_PWD) {
+    localStorage.setItem(CI_AUTH_KEY, Date.now().toString());
+    showMain();
+  } else {
+    const err = document.getElementById('lockErr');
+    err.style.display = 'block';
+    document.getElementById('pwdInput').value = '';
+  }
+}
+
+function showMain() {
+  document.getElementById('lockScreen').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+  loadChecklist();
+  loadInv();
+}
+
+function checkAuth() {
+  const ts = localStorage.getItem(CI_AUTH_KEY);
+  if (ts && (Date.now() - parseInt(ts)) < CI_AUTH_TTL) {
+    showMain();
+  }
+}
+
+checkAuth();
+
+// ══════════════════════════════════════════════════════
+// TAB NAVIGATION
+// ══════════════════════════════════════════════════════
+
+function switchTab(idx) {
+  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+  document.querySelectorAll('.tab-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+}
+
+// ══════════════════════════════════════════════════════
+// CHECKLIST — TAB 0
+// ══════════════════════════════════════════════════════
+
+let localState = {};
+const CI_LS = 'ci_state_' + FIXED_BOAT;
+
+function getCached(boat) {
+  try { return JSON.parse(localStorage.getItem('ci_state_' + boat) || '{}'); } catch(e) { return {}; }
+}
+
+function setCached(boat, state) {
+  try { localStorage.setItem('ci_state_' + boat, JSON.stringify(state)); } catch(e) {}
+}
+
+function loadChecklist() {
+  localState = getCached(FIXED_BOAT);
+  renderChecklist(FIXED_BOAT);
+  syncFromSheets();
+}
+
+function renderChecklist(boat) {
+  const container = document.getElementById('checklistContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  const sections = BOATS[boat].sections;
+  sections.forEach(function(sec, si) {
+    const doneInSec = sec.items.filter(function(it) { return localState[it.id] && localState[it.id].stato; }).length;
+    const div = document.createElement('div');
+    div.className = 'ci-section' + (si === 0 ? ' open' : '');
+    div.id = 'sec-' + si;
+    const noteHtml = sec.note
+      ? '<div style="padding:8px 16px 2px;font-size:.78rem;color:rgba(255,200,100,.85)">' + sec.note + '</div>'
+      : '';
+    const itemsHtml = sec.items.map(function(it) {
+      const s = localState[it.id] || {};
+      const checked = !!s.stato;
+      const nota = s.nota || '';
+      return '<div class="ci-item' + (checked ? ' checked' : '') + '" id="item-' + it.id + '">' +
+        '<input type="checkbox" id="cb-' + it.id + '" ' + (checked ? 'checked' : '') +
+        ' onchange="onToggle(\'' + it.id + '\',\'sec-' + si + '\',this.checked)"/>' +
+        '<div class="ci-item-body">' +
+        '<span class="ci-item-label" onclick="document.getElementById(\'cb-' + it.id + '\').click()">' + it.text + '</span>' +
+        (it.note ? '<span class="hint">' + it.note + '</span>' : '') +
+        '<textarea class="ci-item-note" rows="1" placeholder="Aggiungi una nota…"' +
+        ' onchange="onNota(\'' + it.id + '\',this.value)"' +
+        ' onfocus="this.rows=3" onblur="this.rows=1">' + escHtml(nota) + '</textarea>' +
+        '</div></div>';
+    }).join('');
+    div.innerHTML =
+      '<div class="ci-section-header" onclick="document.getElementById(\'sec-' + si + '\').classList.toggle(\'open\')">' +
+      '<span class="icon">' + sec.emoji + '</span>' +
+      '<span class="title">' + sec.label + '</span>' +
+      '<span class="count" id="sec-count-' + si + '">' + doneInSec + '/' + sec.items.length + '</span>' +
+      '<span class="arrow">▶</span></div>' +
+      '<div class="ci-section-body">' + noteHtml + itemsHtml + '</div>';
+    container.appendChild(div);
+  });
+
+  updateProgress(boat);
+}
+
+function escHtml(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── Toggle checkbox ───────────────────────────────────
+function onToggle(id, secId, checked) {
+  const boat = FIXED_BOAT;
+  if (!localState[id]) localState[id] = { stato: false, nota: '' };
+  localState[id].stato = checked;
+  setCached(boat, localState);
+  const itemEl = document.getElementById('item-' + id);
+  if (itemEl) itemEl.classList.toggle('checked', checked);
+  updateProgress(boat);
+  updateSecCount(secId);
+  saveToSheets(boat, id, checked, localState[id].nota);
+}
+
+// ── Nota ──────────────────────────────────────────────
+function onNota(id, val) {
+  const boat = FIXED_BOAT;
+  if (!localState[id]) localState[id] = { stato: false, nota: '' };
+  localState[id].nota = val;
+  setCached(boat, localState);
+  saveToSheets(boat, id, localState[id].stato, val);
+}
+
+// ── Section helpers ───────────────────────────────────
+function toggleSection(id) { document.getElementById(id).classList.toggle('open'); }
+
+function updateSecCount(secId) {
+  const sec = document.getElementById(secId);
+  if (!sec) return;
+  const total = sec.querySelectorAll('.ci-item').length;
+  const done  = sec.querySelectorAll('.ci-item.checked').length;
+  const el = sec.querySelector('.count');
+  if (el) el.textContent = done + '/' + total;
+}
+
+// ── Progress bar ──────────────────────────────────────
+function updateProgress(boat) {
+  const sections = BOATS[boat].sections;
+  const total = sections.reduce((n, s) => n + s.items.length, 0);
+  const done  = sections.reduce((n, s) => n + s.items.filter(it => localState[it.id] && localState[it.id].stato).length, 0);
+  const pct = total ? Math.round(done / total * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = done + ' / ' + total + ' voci completate (' + pct + '%)';
+}
+
+// ── Reset ─────────────────────────────────────────────
+function resetChecklist() {
+  if (!confirm('Azzerare TUTTE le spunte e le note per ' + BOATS[FIXED_BOAT].name + '?')) return;
+  localState = {};
+  setCached(FIXED_BOAT, {});
+  renderChecklist(FIXED_BOAT);
+  setSyncState('loading', 'Reset in corso…');
+  // Reset su Sheets: invia stato false per tutte le voci
+  const sections = BOATS[FIXED_BOAT].sections;
+  const allIds = sections.flatMap(s => s.items.map(it => it.id));
+  const promises = allIds.map(id => {
+    const p = new URLSearchParams();
+    p.append('boat', FIXED_BOAT); p.append('voceId', id); p.append('stato', 'false'); p.append('nota', ''); p.append('skipper', 'Skipper');
+    return fetch(CHECKIN_API, { method: 'POST', mode: 'no-cors', body: p }).catch(() => {});
+  });
+  Promise.all(promises).then(() => setSyncState('ok', 'Reset completato'));
+}
+
+// ── Print ─────────────────────────────────────────────
+function printChecklist() {
+  const boat = BOATS[FIXED_BOAT];
+  const now = new Date().toLocaleString('it-IT');
+  document.getElementById('printMeta').textContent = 'Barca: ' + boat.name + '  ·  Stampato: ' + now + '  ·  Skipper: ___________________________';
+  window.print();
+}
+
+// ══════════════════════════════════════════════════════
+// SHEETS SYNC — CHECKLIST
+// ══════════════════════════════════════════════════════
+
+function setSyncState(st, msg) {
+  const dot = document.getElementById('syncDot');
+  const lbl = document.getElementById('syncLabel');
+  if (dot) dot.className = 'sync-dot ' + st;
+  if (lbl) lbl.textContent = msg;
+}
+
+function syncFromSheets() {
+  setSyncState('loading', 'Sincronizzazione…');
+  const cbName = '_ci_load_' + Date.now();
+  const timer = setTimeout(function() {
+    delete window[cbName];
+    const old = document.getElementById('_ci_load_s');
+    if (old) old.remove();
+    setSyncState('err', 'Timeout — dati locali');
+  }, 8000);
+
+  window[cbName] = function(res) {
+    clearTimeout(timer);
+    delete window[cbName];
+    const old = document.getElementById('_ci_load_s');
+    if (old) old.remove();
+    if (!res.ok) { setSyncState('err', 'Errore Sheets'); return; }
+    const data = res.data || {};
+    Object.keys(data).forEach(function(k) {
+      if (!localState[k]) localState[k] = { stato: false, nota: '' };
+      localState[k].stato = data[k].stato;
+      localState[k].nota = data[k].nota || '';
+    });
+    setCached(FIXED_BOAT, localState);
+    renderChecklist(FIXED_BOAT);
+    setSyncState('ok', 'Sincronizzato · ' + new Date().toLocaleTimeString('it-IT'));
+  };
+
+  const s = document.createElement('script');
+  s.id = '_ci_load_s';
+  s.src = CHECKIN_API + '?boat=' + FIXED_BOAT + '&callback=' + cbName;
+  document.head.appendChild(s);
+  s.onerror = function() {
+    clearTimeout(timer);
+    delete window[cbName];
+    setSyncState('err', 'Offline — dati locali');
+  };
+}
+
+function saveToSheets(boat, id, stato, nota) {
+  setSyncState('loading', 'Salvataggio…');
+  const p = new URLSearchParams();
+  p.append('boat', boat);
+  p.append('voceId', id);
+  p.append('stato', stato);
+  p.append('nota', nota);
+  p.append('skipper', 'Skipper');
+  fetch(CHECKIN_API, { method: 'POST', mode: 'no-cors', body: p })
+    .then(() => setSyncState('ok', 'Salvato · ' + new Date().toLocaleTimeString('it-IT')))
+    .catch(() => setSyncState('err', 'Offline — locale'));
+}
+
+// ══════════════════════════════════════════════════════
+// INVENTARIO VELAMICA — TAB 9 (PLACEHOLDER - DA COMPLETARE)
+// ══════════════════════════════════════════════════════
+
+const INV_SECTIONS = []; // DA COMPLETARE CON SEZIONI INVENTARIO ATLANTICA
+let invState = {};
+const INV_LS = 'inv_state_atlantica';
+let invScriptCnt = 0;
+const invExtraTimers = {};
+
+function loadInv() {
+  // Placeholder - implementare logica inventario
+  document.getElementById('invContainer').innerHTML = '<div style="text-align:center;padding:40px;color:rgba(255,255,255,.5)">Inventario Atlantica - DA COMPLETARE</div>';
+}
+
+function renderInv() {
+  // Placeholder
+}
+
+function toggleInvItem(id, si, checked) {
+  // Placeholder
+}
+
+function updateInvProgress() {
+  // Placeholder
+}
+
+function resetInv() {
+  if (!confirm('Azzerare TUTTE le spunte inventario Velamica?')) return;
+  // Placeholder
+}
+
+function setInvSync(st, msg) {
+  const dot = document.getElementById('invSyncDot');
+  const lbl = document.getElementById('invSyncLabel');
+  if (dot) dot.className = 'sync-dot ' + st;
+  if (lbl) lbl.textContent = msg;
+}
+
+function saveInvItem(id, checked) {
+  // Placeholder
+}
+
+function scheduleInvExtra(key, val) {
+  // Placeholder
+}
+
+function saveInvExtra(key, val) {
+  // Placeholder
+}
+</script>
+</body>
+</html>

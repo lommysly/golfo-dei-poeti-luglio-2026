@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rotta · Corsica Experience 2026</title>
+  <link rel="stylesheet" href="styles.css?v=20260528r" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ocean: #0b1e2d;
+      --turq: #1ca7a8;
+      --turq-light: #3dd5d6;
+      --gold: #e8c87a;
+      --danger: #f87171;
+      --warn: #fb923c;
+      --go: #34d399;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--ocean); color: #fff; font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 60vw;
+      max-height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0b2a3a 0%, #0d3d52 40%, #0a4a6b 100%);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 70% 30%, rgba(28,167,168,.18) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 20% 70%, rgba(14,50,80,.6) 0%, transparent 60%);
+    }
+    /* Animated sea */
+    .hero-waves {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+      background: linear-gradient(to top, rgba(11,30,45,1) 0%, transparent 100%);
+      z-index: 2;
+    }
+    .hero-content {
+      position: relative; z-index: 3;
+      padding: 32px 24px 40px;
+      width: 100%; max-width: 720px; margin: 0 auto;
+    }
+    .hero-label { font-size: .7rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--turq); display: block; margin-bottom: 14px; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 8vw, 4.2rem); font-weight: 300; line-height: 1.08; margin-bottom: 16px; }
+    .hero h1 em { font-style: italic; color: var(--turq-light); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 20px; font-size: .82rem; color: rgba(255,255,255,.55); }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── ROUTE STRIP ── */
+    .route-strip {
+      background: rgba(28,167,168,.10);
+      border-top: 1px solid rgba(28,167,168,.25);
+      border-bottom: 1px solid rgba(28,167,168,.25);
+      padding: 14px 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .route-row {
+      display: flex; align-items: center; gap: 6px;
+      min-width: max-content;
+      font-size: .82rem; font-weight: 600;
+    }
+    .route-port { color: #fff; white-space: nowrap; flex-shrink: 0; }
+    .route-seg { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+    .route-arrow { color: var(--turq); font-size: .9rem; }
+    .route-nm { font-size: .67rem; font-weight: 400; color: rgba(255,255,255,.38); }
+    @media (max-width: 600px) {
+      .route-strip { padding: 10px 18px; overflow-x: visible; }
+      .route-row {
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 0;
+        gap: 0;
+      }
+      .route-port { font-size: .9rem; padding: 5px 0; }
+      .route-seg {
+        flex-direction: row;
+        align-items: center;
+        padding: 2px 0 2px 4px;
+        gap: 6px;
+      }
+      .route-arrow { font-size: .75rem; color: rgba(28,167,168,.7); }
+      .route-nm { font-size: .7rem; }
+    }
+
+    /* ── WRAP ── */
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 100px; }
+
+    /* ── SECTION TITLE ── */
+    .section-label { font-size: .68rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--turq); margin: 44px 0 18px; display: block; }
+
+    /* ── DAY CARDS ── */
+    .day-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .day-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,.05);
+      cursor: pointer;
+      user-select: none;
+    }
+    .day-emoji { font-size: 2rem; flex-shrink: 0; }
+    .day-header-text { flex: 1; }
+    .day-date { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--turq); }
+    .day-title { font-size: 1.05rem; font-weight: 700; margin: 2px 0; }
+    .day-subtitle { font-size: .78rem; color: rgba(255,255,255,.45); }
+    .day-badge { background: rgba(28,167,168,.15); border: 1px solid rgba(28,167,168,.3); color: var(--turq-light); font-size: .72rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+    .day-body { padding: 0 20px 20px; }
+
+    /* ── PILL ROW ── */
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+    .pill {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 30px; padding: 6px 12px;
+      font-size: .78rem; font-weight: 500;
+    }
+    .pill .icon { font-size: 1rem; }
+    .pill.highlight { background: rgba(28,167,168,.12); border-color: rgba(28,167,168,.3); color: var(--turq-light); }
+    .pill.warn { background: rgba(251,146,60,.1); border-color: rgba(251,146,60,.3); color: #fdba74; }
+    .pill.moon { background: rgba(232,200,122,.1); border-color: rgba(232,200,122,.3); color: var(--gold); }
+
+    /* ── SUN/MOON BAR ── */
+    .astro-bar {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin: 14px 0;
+    }
+    .astro-block {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px; padding: 12px 14px;
+    }
+    .astro-icon { font-size: 1.4rem; margin-bottom: 4px; display: block; }
+    .astro-times { display: flex; justify-content: space-between; margin-top: 4px; }
+    .astro-time { text-align: center; }
+    .astro-time .t { font-size: .92rem; font-weight: 700; color: #fff; }
+    .astro-time .l { font-size: .62rem; color: rgba(255,255,255,.38); text-transform: uppercase; letter-spacing: .08em; }
+    .astro-label { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 6px; }
+
+    /* ── WIND CARD ── */
+    .wind-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px; padding: 14px 16px;
+      margin: 14px 0;
+    }
+    .wind-row { display: flex; align-items: center; gap: 14px; }
+    .wind-compass {
+      width: 56px; height: 56px; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      background: rgba(255,255,255,.05);
+      position: relative;
+    }
+    .wind-info { flex: 1; }
+    .wind-dir { font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: rgba(255,255,255,.45); text-transform: uppercase; }
+    .wind-kn { font-size: 1.5rem; font-weight: 700; color: #fff; line-height: 1; }
+    .wind-kn span { font-size: .75rem; font-weight: 400; color: rgba(255,255,255,.4); }
+    .wind-wave { font-size: .8rem; color: rgba(255,255,255,.5); margin-top: 4px; }
+    .wind-note { font-size: .78rem; color: rgba(255,255,255,.5); margin-top: 8px; font-style: italic; }
+
+    /* ── LEG CARD ── */
+    .leg-card {
+      background: rgba(28,167,168,.06);
+      border: 1px solid rgba(28,167,168,.2);
+      border-radius: 18px; padding: 18px 18px 14px;
+      margin: 14px 0;
+    }
+    .leg-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .leg-title { font-size: .85rem; font-weight: 700; color: var(--turq-light); }
+    .leg-nm { font-size: 1.6rem; font-weight: 700; line-height: 1; }
+    .leg-nm span { font-size: .72rem; color: rgba(255,255,255,.4); font-weight: 400; }
+    .leg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .leg-stat { text-align: center; }
+    .leg-stat .val { font-size: 1rem; font-weight: 700; }
+    .leg-stat .lbl { font-size: .62rem; color: rgba(255,255,255,.38); text-transform: uppercase; letter-spacing: .08em; margin-top: 2px; }
+    .leg-route { font-size: .75rem; color: rgba(255,255,255,.4); margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.06); display: flex; align-items: center; gap: 6px; }
+
+    /* ── FEEL STRIP ── */
+    .feel-strip {
+      display: flex; gap: 8px; margin: 14px 0;
+      overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px;
+    }
+    .feel-block {
+      flex-shrink: 0;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px; padding: 10px 14px;
+      text-align: center; min-width: 90px;
+    }
+    .feel-block .fi { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+    .feel-block .ft { font-size: .7rem; color: rgba(255,255,255,.5); font-weight: 500; }
+    .feel-block .fv { font-size: .92rem; font-weight: 700; margin-top: 1px; }
+
+    /* ── GATES ── */
+    .gate-card {
+      border-radius: 16px; overflow: hidden; margin-bottom: 12px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .gate-head {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,.06);
+    }
+    .gate-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--turq); color: #fff;
+      font-size: .82rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .gate-name { font-weight: 700; font-size: .9rem; }
+    .gate-when { font-size: .72rem; color: rgba(255,255,255,.4); }
+    .gate-body { padding: 14px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .gate-col h4 { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+    .gate-col.go h4 { color: var(--go); }
+    .gate-col.nogo h4 { color: var(--danger); }
+    .gate-item { font-size: .78rem; color: rgba(255,255,255,.7); display: flex; gap: 6px; margin-bottom: 5px; line-height: 1.4; }
+    .gate-item::before { content: '·'; opacity: .4; flex-shrink: 0; }
+
+    /* ── EMERGENCY ── */
+    .emergency-strip {
+      background: rgba(239,68,68,.08);
+      border: 1px solid rgba(239,68,68,.25);
+      border-radius: 18px; padding: 18px 18px 14px; margin: 14px 0;
+    }
+    .emergency-title { font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #f87171; margin-bottom: 14px; }
+    .em-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .em-item { display: flex; align-items: flex-start; gap: 10px; }
+    .em-item .ei { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .em-item .en { font-size: .65rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .08em; }
+    .em-item .ev { font-size: .85rem; font-weight: 700; }
+
+    /* ── MOON SPECIAL ── */
+    .moon-special {
+      background: linear-gradient(135deg, rgba(232,200,122,.1) 0%, rgba(28,167,168,.08) 100%);
+      border: 1px solid rgba(232,200,122,.25);
+      border-radius: 16px; padding: 16px;
+      display: flex; align-items: center; gap: 14px;
+      margin: 14px 0;
+    }
+    .moon-icon { font-size: 2.6rem; flex-shrink: 0; }
+    .moon-text h3 { font-size: .95rem; font-weight: 700; color: var(--gold); }
+    .moon-text p { font-size: .8rem; color: rgba(255,255,255,.65); margin-top: 3px; line-height: 1.5; }
+
+    /* ── COLLAPSIBLE ── */
+    .day-body { display: none; }
+    .day-card.open .day-body { display: block; }
+    .day-chevron { color: rgba(255,255,255,.35); transition: transform .2s; font-size: .85rem; }
+    .day-card.open .day-chevron { transform: rotate(180deg); }
+
+    /* ── INFO NOTE ── */
+    .info-note {
+      background: rgba(255,255,255,.04);
+      border-left: 3px solid var(--turq);
+      border-radius: 0 10px 10px 0;
+      padding: 10px 14px; margin: 12px 0;
+      font-size: .8rem; color: rgba(255,255,255,.65); line-height: 1.5;
+    }
+
+    /* ── WATCHPLAN ── */
+    .watch-table { width: 100%; border-collapse: collapse; font-size: .78rem; margin: 12px 0; }
+    .watch-table th { text-align: left; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); padding: 6px 10px; border-bottom: 1px solid rgba(255,255,255,.07); }
+    .watch-table td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,.05); }
+    .watch-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: .7rem; font-weight: 700; }
+    .wb-a { background: rgba(28,167,168,.2); color: var(--turq-light); }
+    .wb-b { background: rgba(232,200,122,.15); color: var(--gold); }
+    .wb-c { background: rgba(139,92,246,.2); color: #c4b5fd; }
+
+    /* ── TEMP DISPLAY ── */
+    .temp-row { display: flex; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
+    .temp-block { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,.05); border-radius: 10px; padding: 7px 12px; font-size: .82rem; }
+    .temp-block .ti { font-size: 1.1rem; }
+
+    @media (max-width: 768px) {
+      .hero { padding-top: 72px; }
+    }
+    @media (max-width: 420px) {
+      .astro-bar { grid-template-columns: 1fr; }
+      .leg-grid { grid-template-columns: 1fr 1fr; }
+      .gate-body { grid-template-columns: 1fr; }
+      .em-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span class="logo-text">Corsica Experience</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="meteo.html">Meteo</a>
+      <a href="lagoon.html">Lagoon 40</a>
+      <a href="oceanis.html">Oceanis 48</a>
+      <a href="rotta.html" class="active">🗺️ Rotta</a>
+    </div>
+    <button class="nav-burger" id="navBurger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="meteo.html">Meteo</a>
+    <a href="lagoon.html">Lagoon 40</a>
+    <a href="oceanis.html">Oceanis 48</a>
+    <a href="rotta.html" style="color:var(--turq);font-weight:700;">🗺️ Rotta →</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-waves"></div>
+  <div class="hero-content">
+    <span class="hero-label">Passage Plan · Corsica Experience 2026</span>
+    <h1>La rotta per <em>la Corsica</em></h1>
+    <div class="hero-meta">
+      <span>⚓ Porto Mirabello</span>
+      <span>📅 17 lug – 19 lug 2026</span>
+      <span>⛵ ~210 NM totali</span>
+      <span>👥 12 persone</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ROUTE STRIP ═══ -->
+<div class="route-strip">
+  <div class="route-row">
+    <span class="route-port">⚓ Porto Mirabello</span>
+    <div class="route-seg"><span class="route-arrow">——▶</span><span class="route-nm">~78 NM · Notte</span></div>
+    <span class="route-port">⚓ Centuri</span>
+    <div class="route-seg"><span class="route-arrow">——▶</span><span class="route-nm">~18 NM · Mattino</span></div>
+    <span class="route-port">⛵ Saint-Florent</span>
+    <div class="route-seg"><span class="route-arrow">——▶</span></div>
+    <span class="route-port">🏖 Agriates</span>
+    <div class="route-seg"><span class="route-arrow">——▶</span><span class="route-nm">~105 NM · Notte</span></div>
+    <span class="route-port">🏛 Portovenere</span>
+    <div class="route-seg"><span class="route-arrow">——▶</span><span class="route-nm">~6 NM</span></div>
+    <span class="route-port">⚓ Porto Mirabello</span>
+  </div>
+</div>
+
+<!-- ═══ LUNA SPECIALE ═══ -->
+<div class="wrap">
+
+<div class="moon-special" style="margin-top:28px">
+  <span class="moon-icon">🌕</span>
+  <div class="moon-text">
+    <h3>Blue Moon — 19 luglio 2026</h3>
+    <p>Luna Piena per tutta la traversata. Illuminazione >95% tutte le notti. Le navigazioni notturne avranno visibilità eccezionale — un vantaggio rarissimo.</p>
+  </div>
+</div>
+
+<!-- ═══ GIORNI ═══ -->
+<span class="section-label">🗓 Il viaggio giorno per giorno</span>
+
+<!-- DAY 1 -->
+<div class="day-card open" id="day1">
+  <div class="day-header" onclick="toggleDay('day1')">
+    <span class="day-emoji">🌅</span>
+    <div class="day-header-text">
+      <div class="day-date">Venerdì 17 luglio</div>
+      <div class="day-title">Si salpa</div>
+      <div class="day-subtitle">Porto Mirabello → traversata notturna</div>
+    </div>
+    <span class="day-badge">17:00 ⚓</span>
+    <span class="day-chevron">▼</span>
+  </div>
+  <div class="day-body">
+
+    <!-- Leg -->
+    <div class="leg-card">
+      <div class="leg-header">
+        <span class="leg-title">🧭 Leg 1 — La Spezia → Centuri</span>
+        <div style="text-align:right"><div class="leg-nm">~78 <span>NM</span></div></div>
+      </div>
+      <div class="leg-grid">
+        <div class="leg-stat"><div class="val">17:00</div><div class="lbl">ETD</div></div>
+        <div class="leg-stat"><div class="val">~13h</div><div class="lbl">durata</div></div>
+        <div class="leg-stat"><div class="val">~06:00</div><div class="lbl">ETA 18 lug</div></div>
+      </div>
+      <div class="leg-route">🧭 Rotta media ~200° → doppiare Capo di Grosso di notte · 6 kn piano · profondità aperto 800–2400m</div>
+    </div>
+
+    <!-- Meteo -->
+    <div class="wind-card">
+      <div class="wind-row">
+        <div class="wind-compass">🧭</div>
+        <div class="wind-info">
+          <div class="wind-dir">💨 Vento atteso</div>
+          <div class="wind-kn">8–18 <span>kn</span></div>
+          <div class="wind-wave">🌊 Onda 0.5–1.0m · periodo 5–7s</div>
+        </div>
+      </div>
+      <div class="wind-note">⚠️ Climatologico — verifica previsione reale la mattina del 29</div>
+    </div>
+
+    <!-- Pillole -->
+    <div class="pill-row">
+      <div class="pill highlight"><span class="icon">💨</span> NW–Maestrale favorevole</div>
+      <div class="pill highlight"><span class="icon">🍷</span> Apericena al tramonto ~20:52 — crepuscolo ~21:22</div>
+      <div class="pill moon"><span class="icon">🌔</span> Luna 95% · sorge ~19:30</div>
+      <div class="pill warn"><span class="icon">⚠️</span> Capo di Grosso ~03:00 · vento accelera al traverso</div>
+      <div class="pill"><span class="icon">🚢</span> Traffico commerciale attivo</div>
+      <div class="pill"><span class="icon">📡</span> AIS obbligatorio</div>
+    </div>
+
+    <!-- Sole/Luna -->
+    <div class="astro-bar">
+      <div class="astro-block">
+        <span class="astro-label">☀️ Sole — 17 luglio</span>
+        <div class="astro-times">
+          <div class="astro-time"><div class="t">05:39</div><div class="l">Alba</div></div>
+          <div class="astro-time"><div class="t">05:09</div><div class="l">Crepuscolo ↑</div></div>
+          <div class="astro-time"><div class="t">20:52</div><div class="l">Tramonto</div></div>
+          <div class="astro-time"><div class="t">21:22</div><div class="l">Crepuscolo ↓</div></div>
+        </div>
+      </div>
+      <div class="astro-block">
+        <span class="astro-label">🌔 Luna — Gibbosa 95%</span>
+        <div class="astro-times">
+          <div class="astro-time"><div class="t">~19:30</div><div class="l">Moonrise</div></div>
+          <div class="astro-time"><div class="t">~04:30</div><div class="l">Moonset</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Temperature -->
+    <div class="temp-row">
+      <div class="temp-block"><span class="ti">🌡️</span> Aria <strong>18–22°C</strong></div>
+      <div class="temp-block"><span class="ti">🌊</span> Acqua <strong>18–20°C</strong></div>
+    </div>
+
+    <!-- Watch -->
+    <span class="section-label" style="margin-top:18px;margin-bottom:10px">⏱ Turni di guardia — notte</span>
+    <table class="watch-table">
+      <tr><th>Ora</th><th>Turno</th><th>Note</th></tr>
+      <tr><td>17:00–20:00</td><td><span class="watch-badge wb-a">A</span></td><td>Tramonto, uscita Golfo della Spezia</td></tr>
+      <tr><td>20:00–23:00</td><td><span class="watch-badge wb-b">B</span></td><td>Luna alta — ottima visibilità</td></tr>
+      <tr><td>23:00–02:00</td><td><span class="watch-badge wb-c">C</span></td><td>⚠️ 2 persone sveglie minimo</td></tr>
+      <tr><td>02:00–05:00</td><td><span class="watch-badge wb-a">A</span></td><td>Pre-alba, avvicinamento Cap Corse</td></tr>
+      <tr><td>05:00–08:00</td><td><span class="watch-badge wb-b">B</span></td><td>Alba — arrivo Centuri</td></tr>
+    </table>
+
+    <div class="info-note">🎯 <strong>Clou della giornata:</strong> apericena in navigazione al tramonto (~20:52) con il crepuscolo che tinge il mare fino alle ~21:22. La luna gibbosa sorge poco dopo (~19:30). Poi: testa sul cuscino e lascia fare ai turni.</div>
+  </div>
+</div>
+
+<!-- DAY 2 -->
+<div class="day-card" id="day2">
+  <div class="day-header" onclick="toggleDay('day2')">
+    <span class="day-emoji">⚓</span>
+    <div class="day-header-text">
+      <div class="day-date">Sabato 18 luglio</div>
+      <div class="day-title">Centuri — Cap Corse</div>
+      <div class="day-subtitle">Centuri → Saint-Florent</div>
+    </div>
+    <span class="day-badge">Costiero ⛵</span>
+    <span class="day-chevron">▼</span>
+  </div>
+  <div class="day-body">
+
+    <!-- Arrivo Centuri -->
+    <div class="pill-row" style="margin-top:14px">
+      <div class="pill highlight"><span class="icon">⚓</span> Arrivo Centuri ~06:00–08:00</div>
+      <div class="pill"><span class="icon">☕</span> Colazione, riposo, rifornimenti</div>
+      <div class="pill"><span class="icon">📻</span> VHF 09 · Centuri</div>
+    </div>
+
+    <div class="info-note">📍 <strong>Centuri:</strong> porto peschereccio pittoresco · profondità 2–3m · riparato da NE/E · servizi di base · carburante disponibile · atmosfera autentica — a 2 NM da Capo di Grosso</div>
+
+    <!-- Leg 2 -->
+    <div class="leg-card" style="margin-top:16px">
+      <div class="leg-header">
+        <span class="leg-title">🧭 Leg 2 — Centuri → Saint-Florent</span>
+        <div style="text-align:right"><div class="leg-nm">~18 <span>NM</span></div></div>
+      </div>
+      <div class="leg-grid">
+        <div class="leg-stat"><div class="val">~10:00</div><div class="lbl">ETD</div></div>
+        <div class="leg-stat"><div class="val">~3h</div><div class="lbl">durata</div></div>
+        <div class="leg-stat"><div class="val">~13:00</div><div class="lbl">ETA</div></div>
+      </div>
+      <div class="leg-route">🌊 Costa ovest Cap Corse · 100% diurno · paesaggi selvaggi · arrivo nel primo pomeriggio</div>
+    </div>
+
+    <div class="pill-row">
+      <div class="pill highlight"><span class="icon">🌊</span> Costa ovest — calma e protetta</div>
+      <div class="pill"><span class="icon">📐</span> Tenersi 2+ NM dalla costa</div>
+      <div class="pill"><span class="icon">🕐</span> Arrivo Saint-Florent nel primo pomeriggio</div>
+    </div>
+
+    <!-- Sole/Luna -->
+    <div class="astro-bar">
+      <div class="astro-block">
+        <span class="astro-label">☀️ Sole — 18 luglio</span>
+        <div class="astro-times">
+          <div class="astro-time"><div class="t">05:38</div><div class="l">Alba</div></div>
+          <div class="astro-time"><div class="t">20:53</div><div class="l">Tramonto</div></div>
+        </div>
+      </div>
+      <div class="astro-block">
+        <span class="astro-label">🌔 Luna — Gibbosa 99%</span>
+        <div class="astro-times">
+          <div class="astro-time"><div class="t">~20:15</div><div class="l">Moonrise</div></div>
+          <div class="astro-time"><div class="t">~05:00</div><div class="l">Moonset</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Temperature -->
+    <div class="temp-row">
+      <div class="temp-block"><span class="ti">🌡️</span> Aria <strong>20–25°C</strong></div>
+      <div class="temp-block"><span class="ti">🌊</span> Acqua <strong>19–21°C</strong></div>
+    </div>
+
+    <div class="info-note">📍 <strong>Saint-Florent:</strong> contattare capitaneria via VHF prima di entrare · canale dragato 3m · problemi con NNW forte · Tel capitainerie +33 04 95 37 00 79</div>
+
+    <div class="info-note">🎯 <strong>Clou della giornata:</strong> la mattina a Centuri — il villaggio peschereccio più pittoresco di Cap Corse. Un caffè sul molo mentre la barca si sveglia. Poi una navigazione rilassata verso Saint-Florent con tutto il pomeriggio davanti.</div>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div class="day-card" id="day3">
+  <div class="day-header" onclick="toggleDay('day3')">
+    <span class="day-emoji">🏖</span>
+    <div class="day-header-text">
+      <div class="day-date">Domenica 19 luglio</div>
+      <div class="day-title">Désert des Agriates</div>
+      <div class="day-subtitle">Il giorno più bello — solo mare e spiaggia bianca</div>
+    </div>
+    <span class="day-badge" style="background:rgba(232,200,122,.15);border-color:rgba(232,200,122,.35);color:var(--gold)">🌕 Luna Piena</span>
+    <span class="day-chevron">▼</span>
+  </div>
+  <div class="day-body">
+
+    <div class="moon-special">
+      <span class="moon-icon">🌕</span>
+      <div class="moon-text">
+        <h3>Blue Moon — 19 luglio 2026</h3>
+        <p>Seconda Luna Piena del mese. La prima e unica Blue Moon del 2026. Sorge alle ~20:50 — praticamente al tramonto. Notte illuminata come un giorno.</p>
+      </div>
+    </div>
+
+    <!-- Rade -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:14px">
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--turq);margin-bottom:8px">⚓ Anse de Lotu</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.6">
+          🌊 5–10m · sabbia<br>
+          ✅ Ottima tenuta<br>
+          🛡 Protetta da SW<br>
+          🏖 Spiaggia di sabbia bianca
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:14px">
+        <div style="font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--turq);margin-bottom:8px">⚓ Anse de Saleccia</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.6">
+          🌊 ~5m · sabbia<br>
+          ✅ Buona tenuta<br>
+          ⚠️ Aperta a N/NW<br>
+          Solo con meteo stabile
+        </div>
+      </div>
+    </div>
+
+    <div class="pill-row">
+      <div class="pill highlight"><span class="icon">🚫</span> Nessuna strada — solo via mare</div>
+      <div class="pill"><span class="icon">🤿</span> Balneazione ottima</div>
+      <div class="pill"><span class="icon">⚠️</span> Tramontana: rientrare a Saint-Florent</div>
+    </div>
+
+    <!-- Sole/Luna -->
+    <div class="astro-bar">
+      <div class="astro-block">
+        <span class="astro-label">☀️ Sole — 19 luglio</span>
+        <div class="astro-times">
+          <div class="astro-time"><div class="t">05:37</div><div class="l">Alba</div></div>
+          <div class="astro-time"><div class="t">20:54</div><div class="l">Tramonto</div></div>
+        </div>
+      </div>
+      <div class="astro-block">
+        <span class="astro-label">🌕 LUNA PIENA — 100%</span>
+        <div class="astro-times">
+          <div class="astro-time"><div class="t">~20:50</div><div class="l">Moonrise</div></div>
+          <div class="astro-time"><div class="t">~05:37</div><div class="l">Moonset</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Temperature -->
+    <div class="temp-row">
+      <div class="temp-block"><span class="ti">🌡️</span> Aria <strong>22–27°C</strong></div>
+      <div class="temp-block"><span class="ti">🌊</span> Acqua <strong>20–22°C</strong> 🤿</div>
+    </div>
+
+    <div class="info-note">🎯 <strong>Clou della giornata:</strong> la Luna Piena che sorge sull'acqua delle Agriates alle 20:50. Siete all'ancora nella spiaggia più bella del Mediterraneo. Nessun suono di macchine.</div>
+  </div>
+</div>
+
+<!-- ═══ GATE DECISIONALI ═══ */
+<span class="section-label">🚦 Gate Decisionali — skipper</span>
+
+<div class="gate-card">
+  <div class="gate-head">
+    <div class="gate-num">1</div>
+    <div>
+      <div class="gate-name">Partenza da Porto Mirabello</div>
+      <div class="gate-when">17 luglio ore 16:00</div>
+    </div>
+  </div>
+  <div class="gate-body">
+    <div class="gate-col go">
+      <h4>✅ GO</h4>
+      <div class="gate-item">Vento &lt;25 kn nelle prossime 18h</div>
+      <div class="gate-item">Onda &lt;2.0m in Ligure</div>
+      <div class="gate-item">Nessun fronte attivo</div>
+      <div class="gate-item">AIS funzionante</div>
+    </div>
+    <div class="gate-col nogo">
+      <h4>🛑 NO-GO</h4>
+      <div class="gate-item">Vento &gt;28 kn previsto</div>
+      <div class="gate-item">Onda &gt;2.5m</div>
+      <div class="gate-item">Fronte nelle prossime 24h</div>
+    </div>
+  </div>
+</div>
+
+<div class="gate-card">
+  <div class="gate-head">
+    <div class="gate-num">2</div>
+    <div>
+      <div class="gate-name">Passaggio Capo di Grosso — notte</div>
+      <div class="gate-when">17/18 luglio ore ~03:00–04:00</div>
+    </div>
+  </div>
+  <div class="gate-body">
+    <div class="gate-col go">
+      <h4>✅ GO</h4>
+      <div class="gate-item">Vento &lt;20 kn al capo</div>
+      <div class="gate-item">Onda corta &lt;1.5m</div>
+      <div class="gate-item">AIS attivo · luci navigazione OK</div>
+      <div class="gate-item">Stabile per le prossime 4h</div>
+    </div>
+    <div class="gate-col nogo">
+      <h4>🛑 ATTENZIONE</h4>
+      <div class="gate-item">Vento &gt;25 kn improvviso</div>
+      <div class="gate-item">Deterioramento in arrivo</div>
+      <div class="gate-item">→ Tenersi &gt;3 NM dalla punta</div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ═══ EMERGENZE ═══ -->
+<span class="section-label">🆘 Emergenze</span>
+
+<div class="emergency-strip">
+  <div class="emergency-title">🚨 Contatti di emergenza mare</div>
+  <div class="em-grid">
+    <div class="em-item">
+      <span class="ei">📻</span>
+      <div><div class="en">VHF sempre aperto</div><div class="ev">Canale 16</div></div>
+    </div>
+    <div class="em-item">
+      <span class="ei">🇮🇹</span>
+      <div><div class="en">Guardia Costiera Italia</div><div class="ev">1530</div></div>
+    </div>
+    <div class="em-item">
+      <span class="ei">🇫🇷</span>
+      <div><div class="en">CROSS Corsica (Francia)</div><div class="ev">+33 04 95 20 13 63</div></div>
+    </div>
+    <div class="em-item">
+      <span class="ei">🏥</span>
+      <div><div class="en">Emergenza medica a bordo (CIRM)</div><div class="ev">+39 06 59290263</div></div>
+    </div>
+    <div class="em-item">
+      <span class="ei">📱</span>
+      <div><div class="en">Emergenza da cellulare</div><div class="ev">112</div></div>
+    </div>
+    <div class="em-item">
+      <span class="ei">⚓</span>
+      <div><div class="en">Capitainerie Saint-Florent</div><div class="ev">+33 04 95 37 00 79</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="info-note" style="margin-top:8px">📻 VHF 16 è il canale di emergenza internazionale — sempre monitorato. Il CROSS Corsica usa anche il canale 67. La Guardia Costiera italiana usa anche DSC canale 70.</div>
+
+</div><!-- /.wrap -->
+
+<script src="script.js?v=20260528r"></script>
+<script>
+  function toggleDay(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corsica Sailing Experience — Weekend 17–19 Luglio</title>
+  <meta name="description" content="Tre giorni tra mare cristallino, navigazione d'altura, tramonti in rada e le spiagge più belle del Mediterraneo. Partenza da La Spezia verso la Corsica." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-wave">
+        <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+          <path class="wave-path" d="M0,30 C50,0 100,60 150,30 C175,15 190,35 200,30" fill="none" stroke="#1CA7A8" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="preloader-text">CORSICA EXPERIENCE</div>
+    </div>
+  </div>
+
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero">
+        <span class="logo-icon">—</span>
+        <span>Corsica Experience</span>
+      </a>
+      <div class="nav-links">
+        <a href="#itinerario">Itinerario</a>
+        <a href="#barche">Le Barche</a>
+        <a href="#spiagge">Spiagge</a>
+        <a href="#meteo">Meteo</a>
+        <a href="regole.html">Regole</a>
+        <a href="cambusa.html">Cambusa</a>
+        <a href="briefing.html">Briefing</a>
+        <a href="crewlist.html" class="nav-cta">Crew List</a>
+        <a href="checkin.html" style="color:var(--turq);font-weight:600">🔐 Check-in</a>
+        <a href="rotta.html">🗺️ Rotta</a>
+      </div>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="#itinerario">Itinerario</a>
+      <a href="#barche">Le Barche</a>
+      <a href="#spiagge">Spiagge</a>
+      <a href="#meteo">Meteo</a>
+      <a href="regole.html">Regole</a>
+      <a href="cambusa.html">Cambusa</a>
+      <a href="briefing.html">Briefing</a>
+      <a href="crewlist.html">Crew List</a>
+      <a href="checkin.html" style="color:var(--turq);font-weight:600">🔐 Check-in</a>
+      <a href="rotta.html">🗺️ Rotta</a>
+      <a href="#contatti">Contatti</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-img" style="background-image:url('img/hero.jpg')"></div>
+      <div class="hero-gradient"></div>
+      <div class="hero-particles" id="heroParticles"></div>
+    </div>
+    <div class="hero-waves-top">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80Z" fill="rgba(255,255,255,0.03)"/></svg>
+    </div>
+
+    <div class="hero-content" id="heroContent">
+      <div class="hero-eyebrow reveal-up">
+        <span class="eyebrow-dot"></span>
+        Weekend 17–19 Luglio · 17 – 19 Luglio 2026
+        <span class="eyebrow-dot"></span>
+      </div>
+      <h1 class="hero-title reveal-up d1">
+        Corsica<br/>
+        <em>Sailing</em><br/>
+        Experience
+      </h1>
+      <p class="hero-sub reveal-up d2">
+        Tre giorni tra mare cristallino, navigazione d'altura,<br/>
+        tramonti in rada e le spiagge più belle del Mediterraneo.
+      </p>
+
+      <!-- Countdown -->
+      <div class="countdown reveal-up d3" id="countdown">
+        <div class="cd-block">
+          <span class="cd-num" id="cdDays">--</span>
+          <span class="cd-label">giorni</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cdHours">--</span>
+          <span class="cd-label">ore</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cdMins">--</span>
+          <span class="cd-label">min</span>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <span class="cd-num" id="cdSecs">--</span>
+          <span class="cd-label">sec</span>
+        </div>
+      </div>
+
+      <div class="hero-ctas reveal-up d4">
+        <a href="#itinerario" class="btn-primary">
+          <span>Scopri l'itinerario</span>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </a>
+        <a href="#meteo" class="btn-ghost">Meteo del viaggio</a>
+      </div>
+
+      <div class="hero-badges reveal-up d5">
+        <div class="badge">Flottiglia di due barche</div>
+        <div class="badge">Porto Mirabello · La Spezia</div>
+        <div class="badge">3 giorni in mare aperto</div>
+        <div class="badge">17 – 19 Luglio</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-indicator">
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+        <span>Scorri</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ VIBE ═══ -->
+  <section class="vibe-strip">
+    <div class="vibe-track">
+      <span>Mare Cristallino</span><span class="vs">·</span>
+      <span>Navigazione d'Altura</span><span class="vs">·</span>
+      <span>Tramonti in Rada</span><span class="vs">·</span>
+      <span>Spiagge Paradisiache</span><span class="vs">·</span>
+      <span>Vita di Bordo</span><span class="vs">·</span>
+      <span>Aperitivi al Tramonto</span><span class="vs">·</span>
+      <span>Corsica Selvaggia</span><span class="vs">·</span>
+      <span>Mare Cristallino</span><span class="vs">·</span>
+      <span>Navigazione d'Altura</span><span class="vs">·</span>
+      <span>Tramonti in Rada</span><span class="vs">·</span>
+      <span>Spiagge Paradisiache</span><span class="vs">·</span>
+      <span>Vita di Bordo</span><span class="vs">·</span>
+      <span>Aperitivi al Tramonto</span><span class="vs">·</span>
+      <span>Corsica Selvaggia</span><span class="vs">·</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ INTRO ═══ -->
+  <section class="intro" id="intro">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-copy">
+          <span class="label">L'Esperienza</span>
+          <h2 class="h2">Non è solo un viaggio.<br/><em>È una piccola vita parallela sul mare.</em></h2>
+          <p>Due barche, un solo equipaggio. Tre giorni che cambieranno il ritmo del cuore. La Corsica dal mare è un'altra cosa: baie raggiungibili solo in barca, acque di un turchese impossibile, notti a cielo aperto e l'emozione vera della traversata.</p>
+          <p>Un equipaggio autentico. Un'esperienza esclusiva. Un ricordo per sempre.</p>
+          <a href="#itinerario" class="btn-primary mt">Scopri il programma</a>
+        </div>
+        <div class="intro-stats">
+          <div class="stat reveal-left">
+            <div class="stat-n">5</div>
+            <div class="stat-l">Giorni<br/>in mare</div>
+          </div>
+          <div class="stat reveal-left d1">
+            <div class="stat-n">3</div>
+            <div class="stat-l">Spiagge<br/>paradisiache</div>
+          </div>
+          <div class="stat reveal-left d2">
+            <div class="stat-n">2</div>
+            <div class="stat-l">Barche in<br/>flottiglia</div>
+          </div>
+          <div class="stat highlight reveal-left d3">
+            <div class="stat-n">∞</div>
+            <div class="stat-l">Tramonti<br/>in rada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ QUOTA ═══ -->
+  <section class="quota" id="quota">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">Costi</span>
+        <h2 class="h2">Quota di Partecipazione</h2>
+        <p class="section-desc">Tutto quello che è incluso e quello che non lo è — nessuna sorpresa.</p>
+      </div>
+      <div class="quota-grid">
+        <div class="quota-card incluso reveal-up">
+          <div class="quota-card-title">Incluso nella quota</div>
+          <ul class="quota-list">
+            <li>Noleggio barca (3 giorni)</li>
+            <li>Pulizie finali</li>
+            <li>Fuoribordo</li>
+            <li>Tender</li>
+          </ul>
+        </div>
+        <div class="quota-card non-incluso reveal-up d1">
+          <div class="quota-card-title">Non incluso</div>
+          <ul class="quota-list">
+            <li>Lenzuola: <strong>€60 a cabina</strong> (kit per 2 — obbligatorio per entrambi)</li>
+            <li>Cambusa (spesa da dividere tra l'equipaggio)</li>
+            <li>Gasolio per la navigazione</li>
+            <li>Transfer da/per il porto</li>
+            <li>Cauzione rimborsabile: <strong>€300 a persona</strong> in contanti in loco</li>
+            <li>Assicurazione cauzione: <strong>€30 a persona</strong> — facoltativa, copre qualsiasi danno accidentale</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ ITINERARIO ═══ -->
+  <section class="itinerario" id="itinerario">
+    <div class="itinerario-bg"></div>
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label light">Programma</span>
+        <h2 class="h2 light">🗓 Itinerario Giorno per Giorno</h2>
+      </div>
+
+      <div class="timeline-v">
+
+        <!-- G1 -->
+        <div class="tl-item reveal-up">
+          <div class="tl-date">
+            <div class="tl-day">29</div>
+            <div class="tl-month">MAG</div>
+            <div class="tl-wd">VEN</div>
+          </div>
+          <div class="tl-line">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-tag">Partenza</div>
+            <h3>La Spezia → Traversata Notturna</h3>
+            <p>Imbarco a <strong>Porto Mirabello ore 15:00</strong>. Cambusa collettiva insieme, briefing equipaggio, sistemazione cabine. Partenza ore <strong>17:00</strong> verso il mare aperto.</p>
+            <p>Attraversiamo il Mar Tirreno sotto un cielo di stelle. Il vento ci guida. L'avventura inizia davvero.</p>
+            <div class="cambusa-note">La cambusa include <strong>2 colazioni · 2 pranzi · 2 cene</strong> (+ 1 apericena al tramonto in navigazione) — spesa collettiva da fare insieme prima di salpare. La cena di sabato sera è prevista al ristorante a Saint-Florent (non inclusa).</div>
+            <div class="tl-tags">
+              <span>Imbarco ore 15:00</span>
+              <span>Cambusa collettiva</span>
+              <span>Partenza ore 17:00</span>
+              <span>Navigazione notturna</span>
+            </div>
+            <div class="tl-overnight">Notte in navigazione — cielo stellato</div>
+          </div>
+        </div>
+
+        <!-- G2 -->
+        <div class="tl-item reveal-up d1">
+          <div class="tl-date">
+            <div class="tl-day">30</div>
+            <div class="tl-month">MAG</div>
+            <div class="tl-wd">SAB</div>
+          </div>
+          <div class="tl-line">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-tag">Corsica Nord</div>
+            <h3>Cap Corse & Saint-Florent</h3>
+            <p>Arrivo all'alba tra le baie selvagge del <strong>Cap Corse</strong>. Acqua turchese. Colazione in rada. Poi discesa verso <strong>Saint-Florent</strong>, borgo marinaro di rara bellezza.</p>
+            <div class="tl-beach-mini">
+              <div class="tbm">Baie del Cap Corse</div>
+              <div class="tbm">Centuri</div>
+              <div class="tbm">Aperitivo in rada</div>
+            </div>
+            <div class="tl-overnight">Notte in rada o porto — Saint-Florent</div>
+          </div>
+        </div>
+
+        <!-- G3 -->
+        <div class="tl-item star reveal-up d2">
+          <div class="tl-date">
+            <div class="tl-day">31</div>
+            <div class="tl-month">MAG</div>
+            <div class="tl-wd">DOM</div>
+          </div>
+          <div class="tl-line">
+            <div class="tl-dot star-dot"></div>
+          </div>
+          <div class="tl-card star-card">
+            <div class="tl-card-tag star-tag">Il Giorno Perfetto</div>
+            <h3>Désert des Agriates — Le Spiagge Più Belle d'Europa</h3>
+            <p>Una giornata intera per le spiagge che non dimenticherai mai. <strong>Sabbia bianca, acqua caraibica</strong>, sole africano. Perfetta per snorkeling, paddle, relax totale.</p>
+            <div class="beach-trio">
+              <div class="bt-item">
+                <div class="bt-num">01</div>
+                <div class="bt-name">Saleccia</div>
+                <div class="bt-desc">Acqua caraibica · Sabbia bianca</div>
+              </div>
+              <div class="bt-item">
+                <div class="bt-num">02</div>
+                <div class="bt-name">Lotu</div>
+                <div class="bt-desc">Rada perfetta · Trasparenza totale</div>
+              </div>
+              <div class="bt-item">
+                <div class="bt-num">03</div>
+                <div class="bt-name">Ghignu</div>
+                <div class="bt-desc">Spiaggia selvaggia · Zero turisti</div>
+              </div>
+            </div>
+            <div class="activity-pills mt-sm">
+              <span>Snorkeling</span>
+              <span>Paddle</span>
+              <span>Relax</span>
+              <span>Pranzo in rada</span>
+              <span>Foto impossibili</span>
+            </div>
+            <div class="tl-overnight">Notte in rada — sotto le stelle</div>
+          </div>
+        </div>
+
+        <!-- G4 -->
+        <div class="tl-item reveal-up d3">
+          <div class="tl-date">
+            <div class="tl-day">1</div>
+            <div class="tl-month">GIU</div>
+            <div class="tl-wd">LUN</div>
+          </div>
+          <div class="tl-line">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-tag">Risalita</div>
+            <h3>Ultime Baie della Corsica → Portovenere</h3>
+            <p>Mattinata per le ultime calette. Poi poppa verso la Liguria. Traversata in pieno sole verso <strong>Portovenere</strong>. Arrivo al tramonto davanti all'isola Palmaria.</p>
+            <div class="tl-tags">
+              <span>Traversata open sea</span>
+              <span>Borgo più bello d'Italia</span>
+            </div>
+            <div class="tl-overnight">Cena e notte in rada — Portovenere</div>
+          </div>
+        </div>
+
+        <!-- G5 -->
+        <div class="tl-item reveal-up d4">
+          <div class="tl-date">
+            <div class="tl-day">2</div>
+            <div class="tl-month">GIU</div>
+            <div class="tl-wd">MAR</div>
+          </div>
+          <div class="tl-line last">
+            <div class="tl-dot end-dot"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-tag">Rientro</div>
+            <h3>Alba sulla Palmaria → La Spezia</h3>
+            <p>Colazione in rada davanti a uno dei panorami più belli d'Italia. Poi rientro tranquillo verso <strong>Porto Mirabello</strong>. Sbarco nel pomeriggio. Ma il mare non ti lascia mai davvero.</p>
+            <div class="tl-tags">
+              <span>Alba sulla Palmaria</span>
+              <span>Colazione vista mare</span>
+              <span>Rientro pomeriggio</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ METEO ═══ -->
+  <section class="meteo" id="meteo">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">Previsioni Aggiornate</span>
+        <h2 class="h2">Meteo del Viaggio</h2>
+        <p class="section-desc">Dati aggiornati al <strong>14 luglio 2026</strong> — Tirreno &amp; Corsica Nord</p>
+      </div>
+
+      <!-- Rotte meteo -->
+      <div class="meteo-routes reveal-up">
+        <div class="mr-tab active" data-route="spezia">La Spezia</div>
+        <div class="mr-tab" data-route="traversata">Traversata Tirrenica</div>
+        <div class="mr-tab" data-route="corsica">Corsica Nord</div>
+      </div>
+
+      <!-- LA SPEZIA -->
+      <div class="meteo-panel active" id="panel-spezia">
+        <div class="meteo-grid">
+          <div class="meteo-card reveal-up">
+            <div class="mc-val">22–27°C</div>
+            <div class="mc-label">Temperatura Aria</div>
+            <div class="mc-sub">Notte 16–18°C</div>
+          </div>
+          <div class="meteo-card reveal-up d1">
+            <div class="mc-val">18–21°C</div>
+            <div class="mc-label">Temperatura Mare</div>
+            <div class="mc-sub">Golfo di La Spezia</div>
+          </div>
+          <div class="meteo-card reveal-up d2">
+            <div class="mc-val">8–15 kn</div>
+            <div class="mc-label">Vento</div>
+            <div class="mc-sub">Variabili SE–Ovest pomeriggio</div>
+          </div>
+          <div class="meteo-card reveal-up d3">
+            <div class="mc-val">Poco mosso</div>
+            <div class="mc-label">Moto Ondoso</div>
+            <div class="mc-sub">Anticiclone sul Tirreno</div>
+          </div>
+          <div class="meteo-card reveal-up d4">
+            <div class="mc-val">15:00–17:00</div>
+            <div class="mc-label">Imbarco &amp; Partenza</div>
+            <div class="mc-sub">Cambusa + briefing + salpata ore 17</div>
+          </div>
+          <div class="meteo-card ideal reveal-up d5">
+            <div class="mc-val ideal-val">FAVOREVOLE</div>
+            <div class="mc-label">Tendenza meteo</div>
+            <div class="mc-sub">Venerdì 17 Luglio</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRAVERSATA -->
+      <div class="meteo-panel" id="panel-traversata">
+        <div class="meteo-grid">
+          <div class="meteo-card reveal-up">
+            <div class="mc-val">La Spezia → Cap Corse Est</div>
+            <div class="mc-label">Rotta</div>
+            <div class="mc-sub">Centuri / Macinaggio</div>
+          </div>
+          <div class="meteo-card reveal-up d1">
+            <div class="mc-val">~12–14 h</div>
+            <div class="mc-label">Durata Traversata</div>
+            <div class="mc-sub">Partenza ore 17:00 · Arrivo alba sab</div>
+          </div>
+          <div class="meteo-card reveal-up d2">
+            <div class="mc-val">8–15 kn</div>
+            <div class="mc-label">Vento atteso</div>
+            <div class="mc-sub">Variabili · Maestrale ideale</div>
+          </div>
+          <div class="meteo-card reveal-up d3">
+            <div class="mc-val">Poco mosso</div>
+            <div class="mc-label">Mare</div>
+            <div class="mc-sub">Possibile onda lunga con Libeccio</div>
+          </div>
+          <div class="meteo-card reveal-up d4">
+            <div class="mc-val">Notturna</div>
+            <div class="mc-label">Navigazione</div>
+            <div class="mc-sub">Colazione in rada · Cap Corse</div>
+          </div>
+          <div class="meteo-card ideal reveal-up d5">
+            <div class="mc-val ideal-val">DIRETTA</div>
+            <div class="mc-label">Rotta logica</div>
+            <div class="mc-sub">Arrivo sabato mattina riposati</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CORSICA NORD -->
+      <div class="meteo-panel" id="panel-corsica">
+        <div class="meteo-grid">
+          <div class="meteo-card reveal-up">
+            <div class="mc-val">24–29°C</div>
+            <div class="mc-label">Temperatura Aria</div>
+            <div class="mc-sub">Notte 16–20°C · Temperature estive</div>
+          </div>
+          <div class="meteo-card reveal-up d1">
+            <div class="mc-val">18–21°C</div>
+            <div class="mc-label">Temperatura Mare</div>
+            <div class="mc-sub">Golfo di Saint-Florent</div>
+          </div>
+          <div class="meteo-card reveal-up d2">
+            <div class="mc-val">Brezze termiche</div>
+            <div class="mc-label">Vento in Rada</div>
+            <div class="mc-sub">SE–Ovest moderato nel pomeriggio</div>
+          </div>
+          <div class="meteo-card reveal-up d3">
+            <div class="mc-val">Poco mosso</div>
+            <div class="mc-label">Moto Ondoso</div>
+            <div class="mc-sub">Acque protette · Rada ideale</div>
+          </div>
+          <div class="meteo-card reveal-up d4">
+            <div class="mc-val">Lotu · Saleccia · Ghignu</div>
+            <div class="mc-label">Spiagge programmate</div>
+            <div class="mc-sub">Dom mattina Lotu · pomeriggio Saleccia</div>
+          </div>
+          <div class="meteo-card ideal reveal-up d5">
+            <div class="mc-val ideal-val">PERFETTO</div>
+            <div class="mc-label">Condizioni Mare</div>
+            <div class="mc-sub">Anticiclone stabile sul Tirreno</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Forecast giornaliero -->
+      <div class="forecast reveal-up">
+        <div class="forecast-title">Previsioni Giorno per Giorno</div>
+        <div class="forecast-grid">
+          <div class="fc-day"><div class="fc-date">Ven 17</div><div class="fc-temp">24°C</div><div class="fc-wind">SW 8 kn</div><div class="fc-sea">0.3 m</div><div class="fc-note">Partenza</div></div>
+          <div class="fc-day"><div class="fc-date">Sab 18</div><div class="fc-temp">26°C</div><div class="fc-wind">NW 12 kn</div><div class="fc-sea">0.5 m</div><div class="fc-note">Traversata</div></div>
+          <div class="fc-day active-day"><div class="fc-date">Dom 19</div><div class="fc-temp">27°C</div><div class="fc-wind">5 kn</div><div class="fc-sea">0.2 m</div><div class="fc-note">Spiagge</div></div>
+        </div>
+      </div>
+
+      <div class="meteo-note reveal-up">
+        <span>!</span>
+        <div><strong>Vento da monitorare: Libeccio (SW)</strong> — onda lunga, traverso scomodo tra Cap Corse e Liguria. Configurazione ideale: Maestrale leggero o brezze termiche con alta pressione stabile.<br/>
+        Previsioni affidabili disponibili <strong>5 giorni prima</strong> della partenza su <strong>Windy.com</strong> e <strong>Navily</strong>. Finestra meteo definitiva: 48–72h prima.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ BARCHE ═══ -->
+  <section class="barche" id="barche">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">Le Barche</span>
+        <h2 class="h2">La Flottiglia</h2>
+        <p class="section-desc">Due barche, un solo spirito. La stessa rotta, vissuta in modo unico su ogni scafo.</p>
+      </div>
+
+      <div class="barche-grid">
+        <!-- LAGOON 40 -->
+        <div class="barca-card featured reveal-left">
+          <div class="barca-visual">
+            <div class="barca-visual-inner lagoon" style="background-image:url('img/lagoon40-new.jpg');background-size:cover;background-position:center">
+              <div class="bv-wave"></div>
+            </div>
+          </div>
+          <div class="barca-body">
+            <div class="barca-type">Catamarano</div>
+            <h3 class="barca-name">Lagoon 40</h3>
+            <p class="barca-mood">"Il tuo resort galleggiante sul Mediterraneo."</p>
+            <div class="barca-specs">
+              <div class="spec-item"><span>40 piedi · 12 m</span></div>
+              <div class="spec-item"><span>4 cabine confortevoli</span></div>
+              <div class="spec-item"><span>Flybridge &amp; prendisole</span></div>
+              <div class="spec-item"><span>Ampio living esterno</span></div>
+              <div class="spec-item"><span>Cucina attrezzata</span></div>
+              <div class="spec-item"><span>Stabilità e comfort</span></div>
+            </div>
+            <div class="barca-ideal">
+              Comfort, spazi ampi e convivialità al massimo. Il salotto sul mare.
+            </div>
+          </div>
+        </div>
+
+        <!-- OCEANIS 48 -->
+        <div class="barca-card reveal-right">
+          <div class="barca-visual">
+            <div class="barca-visual-inner oceanis" style="background-image:url('img/oceanis48.jpg');background-size:cover;background-position:center">
+              <div class="bv-wave"></div>
+            </div>
+          </div>
+          <div class="barca-body">
+            <div class="barca-type">Monoscafo</div>
+            <h3 class="barca-name">Beneteau Oceanis 48</h3>
+            <p class="barca-mood">"La vela nel sangue. L'emozione autentica della traversata."</p>
+            <div class="barca-specs">
+              <div class="spec-item"><span>48 piedi · 14.5 m</span></div>
+              <div class="spec-item"><span>5 cabine</span></div>
+              <div class="spec-item"><span>Performance sailing</span></div>
+              <div class="spec-item"><span>Navigazione sportiva</span></div>
+              <div class="spec-item"><span>Alta navigazione</span></div>
+              <div class="spec-item"><span>Linee eleganti Beneteau</span></div>
+            </div>
+            <div class="barca-ideal">
+              Performance, emozione autentica e il vento nelle vele. La vela vera.
+            </div>
+          </div>
+        </div>
+
+        <!-- ATLANTICA 45 -->
+        <div class="barca-card reveal-up">
+          <div class="barca-visual">
+            <div class="barcavisual-inner atlantica" style="background-image:url('img/atlantica45.jpg');background-size:cover;background-position:center">
+              <div class="bv-wave"></div>
+            </div>
+          </div>
+          <div class="barca-body">
+            <div class="barca-type">Monoscafo</div>
+            <h3 class="barca-name">Atlantica 45</h3>
+            <p class="barca-mood">"Esplorazione del Golfo dei Poeti. Comfort e versatilità."</p>
+            <div class="barca-specs">
+              <div class="spec-item"><span>45 piedi · 13.7 m</span></div>
+              <div class="spec-item"><span>4 cabine</span></div>
+              <div class="spec-item"><span>Crociera costiera</span></div>
+              <div class="spec-item"><span>Navigazione facile</span></div>
+              <div class="spec-item"><span>Design moderno</span></div>
+              <div class="spec-item"><span>Perfetto per week-end</span></div>
+            </div>
+            <div class="barca-ideal">
+              Versatilità, comfort e scoperta delle coste liguri. La barca perfetta per crociere relax.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ SPIAGGE ═══ -->
+  <section class="spiagge" id="spiagge">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">Il Cuore del Viaggio</span>
+        <h2 class="h2">Le Spiagge che Non Dimenticherai</h2>
+        <p class="section-desc">Raggiungibili solo in barca. Impossibile dimenticarle.</p>
+      </div>
+      <div class="spiagge-grid">
+
+        <div class="spiaggia-card big reveal-up">
+          <div class="sp-bg s1" style="background-image:url('img/saleccia.jpg')"></div>
+          <div class="sp-overlay"></div>
+          <div class="sp-content">
+            <div class="sp-num">01</div>
+            <div class="sp-name">Saleccia</div>
+            <div class="sp-desc">Sabbia bianca finissima, acqua caraibica, il tutto in mezzo alla macchia mediterrranea. La spiaggia più bella della Corsica.</div>
+            <div class="sp-tags">
+              <span>Sabbia bianca</span>
+              <span>Acqua caraibica</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="spiaggia-card reveal-up d1">
+          <div class="sp-bg s2" style="background-image:url('img/lotu.jpg')"></div>
+          <div class="sp-overlay"></div>
+          <div class="sp-content">
+            <div class="sp-num">02</div>
+            <div class="sp-name">Lotu</div>
+            <div class="sp-desc">Rada perfetta per catamarani. Acqua di un turchese impossibile. Silenzio assoluto.</div>
+            <div class="sp-tags">
+              <span>Rada perfetta</span>
+              <span>Trasparenza totale</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="spiaggia-card reveal-up d2">
+          <div class="sp-bg s3" style="background-image:url('img/ghignu.jpg')"></div>
+          <div class="sp-overlay"></div>
+          <div class="sp-content">
+            <div class="sp-num">03</div>
+            <div class="sp-name">Ghignu</div>
+            <div class="sp-desc">Spiaggia selvaggia, zero turisti, scenari che sembrano dipinti. Solo chi arriva in barca la trova.</div>
+            <div class="sp-tags">
+              <span>Selvaggia</span>
+              <span>Esclusiva</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ VITA DI BORDO ═══ -->
+  <section class="vitabordo" id="vitabordo">
+    <div class="vitabordo-bg"></div>
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label light">Lifestyle</span>
+        <h2 class="h2 light">La Vita di Bordo</h2>
+        <p class="section-desc light">"Non è solo un viaggio. È una piccola vita parallela sul mare."</p>
+      </div>
+      <div class="bordo-grid">
+        <div class="bordo-item reveal-up">
+          <h4>Colazioni Vista Mare</h4>
+          <p>Ogni mattina si apre sul mare. Caffè, frutta, silenzio e l'orizzonte davanti a te.</p>
+        </div>
+        <div class="bordo-item reveal-up d1">
+          <h4>Pasti &amp; Ritmi</h4>
+          <p><strong>2 notti</strong> a bordo = 2 colazioni + 2 pranzi + 2 cene. Venerdì: apericena al tramonto in navigazione. Sabato: cena al ristorante a Saint-Florent (facoltativa, non inclusa).</p>
+        </div>
+        <div class="bordo-item reveal-up d2">
+          <h4>Aperitivi al Tramonto</h4>
+          <p>Spritz in rada mentre il sole tinge di arancio il mare. Non esiste posto migliore al mondo.</p>
+        </div>
+        <div class="bordo-item reveal-up d3">
+          <h4>Bagni in Rada</h4>
+          <p>Tuffo direttamente dalla barca. Acqua trasparente, fondo bianco, temperatura perfetta.</p>
+        </div>
+        <div class="bordo-item reveal-up d4">
+          <h4>Notti Stellate</h4>
+          <p>In rada, lontano dalle luci, il cielo si riempie di stelle. Il mare dondola dolcemente.</p>
+        </div>
+        <div class="bordo-item reveal-up d5">
+          <h4>Musica Chill &amp; Convivialità</h4>
+          <p>Musica, risate, storie. L'equipaggio diventa famiglia nel giro di poche ore di navigazione.</p>
+        </div>
+        <div class="bordo-item reveal-up">
+          <h4>Turni di Navigazione</h4>
+          <p>Prendi il timone. Senti il vento. La vela vera è questo: essere parte della barca.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ LA TUA BARCA ═══ -->
+  <section class="page-links" id="pagine">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label light">La Tua Barca</span>
+        <h2 class="h2 light">Entra nella tua sezione</h2>
+        <p class="section-desc light">Ogni barca ha la sua pagina dedicata con le regole di bordo, la checklist e il modulo crew list da compilare e inviare.</p>
+      </div>
+      <div class="page-links-grid">
+        <a href="lagoon.html" class="pl-card reveal-up">
+          <div class="pl-img" style="background-image:url('img/lagoon40-new.jpg')"></div>
+          <div class="pl-body">
+            <div class="pl-label">Catamarano</div>
+            <div class="pl-title">Lagoon 40</div>
+            <div class="pl-desc">Regole di bordo, cosa portare e crew list per l'equipaggio del Lagoon 40.</div>
+            <div class="pl-cta">Entra nella tua sezione →</div>
+          </div>
+        </a>
+        <a href="oceanis.html" class="pl-card reveal-up d1">
+          <div class="pl-img" style="background-image:url('img/oceanis48.jpg')"></div>
+          <div class="pl-body">
+            <div class="pl-label">Monoscafo</div>
+            <div class="pl-title">Beneteau Oceanis 48</div>
+            <div class="pl-desc">Regole di bordo, cosa portare e crew list per l'equipaggio dell'Oceanis 48.</div>
+            <div class="pl-cta">Entra nella tua sezione →</div>
+          </div>
+        </a>
+        <a href="atlantica.html" class="pl-card reveal-up d2">
+          <div class="pl-img" style="background-image:url('img/atlantica45.jpg')"></div>
+          <div class="pl-body">
+            <div class="pl-label">Monoscafo</div>
+            <div class="pl-title">Atlantica 45</div>
+            <div class="pl-desc">Regole di bordo, cosa portare e crew list per l'equipaggio dell'Atlantica 45.</div>
+            <div class="pl-cta">Entra nella tua sezione →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- meteo spostato sopra, dopo itinerario -->
+  <section style="display:none">
+    <div class="container">
+      <div class="section-header centered">
+
+      <!-- Rotte meteo -->
+      <div class="meteo-routes reveal-up">
+        <div class="mr-tab active" data-route="spezia">📍 La Spezia</div>
+        <div class="mr-tab" data-route="traversata">⛵ Traversata Tirrenica</div>
+        <div class="mr-tab" data-route="corsica">🏝 Corsica Nord</div>
+      </div>
+
+      <!-- LA SPEZIA -->
+      <div class="meteo-panel active" id="panel-spezia">
+        <div class="meteo-grid">
+          <div class="meteo-card reveal-up">
+            <div class="mc-icon">🌡️</div>
+            <div class="mc-val">22–27°C</div>
+            <div class="mc-label">Temperatura Aria</div>
+            <div class="mc-sub">Notte 16–18°C</div>
+          </div>
+          <div class="meteo-card reveal-up d1">
+            <div class="mc-icon">🌊</div>
+            <div class="mc-val">18–21°C</div>
+            <div class="mc-label">Temperatura Mare</div>
+            <div class="mc-sub">Golfo di La Spezia</div>
+          </div>
+          <div class="meteo-card reveal-up d2">
+            <div class="mc-icon">💨</div>
+            <div class="mc-val">8–15 kn</div>
+            <div class="mc-label">Vento</div>
+            <div class="mc-sub">Variabili SE–Ovest pomeriggio</div>
+          </div>
+          <div class="meteo-card reveal-up d3">
+            <div class="mc-icon">〰️</div>
+            <div class="mc-val">Poco mosso</div>
+            <div class="mc-label">Moto Ondoso</div>
+            <div class="mc-sub">Anticiclone sul Tirreno</div>
+          </div>
+          <div class="meteo-card reveal-up d4">
+            <div class="mc-icon">🕔</div>
+            <div class="mc-val">15:00–17:00</div>
+            <div class="mc-label">Imbarco &amp; Partenza</div>
+            <div class="mc-sub">Cambusa + briefing + salpata ore 17</div>
+          </div>
+          <div class="meteo-card ideal reveal-up d5">
+            <div class="mc-icon">✅</div>
+            <div class="mc-val ideal-val">FAVOREVOLE</div>
+            <div class="mc-label">Tendenza meteo</div>
+            <div class="mc-sub">Venerdì 17 Luglio</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRAVERSATA -->
+      <div class="meteo-panel" id="panel-traversata">
+        <div class="meteo-grid">
+          <div class="meteo-card reveal-up">
+            <div class="mc-icon">🧭</div>
+            <div class="mc-val">La Spezia → Cap Corse Est</div>
+            <div class="mc-label">Rotta</div>
+            <div class="mc-sub">Centuri / Macinaggio</div>
+          </div>
+          <div class="meteo-card reveal-up d1">
+            <div class="mc-icon">⏱️</div>
+            <div class="mc-val">~12–14 h</div>
+            <div class="mc-label">Durata Traversata</div>
+            <div class="mc-sub">Partenza ore 17:00 · Arrivo alba sab</div>
+          </div>
+          <div class="meteo-card reveal-up d2">
+            <div class="mc-icon">💨</div>
+            <div class="mc-val">8–15 kn</div>
+            <div class="mc-label">Vento atteso</div>
+            <div class="mc-sub">Variabili · Maestrale ideale</div>
+          </div>
+          <div class="meteo-card reveal-up d3">
+            <div class="mc-icon">〰️</div>
+            <div class="mc-val">Poco mosso</div>
+            <div class="mc-label">Mare</div>
+            <div class="mc-sub">Possibile onda lunga con Libeccio</div>
+          </div>
+          <div class="meteo-card reveal-up d4">
+            <div class="mc-icon">🌙</div>
+            <div class="mc-val">Notturna</div>
+            <div class="mc-label">Navigazione</div>
+            <div class="mc-sub">Colazione in rada · Cap Corse</div>
+          </div>
+          <div class="meteo-card ideal reveal-up d5">
+            <div class="mc-icon">⛵</div>
+            <div class="mc-val ideal-val">DIRETTA</div>
+            <div class="mc-label">Rotta logica</div>
+            <div class="mc-sub">Arrivo sabato mattina riposati</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CORSICA NORD -->
+      <div class="meteo-panel" id="panel-corsica">
+        <div class="meteo-grid">
+          <div class="meteo-card reveal-up">
+            <div class="mc-icon">🌡️</div>
+            <div class="mc-val">24–29°C</div>
+            <div class="mc-label">Temperatura Aria</div>
+            <div class="mc-sub">Notte 16–20°C · Temperature estive</div>
+          </div>
+          <div class="meteo-card reveal-up d1">
+            <div class="mc-icon">🌊</div>
+            <div class="mc-val">18–21°C</div>
+            <div class="mc-label">Temperatura Mare</div>
+            <div class="mc-sub">Golfo di Saint-Florent</div>
+          </div>
+          <div class="meteo-card reveal-up d2">
+            <div class="mc-icon">💨</div>
+            <div class="mc-val">Brezze termiche</div>
+            <div class="mc-label">Vento in Rada</div>
+            <div class="mc-sub">SE–Ovest moderato nel pomeriggio</div>
+          </div>
+          <div class="meteo-card reveal-up d3">
+            <div class="mc-icon">〰️</div>
+            <div class="mc-val">Poco mosso</div>
+            <div class="mc-label">Moto Ondoso</div>
+            <div class="mc-sub">Acque protette · Rada ideale</div>
+          </div>
+          <div class="meteo-card reveal-up d4">
+            <div class="mc-icon">🏝️</div>
+            <div class="mc-val">Lotu · Saleccia · Ghignu</div>
+            <div class="mc-label">Spiagge programmate</div>
+            <div class="mc-sub">Dom mattina Lotu · pomeriggio Saleccia</div>
+          </div>
+          <div class="meteo-card ideal reveal-up d5">
+            <div class="mc-icon">🏖️</div>
+            <div class="mc-val ideal-val">PERFETTO</div>
+            <div class="mc-label">Condizioni Mare</div>
+            <div class="mc-sub">Anticiclone stabile sul Tirreno</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Forecast giornaliero -->
+      <div class="forecast reveal-up">
+        <div class="forecast-title">📅 Previsioni Giorno per Giorno</div>
+        <div class="forecast-grid">
+          <div class="fc-day">
+            <div class="fc-date">Ven 17</div>
+            <div class="fc-icon">🌤️</div>
+            <div class="fc-temp">24°C</div>
+            <div class="fc-wind">SW 8 kn</div>
+            <div class="fc-sea">0.3 m</div>
+            <div class="fc-note">Partenza</div>
+          </div>
+          <div class="fc-day">
+            <div class="fc-date">Sab 18</div>
+            <div class="fc-icon">☀️</div>
+            <div class="fc-temp">26°C</div>
+            <div class="fc-wind">NW 12 kn</div>
+            <div class="fc-sea">0.5 m</div>
+            <div class="fc-note">Traversata</div>
+          </div>
+          <div class="fc-day active-day">
+            <div class="fc-date">Dom 19</div>
+            <div class="fc-icon">☀️</div>
+            <div class="fc-temp">27°C</div>
+            <div class="fc-wind">5 kn</div>
+            <div class="fc-sea">0.2 m</div>
+            <div class="fc-note">Spiagge ★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="meteo-note reveal-up">
+        <span>⚠️</span>
+        <div><strong>Vento da monitorare: Libeccio (SW)</strong> — onda lunga, traverso scomodo tra Cap Corse e Liguria. Configurazione ideale: Maestrale leggero o brezze termiche con alta pressione stabile.<br/>
+        Previsioni affidabili disponibili <strong>5 giorni prima</strong> della partenza su <strong>Windy.com</strong> e <strong>Navily</strong>. Finestra meteo definitiva: 48–72h prima.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ PER CHI ═══ -->
+  <section class="perchi" id="perchi">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">Identikit</span>
+        <h2 class="h2">È Fatta per Te?</h2>
+      </div>
+      <div class="perchi-grid">
+        <div class="pc-card reveal-up"><p>Ami il mare e vuoi viverlo davvero, non solo guardarlo dalla spiaggia</p></div>
+        <div class="pc-card reveal-up d1"><p>Sei appassionato di vela o hai sempre voluto provare la navigazione vera</p></div>
+        <div class="pc-card reveal-up d2"><p>Cerchi un'avventura autentica, lontano dal turismo di massa</p></div>
+        <div class="pc-card reveal-up d3"><p>Vuoi condividere qualcosa di speciale con un gruppo di amici</p></div>
+        <div class="pc-card reveal-up d4"><p>Hai sognato la Corsica ma vuoi scoprirla dove nessun bus turistico arriva</p></div>
+        <div class="pc-card reveal-up d5"><p>Sei dinamico, curioso, socievole — e non ti basta il solito viaggio</p></div>
+      </div>
+
+      <!-- Prima esperienza -->
+      <div class="prima-vela reveal-up">
+        <div class="pv-content">
+          <h3>Prima esperienza in vela?</h3>
+          <p>Perfetto. Non è richiesta nessuna esperienza precedente. L'equipaggio professionale gestisce la navigazione. Tu ti godi il viaggio, impari se vuoi, e prendi il timone quando ti senti pronto. La vela si impara vivendo, non studiando.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ COSA PORTARE ═══ -->
+  <section class="portare" id="portare">
+    <div class="portare-bg"></div>
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label light">Check-list</span>
+        <h2 class="h2 light">Cosa Portare in Barca</h2>
+      </div>
+      <div class="portare-grid">
+        <div class="pg-col reveal-left">
+          <h4>Essenziali</h4>
+          <ul>
+            <li>Costume da bagno (almeno 3)</li>
+            <li>Scarpe da barca (suole bianche)</li>
+            <li>Crema solare alta protezione</li>
+            <li>Occhiali da sole polarizzati</li>
+            <li>Giacca a vento o cerata leggera</li>
+            <li>Maschera da snorkeling</li>
+            <li>Biodramina — prendila prima di partire</li>
+          </ul>
+        </div>
+        <div class="pg-col reveal-up d1">
+          <h4>La Valigia Intelligente</h4>
+          <ul>
+            <li><strong>Niente valigie rigide</strong> — in barca non c'è spazio</li>
+            <li>Usa una <strong>sacca morbida o borsone</strong> comprimibile</li>
+            <li>Max <strong>1 bagaglio a testa</strong> + zaino piccolo</li>
+            <li>Abbigliamento leggero e sovrapposto</li>
+            <li>Felpa o pile per le notti in rada</li>
+            <li>Cappello da sole + sandali leggeri</li>
+            <li>Cena leggera il venerdì sera prima di salpare</li>
+          </ul>
+        </div>
+        <div class="pg-col reveal-right d2">
+          <h4>Lascia a Casa</h4>
+          <ul>
+            <li>Valigie rigide o trolley con ruote</li>
+            <li>Profumi forti (danneggiano le superfici)</li>
+            <li>Scarpe con suole nere</li>
+            <li>Ansia da ufficio</li>
+            <li>L'aspettativa del wi-fi costante</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ FAQ ═══ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">Domande</span>
+        <h2 class="h2">Domande Frequenti</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal-up">
+          <button class="faq-q" aria-expanded="false">
+            <span>Devo saper navigare?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Assolutamente no. Non è richiesta nessuna esperienza pregressa di vela. L'equipaggio professionista gestisce la barca. Tu puoi partecipare attivamente alla navigazione se lo desideri, oppure rilassarti e goderti il panorama.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal-up d1">
+          <button class="faq-q" aria-expanded="false">
+            <span>Il viaggio è adatto a chi soffre il mal di mare?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Metà luglio nel Tirreno presenta generalmente condizioni ottimali con mare poco mosso. Le barche della flottiglia offrono stabilità eccellente nelle condizioni tipiche di metà luglio. In ogni caso, consigliamo sempre l'uso di cerotti anti-nausea in via preventiva.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal-up d2">
+          <button class="faq-q" aria-expanded="false">
+            <span>Come funzionano le cabine?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Le barche della flottiglia dispongono di cabine doppie con bagno privato. La composizione per ogni scafo è stata organizzata dall'equipaggio già definito.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal-up d3">
+          <button class="faq-q" aria-expanded="false">
+            <span>Quanto dura la traversata notturna verso la Corsica?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Partendo da La Spezia intorno alle 17:00 del venerdì, la traversata verso Cap Corse dura circa 12–14 ore con vento e condizioni medie di metà luglio. L'arrivo è previsto all'alba del sabato, tra le baie del Cap Corse.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal-up d4">
+          <button class="faq-q" aria-expanded="false">
+            <span>Come si dorme durante la traversata notturna?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Durante la traversata si organizzano turni di guardia al timone, mentre chi non è di turno dorme nelle cabine. È uno degli aspetti più autentici e romantici della navigazione d'altura: il ritmo della barca, il cielo stellato, il suono del mare.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal-up d5">
+          <button class="faq-q" aria-expanded="false">
+            <span>Come ci si raggiunge a La Spezia?</span>
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-a">
+            <p>La Spezia è collegata in treno direttamente da Milano (2h), Genova (1h) e Roma (4h). L'aeroporto più vicino è Pisa (1h di treno). Porto Mirabello è raggiungibile a piedi dalla stazione.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGOLE RIMOSSO — pagina dedicata regole.html -->
+  <section class="regole" id="regole" style="display:none">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">A Bordo</span>
+        <h2 class="h2">⚓ Regole di Bordo</h2>
+        <p class="section-desc">Prima di salpare, leggi con attenzione. Il rispetto di queste regole garantisce sicurezza e divertimento per tutti.</p>
+      </div>
+
+      <div class="regole-grid">
+        <div class="regola-card reveal-up">
+          <div class="rc-icon">⚠️</div>
+          <h4>Regola 1 — Sicurezza a Bordo</h4>
+          <p>Non cadere in mare e non farti male. Testa, gambe, schiena e piedi sono sempre a rischio, soprattutto di notte. Attenzione a oblò, scalette, gallocce e anelli d'acciaio in coperta. <strong>Mai correre a piedi nudi, soprattutto se bagnati.</strong></p>
+        </div>
+        <div class="regola-card reveal-up d1">
+          <div class="rc-icon">🚫</div>
+          <h4>Regola 2 — Sicurezza e Salute</h4>
+          <p>Non fare nulla che possa mettere in pericolo te stesso o gli altri. <strong>È assolutamente vietato l'uso di droghe a bordo.</strong></p>
+        </div>
+        <div class="regola-card reveal-up d2">
+          <div class="rc-icon">❓</div>
+          <h4>Regola 3 — Comunicazione</h4>
+          <p>Se non conosci qualcosa, <strong>chiedi!</strong> Meglio evitare sorprese sgradevoli.</p>
+        </div>
+        <div class="regola-card reveal-up d3">
+          <div class="rc-icon">📱</div>
+          <h4>Regola 4 — Dispositivi Elettronici</h4>
+          <p>Ricarica limitata: usa i dispositivi con parsimonia. <strong>Non lasciarli in carica tutta la notte.</strong></p>
+        </div>
+        <div class="regola-card reveal-up">
+          <div class="rc-icon">💬</div>
+          <h4>Regola 5 — Quiet Zone</h4>
+          <p>Se vuoi ascoltare musica, usa le cuffie o abbassa il volume. Alcuni preferiscono il suono del mare.</p>
+        </div>
+        <div class="regola-card reveal-up d1">
+          <div class="rc-icon">🔑</div>
+          <h4>Regola 6 — Spazi Privati</h4>
+          <p>Rispetta la privacy nelle cabine. <strong>Non entrare senza permesso.</strong></p>
+        </div>
+        <div class="regola-card reveal-up d2">
+          <div class="rc-icon">⛵</div>
+          <h4>Regola 7 — Turni Notturni</h4>
+          <p>Rispetta i turni di navigazione notturna. La sicurezza dipende da un team vigile.</p>
+        </div>
+        <div class="regola-card reveal-up d3">
+          <div class="rc-icon">🍻</div>
+          <h4>Regola 8 — Alcol</h4>
+          <p>Non esagerare con l'alcol. Tieni il consumo sotto controllo, soprattutto durante la navigazione notturna.</p>
+        </div>
+        <div class="regola-card reveal-up">
+          <div class="rc-icon">🌊</div>
+          <h4>Regola 9 — Mal di Mare</h4>
+          <p>Porta con te rimedi (scopolamina, xamamina). Cena leggera il venerdì sera prima della traversata.</p>
+        </div>
+        <div class="regola-card reveal-up d1">
+          <div class="rc-icon">⏰</div>
+          <h4>Regola 10 — Orari</h4>
+          <p>Rispettare gli orari è fondamentale per partenze, arrivi e itinerari. <strong>La barca non aspetta nessuno.</strong></p>
+        </div>
+      </div>
+
+      <div class="regole-extra reveal-up">
+        <div class="re-block">
+          <h4>🛠️ Vita di Bordo</h4>
+          <ul>
+            <li>Chi cucina <strong>non lava i piatti</strong>.</li>
+            <li>Chi non lava i piatti aiuta in cucina, prepara aperitivi o apparecchia.</li>
+            <li>Chi non fa nulla trova qualcosa da fare: pulire i bagni, la cucina o la barca.</li>
+            <li>Ordine e rispetto a bordo, sia in mare che con i vicini in rada o in porto.</li>
+            <li>Nel WC <strong>non si butta nulla</strong> che non possa essere mangiato e digerito.</li>
+            <li>Tutto ciò che è aperto si rovescia: usa mollette e assicurati che tutto sia ben sistemato.</li>
+            <li>Prima di dormire, la barca deve essere in ordine.</li>
+            <li>Avvisa sempre qualcuno se ti allontani, soprattutto di notte.</li>
+            <li>Il tender non è assicurato: usalo con attenzione.</li>
+          </ul>
+        </div>
+        <div class="re-block">
+          <h4>🚬 Fumatori</h4>
+          <ul>
+            <li>Fumare <strong>solo nel pozzetto</strong>. Rispetta gli altri.</li>
+            <li>Tieni sempre il posacenere.</li>
+            <li>Vietato fumare sottocoperta.</li>
+            <li>Mozziconi e rifiuti: smaltiscili correttamente.</li>
+          </ul>
+          <h4 style="margin-top:20px">💶 Cauzione</h4>
+          <ul>
+            <li>Ogni ospite versa <strong>100–250€ in contanti</strong> all'imbarco.</li>
+            <li>Restituita dopo il checkout finale senza danni.</li>
+            <li>Eventuali danni scalati dalla cauzione.</li>
+            <li>Lo skipper e co-skipper non partecipano alle spese di cambusa.</li>
+          </ul>
+        </div>
+        <div class="re-block">
+          <h4>⚡ Corrente &amp; Acqua</h4>
+          <ul>
+            <li>Corrente e acqua sono beni preziosi: istruzioni a bordo.</li>
+            <li>Asciuga capelli con sole e vento: <strong>niente phon</strong>.</li>
+            <li>Shampoo e saponi <strong>biodegradabili</strong>.</li>
+            <li>Una mano alla barca, una a te stesso — soprattutto in poppa.</li>
+          </ul>
+          <h4 style="margin-top:20px">🥘 Cambusa</h4>
+          <ul>
+            <li>La cambusa non fa distinzioni per astemi o intolleranze: verrà trovato un equilibrio.</li>
+            <li>Chi si lamenta di cambusa o itinerario probabilmente non è nato per la vita di bordo. Conta fino a 100 prima di aprire bocca.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREW LIST RIMOSSO — pagina dedicata crewlist.html -->
+  <section class="crewlist" id="crewlist" style="display:none">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label light">Documentazione</span>
+        <h2 class="h2 light">📋 Crew List</h2>
+        <p class="section-desc" style="color:rgba(255,255,255,.65)">Seleziona la tua barca, compila i dati di ogni membro dell'equipaggio e scarica il modulo PDF pronto per il charter.</p>
+      </div>
+
+      <!-- STEP 1: scelta barca -->
+      <div class="crew-boat-select reveal-up" id="crewBoatSelect">
+        <p class="crew-select-label">Su quale barca sei imbarcato?</p>
+        <div class="crew-boat-cards">
+          <button class="crew-boat-card" onclick="selectBoat('lagoon')">
+            <div class="cbc-img" style="background-image:url('img/lagoon40-new.jpg')"></div>
+            <div class="cbc-body">
+              <div class="cbc-type">Catamarano</div>
+              <div class="cbc-name">Lagoon 40</div>
+              <div class="cbc-cta">Entra &amp; compila →</div>
+            </div>
+          </button>
+          <button class="crew-boat-card" onclick="selectBoat('oceanis')">
+            <div class="cbc-img" style="background-image:url('img/oceanis48.jpg')"></div>
+            <div class="cbc-body">
+              <div class="cbc-type">Monoscafo</div>
+              <div class="cbc-name">Beneteau Oceanis 48</div>
+              <div class="cbc-cta">Entra &amp; compila →</div>
+            </div>
+          </button>
+          <button class="crew-boat-card" onclick="selectBoat('atlantica')">
+            <div class="cbc-img" style="background-image:url('img/atlantica45.jpg')"></div>
+            <div class="cbc-body">
+              <div class="cbc-type">Monoscafo</div>
+              <div class="cbc-name">Atlantica 45</div>
+              <div class="cbc-cta">Entra &amp; compila →</div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: form per barca selezionata (inizialmente nascosto) -->
+      <div class="crew-form-area" id="crewFormArea" style="display:none">
+        <div class="crew-form-header">
+          <button class="crew-back-btn" onclick="backToBoatSelect()">← Cambia barca</button>
+          <div class="crew-form-title" id="crewFormTitle"></div>
+        </div>
+
+        <!-- LAGOON panel -->
+        <div class="crew-panel" id="crew-lagoon">
+          <div class="crew-members" id="members-lagoon"></div>
+          <div class="save-status" id="saveStatus-lagoon" style="display:none; margin:12px 0; padding:12px 16px; background:rgba(28,167,168,.15); border:1px solid var(--turq); border-radius:10px; color:#fff; font-size:.9rem;"></div>
+          <div class="crew-actions">
+            <button class="btn-dl-pdf" id="btnSalva-lagoon" onclick="saveMemberToSheets('lagoon')">💾 Salva i miei dati</button>
+          </div>
+        </div>
+
+        <!-- OCEANIS panel -->
+        <div class="crew-panel" id="crew-oceanis">
+          <div class="crew-members" id="members-oceanis"></div>
+          <div class="save-status" id="saveStatus-oceanis" style="display:none; margin:12px 0; padding:12px 16px; background:rgba(28,167,168,.15); border:1px solid var(--turq); border-radius:10px; color:#fff; font-size:.9rem;"></div>
+          <div class="crew-actions">
+            <button class="btn-dl-pdf" id="btnSalva-oceanis" onclick="saveMemberToSheets('oceanis')">💾 Salva i miei dati</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ CONTATTI ═══ -->
+  <section class="contatti" id="contatti">
+    <div class="contatti-bg"></div>
+    <div class="container">
+      <div class="contatti-info-only reveal-up">
+        <span class="label light">Informazioni</span>
+        <h2 class="h2 light">Contatti</h2>
+        <p class="contatti-desc">Il programma è definito, l'equipaggio è pronto. Questa pagina raccoglie tutte le informazioni sul viaggio.</p>
+        <div class="contatti-cards">
+          <div class="cc-card reveal-left">
+            <div class="cc-icon">—</div>
+            <div class="cc-label">Punto di Partenza</div>
+            <div class="cc-val">Porto Mirabello — La Spezia</div>
+          </div>
+          <div class="cc-card reveal-up d1">
+            <div class="cc-icon">—</div>
+            <div class="cc-label">Date</div>
+            <div class="cc-val">17 – 19 Luglio 2026</div>
+          </div>
+          <div class="cc-card reveal-up d2">
+            <div class="cc-icon">—</div>
+            <div class="cc-label">Imbarcazione</div>
+            <div class="cc-val">Flottiglia due barche a vela</div>
+          </div>
+          <div class="cc-card reveal-right d3">
+            <div class="cc-icon">—</div>
+            <div class="cc-label">Rotta</div>
+            <div class="cc-val">La Spezia → Corsica → Portovenere</div>
+          </div>
+        </div>
+        <div class="contatti-btns reveal-up">
+          <a href="https://wa.me/393518447888?text=Ciao!%20Ti%20scrivo%20per%20il%20viaggio%20in%20Corsica%20%E2%9B%B5" class="btn-wa-big" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span>Scrivici su WhatsApp</span>
+          </a>
+          <a href="tel:+393518447888" class="btn-call-big">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.09 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14z"/></svg>
+            <span>Chiama +39 351 844 7888</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">Corsica Experience</div>
+      <p>Porto Mirabello · La Spezia · Weekend 17–19 Luglio 2026</p>
+      <div class="footer-links">
+        <a href="#itinerario">Itinerario</a>
+        <a href="#barche">Barche</a>
+        <a href="#spiagge">Spiagge</a>
+        <a href="#meteo">Meteo</a>
+        <a href="regole.html">Regole</a>
+        <a href="crewlist.html">Crew List</a>
+        <a href="#contatti">Contatti</a>
+      </div>
+      <p class="footer-copy">© 2026 Corsica Experience — Tutti i diritti riservati</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

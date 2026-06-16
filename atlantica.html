@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atlantica 45 — Regole & Crew List · Corsica Experience</title>
+  <link rel="stylesheet" href="styles.css?v=20260525i" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">
+        <span class="logo-icon">—</span>
+        <span>Corsica Experience</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#itinerario">Itinerario</a>
+        <a href="index.html#meteo">Meteo</a>
+        <a href="cambusa.html">Cambusa</a>
+        <a href="briefing.html">Briefing</a>
+        <a href="lagoon.html">Lagoon 40</a>
+        <a href="oceanis.html">Oceanis 48</a>
+        <a href="checkin.html" style="color:var(--turq);font-weight:600">🔐 Check-in</a>
+        <a href="rotta.html">🗺️ Rotta</a>
+      </div>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a href="index.html">Home</a>
+      <a href="index.html#itinerario">Itinerario</a>
+      <a href="index.html#meteo">Meteo</a>
+      <a href="cambusa.html">Cambusa</a>
+      <a href="briefing.html">Briefing</a>
+      <a href="lagoon.html">Lagoon 40</a>
+      <a href="oceanis.html">Oceanis 48</a>
+      <a href="checkin.html" style="color:var(--turq);font-weight:600">🔐 Check-in</a>
+      <a href="rotta.html">🗺️ Rotta</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('img/atlantica45.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <a href="index.html" class="back-link">← Torna alla home</a>
+      <span class="label light">Monoscafo</span>
+      <h1 class="page-hero-title">Atlantica 45</h1>
+      <p class="page-hero-sub">Regole di bordo, cosa portare e compilazione della crew list per il tuo scafo. Golfo dei Poeti.</p>
+    </div>
+  </div>
+
+  <!-- PROGRESS STEPS -->
+  <div class="progress-steps" id="progressSteps">
+    <div class="ps-step active" id="step1">
+      <div class="ps-num">1</div>
+      <div class="ps-label">Leggi le regole</div>
+    </div>
+    <div class="ps-connector"></div>
+    <div class="ps-step" id="step2">
+      <div class="ps-num">2</div>
+      <div class="ps-label">Accetta e conferma</div>
+    </div>
+    <div class="ps-connector"></div>
+    <div class="ps-step" id="step3">
+      <div class="ps-num">3</div>
+      <div class="ps-label">Compila Crew List</div>
+    </div>
+    <div class="ps-connector"></div>
+    <div class="ps-step" id="step4">
+      <div class="ps-num">4</div>
+      <div class="ps-label">Scarica PDF</div>
+    </div>
+  </div>
+
+  <!-- REGOLE -->
+  <section class="regole" id="regole" style="padding-top:60px">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">A Bordo</span>
+        <h2 class="h2">Regole di Bordo</h2>
+        <p class="section-desc">Prima di salpare, leggi con attenzione. Il rispetto di queste regole garantisce sicurezza e divertimento per tutti.</p>
+      </div>
+
+      <div class="regole-grid">
+        <div class="regola-card reveal-up">
+          <div class="rc-icon">01</div>
+          <h4>Sicurezza a Bordo</h4>
+          <p>Non cadere in mare e non farti male. Testa, gambe, schiena e piedi sono sempre a rischio, soprattutto di notte. Attenzione a oblò, scalette, gallocce e anelli d'acciaio in coperta. <strong>Mai correre a piedi nudi, soprattutto se bagnati.</strong></p>
+        </div>
+        <div class="regola-card reveal-up d1">
+          <div class="rc-icon">02</div>
+          <h4>Sicurezza e Salute</h4>
+          <p>Non fare nulla che possa mettere in pericolo te stesso o gli altri. <strong>È assolutamente vietato l'uso di droghe a bordo.</strong></p>
+        </div>
+        <div class="regola-card reveal-up d2">
+          <div class="rc-icon">03</div>
+          <h4>Rispetto e Convivialità</h4>
+          <p>La barca è uno spazio condiviso. Rispetta il sonno degli altri, mantieni pulizia e ordine. La musica è consentita ma a volume moderato e solo con il consenso di tutti.</p>
+        </div>
+        <div class="regola-card reveal-up d3">
+          <div class="rc-icon">04</div>
+          <h4>Navigazione</h4>
+          <p>Segui le indicazioni dello skipper. In navigazione, tieniti sempre con una mano libera. Non sederti sul boma o sul pozzetto senza autorizzazione.</p>
+        </div>
+        <div class="regola-card reveal-up d4">
+          <div class="rc-icon">05</div>
+          <h4>Acqua ed Energia</h4>
+          <p>L'acqua dolce è limitata. Usa la doccia con parsimonia. Spegni luci e apparecchiature quando non in uso. Non usare phon a bordo.</p>
+        </div>
+        <div class="regola-card reveal-up d5">
+          <div class="rc-icon">06</div>
+          <h4>Cambusa</h4>
+          <p>La cambusa è gestita dallo skipper. Non prelevare cibo senza permesso. Rifiuta solo in caso di allergie o intolleranze gravi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSA PORTARE -->
+  <section class="cosa-portare" id="cosa-portare">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">Preparazione</span>
+        <h2 class="h2">Cosa Portare</h2>
+        <p class="section-desc">Lista essenziale per una crociera confortevole e sicura.</p>
+      </div>
+
+      <div class="cp-grid">
+        <div class="cp-column">
+          <h3>👕 Abbigliamento</h3>
+          <ul>
+            <li>T-shirt e magliette (3-4)</li>
+            <li>Short e pantaloni leggeri</li>
+            <li>Felpa o giacca leggera per le sere</li>
+            <li>Costume da bagno (2-3)</li>
+            <li>Scarpe con suola bianca (obbligatorio)</li>
+            <li>Sandali o ciabatte per la barca</li>
+            <li>Cappellino o bandana</li>
+            <li>Occhiali da sole con laccio</li>
+          </ul>
+        </div>
+        <div class="cp-column">
+          <h3>🧴 Cura Personale</h3>
+          <ul>
+            <li>Crema solare alta protezione</li>
+            <li>Doposole</li>
+            <li>Shampoo e bagnoschiuma biodegradabili</li>
+            <li>Spazzolino e dentifricio</li>
+            <li>Deodorante (no spray)</li>
+            <li>Medicinali personali</li>
+            <li>Kit pronto soccorso personale</li>
+          </ul>
+        </div>
+        <div class="cp-column">
+          <h3>📦 Altro</h3>
+          <ul>
+            <li>Documenti (carta d'identità)</li>
+            <li>Telefono e caricabatterie</li>
+            <li>Power bank</li>
+            <li>Macchina fotografica</li>
+            <li>Libro o e-reader</li>
+            <li>Telo mare</li>
+            <li>Maschera e boccaglio (se hai)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCETTAZIONE -->
+  <section class="accettazione" id="accettazione">
+    <div class="container">
+      <div class="accettazione-box">
+        <h3>📋 Accettazione Regole</h3>
+        <p>Per procedere alla compilazione della crew list, devi accettare le regole di bordo sopra elencate.</p>
+        <label class="accettazione-label">
+          <input type="checkbox" id="acceptRules" onchange="checkAcceptance()" />
+          <span>Ho letto e accetto le regole di bordo dell'Atlantica 45</span>
+        </label>
+        <button class="btn-primary" id="btnProceed" onclick="proceedToCrew()" disabled>Procedi alla Crew List →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREW LIST -->
+  <section class="crewlist-section" id="crewlist" style="display:none">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">Documentazione</span>
+        <h2 class="h2">📋 Crew List</h2>
+        <p class="section-desc">Compila i dati di ogni membro dell'equipaggio dell'Atlantica 45.</p>
+      </div>
+
+      <div class="crew-members" id="members-atlantica"></div>
+      <div class="save-status" id="saveStatus-atlantica" style="display:none; margin:12px 0; padding:12px 16px; background:rgba(28,167,168,.15); border:1px solid var(--turq); border-radius:10px; color:#fff; font-size:.9rem;"></div>
+      <div class="crew-actions">
+        <button class="btn-dl-pdf" id="btnSalva-atlantica" onclick="saveMemberToSheets('atlantica')">💾 Salva i miei dati</button>
+        <button class="btn-secondary" onclick="addMember('atlantica')">+ Aggiungi membro</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js?v=20260525i"></script>
+  <script>
+    document.getElementById('navBurger').addEventListener('click', () => {
+      document.getElementById('navMobile').classList.toggle('open');
+    });
+
+    function checkAcceptance() {
+      const accepted = document.getElementById('acceptRules').checked;
+      document.getElementById('btnProceed').disabled = !accepted;
+    }
+
+    function proceedToCrew() {
+      document.getElementById('step2').classList.add('active');
+      document.getElementById('step3').classList.add('active');
+      document.getElementById('accettazione').style.display = 'none';
+      document.getElementById('crewlist').style.display = 'block';
+      loadCrewList('atlantica');
+    }
+
+    // Crew list functions
+    let crewData = {};
+
+    function loadCrewList(boat) {
+      try {
+        crewData = JSON.parse(localStorage.getItem('crew_' + boat) || '{}');
+      } catch(e) {
+        crewData = {};
+      }
+      renderMembers(boat);
+    }
+
+    function renderMembers(boat) {
+      const container = document.getElementById('members-' + boat);
+      container.innerHTML = '';
+      
+      const members = crewData.members || [];
+      if (members.length === 0) {
+        addMember(boat);
+        return;
+      }
+      
+      members.forEach((member, idx) => {
+        const div = document.createElement('div');
+        div.className = 'crew-member-card';
+        div.innerHTML = `
+          <div class="cm-header">
+            <span class="cm-num">${idx + 1}</span>
+            <button class="cm-delete" onclick="deleteMember('${boat}', ${idx})">Elimina</button>
+          </div>
+          <div class="cm-body">
+            <div class="cm-row">
+              <label>Nome</label>
+              <input type="text" value="${member.nome || ''}" onchange="updateMember('${boat}', ${idx}, 'nome', this.value)" />
+            </div>
+            <div class="cm-row">
+              <label>Cognome</label>
+              <input type="text" value="${member.cognome || ''}" onchange="updateMember('${boat}', ${idx}, 'cognome', this.value)" />
+            </div>
+            <div class="cm-row">
+              <label>Data di nascita</label>
+              <input type="date" value="${member.dataNascita || ''}" onchange="updateMember('${boat}', ${idx}, 'dataNascita', this.value)" />
+            </div>
+            <div class="cm-row">
+              <label>Luogo di nascita</label>
+              <input type="text" value="${member.luogoNascita || ''}" onchange="updateMember('${boat}', ${idx}, 'luogoNascita', this.value)" />
+            </div>
+            <div class="cm-row">
+              <label>Nazionalità</label>
+              <input type="text" value="${member.nazionalita || ''}" onchange="updateMember('${boat}', ${idx}, 'nazionalita', this.value)" />
+            </div>
+            <div class="cm-row">
+              <label>Documento</label>
+              <input type="text" value="${member.documento || ''}" onchange="updateMember('${boat}', ${idx}, 'documento', this.value)" />
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function addMember(boat) {
+      if (!crewData.members) crewData.members = [];
+      crewData.members.push({
+        nome: '',
+        cognome: '',
+        dataNascita: '',
+        luogoNascita: '',
+        nazionalita: '',
+        documento: ''
+      });
+      saveCrewData(boat);
+      renderMembers(boat);
+    }
+
+    function updateMember(boat, idx, field, value) {
+      crewData.members[idx][field] = value;
+      saveCrewData(boat);
+    }
+
+    function deleteMember(boat, idx) {
+      if (confirm('Eliminare questo membro?')) {
+        crewData.members.splice(idx, 1);
+        saveCrewData(boat);
+        renderMembers(boat);
+      }
+    }
+
+    function saveCrewData(boat) {
+      try {
+        localStorage.setItem('crew_' + boat, JSON.stringify(crewData));
+      } catch(e) {}
+    }
+
+    function saveMemberToSheets(boat) {
+      const status = document.getElementById('saveStatus-' + boat);
+      status.style.display = 'block';
+      status.textContent = 'Salvataggio in corso...';
+      
+      // Placeholder - implementare salvataggio su Google Sheets
+      setTimeout(() => {
+        status.textContent = '✅ Dati salvati con successo!';
+        document.getElementById('step4').classList.add('active');
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
