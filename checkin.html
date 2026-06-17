@@ -178,23 +178,17 @@
     <p>Seleziona la barca corretta prima di iniziare. Ogni check-in è isolato in una pagina dedicata e salva esclusivamente sul foglio della propria barca.</p>
   </div>
   <div class="ci-choice-grid">
-    <a class="ci-choice-card" href="checkin-lagoon.html">
-      <div class="type">Catamarano</div>
-      <h2>Lagoon 40</h2>
-      <p>Checklist dedicata al Lagoon 40. Nessun cambio barca interno, nessun rischio di salvataggio incrociato.</p>
-      <span class="cta">Apri check-in Lagoon →</span>
-    </a>
-    <a class="ci-choice-card" href="checkin-oceanis.html">
-      <div class="type">Monoscafo</div>
-      <h2>Beneteau Oceanis 48</h2>
-      <p>Checklist dedicata all'Oceanis 48. Stato, note e PDF restano separati da Lagoon.</p>
-      <span class="cta">Apri check-in Oceanis →</span>
-    </a>
     <a class="ci-choice-card" href="checkin-atlantica.html">
       <div class="type">Monoscafo</div>
       <h2>Atlantica 45</h2>
-      <p>Checklist dedicata all'Atlantica 45. Golfo dei Poeti. Stato, note e PDF isolati.</p>
+      <p>Checklist dedicata all'Atlantica 45. Corsica. Stato, note e PDF isolati.</p>
       <span class="cta">Apri check-in Atlantica →</span>
+    </a>
+    <a class="ci-choice-card" href="checkin-oceanis.html">
+      <div class="type">Monoscafo</div>
+      <h2>Sharel (Oceanis 48)</h2>
+      <p>Checklist dedicata a Sharel. Stato, note e PDF restano separati da Atlantica.</p>
+      <span class="cta">Apri check-in Sharel →</span>
     </a>
     <a class="ci-choice-card" href="inventario-oceanis.html">
       <div class="type">Inventario</div>
@@ -246,7 +240,6 @@
     <!-- TAB 0: Check-in Barca (checklist) -->
     <div class="tab-panel active" id="tab-0">
       <div class="boat-tabs">
-        <button class="boat-tab active" id="btab-Lagoon40" onclick="selectBoatCheckin('Lagoon40')">⛵ Lagoon 40</button>
         <button class="boat-tab" id="btab-Oceanis48" onclick="selectBoatCheckin('Oceanis48')">⛵ Oceanis 48</button>
       </div>
       <div class="sync-bar"><div class="sync-dot" id="syncDot"></div><span id="syncLabel">—</span></div>
@@ -587,12 +580,11 @@ const SECTIONS_BASE = [
 // ── Config ──────────────────────────────────────────
 const CHECKIN_API = 'https://script.google.com/macros/s/AKfycbyBfTFMhYnEpNfcxZfZOF64W0gJIlGy63iJOspFuY1yxPoYVPEAsW7OiDaHA68371JkeA/exec';
 const BOATS = {
-  Lagoon40:  { name: 'Lagoon 40',          sections: SECTIONS_BASE },
   Oceanis48: { name: 'Beneteau Oceanis 48', sections: SECTIONS_BASE }
 };
 
 // ── State ────────────────────────────────────────────
-let currentBoat = 'Lagoon40';
+let currentBoat = 'Atlantica';
 let localState  = {};   // { [voceId]: { stato: bool, nota: string } }
 let saveTimers  = {};
 

@@ -78,11 +78,11 @@
       <div class="crew-boat-select reveal-up" id="crewBoatSelect">
         <p class="crew-select-label">Su quale barca sei imbarcato?</p>
         <div class="crew-boat-cards">
-          <button class="crew-boat-card" onclick="selectBoat('lagoon')">
-            <div class="cbc-img" style="background-image:url('img/lagoon40-new.jpg')"></div>
+          <button class="crew-boat-card" onclick="selectBoat('atlantica')">
+            <div class="cbc-img" style="background-image:url('img/atlantica45.jpg')"></div>
             <div class="cbc-body">
-              <div class="cbc-type">Catamarano</div>
-              <div class="cbc-name">Lagoon 40</div>
+              <div class="cbc-type">Monoscafo</div>
+              <div class="cbc-name">Atlantica 45</div>
               <div class="cbc-cta">Entra &amp; compila →</div>
             </div>
           </button>
@@ -90,7 +90,7 @@
             <div class="cbc-img" style="background-image:url('img/oceanis48.jpg')"></div>
             <div class="cbc-body">
               <div class="cbc-type">Monoscafo</div>
-              <div class="cbc-name">Beneteau Oceanis 48</div>
+              <div class="cbc-name">Sharel (Oceanis 48)</div>
               <div class="cbc-cta">Entra &amp; compila →</div>
             </div>
           </button>
@@ -104,32 +104,32 @@
           <div class="crew-form-title" id="crewFormTitle"></div>
         </div>
 
-        <!-- LAGOON panel -->
-        <div class="crew-panel" id="crew-lagoon">
-          <div id="crewStatusPanel-lagoon" style="margin-bottom:28px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:20px 24px;">
+        <!-- ATLANTICA panel -->
+        <div class="crew-panel" id="crew-atlantica">
+          <div id="crewStatusPanel-atlantica" style="margin-bottom:28px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:20px 24px;">
             <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
               <span style="font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.45);">✦ Equipaggio — stato compilazione</span>
-              <button onclick="loadCrewStatus('lagoon','crewStatusList-lagoon','crewStatusCount-lagoon')" style="background:none; border:none; color:rgba(255,255,255,.4); font-size:.75rem; cursor:pointer; padding:4px 8px;">↺ Aggiorna</button>
+              <button onclick="loadCrewStatus('atlantica','crewStatusList-atlantica','crewStatusCount-atlantica')" style="background:none; border:none; color:rgba(255,255,255,.4); font-size:.75rem; cursor:pointer; padding:4px 8px;">↺ Aggiorna</button>
             </div>
-            <div id="crewStatusList-lagoon" style="display:flex; flex-wrap:wrap; gap:10px;">
+            <div id="crewStatusList-atlantica" style="display:flex; flex-wrap:wrap; gap:10px;">
               <span style="color:rgba(255,255,255,.3); font-size:.85rem;">Caricamento...</span>
             </div>
-            <div id="crewStatusCount-lagoon" style="margin-top:14px; font-size:.78rem; color:rgba(255,255,255,.4);"></div>
+            <div id="crewStatusCount-atlantica" style="margin-top:14px; font-size:.78rem; color:rgba(255,255,255,.4);"></div>
           </div>
-          <div class="crew-members" id="members-lagoon"></div>
-          <div class="save-status" id="saveStatus-lagoon" style="display:none; margin:12px 0; padding:12px 16px; background:rgba(28,167,168,.15); border:1px solid var(--turq); border-radius:10px; color:#fff; font-size:.9rem;"></div>
+          <div class="crew-members" id="members-atlantica"></div>
+          <div class="save-status" id="saveStatus-atlantica" style="display:none; margin:12px 0; padding:12px 16px; background:rgba(28,167,168,.15); border:1px solid var(--turq); border-radius:10px; color:#fff; font-size:.9rem;"></div>
           <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:18px 20px; margin:16px 0;">
             <label style="display:flex; align-items:flex-start; gap:12px; cursor:pointer;">
-              <input type="checkbox" id="checkRegole-lagoon" onchange="toggleAccettaBoat(this,'lagoon')" style="width:20px; height:20px; margin-top:2px; accent-color:var(--turq); cursor:pointer; flex-shrink:0;" />
-              <span style="font-size:.9rem; color:rgba(255,255,255,.8); line-height:1.5;">Ho letto e accetto le <strong>Regole di Bordo del Lagoon 40</strong>.
+              <input type="checkbox" id="checkRegole-atlantica" onchange="toggleAccettaBoat(this,'atlantica')" style="width:20px; height:20px; margin-top:2px; accent-color:var(--turq); cursor:pointer; flex-shrink:0;" />
+              <span style="font-size:.9rem; color:rgba(255,255,255,.8); line-height:1.5;">Ho letto e accetto le <strong>Regole di Bordo dell'Atlantica 45</strong>.
                 <a href="regole.html" style="color:var(--turq); text-decoration:none; display:block; font-size:.8rem; margin-top:4px;">📋 Leggi le Regole di Bordo →</a>
               </span>
             </label>
-            <div id="accettaStatus-lagoon" style="display:none; margin-top:10px; color:var(--turq); font-size:.85rem; font-weight:600;">✓ Regole accettate</div>
+            <div id="accettaStatus-atlantica" style="display:none; margin-top:10px; color:var(--turq); font-size:.85rem; font-weight:600;">✓ Regole accettate</div>
           </div>
           <div class="crew-actions">
-            <button class="btn-dl-pdf" id="btnSalva-lagoon" onclick="saveMemberToSheets('lagoon')">📝 Compila i miei dati</button>
-            <button class="btn-dl-pdf admin-btn" id="btnAdminPDF-lagoon" onclick="adminDownloadPDF('lagoon','Lagoon 40','17 Luglio 2026','19 Luglio 2026')">📄 Crea PDF (solo skipper)</button>
+            <button class="btn-dl-pdf" id="btnSalva-atlantica" onclick="saveMemberToSheets('atlantica')">📝 Compila i miei dati</button>
+            <button class="btn-dl-pdf admin-btn" id="btnAdminPDF-atlantica" onclick="adminDownloadPDF('atlantica','Atlantica 45','17 Luglio 2026','19 Luglio 2026')">📄 Crea PDF (solo skipper)</button>
           </div>
         </div>
 
