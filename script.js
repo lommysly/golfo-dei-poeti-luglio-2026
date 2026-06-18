@@ -734,3 +734,22 @@ function generateCrewPDF(members, boatName, departureDate, arrivalDate) {
     document.head.appendChild(s);
   }
 })();
+
+/* ── Dropdown nav ── */
+(function() {
+  const dd = document.getElementById('navDropdown');
+  if (!dd) return;
+  const toggle = dd.querySelector('.dropdown-toggle');
+  const menu   = dd.querySelector('.dropdown-menu');
+  if (!toggle || !menu) return;
+
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dd.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!dd.contains(e.target)) dd.classList.remove('open');
+  });
+})();
