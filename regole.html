@@ -4,17 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Regole di Bordo — Golfo dei Poeti Weekend</title>
-  <meta property="og:title" content="Regole di Bordo — Golfo dei Poeti Weekend" />
-  <meta property="og:description" content="Le 10 regole fondamentali per convivere in sicurezza a bordo." />
-  <meta property="og:image" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/img/sailboat.jpg" />
-  <meta property="og:image:width" content="1600" />
-  <meta property="og:image:height" content="1041" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/regole.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Regole di Bordo — Golfo dei Poeti Weekend" />
-  <meta name="twitter:description" content="Le 10 regole fondamentali per convivere in sicurezza a bordo." />
-  <meta name="twitter:image" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/img/sailboat.jpg" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,12 +17,20 @@
         <span class="logo-icon">—</span>
         <span>Golfo dei Poeti Weekend</span>
       </a>
-            <div class="nav-links">
+                  <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="esperienza.html">L'Esperienza</a>
         <a href="organizzazione.html">Organizzazione</a>
         <a href="sicurezza.html">Sicurezza</a>
-        <a href="meteo.html">Meteo</a>
+        <div class="dropdown" id="navDropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="checkin-atlantica.html">Check-in Atlantica</a>
+            <a href="checkin-oceanis.html">Check-in Sharel</a>
+            <a href="meteo.html">Meteo Operativo</a>
+          </div>
+        </div>
+      </div></div>
       </div><button class="nav-burger" id="navBurger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -44,22 +41,29 @@
       <a href="organizzazione.html">Organizzazione</a>
       <a href="sicurezza.html">Sicurezza</a>
       <a href="valigia.html">Valigia Intelligente</a>
+      <a href="cambusa-atlantica.html">Cambusa Atlantica</a>
+      <a href="cambusa-oceanis.html">Cambusa Sharel</a>
+      <a href="atlantica.html">Atlantica 45</a>
+      <a href="oceanis.html">Sharel (Oceanis 48)</a>
       <a href="meteo.html">Meteo</a>
+      <a href="rotta.html">Rotta</a>
+      <a href="checkin-atlantica.html">Check-in Atlantica</a>
+      <a href="checkin-oceanis.html">Check-in Sharel</a>
     </div>
   </nav>
 
   <!-- PAGE HERO -->
   <div class="page-hero">
-      <video class="page-hero-video" autoplay muted loop playsinline poster="img/hero.jpg">
-    <source src="img/mare.mp4" type="video/mp4">
-  </video>
-  <div class="page-hero-bg" style="background-color:#0b3c5d;"></div>
+    <video class="page-hero-video" autoplay muted loop playsinline poster="img/portovenere.jpg">
+      <source src="img/mare.mp4" type="video/mp4">
+    </video>
+    <div class="page-hero-bg" style="background-color:#0b3c5d;"></div>
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <a href="index.html" class="back-link">← Torna alla home</a>
       <span class="label light">A Bordo</span>
       <h1 class="page-hero-title">Regole di Bordo</h1>
-      <p class="page-hero-sub">Prima di salpare, leggi con attenzione. La sicurezza e il rispetto sono la base di un viaggio straordinario.</p>
+      <p class="page-hero-sub">Prima di salpare, leggi con attenzione. La sicurezza e il rispetto sono la base di un weekend indimenticabile.</p>
     </div>
   </div>
 
@@ -67,7 +71,7 @@
   <div style="background:rgba(28,167,168,.1);border-bottom:1px solid rgba(28,167,168,.2);">
     <div class="container" style="padding:20px 0;text-align:center;">
       <p style="color:rgba(255,255,255,.8);margin:0;font-size:.95rem;">
-        📋 <strong>Nuovo:</strong> Leggi il <a href="briefing.html" style="color:var(--turq);font-weight:700;">Briefing Pre-Crociera</a> completo con tutte le procedure di sicurezza, istruzioni dettagliate e foto delle dotazioni.
+        📋 <strong>Nuovo:</strong> Leggi il <a href="briefing.html" style="color:var(--turq);font-weight:700;">Briefing Pre-Crociera</a> completo con procedure di sicurezza, istruzioni dettagliate e dotazioni.
       </p>
     </div>
   </div>
@@ -190,7 +194,7 @@
         <div class="pg-col reveal-left">
           <h4>Essenziali</h4>
           <ul>
-            <li>Costume da bagno (almeno 3)</li>
+            <li>Costume da bagno (almeno 2)</li>
             <li>Scarpe da barca (suole bianche)</li>
             <li>Crema solare alta protezione</li>
             <li>Occhiali da sole polarizzati</li>
@@ -238,7 +242,7 @@
         </div>
         <div class="accetta-status" id="accettaStatus" style="display:none">
           <span class="accetta-badge">Regole accettate</span>
-          <a href="atlantica.html" class="btn-primary" style="margin-top:0">Compila la Crew List &rarr;</a>
+          <a href="atlantica.html#crewlist" class="btn-primary" style="margin-top:0">Compila la Crew List &rarr;</a>
         </div>
       </div>
     </div>
@@ -247,7 +251,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-logo">Golfo dei Poeti Weekend</div>
-      <p>Porto Mirabello · La Spezia · Weekend 17–19 Luglio 2026</p>
+      <p>Porto Venere · 27-19 Luglio 2026</p>
       <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="esperienza.html">L'Esperienza</a>

@@ -4,18 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>L'Esperienza — Golfo dei Poeti Weekend</title>
-  <meta property="og:title" content="L'Esperienza — Golfo dei Poeti Weekend" />
-  <meta property="og:description" content="Itinerario, calette, le barche e il meteo. Scopri cosa ti aspetta nel Golfo dei Poeti." />
-  <meta property="og:image" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/img/sailboat.jpg" />
-  <meta property="og:image:width" content="1600" />
-  <meta property="og:image:height" content="1041" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/esperienza.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="L'Esperienza — Golfo dei Poeti Weekend" />
-  <meta name="twitter:description" content="Itinerario, calette, le barche e il meteo. Scopri cosa ti aspetta nel Golfo dei Poeti." />
-  <meta name="twitter:image" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/img/sailboat.jpg" />
-  <meta name="description" content="Il weekend in barca a vela nel Golfo dei Poeti. Itinerario, spiagge, le barche e il meteo." />
+  <meta name="description" content="Il weekend in barca a vela nel Golfo dei Poeti. Itinerario, calette, la barca Atlantica e meteo." />
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,14 +14,23 @@
 
 <nav class="nav scrolled" id="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Golfo dei Poeti Weekend</span></a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="esperienza.html" class="active">L'Esperienza</a>
-      <a href="organizzazione.html">Organizzazione</a>
-      <a href="sicurezza.html">Sicurezza</a>
-      <a href="meteo.html">Meteo</a>
-      </div><button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Golfo dei Poeti</span></a>
+          <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="esperienza.html" class="active">L'Esperienza</a>
+        <a href="organizzazione.html">Organizzazione</a>
+        <a href="sicurezza.html">Sicurezza</a>
+        <div class="dropdown" id="navDropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="checkin-atlantica.html">Check-in Atlantica</a>
+            <a href="checkin-oceanis.html">Check-in Sharel</a>
+            <a href="meteo.html">Meteo Operativo</a>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
       <div class="nav-mobile" id="navMobile">
       <a href="index.html">Home</a>
@@ -40,12 +38,19 @@
       <a href="organizzazione.html">Organizzazione</a>
       <a href="sicurezza.html">Sicurezza</a>
       <a href="valigia.html">Valigia Intelligente</a>
+      <a href="cambusa-atlantica.html">Cambusa Atlantica</a>
+      <a href="cambusa-oceanis.html">Cambusa Sharel</a>
+      <a href="atlantica.html">Atlantica 45</a>
+      <a href="oceanis.html">Sharel (Oceanis 48)</a>
       <a href="meteo.html">Meteo</a>
+      <a href="rotta.html">Rotta</a>
+      <a href="checkin-atlantica.html">Check-in Atlantica</a>
+      <a href="checkin-oceanis.html">Check-in Sharel</a>
     </div>
 </nav>
 
 <div class="page-hero">
-  <video class="page-hero-video" autoplay muted loop playsinline poster="img/hero.jpg">
+  <video class="page-hero-video" autoplay muted loop playsinline poster="img/sailboat-anchor-sunset.jpg">
     <source src="img/delfini.mp4" type="video/mp4">
   </video>
   <div class="page-hero-bg" style="background-color:#0b3c5d;"></div>
@@ -54,52 +59,52 @@
     <a href="index.html" class="back-link">← Torna alla Home</a>
     <span class="label light">Il Viaggio</span>
     <h1 class="page-hero-title">L'Esperienza</h1>
-    <p class="page-hero-sub">Tre giorni nel Golfo dei Poeti. Mare cristallino, navigazione costiera e spiagge da sogno.</p>
+    <p class="page-hero-sub">Tre giorni nel Golfo dei Poeti. Calette nascoste, tramonti mozzafiato e la magia della vita in barca.</p>
   </div>
 </div>
 
 <div class="container" style="padding: 60px 20px 80px;">
   <div class="section-header centered" style="margin-bottom:48px;">
     <span class="label">Scopri</span>
-    <h2 class="h2">Il tuo weekend in Golfo dei Poeti</h2>
-    <p class="section-desc">Itinerario, spiagge, le barche e il meteo. Tutto quello che ti aspetta.</p>
+    <h2 class="h2">Il tuo weekend nel Golfo</h2>
+    <p class="section-desc">Itinerario, calette, la barca e il meteo. Tutto quello che renderà indimenticabile questa esperienza.</p>
   </div>
 
   <div class="regole-grid">
     <a href="rotta.html" class="hub-card turq reveal-up">
       <div class="rc-icon" style="background:rgba(28,167,168,.15);color:var(--turq-light);">🗺️</div>
       <h4>Itinerario &amp; Rotta</h4>
-      <p>Il <strong>percorso giorno per giorno</strong>: La Spezia → Golfo dei Poeti, tappe, distanze e tempi.</p>
+      <p>Il <strong>percorso giorno per giorno</strong>: tappe, distanze in miglia, tempi di navigazione, sole/luna e turni di guardia.</p>
       <span class="hub-cta">Vedi rotta →</span>
     </a>
-    <a href="index.html#spiagge" class="hub-card gold reveal-up d1">
+    <a href="index.html#calette" class="hub-card gold reveal-up d1">
       <div class="rc-icon" style="background:rgba(251,191,36,.15);color:#fbbf24;">🏖️</div>
-      <h4>Le Spiagge</h4>
-      <p>Le <strong>cale più belle</strong> del Golfo dei Poeti: Cala del Terrizzo, Fornace, Pozzale, Maramozza.</p>
+      <h4>Le Calette</h4>
+      <p>Le <strong>spiagge nascoste</strong> raggiungibili solo via mare: Terrizzo, Fornace, Pozzale, Maramozza.</p>
       <span class="hub-cta">Esplora →</span>
     </a>
-    <a href="index.html#barche" class="hub-card turq reveal-up d2">
+    <a href="atlantica.html" class="hub-card turq reveal-up d2">
       <div class="rc-icon" style="background:rgba(52,211,153,.15);color:#6ee7b7;">⛵</div>
-      <h4>Le Barche</h4>
-      <p>Atlantica 45 e Sharel (Oceanis 48). Le foto, le specs e le piantine.</p>
-      <span class="hub-cta">Conosci le barche →</span>
+      <h4>La Barca — Atlantica</h4>
+      <p>Beneteau <strong>Oceanis 45 (2018)</strong>: 4 cabine doppie, 13.9 metri, tender incluso.</p>
+      <span class="hub-cta">Conosci Atlantica →</span>
     </a>
     <a href="meteo.html" class="hub-card ocean reveal-up">
       <div class="rc-icon" style="background:rgba(167,139,250,.15);color:#a78bfa;">🌤️</div>
       <h4>Meteo &amp; Passage Plan</h4>
-      <p>Le <strong>previsioni per il weekend</strong> e il passage plan operativo.</p>
+      <p>Le <strong>previsioni per il weekend</strong> e il passage plan operativo con consigli per l'equipaggio.</p>
       <span class="hub-cta">Controlla meteo →</span>
     </a>
     <a href="briefing.html#vita-bordo" class="hub-card coral reveal-up d1">
       <div class="rc-icon" style="background:rgba(248,113,113,.15);color:#f87171;">🌅</div>
       <h4>La Magia del Weekend</h4>
-      <p>La <strong>convivenza in barca</strong>: doccia da marinaio, stelle, silenzio.</p>
+      <p>La <strong>convivenza in barca</strong>: doccia da marinaio, musica, silenzio e stelle.</p>
       <span class="hub-cta">Leggi →</span>
     </a>
     <a href="index.html#galleria" class="hub-card gold reveal-up d2">
       <div class="rc-icon" style="background:rgba(56,189,248,.15);color:#38bdf8;">📸</div>
       <h4>Galleria</h4>
-      <p>Le <strong>foto del Golfo dei Poeti</strong>: mare cristallino, rade, tramonti.</p>
+      <p>Le <strong>foto del Golfo dei Poeti</strong>: Palmaria, Portovenere, Lerici, tramonti.</p>
       <span class="hub-cta">Guarda →</span>
     </a>
   </div>

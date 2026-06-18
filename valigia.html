@@ -4,17 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Valigia Intelligente — Golfo dei Poeti Weekend</title>
-  <meta property="og:title" content="Valigia Intelligente — Golfo dei Poeti Weekend" />
-  <meta property="og:description" content="Cosa mettere in valigia per un weekend in barca a vela. Smart packing e lista pratica." />
-  <meta property="og:image" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/img/sailboat.jpg" />
-  <meta property="og:image:width" content="1600" />
-  <meta property="og:image:height" content="1041" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/valigia.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Valigia Intelligente — Golfo dei Poeti Weekend" />
-  <meta name="twitter:description" content="Cosa mettere in valigia per un weekend in barca a vela. Smart packing e lista pratica." />
-  <meta name="twitter:image" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/img/sailboat.jpg" />
   <meta name="description" content="Cosa mettere in valigia per un weekend in barca a vela nel Golfo dei Poeti. Lista smart packing con checklist interattiva." />
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,6 +12,16 @@
   <style>
     body { background: var(--ocean); color: #fff; min-height: 100vh; }
     .val-wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px 80px; }
+    .val-progress { margin: 32px 0 24px; padding: 18px 22px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; }
+    .val-progress-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .val-progress-label { font-size: .85rem; color: rgba(255,255,255,.65); }
+    .val-progress-pct { font-size: .85rem; font-weight: 700; color: var(--turq-light); }
+    .val-progress-track { height: 8px; background: rgba(255,255,255,.08); border-radius: 20px; overflow: hidden; }
+    .val-progress-fill { height: 100%; width: 0; background: var(--turq); border-radius: 20px; transition: width .3s ease; }
+    .val-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .val-btn { border: none; border-radius: 10px; padding: 9px 16px; font-weight: 700; font-size: .82rem; cursor: pointer; }
+    .val-btn.primary { background: var(--turq); color: #fff; }
+    .val-btn.secondary { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.7); }
     .borsa-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin: 28px 0; }
     .borsa-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 18px; padding: 24px 20px; text-align: center; transition: transform .2s, background .2s; }
     .borsa-card:hover { background: rgba(255,255,255,.07); transform: translateY(-4px); }
@@ -35,31 +34,64 @@
     .principio-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--turq); line-height: 1; margin-bottom: 10px; }
     .principio-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; color: #fff; }
     .principio-card p { font-size: .85rem; color: rgba(255,255,255,.55); line-height: 1.6; margin: 0; }
-    .tip-bar { display: flex; gap: 14px; align-items: flex-start; padding: 18px 22px; background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.2); border-radius: 16px; margin: 28px 0; }
-    .tip-bar span { font-size: 1.4rem; flex-shrink: 0; }
-    .tip-bar div { font-size: .88rem; color: rgba(255,255,255,.75); line-height: 1.6; }
-    .tip-bar strong { color: #fbbf24; }
+    .cat-section { margin-bottom: 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 20px; overflow: hidden; }
+    .cat-head { display: flex; align-items: center; gap: 12px; padding: 16px 18px; cursor: pointer; background: rgba(255,255,255,.05); user-select: none; }
+    .cat-head:hover { background: rgba(255,255,255,.08); }
+    .cat-head .emoji { font-size: 1.4rem; }
+    .cat-head h2 { flex: 1; font-size: 1rem; font-weight: 700; }
+    .cat-count { font-size: .78rem; color: rgba(255,255,255,.4); }
+    .cat-count.done { color: #4ade80; }
+    .cat-chevron { color: rgba(255,255,255,.35); font-size: .85rem; transition: transform .2s; }
+    .cat-section.open .cat-chevron { transform: rotate(180deg); }
+    .cat-body { display: none; padding: 8px 0; }
+    .cat-section.open .cat-body { display: block; }
+    .cat-item { display: grid; grid-template-columns: 22px 1fr auto; gap: 12px; align-items: start; padding: 11px 18px; border-top: 1px solid rgba(255,255,255,.055); transition: background .15s; }
+    .cat-item:hover { background: rgba(255,255,255,.03); }
+    .cat-item input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--turq); margin-top: 2px; cursor: pointer; flex-shrink: 0; }
+    .cat-item-name { display: block; color: rgba(255,255,255,.86); font-size: .9rem; line-height: 1.35; }
+    .cat-item.done .cat-item-name { color: rgba(255,255,255,.38); text-decoration: line-through; }
+    .cat-item-note { display: block; font-size: .75rem; color: rgba(255,255,255,.35); margin-top: 2px; }
+    .cat-item.done .cat-item-note { color: rgba(255,255,255,.2); }
+    .cat-badge { display: inline-block; padding: 2px 8px; border-radius: 7px; font-size: .72rem; font-weight: 700; white-space: nowrap; background: rgba(255,255,255,.07); color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.1); }
+    .cat-item.done .cat-badge { opacity: .35; }
+    .cat-badge.obbligatorio { background: rgba(239,68,68,.12); color: #f87171; border-color: rgba(239,68,68,.25); }
+    .cat-badge.consigliato { background: rgba(251,191,36,.1); color: #fbbf24; border-color: rgba(251,191,36,.2); }
+    .no-section { margin: 28px 0; }
     .no-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
     .no-card { background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.15); border-radius: 14px; padding: 18px 16px; display: flex; align-items: flex-start; gap: 12px; }
     .no-card .icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
     .no-card h4 { font-size: .9rem; font-weight: 700; color: rgba(255,255,255,.85); margin-bottom: 4px; }
     .no-card p { font-size: .82rem; color: rgba(255,255,255,.5); line-height: 1.5; margin: 0; }
+    .tip-bar { display: flex; gap: 14px; align-items: flex-start; padding: 18px 22px; background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.2); border-radius: 16px; margin: 28px 0; }
+    .tip-bar span { font-size: 1.4rem; flex-shrink: 0; }
+    .tip-bar div { font-size: .88rem; color: rgba(255,255,255,.75); line-height: 1.6; }
+    .tip-bar strong { color: #fbbf24; }
     @media (max-width: 900px) { .borsa-grid, .principi-grid { grid-template-columns: repeat(2, 1fr); } .no-grid { grid-template-columns: 1fr; } }
     @media (max-width: 600px) { .borsa-grid, .principi-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav class="nav scrolled" id="nav">
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Golfo dei Poeti Weekend</span></a>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="esperienza.html">L'Esperienza</a>
-      <a href="organizzazione.html">Organizzazione</a>
-      <a href="sicurezza.html">Sicurezza</a>
-      <a href="meteo.html">Meteo</a>
-      </div><button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Golfo dei Poeti</span></a>
+          <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="esperienza.html">L'Esperienza</a>
+        <a href="organizzazione.html">Organizzazione</a>
+        <a href="sicurezza.html">Sicurezza</a>
+        <div class="dropdown" id="navDropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="checkin-atlantica.html">Check-in Atlantica</a>
+            <a href="checkin-oceanis.html">Check-in Sharel</a>
+            <a href="meteo.html">Meteo Operativo</a>
+          </div>
+        </div>
+      </div></div>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
       <div class="nav-mobile" id="navMobile">
       <a href="index.html">Home</a>
@@ -67,12 +99,20 @@
       <a href="organizzazione.html">Organizzazione</a>
       <a href="sicurezza.html">Sicurezza</a>
       <a href="valigia.html" style="color:var(--turq);font-weight:700;">Valigia Intelligente</a>
+      <a href="cambusa-atlantica.html">Cambusa Atlantica</a>
+      <a href="cambusa-oceanis.html">Cambusa Sharel</a>
+      <a href="atlantica.html">Atlantica 45</a>
+      <a href="oceanis.html">Sharel (Oceanis 48)</a>
       <a href="meteo.html">Meteo</a>
+      <a href="rotta.html">Rotta</a>
+      <a href="checkin-atlantica.html">Check-in Atlantica</a>
+      <a href="checkin-oceanis.html">Check-in Sharel</a>
     </div>
 </nav>
 
+<!-- HERO -->
 <div class="page-hero">
-  <video class="page-hero-video" autoplay muted loop playsinline poster="img/hero.jpg">
+  <video class="page-hero-video" autoplay muted loop playsinline poster="img/atlantica.jpg">
     <source src="img/mare.mp4" type="video/mp4">
   </video>
   <div class="page-hero-bg" style="background-color:#0b3c5d;"></div>
@@ -81,30 +121,44 @@
     <a href="organizzazione.html" class="back-link">← Torna a Organizzazione</a>
     <span class="label light">Preparazione</span>
     <h1 class="page-hero-title">Valigia Intelligente</h1>
-    <p class="page-hero-sub">Cosa mettere in valigia per un weekend in barca a vela. Principi smart packing e lista pratica.</p>
+    <p class="page-hero-sub">Cosa mettere in valigia per un weekend in barca a vela. Lista pratica, principi smart packing e checklist interattiva.</p>
   </div>
 </div>
 
 <div class="val-wrap">
 
+  <!-- Progress -->
+  <div class="val-progress">
+    <div class="val-progress-row">
+      <div class="val-progress-label">Checklist Valigia</div>
+      <div class="val-progress-pct" id="valPct">0%</div>
+    </div>
+    <div class="val-progress-track"><div class="val-progress-fill" id="valFill"></div></div>
+    <div class="val-actions">
+      <button class="val-btn secondary" onclick="valigiaReset()">Azzera</button>
+      <button class="val-btn primary" onclick="window.print()">Stampa Lista</button>
+    </div>
+  </div>
+
+  <!-- BORSA GIUSTA -->
   <span class="section-label" style="margin-top:18px;margin-bottom:10px">🎒 La Borsa Giusta</span>
   <div class="borsa-grid">
     <div class="borsa-card reveal-up">
       <span class="borsa-emoji">🎒</span>
       <h4>Duffle Bag Morbida</h4>
-      <p>40–60 litri, senza trolley. Le valigie rigide non entrano negli armadietti.</p>
+      <p>40–60 litri, senza trolley. Le valigie rigide non entrano negli armadietti della barca.</p>
       <span class="borsa-tag">Indispensabile</span>
     </div>
     <div class="borsa-card reveal-up d1">
       <span class="borsa-emoji">🛡️</span>
       <h4>Dry Bag 10–20L</h4>
-      <p>Per elettronica, documenti e oggetti che non devono bagnarsi.</p>
+      <p>Per elettronica, documenti e oggetti che non devono bagnarsi. Chiusura a roll-top.</p>
       <span class="borsa-tag">Consigliata</span>
     </div>
     <div class="borsa-card reveal-up d2">
       <span class="borsa-emoji">📦</span>
       <h4>Packing Cubes</h4>
-      <p>Set da 3–4 sacchetti. Dividi per categoria: indumenti, mare, notte.</p>
+      <p>Set da 3–4 sacchetti compressione. Dividi per categoria: indumenti, mare, notte.</p>
       <span class="borsa-tag">Smart</span>
     </div>
     <div class="borsa-card reveal-up d3">
@@ -115,27 +169,28 @@
     </div>
   </div>
 
+  <!-- PRINCIPI -->
   <span class="section-label" style="margin-top:44px;margin-bottom:10px">🧠 Smart Packing — I 4 Principi</span>
   <div class="principi-grid">
     <div class="principio-card reveal-up">
       <div class="principio-num">01</div>
       <h4>Roll, Don't Fold</h4>
-      <p>Arrotola gli indumenti. Meno spazio, meno grinze.</p>
+      <p>Arrotola gli indumenti invece di piegarli. Occupano meno spazio, si stropicciano meno.</p>
     </div>
     <div class="principio-card reveal-up d1">
       <div class="principio-num">02</div>
       <h4>Layer System</h4>
-      <p>1 giacca + 2 maglie tecniche è meglio di 3 felpe.</p>
+      <p>1 giacca leggera + 2 maglie tecniche è meglio di 3 felpe. Mescola e sovrappone.</p>
     </div>
     <div class="principio-card reveal-up d2">
       <div class="principio-num">03</div>
       <h4>+1 / −1</h4>
-      <p>Uno in più di scorta, uno in meno del solito. Non esagerare.</p>
+      <p>Per ogni categoria: uno in più di scorta, uno in meno del solito. Non esagerare.</p>
     </div>
     <div class="principio-card reveal-up d3">
       <div class="principio-num">04</div>
       <h4>Palette 2 Colori</h4>
-      <p>Tutto mescolabile. Navy + bianco. Zero stress.</p>
+      <p>Tutto mescolabile. Es. navy + bianco. Ogni pezzo si abbina con ogni altro.</p>
     </div>
   </div>
 
@@ -144,59 +199,189 @@
     <div><strong>Pro-tip dello skipper:</strong> la sera prima del weekend, stendi tutto sul letto e fotografalo. Se non entra in una duffle bag da 60L, togli qualcosa. In barca <strong>meno è meglio</strong>.</div>
   </div>
 
+  <!-- LISTA CHECKLIST -->
   <span class="section-label" style="margin-top:44px;margin-bottom:10px">✅ Lista Weekend — 3 Giorni / 2 Notti</span>
-  <p style="color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:20px;">
-    La lista completa è disponibile nel <a href="briefing.html#valigia" style="color:var(--turq);font-weight:700;">Briefing Pre-Crociera</a> — con checklist interattiva per ogni categoria.
-  </p>
+  <p style="color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:20px;">Spunta gli oggetti mentre li metti in valigia. Lo stato si salva automaticamente sul tuo dispositivo.</p>
 
+  <!-- Indumenti -->
+  <div class="cat-section open" data-cat="indumenti">
+    <div class="cat-head" onclick="toggleCat(this)">
+      <span class="emoji">👕</span>
+      <h2>Indumenti</h2>
+      <span class="cat-count" id="cnt-indumenti">0/8</span>
+      <span class="cat-chevron">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-item" data-id="i1"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">2 costumi da bagno</span><span class="cat-item-note">uno per navigazione, uno di scorta</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="i2"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">3 magliette tecniche / quick-dry</span><span class="cat-item-note">cotone = disastro in barca</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="i3"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">2 bermuda / shorts</span><span class="cat-item-note">leggeri e comodi</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="i4"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">1 pantalone lungo leggero</span><span class="cat-item-note">per la sera o il vento</span></div><span class="cat-badge consigliato">consigliato</span></div>
+      <div class="cat-item" data-id="i5"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">3 paia calzini</span><span class="cat-item-note">corti, preferibilmente tecnici</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="i6"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">3 intimo</span><span class="cat-item-note">quick-dry se possibile</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="i7"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">1 giacca antivento leggera</span><span class="cat-item-note">K-way o softshell</span></div><span class="cat-badge consigliato">consigliato</span></div>
+      <div class="cat-item" data-id="i8"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">1 felpa leggera</span><span class="cat-item-note">per la sera in rada</span></div><span class="cat-badge consigliato">consigliato</span></div>
+    </div>
+  </div>
+
+  <!-- Scarpe -->
+  <div class="cat-section open" data-cat="scarpe">
+    <div class="cat-head" onclick="toggleCat(this)">
+      <span class="emoji">👟</span>
+      <h2>Scarpe</h2>
+      <span class="cat-count" id="cnt-scarpe">0/3</span>
+      <span class="cat-chevron">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-item" data-id="s1"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">1 paio scarpe da barca</span><span class="cat-item-note">suola chiara/bianca, antiscivolo. NO suole scure</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="s2"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">1 paio infradito / ciabatte</span><span class="cat-item-note">per spiaggia e docce in marina</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="s3"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">1 paio sneakers comode</span><span class="cat-item-note">per eventuali escursioni a terra</span></div><span class="cat-badge consigliato">consigliato</span></div>
+    </div>
+  </div>
+
+  <!-- Testa / Corpo -->
+  <div class="cat-section open" data-cat="testa">
+    <div class="cat-head" onclick="toggleCat(this)">
+      <span class="emoji">🧢</span>
+      <h2>Testa &amp; Corpo</h2>
+      <span class="cat-count" id="cnt-testa">0/5</span>
+      <span class="cat-chevron">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-item" data-id="t1"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Cappello con visiera</span><span class="cat-item-note">a tesa larga o baseball</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="t2"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Occhiali da sole</span><span class="cat-item-note">con cordino per non perderli</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="t3"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Crema solare SPF 50+</span><span class="cat-item-note">alta protezione, resistente all'acqua</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="t4"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Doposole / idratante</span><span class="cat-item-note">dopo il bagno in mare</span></div><span class="cat-badge consigliato">consigliato</span></div>
+      <div class="cat-item" data-id="t5"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Repellente insetti</span><span class="cat-item-note">sera in rada</span></div><span class="cat-badge consigliato">consigliato</span></div>
+    </div>
+  </div>
+
+  <!-- Mare -->
+  <div class="cat-section open" data-cat="mare">
+    <div class="cat-head" onclick="toggleCat(this)">
+      <span class="emoji">🏊</span>
+      <h2>Mare</h2>
+      <span class="cat-count" id="cnt-mare">0/3</span>
+      <span class="cat-chevron">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-item" data-id="m1"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Telo mare</span><span class="cat-item-note">microfibra, asciuga in 10 minuti</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="m2"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Maschera e snorkel</span><span class="cat-item-note">se hai i tuoi, altrimenti in prestito</span></div><span class="cat-badge consigliato">consigliato</span></div>
+      <div class="cat-item" data-id="m3"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Sacca impermeabile per bagnato</span><span class="cat-item-note">per costume umido in rientro</span></div><span class="cat-badge consigliato">consigliato</span></div>
+    </div>
+  </div>
+
+  <!-- Notte -->
+  <div class="cat-section open" data-cat="notte">
+    <div class="cat-head" onclick="toggleCat(this)">
+      <span class="emoji">🌙</span>
+      <h2>Notte</h2>
+      <span class="cat-count" id="cnt-notte">0/2</span>
+      <span class="cat-chevron">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-item" data-id="n1"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Pigiama leggero</span><span class="cat-item-note">boxer + maglietta va benissimo</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="n2"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Sacco a pelo leggero</span><span class="cat-item-note">solo se freddolosi. Lenzuola incluse</span></div><span class="cat-badge">facoltativo</span></div>
+    </div>
+  </div>
+
+  <!-- Elettronica -->
+  <div class="cat-section open" data-cat="elettronica">
+    <div class="cat-head" onclick="toggleCat(this)">
+      <span class="emoji">🔋</span>
+      <h2>Elettronica</h2>
+      <span class="cat-count" id="cnt-elettronica">0/4</span>
+      <span class="cat-chevron">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-item" data-id="e1"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Power bank (caricato)</span><span class="cat-item-note">minimo 10.000 mAh</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="e2"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Caricabatterie 12V auto</span><span class="cat-item-note">presa accendisigari, NON 220V</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="e3"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Cavi di ricarica</span><span class="cat-item-note">USB-C / Lightning</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="e4"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Cover impermeabile telefono</span><span class="cat-item-note">o custodia waterproof</span></div><span class="cat-badge consigliato">consigliato</span></div>
+    </div>
+  </div>
+
+  <!-- Documenti -->
+  <div class="cat-section open" data-cat="documenti">
+    <div class="cat-head" onclick="toggleCat(this)">
+      <span class="emoji">🪪</span>
+      <h2>Documenti</h2>
+      <span class="cat-count" id="cnt-documenti">0/3</span>
+      <span class="cat-chevron">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-item" data-id="d1"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Documento d'identità</span><span class="cat-item-note">obbligatorio per controlli Guardia Costiera</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="d2"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Tessera sanitaria</span><span class="cat-item-note">in caso di necessità</span></div><span class="cat-badge consigliato">consigliato</span></div>
+      <div class="cat-item" data-id="d3"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Certificato assicurazione cauzione</span><span class="cat-item-note">se hai sottoscritto l'assicurazione</span></div><span class="cat-badge">facoltativo</span></div>
+    </div>
+  </div>
+
+  <!-- Farmaci -->
+  <div class="cat-section open" data-cat="farmaci">
+    <div class="cat-head" onclick="toggleCat(this)">
+      <span class="emoji">💊</span>
+      <h2>Farmaci</h2>
+      <span class="cat-count" id="cnt-farmaci">0/5</span>
+      <span class="cat-chevron">▼</span>
+    </div>
+    <div class="cat-body">
+      <div class="cat-item" data-id="f1"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Farmaci abituali</span><span class="cat-item-note">portali sempre, anche se 'solo per 3 giorni'</span></div><span class="cat-badge obbligatorio">obbligatorio</span></div>
+      <div class="cat-item" data-id="f2"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Scopolamina / Xamamina</span><span class="cat-item-note">per mal di mare. Meglio prevenire</span></div><span class="cat-badge consigliato">consigliato</span></div>
+      <div class="cat-item" data-id="f3"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Cerotti e antisettico</span><span class="cat-item-note">per piccole ferite da coperta</span></div><span class="cat-badge consigliato">consigliato</span></div>
+      <div class="cat-item" data-id="f4"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Antistaminico</span><span class="cat-item-note">in caso di punture o reazioni</span></div><span class="cat-badge">facoltativo</span></div>
+      <div class="cat-item" data-id="f5"><input type="checkbox" onchange="toggleItem(this)"><div><span class="cat-item-name">Pastiglie reidratazione</span><span class="cat-item-note">sole + sale = disidratazione rapida</span></div><span class="cat-badge consigliato">consigliato</span></div>
+    </div>
+  </div>
+
+  <!-- COSA NO -->
   <span class="section-label" style="margin-top:44px;margin-bottom:10px">🚫 Cosa NON Mettere in Valigia</span>
   <div class="no-grid">
     <div class="no-card reveal-up">
       <span class="icon">🧳</span>
       <div>
         <h4>Valigia Rigida / Trolley</h4>
-        <p>Non entra negli armadietti. Diventa un ingombro morto.</p>
+        <p>Non entra negli armadietti della barca. Una volta svuotata, diventa un ingombro morto.</p>
       </div>
     </div>
     <div class="no-card reveal-up d1">
       <span class="icon">🔌</span>
       <div>
         <h4>Phon, Ferro da Stiro, 220V</h4>
-        <p>La barca ha solo 12V. Consumano troppo.</p>
+        <p>L'Atlantica ha solo 12V. Gli apparecchi 220V consumano troppo e non ci sono prese.</p>
       </div>
     </div>
     <div class="no-card reveal-up d2">
       <span class="icon">👖</span>
       <div>
         <h4>Troppi Jeans</h4>
-        <p>Pesanti, asciugano in eterno. Portane al massimo uno.</p>
+        <p>Pesanti, asciugano in eterno, occupano spazio. Portane al massimo uno.</p>
       </div>
     </div>
     <div class="no-card reveal-up">
       <span class="icon">👠</span>
       <div>
         <h4>Tacchi e Scarpe Nuove</h4>
-        <p>In barca sono inutili e pericolosi. Vesciche = inferno.</p>
+        <p>In barca sono inutili e pericolosi. Vesciche in barca = inferno assoluto.</p>
       </div>
     </div>
     <div class="no-card reveal-up d1">
       <span class="icon">🧴</span>
       <div>
         <h4>Profumi e Bagnoschiuma Grandi</h4>
-        <p>Spazio docce limitato. Porta flaconi da viaggio.</p>
+        <p>Spazio docce limitato. Porta flaconi da viaggio o usa il sapone marino.</p>
       </div>
     </div>
     <div class="no-card reveal-up d2">
       <span class="icon">🍾</span>
       <div>
         <h4>Alcol in Grandi Quantità</h4>
-        <p>Pesa, occupa spazio. Meglio comprare in loco.</p>
+        <p>Pesa, occupa spazio, meglio comprare in loco o portare solo una bottiglia.</p>
       </div>
     </div>
   </div>
 
-</div>
+</div><!-- /val-wrap -->
 
+<!-- FOOTER -->
 <footer class="footer">
   <div class="container">
     <div class="footer-logo">Golfo dei Poeti Weekend</div>
@@ -213,5 +398,83 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+const VALIGIA_KEY = 'valigia_state_v1';
+function getState() {
+  try { return JSON.parse(localStorage.getItem(VALIGIA_KEY)) || {}; }
+  catch(e) { return {}; }
+}
+function saveState(st) { localStorage.setItem(VALIGIA_KEY, JSON.stringify(st)); }
+
+function toggleItem(cb) {
+  const item = cb.closest('.cat-item');
+  const id = item.dataset.id;
+  const st = getState();
+  st[id] = cb.checked;
+  saveState(st);
+  item.classList.toggle('done', cb.checked);
+  updateProgress();
+}
+
+function updateProgress() {
+  const items = document.querySelectorAll('.cat-item');
+  const total = items.length;
+  let done = 0;
+  items.forEach(it => {
+    const cb = it.querySelector('input[type=checkbox]');
+    if (cb && cb.checked) done++;
+  });
+  const pct = total ? Math.round((done/total)*100) : 0;
+  document.getElementById('valPct').textContent = pct + '%';
+  document.getElementById('valFill').style.width = pct + '%';
+  // update category counts
+  const cats = {};
+  items.forEach(it => {
+    const cat = it.closest('.cat-section').dataset.cat;
+    if (!cats[cat]) cats[cat] = {total:0,done:0};
+    cats[cat].total++;
+    const cb = it.querySelector('input[type=checkbox]');
+    if (cb.checked) cats[cat].done++;
+  });
+  Object.keys(cats).forEach(c => {
+    const el = document.getElementById('cnt-' + c);
+    if (el) {
+      el.textContent = cats[c].done + '/' + cats[c].total;
+      el.classList.toggle('done', cats[c].done === cats[c].total);
+    }
+  });
+}
+
+function valigiaReset() {
+  if (!confirm('Azzerare tutta la checklist?')) return;
+  localStorage.removeItem(VALIGIA_KEY);
+  document.querySelectorAll('.cat-item input[type=checkbox]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.cat-item').classList.remove('done');
+  });
+  updateProgress();
+}
+
+function toggleCat(head) {
+  head.closest('.cat-section').classList.toggle('open');
+}
+
+function initValigia() {
+  const st = getState();
+  document.querySelectorAll('.cat-item').forEach(it => {
+    const id = it.dataset.id;
+    const cb = it.querySelector('input[type=checkbox]');
+    if (st[id]) { cb.checked = true; it.classList.add('done'); }
+  });
+  updateProgress();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initValigia);
+} else {
+  initValigia();
+}
+</script>
+
 </body>
 </html>

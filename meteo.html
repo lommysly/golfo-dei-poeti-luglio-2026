@@ -3,26 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meteo — Golfo dei Poeti Weekend</title>
-  <meta property="og:title" content="Meteo — Golfo dei Poeti Weekend" />
-  <meta property="og:description" content="Previsioni meteo e passage plan operativo per il weekend nel Golfo dei Poeti." />
-  <meta property="og:image" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/img/sailboat.jpg" />
-  <meta property="og:image:width" content="1600" />
-  <meta property="og:image:height" content="1041" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/meteo.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Meteo — Golfo dei Poeti Weekend" />
-  <meta name="twitter:description" content="Previsioni meteo e passage plan operativo per il weekend nel Golfo dei Poeti." />
-  <meta name="twitter:image" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/img/sailboat.jpg" />
-  <meta name="description" content="Aggiornamento meteo 14 luglio 2026 — Weekend La Spezia → Golfo dei Poeti. Vento, mare, temperatura e previsioni giorno per giorno." />
-  <link rel="stylesheet" href="styles.css?v=20260525i" />
+  <title>Meteo &amp; Passage Plan · Golfo dei Poeti Weekend</title>
+  <meta name="description" content="Previsioni meteo e Passage Plan per il weekend 17–19 Luglio 2026 nel Golfo dei Poeti. Vento, mare, temperatura e tappe giorno per giorno." />
+  <link rel="stylesheet" href="styles.css?v=20260627" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
   <style>
-    /* ── Skipper Briefing ─────────────────────────────── */
-    .briefing-wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 40px; }
+    body { background: var(--ocean); color: #fff; min-height: 100vh; }
+    .mp-wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
 
     .status-banner { display: flex; align-items: center; gap: 18px; padding: 24px 28px; border-radius: 20px; background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.3); margin-bottom: 32px; }
     .status-banner .sb-icon { font-size: 2.8rem; flex-shrink: 0; }
@@ -34,24 +23,19 @@
     .check-pill { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 30px; background: rgba(52,211,153,.1); border: 1px solid rgba(52,211,153,.25); font-size: .85rem; color: rgba(255,255,255,.85); }
     .check-pill .cp-icon { font-size: 1rem; }
 
-    /* ── Passage Plan ────────────────────────────────── */
-    .pp-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 24px; }
-    .pp-title span { color: var(--turq); }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; font-weight: 300; margin-bottom: 20px; }
+    .section-title span { color: var(--turq); }
 
     .pp-timeline { position: relative; padding-left: 32px; }
     .pp-timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--turq), rgba(28,167,168,.1)); border-radius: 2px; }
-
     .pp-day { position: relative; margin-bottom: 28px; }
     .pp-day::before { content: ''; position: absolute; left: -26px; top: 18px; width: 10px; height: 10px; border-radius: 50%; background: var(--turq); border: 2px solid var(--ocean); }
-
     .pp-day-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 20px 22px; transition: border-color .2s; }
     .pp-day-card:hover { border-color: rgba(28,167,168,.4); }
-
     .pp-day-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; flex-wrap: wrap; }
     .pp-day-date { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: #fff; }
     .pp-day-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--turq); }
     .pp-day-route { font-size: .85rem; color: rgba(255,255,255,.5); margin-left: auto; }
-
     .pp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
     .pp-pill { padding: 4px 12px; border-radius: 20px; font-size: .78rem; font-weight: 600; }
     .pp-pill.sun { background: rgba(251,191,36,.12); color: #fcd34d; border: 1px solid rgba(251,191,36,.2); }
@@ -59,231 +43,251 @@
     .pp-pill.sea { background: rgba(28,167,168,.12); color: #5eead4; border: 1px solid rgba(28,167,168,.2); }
     .pp-pill.temp { background: rgba(248,113,113,.12); color: #fca5a5; border: 1px solid rgba(248,113,113,.2); }
     .pp-pill.warn { background: rgba(251,146,60,.12); color: #fdba74; border: 1px solid rgba(251,146,60,.2); }
-
     .pp-desc { font-size: .87rem; color: rgba(255,255,255,.65); line-height: 1.65; }
     .pp-spots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
     .pp-spot { padding: 5px 13px; border-radius: 20px; font-size: .78rem; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.7); }
 
-    /* ── Alert monitoraggio ──────────────────────────── */
-    .monitor-card { display: flex; gap: 16px; padding: 20px 22px; background: rgba(251,146,60,.08); border: 1px solid rgba(251,146,60,.25); border-radius: 18px; margin-bottom: 32px; }
-    .monitor-card .mc-ico { font-size: 1.8rem; flex-shrink: 0; }
-    .monitor-card h4 { font-size: .9rem; font-weight: 700; color: #fdba74; margin-bottom: 6px; }
-    .monitor-card p { font-size: .85rem; color: rgba(255,255,255,.65); line-height: 1.6; }
+    .forecast-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 36px; }
+    .fc-day { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 20px; text-align: center; transition: border-color .2s; }
+    .fc-day:hover { border-color: rgba(28,167,168,.4); }
+    .fc-day.active-day { border-color: var(--turq); background: rgba(28,167,168,.06); }
+    .fc-date { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--turq); margin-bottom: 10px; }
+    .fc-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .fc-temp { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: #fff; }
+    .fc-wind { font-size: .8rem; color: rgba(255,255,255,.55); margin-top: 6px; }
+    .fc-sea { font-size: .75rem; color: rgba(255,255,255,.4); margin-top: 2px; }
+    .fc-note { font-size: .72rem; color: rgba(255,255,255,.45); margin-top: 8px; font-weight: 600; }
 
-    /* ── Spiagge ─────────────────────────────────────── */
-    .beach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-bottom: 36px; }
-    .beach-card { padding: 18px 20px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; transition: border-color .2s, transform .2s; }
-    .beach-card:hover { border-color: var(--turq); transform: translateY(-2px); }
-    .beach-card .bc-icon { font-size: 1.8rem; margin-bottom: 10px; }
-    .beach-card .bc-name { font-weight: 700; font-size: .95rem; margin-bottom: 4px; }
-    .beach-card .bc-desc { font-size: .8rem; color: rgba(255,255,255,.5); line-height: 1.5; }
-
-    /* ── Consigli ─────────────────────────────────────── */
-    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-bottom: 40px; }
-    .tip-card { padding: 18px 20px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 16px; }
-    .tip-card .tc-icon { font-size: 1.5rem; margin-bottom: 10px; }
-    .tip-card .tc-text { font-size: .85rem; color: rgba(255,255,255,.7); line-height: 1.6; }
-
-    /* ── Acqua temperatura ────────────────────────────── */
     .water-card { display: flex; align-items: center; gap: 20px; padding: 22px 28px; background: rgba(28,167,168,.08); border: 1px solid rgba(28,167,168,.25); border-radius: 18px; margin-bottom: 36px; }
     .water-card .wc-temp { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 300; color: var(--turq); line-height: 1; }
     .water-card .wc-label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.5); margin-bottom: 6px; }
     .water-card .wc-desc { font-size: .88rem; color: rgba(255,255,255,.7); }
 
-    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; font-weight: 300; margin-bottom: 20px; }
-    .section-title span { color: var(--turq); }
+    .meteo-note { display: flex; gap: 14px; align-items: flex-start; padding: 18px 22px; background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.2); border-radius: 16px; margin-bottom: 40px; }
+    .meteo-note span { font-size: 1.3rem; flex-shrink: 0; }
+    .meteo-note div { font-size: .85rem; color: rgba(255,255,255,.7); line-height: 1.65; }
 
     @media (max-width: 600px) {
       .status-banner { flex-direction: column; text-align: center; }
       .status-banner .sb-badge { margin: 0 auto; }
+      .forecast-grid { grid-template-columns: 1fr; }
       .pp-day-route { margin-left: 0; width: 100%; }
     }
   </style>
 </head>
 <body>
 
-  <nav class="nav scrolled" id="nav">
-    <div class="nav-inner">
-      <a class="nav-logo" href="index.html">
-        <span class="logo-icon">—</span>
-        <span>Golfo dei Poeti Weekend</span>
-      </a>
-            <div class="nav-links">
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Golfo dei Poeti</span></a>
+                <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="esperienza.html">L'Esperienza</a>
         <a href="organizzazione.html">Organizzazione</a>
         <a href="sicurezza.html">Sicurezza</a>
-        <a href="meteo.html">Meteo</a>
-      </div><button class="nav-burger" id="navBurger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-            <div class="nav-mobile" id="navMobile">
+        <div class="dropdown" id="navDropdown">
+          <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="checkin-atlantica.html">Check-in Atlantica</a>
+            <a href="checkin-oceanis.html">Check-in Sharel</a>
+            <a href="meteo.html" class="active">Meteo Operativo</a>
+          </div>
+        </div>
+      </div></div>
+      </div><button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+          <div class="nav-mobile" id="navMobile">
       <a href="index.html">Home</a>
       <a href="esperienza.html">L'Esperienza</a>
       <a href="organizzazione.html">Organizzazione</a>
       <a href="sicurezza.html">Sicurezza</a>
       <a href="valigia.html">Valigia Intelligente</a>
+      <a href="cambusa-atlantica.html">Cambusa Atlantica</a>
+      <a href="cambusa-oceanis.html">Cambusa Sharel</a>
+      <a href="atlantica.html">Atlantica 45</a>
+      <a href="oceanis.html">Sharel (Oceanis 48)</a>
       <a href="meteo.html" style="color:var(--turq);font-weight:700;">Meteo</a>
+      <a href="rotta.html">Rotta</a>
+      <a href="checkin-atlantica.html">Check-in Atlantica</a>
+      <a href="checkin-oceanis.html">Check-in Sharel</a>
     </div>
-  </nav>
+</nav>
 
-  <!-- HERO -->
-  <div class="page-hero">
-      <video class="page-hero-video" autoplay muted loop playsinline poster="img/hero.jpg">
+<!-- HERO -->
+<div class="page-hero">
+  <video class="page-hero-video" autoplay muted loop playsinline poster="img/portovenere.jpg">
     <source src="img/delfini.mp4" type="video/mp4">
   </video>
   <div class="page-hero-bg" style="background-color:#0b3c5d;"></div>
-    <div class="page-hero-overlay"></div>
-    <div class="page-hero-content">
-      <a href="index.html" class="back-link">← Torna alla home</a>
-      <span class="label light">Aggiornamento Skipper · 14 Luglio 2026</span>
-      <h1 class="page-hero-title">Meteo &amp; Previsioni</h1>
-      <p class="page-hero-sub">Tirreno &amp; Golfo dei Poeti — <strong>17 / 19 Luglio 2026</strong></p>
-    </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <a href="index.html" class="back-link">← Torna alla home</a>
+    <span class="label light">Skipper Briefing · 17–19 Luglio 2026</span>
+    <h1 class="page-hero-title">Meteo &amp; Passage Plan</h1>
+    <p class="page-hero-sub">Golfo dei Poeti — <strong>27 / 19 Luglio 2026</strong></p>
   </div>
+</div>
 
-  <!-- MAIN CONTENT -->
-  <section style="background: var(--ocean); padding: 52px 0 80px;">
-    <div class="briefing-wrap">
+<!-- MAIN CONTENT -->
+<section style="background: var(--ocean); padding: 52px 0 80px;">
+  <div class="mp-wrap">
 
-      <!-- STATUS BANNER -->
-      <div class="status-banner">
-        <div class="sb-icon">⛵</div>
-        <div>
-          <div class="sb-title">Finestra molto promettente</div>
-          <div class="sb-sub">Alta pressione stabile · mare poco mosso · temperature quasi estive · nessun peggioramento in vista</div>
-        </div>
-        <div class="sb-badge">FAVOREVOLE</div>
+    <!-- STATUS BANNER -->
+    <div class="status-banner">
+      <div class="sb-icon">☀️</div>
+      <div>
+        <div class="sb-title">Condizioni estive ideali</div>
+        <div class="sb-sub">Alta pressione stabile · mare calmo · temperature estive · brezze termiche pomeridiane</div>
       </div>
+      <div class="sb-badge">FAVOREVOLE</div>
+    </div>
 
-      <!-- CHECK PILLS -->
-      <div class="check-row">
-        <div class="check-pill"><span class="cp-icon">✅</span> Alta pressione stabile sul Tirreno</div>
-        <div class="check-pill"><span class="cp-icon">✅</span> Temperature quasi estive 24–29°C</div>
-        <div class="check-pill"><span class="cp-icon">✅</span> Mare generalmente poco mosso</div>
-        <div class="check-pill"><span class="cp-icon">✅</span> Venti leggeri/moderati 5–15 nodi</div>
-        <div class="check-pill"><span class="cp-icon">✅</span> Nessun peggioramento importante in vista</div>
+    <!-- CHECK PILLS -->
+    <div class="check-row">
+      <div class="check-pill"><span class="cp-icon">✅</span> Alta pressione sul Tirreno</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Temperature 22–30°C</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Mare calmo / poco mosso</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Vento 5–12 nodi (brezze)</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Zero fronti in vista</div>
+    </div>
+
+    <!-- FORECAST GRID -->
+    <div class="section-title"><span>Forecast</span> — Panoramica</div>
+    <div class="forecast-grid">
+      <div class="fc-day">
+        <div class="fc-date">Ven 27</div>
+        <div class="fc-icon">🌤</div>
+        <div class="fc-temp">28°C</div>
+        <div class="fc-wind">SW 8 kn</div>
+        <div class="fc-sea">0.2 m</div>
+        <div class="fc-note">Imbarco 17:00</div>
       </div>
-
-      <!-- ALERT VENTO -->
-      <div class="monitor-card">
-        <div class="mc-ico">⚠️</div>
-        <div>
-          <h4>Scenario da monitorare: Libeccio (SW)</h4>
-          <p>Alza onda lunga sul traverso Golfo dei Poeti. Traverso più impegnativo, possibile disagio per chi soffre il mare. Configurazione ideale: Maestralino moderato o brezze termiche con alta pressione stabile.<br/>
-          <strong>Finestra definitiva:</strong> controlleremo il Lunedì di rientro 48h prima.</p>
-        </div>
+      <div class="fc-day active-day">
+        <div class="fc-date">Sab 28</div>
+        <div class="fc-icon">☀️</div>
+        <div class="fc-temp">30°C</div>
+        <div class="fc-wind">W 10 kn</div>
+        <div class="fc-sea">0.3 m</div>
+        <div class="fc-note">Calette &amp; Cena</div>
       </div>
-
-      <!-- TEMPERATURA ACQUA -->
-      <div class="section-title"><span>Temperatura</span> dell'Acqua</div>
-      <div class="water-card">
-        <div class="wc-temp">18–22°C</div>
-        <div>
-          <div class="wc-label">Golfo dei Poeti</div>
-          <div class="wc-desc">Il primo bagno è "AAAAAAAAAH" · il secondo è perfetto 😄<br/>
-          Mare decisamente balneabile tra Liguria e Golfo dei Poeti.</div>
-        </div>
+      <div class="fc-day">
+        <div class="fc-date">Dom 29</div>
+        <div class="fc-icon">☀️</div>
+        <div class="fc-temp">29°C</div>
+        <div class="fc-wind">SW 6 kn</div>
+        <div class="fc-sea">0.2 m</div>
+        <div class="fc-note">Rientro</div>
       </div>
+    </div>
 
-      <!-- SPIAGGE -->
-      <div class="section-title"><span>Soste Top</span> — Domenica 19 Luglio</div>
-      <div class="beach-grid">
-        <div class="beach-card">
-          <div class="bc-icon">🏝</div>
-          <div class="bc-name">Cala del Terrizzo</div>
-          <div class="bc-desc">Sabbia bianchissima e acqua irreale. La più spettacolare.</div>
-        </div>
-        <div class="beach-card">
-          <div class="bc-icon">🏝</div>
-          <div class="bc-name">Lotu</div>
-          <div class="bc-desc">Più riparata e comodissima in rada. Ideale per l'ormeggio.</div>
-        </div>
-        <div class="beach-card">
-          <div class="bc-icon">🏝</div>
-          <div class="bc-name">Ghignu</div>
-          <div class="bc-desc">Wild e meno turistica. Per chi vuole stare da soli.</div>
-        </div>
-        <div class="beach-card">
-          <div class="bc-icon">🖤</div>
-          <div class="bc-name">Nonza</div>
-          <div class="bc-desc">Spiaggia nera spettacolare. Esperienza unica.</div>
-        </div>
+    <!-- TEMPERATURA ACQUA -->
+    <div class="section-title"><span>Temperatura</span> dell'Acqua</div>
+    <div class="water-card">
+      <div class="wc-temp">23–25°C</div>
+      <div>
+        <div class="wc-label">Golfo dei Poeti · Fine Giugno</div>
+        <div class="wc-desc">Acqua calda e invitante. Perfetta per snorkeling, bagno e doccia da marinaio. 🏊‍♂️</div>
       </div>
+    </div>
 
-      <!-- CONSIGLI EQUIPAGGIO -->
-      <div class="section-title"><span>Consigli</span> Equipaggio</div>
-      <div class="tips-grid">
-        <div class="tip-card">
-          <div class="tc-icon">😴</div>
-          <div class="tc-text"><strong>Dormire bene</strong> il giorno prima della partenza. La navigazione notturna richiede energie.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tc-icon">🍽️</div>
-          <div class="tc-text"><strong>Cena leggera</strong> prima di partire. Niente mix devastanti alcolici pre-traversata.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tc-icon">💊</div>
-          <div class="tc-text"><strong>Biodramina PRIMA</strong> di stare male, non dopo. Chi soffre il mare la prenda in anticipo.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tc-icon">🌊</div>
-          <div class="tc-text"><strong>Stare fuori</strong> a guardare l'orizzonte aiuta tantissimo contro il mal di mare.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tc-icon">👀</div>
-          <div class="tc-text"><strong>Navigazione notturna:</strong> chi non è abituato può trovarla disorientante. Normale, passa in fretta.</div>
-        </div>
-        <div class="tip-card">
-          <div class="tc-icon">🌬️</div>
-          <div class="tc-text"><strong>Windy.com</strong> e <strong>Navily</strong> per le previsioni definitive 48–72h prima della partenza.</div>
-        </div>
-      </div>
+    <!-- PASSAGE PLAN -->
+    <div class="section-title"><span>Passage Plan</span> — Itinerario</div>
+    <div class="pp-timeline">
 
-      <!-- FORECAST STRIP -->
-      <div class="section-title"><span>Forecast</span> — Panoramica</div>
-      <div class="forecast reveal-up">
-        <div class="forecast-grid">
-          <div class="fc-day">
-            <div class="fc-date">Ven 17</div>
-            <div class="fc-icon">🌤</div>
-            <div class="fc-temp">25°C</div>
-            <div class="fc-wind">SW 8 kn</div>
-            <div class="fc-sea">0.3 m</div>
-            <div class="fc-note">Partenza</div>
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Venerdì 17 Luglio</div>
+            <div class="pp-day-label">GIORNO 1</div>
+            <div class="pp-day-route">Porto Mirabello → Porto Venere</div>
           </div>
-          <div class="fc-day">
-            <div class="fc-date">Sab 18</div>
-            <div class="fc-icon">☀️</div>
-            <div class="fc-temp">26°C</div>
-            <div class="fc-wind">NW 10 kn</div>
-            <div class="fc-sea">0.4 m</div>
-            <div class="fc-note">Cap Corse</div>
+          <div class="pp-pills">
+            <div class="pp-pill sun">☀️ Sole</div>
+            <div class="pp-pill wind">💨 SW 6-10 kn</div>
+            <div class="pp-pill sea">🌊 Mare calmo</div>
+            <div class="pp-pill temp">🌡️ 28°C</div>
           </div>
-          <div class="fc-day active-day">
-            <div class="fc-date">Dom 19</div>
-            <div class="fc-icon">☀️</div>
-            <div class="fc-temp">28°C</div>
-            <div class="fc-wind">5 kn</div>
-            <div class="fc-sea">0.2 m</div>
-            <div class="fc-note">Spiagge</div>
+          <div class="pp-desc">
+            <strong>17:00 — Imbarco</strong> a Porto Mirabello, La Spezia. Briefing di sicurezza e sistemazione a bordo.<br/>
+            <strong>18:30 — Uscita</strong> in rada di Porto Venere per l'aperitivo al tramonto.<br/>
+            <strong>20:30 — Cena</strong> in rada o a terra a Porto Venere (opzionale).
+          </div>
+          <div class="pp-spots">
+            <span class="pp-spot">⚓ Porto Mirabello</span>
+            <span class="pp-spot">🌅 Porto Venere</span>
           </div>
         </div>
       </div>
 
-      <div class="meteo-note reveal-up" style="margin-top:24px">
-        <span>!</span>
-        <div><strong>Aggiornamento finale 48–72h prima della partenza.</strong> Previsioni affidabili su <strong>Windy.com</strong> (modelli GFS/ECMWF/ICON/NEMS/AROME) e <strong>Navily</strong>. Il rientro della domenica andrà monitorato con particolare attenzione.</div>
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Sabato 18 Luglio</div>
+            <div class="pp-day-label">GIORNO 2</div>
+            <div class="pp-day-route">Porto Venere → Isola Palmaria → Lerici</div>
+          </div>
+          <div class="pp-pills">
+            <div class="pp-pill sun">☀️ Sole pieno</div>
+            <div class="pp-pill wind">💨 W 8-12 kn</div>
+            <div class="pp-pill sea">🌊 Mare poco mosso</div>
+            <div class="pp-pill temp">🌡️ 30°C</div>
+          </div>
+          <div class="pp-desc">
+            <strong>Mattina — Navigazione</strong> verso le calette dell'isola della Palmaria (Cala del Terrizzo, Pozzale, Maramozza). Snorkeling e relax.<br/>
+            <strong>Pranzo — A bordo</strong> con prodotti locali.<br/>
+            <strong>Pomeriggio — Rotta</strong> verso Lerici / Baia Blu per l'ancoraggio notturno.<br/>
+            <strong>20:00 — Cena</strong> alla Locanda Lorena sull'isola della Palmaria (prenotazione obbligatoria).
+          </div>
+          <div class="pp-spots">
+            <span class="pp-spot">🏖️ Cala del Terrizzo</span>
+            <span class="pp-spot">🏖️ Il Pozzale</span>
+            <span class="pp-spot">🏖️ Cala Maramozza</span>
+            <span class="pp-spot">🍽️ Locanda Lorena</span>
+            <span class="pp-spot">⚓ Baia Blu / Lerici</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Domenica 19 Luglio</div>
+            <div class="pp-day-label">GIORNO 3</div>
+            <div class="pp-day-route">Lerici → Tellaro → Porto Mirabello</div>
+          </div>
+          <div class="pp-pills">
+            <div class="pp-pill sun">☀️ Sole</div>
+            <div class="pp-pill wind">💨 SW 5-8 kn</div>
+            <div class="pp-pill sea">🌊 Mare calmo</div>
+            <div class="pp-pill temp">🌡️ 29°C</div>
+          </div>
+          <div class="pp-desc">
+            <strong>Mattina — Bagno</strong> e colazione in rada.<br/>
+            <strong>11:00 — Passaggio</strong> a Tellaro per un giro nel borgo marinario.<br/>
+            <strong>13:00 — Rientro</strong> a Porto Mirabello. Disimbarco entro le 15:00.
+          </div>
+          <div class="pp-spots">
+            <span class="pp-spot">🏘️ Tellaro</span>
+            <span class="pp-spot">⚓ Porto Mirabello</span>
+          </div>
+        </div>
       </div>
 
     </div>
-  </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-logo">Golfo dei Poeti Weekend</div>
-      <p>Porto Mirabello · La Spezia · 17 – 19 Luglio 2026</p>
+    <!-- NOTE -->
+    <div class="meteo-note">
+      <span>ℹ️</span>
+      <div><strong>Aggiornamento finale 48h prima della partenza.</strong> Consulta <strong>Windy.com</strong> (modelli GFS/ECMWF/ICON) e <strong>Navily</strong> per le previsioni definitive. In caso di peggioramento, il programma viene adattato in sicurezza.</div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Golfo dei Poeti</a>
       <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="esperienza.html">L'Esperienza</a>
@@ -293,20 +297,9 @@
     </div>
       <p class="footer-copy">© 2026 Golfo dei Poeti Weekend — Tutti i diritti riservati</p>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script src="script.js?v=20260525i"></script>
-  <script>
-    // Tab meteo rotte (mantiene compatibilità con styles.css)
-    document.querySelectorAll('.mr-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.mr-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.meteo-panel').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        const panel = document.getElementById('panel-' + tab.dataset.route);
-        if (panel) panel.classList.add('active');
-      });
-    });
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
