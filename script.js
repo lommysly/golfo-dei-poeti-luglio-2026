@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════
-   CORSICA SAILING EXPERIENCE — Script
+   GOLFO DEI POETI WEEKEND — Script
    ══════════════════════════════════════════════════ */
 
 /* ── Google Sheets API ──────────────────────────── */
@@ -689,7 +689,7 @@ function generateCrewPDF(members, boatName, departureDate, arrivalDate) {
     <div class="sig-item"><div class="sig-label">Data e Luogo</div><div class="sig-name">La Spezia, ${new Date().toLocaleDateString('it-IT')}</div></div>
   </div>
   <div class="doc-footer">
-    <span>Corsica Sailing Experience &nbsp;·&nbsp; Porto Mirabello, La Spezia &nbsp;·&nbsp; +39 351 844 7888</span>
+    <span>Golfo dei Poeti Weekend &nbsp;·&nbsp; Porto Mirabello, La Spezia &nbsp;·&nbsp; +39 351 844 7888</span>
     <span>Generato il ${new Date().toLocaleDateString('it-IT',{day:'2-digit',month:'long',year:'numeric'})}</span>
   </div>
 </div>
