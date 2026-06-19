@@ -1551,3 +1551,46 @@ body {
 @media (max-width: 600px) {
   .calette-grid { grid-template-columns: 1fr; }
 }
+
+/* ──────────────────── BARCA CTA ──────────────────── */
+.barca-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--turq), #17888a);
+  color: #fff;
+  font-weight: 700;
+  font-size: .95rem;
+  padding: 14px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: var(--sh-turq);
+  transition: var(--t) var(--ease);
+  letter-spacing: .02em;
+  margin-top: auto;
+}
+.barca-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 44px rgba(28,167,168,.55);
+}
+
+/* ──────────────────── PL CTA ──────────────────── */
+.pl-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--turq);
+  letter-spacing: .04em;
+  margin-top: auto;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(28,167,168,.1);
+  transition: var(--t) var(--ease);
+}
+.pl-cta:hover {
+  transform: translateX(4px);
+  background: rgba(28,167,168,.2);
+}
