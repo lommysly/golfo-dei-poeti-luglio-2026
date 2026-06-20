@@ -175,27 +175,19 @@
             <li>Vietato fumare sottocoperta.</li>
             <li>Mozziconi: smaltiscili correttamente.</li>
           </ul>
-          <h4 style="margin-top:20px">Cauzione</h4>
-          <ul>
-            <li>Cauzione rimborsabile: <strong>€4.000 totali</strong> in contanti al check-in.</li>
-            <li>Restituita integralmente al checkout se nessun danno.</li>
-            <li>Assicurazione cauzione (<strong>€30 a persona</strong>): <strong>decisione di gruppo</strong> — tutta l'equipaggio la fa o nessuno. Se si decide di farla, i €30 vanno bonificati. Copre qualsiasi danno accidentale — consigliata.</li>
-          </ul>
-        </div>
-        <div class="re-block">
-          <h4>Corrente &amp; Acqua</h4>
+          <h4 style="margin-top:20px">Corrente &amp; Acqua</h4>
           <ul>
             <li>Corrente e acqua sono beni preziosi: istruzioni a bordo.</li>
             <li>Asciuga capelli con sole e vento: <strong>niente phon</strong>.</li>
             <li>Shampoo e saponi <strong>biodegradabili</strong>.</li>
           </ul>
-          <h4 style="margin-top:20px">Cosa Portare</h4>
+        </div>
+        <div class="re-block">
+          <h4>Cauzione</h4>
           <ul>
-            <li>Costume da bagno (almeno 3), scarpe da barca (suole bianche)</li>
-            <li>Crema solare, occhiali polarizzati, maschera da snorkeling</li>
-            <li>Lenzuola: <strong>€60 a cabina</strong> (kit obbligatorio per 2 persone — non è possibile acquistarne uno solo)</li>
-            <li><strong>Niente valigie rigide</strong> — sacca morbida max 1 bagaglio</li>
-            <li>Biodramina — prendila prima di partire</li>
+            <li>Cauzione rimborsabile: <strong>€4.000 totali</strong> in contanti al check-in.</li>
+            <li>Restituita integralmente al checkout se nessun danno.</li>
+            <li>Assicurazione cauzione (<strong>€30 a persona</strong>): <strong>decisione di gruppo</strong> — tutta l'equipaggio la fa o nessuno. Se si decide di farla, i €30 vanno bonificati. Copre qualsiasi danno accidentale — consigliata.</li>
           </ul>
         </div>
       </div>
@@ -219,53 +211,85 @@
   </section>
 
 
-  <!-- CREW LIST -->
-  <section class="crewlist" id="crewlist" style="padding-top:0; padding-bottom:80px">
+  <!-- COSA PORTARE -->
+  <section class="cosa-portare" id="cosa-portare">
     <div class="container">
       <div class="section-header centered">
-        <span class="label light">Documentazione</span>
-        <h2 class="h2 light">Crew List — Beneteau Oceanis 48</h2>
-        <p class="section-desc" style="color:rgba(255,255,255,.65)">Compila i tuoi dati personali e salvali. Ogni membro compila la propria scheda.</p>
+        <span class="label">Preparazione</span>
+        <h2 class="h2">Cosa Portare</h2>
+        <p class="section-desc">Lista essenziale per una crociera confortevole e sicura.</p>
+      </div>
+      <div class="cp-grid">
+        <div class="cp-column">
+          <h3>👕 Abbigliamento</h3>
+          <ul>
+            <li>T-shirt e magliette (3-4)</li>
+            <li>Short e pantaloni leggeri</li>
+            <li>Felpa o giacca leggera per le sere</li>
+            <li>Costume da bagno (2-3)</li>
+            <li>Scarpe con suola bianca (obbligatorio)</li>
+            <li>Sandali o ciabatte per la barca</li>
+            <li>Cappellino o bandana</li>
+            <li>Occhiali da sole con laccio</li>
+          </ul>
+        </div>
+        <div class="cp-column">
+          <h3>🧴 Cura Personale</h3>
+          <ul>
+            <li>Crema solare alta protezione</li>
+            <li>Doposole</li>
+            <li>Shampoo e bagnoschiuma biodegradabili</li>
+            <li>Spazzolino e dentifricio</li>
+            <li>Deodorante (no spray)</li>
+            <li>Medicinali personali</li>
+            <li>Kit pronto soccorso personale</li>
+          </ul>
+        </div>
+        <div class="cp-column">
+          <h3>📦 Altro</h3>
+          <ul>
+            <li>Documenti (carta d'identità)</li>
+            <li>Telefono e caricabatterie</li>
+            <li>Power bank</li>
+            <li>Macchina fotografica</li>
+            <li>Libro o e-reader</li>
+            <li>Telo mare</li>
+            <li>Maschera e boccaglio (se hai)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCETTAZIONE -->
+  <section class="accettazione" id="accettazione">
+    <div class="container">
+      <div class="accettazione-box">
+        <h3>📋 Accettazione Regole</h3>
+        <p>Per procedere alla compilazione della crew list, devi accettare le regole di bordo sopra elencate.</p>
+        <label class="accettazione-label">
+          <input type="checkbox" id="acceptRules" onchange="checkAcceptance()" />
+          <span>Ho letto e accetto le regole di bordo dell'Oceanis 48</span>
+        </label>
+        <button class="btn-primary" id="btnProceed" onclick="proceedToCrew()" disabled>Procedi alla Crew List →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREW LIST -->
+  <section class="crewlist-section" id="crewlist" style="display:none">
+    <div class="container">
+      <div class="section-header centered">
+        <span class="label">Documentazione</span>
+        <h2 class="h2">📋 Crew List</h2>
+        <p class="section-desc">Compila i dati di ogni membro dell'equipaggio dell'Oceanis 48.</p>
       </div>
 
-      <!-- Pannello live: chi ha già compilato -->
-      <div id="crewStatusPanel" style="margin-bottom:28px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:20px 24px;">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
-          <span style="font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.45);">✦ Equipaggio — stato compilazione</span>
-          <button onclick="loadCrewStatus('oceanis')" style="background:none; border:none; color:rgba(255,255,255,.4); font-size:.75rem; cursor:pointer; padding:4px 8px;">↺ Aggiorna</button>
-        </div>
-        <div id="crewStatusList" style="display:flex; flex-wrap:wrap; gap:10px;">
-          <span style="color:rgba(255,255,255,.3); font-size:.85rem;">Caricamento...</span>
-        </div>
-        <div id="crewStatusCount" style="margin-top:14px; font-size:.78rem; color:rgba(255,255,255,.4);"></div>
-      </div>
-
-      <!-- Form sempre visibile -->
-      <div id="crewUnlocked">
-        <div class="crew-members" id="members-oceanis"></div>
-        <div class="crew-counter" id="crewCounter">0 membri aggiunti</div>
-        <div class="save-status" id="saveStatus-oceanis" style="display:none; margin:12px 0; padding:12px 16px; background:rgba(28,167,168,.15); border:1px solid var(--turq); border-radius:10px; color:#fff; font-size:.9rem;"></div>
-
-        <!-- Accettazione regole inline -->
-        <div id="crewLocked" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:18px 20px; margin:16px 0;">
-          <label style="display:flex; align-items:flex-start; gap:12px; cursor:pointer;">
-            <input type="checkbox" id="checkRegole" onchange="toggleAccetta(this)" style="width:20px; height:20px; margin-top:2px; accent-color:var(--turq); cursor:pointer; flex-shrink:0;" />
-            <span style="font-size:.9rem; color:rgba(255,255,255,.8); line-height:1.5;">
-              Ho letto e accetto le <strong>Regole di Bordo dell'Oceanis 48</strong>.
-              <a href="#regole" onclick="document.getElementById('regole').scrollIntoView({behavior:'smooth'});return false;" style="color:var(--turq); text-decoration:none; display:block; font-size:.8rem; margin-top:4px;">📋 Leggi le Regole di Bordo ↑</a>
-            </span>
-          </label>
-          <div id="accettaStatus" style="display:none; margin-top:10px; color:var(--turq); font-size:.85rem; font-weight:600;">✓ Regole accettate</div>
-        </div>
-
-        <div class="crew-actions">
-          <button class="btn-dl-pdf" id="btnSalva-oceanis" onclick="saveMemberToSheets('oceanis')">📝 Salva i miei dati</button>
-        </div>
-
-        <div style="margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,.1);">
-          <p style="font-size:.75rem; text-transform:uppercase; letter-spacing:.1em; color:rgba(255,255,255,.35); margin-bottom:12px;">▸ Area riservata skipper</p>
-          <button class="btn-dl-pdf admin-btn" id="btnAdminPDF-oceanis" onclick="adminDownloadPDF('oceanis')">📄 Genera PDF equipaggio completo</button>
-        </div>
+      <div class="crew-members" id="members-oceanis"></div>
+      <div class="save-status" id="saveStatus-oceanis" style="display:none; margin:12px 0; padding:12px 16px; background:rgba(28,167,168,.15); border:1px solid var(--turq); border-radius:10px; color:#fff; font-size:.9rem;"></div>
+      <div class="crew-actions">
+        <button class="btn-dl-pdf" id="btnSalva-oceanis" onclick="saveMemberToSheets('oceanis')">💾 Salva i miei dati</button>
+        <button class="btn-secondary" onclick="addMember('oceanis')">+ Aggiungi membro</button>
       </div>
     </div>
   </section>
@@ -301,15 +325,17 @@
       updateCounter();
     }
 
-    function unlockCrew(accepted) {
-      document.getElementById('step2').classList.toggle('done',   accepted);
-      document.getElementById('step3').classList.toggle('active', accepted);
+    function checkAcceptance() {
+      const accepted = document.getElementById('acceptRules').checked;
+      document.getElementById('btnProceed').disabled = !accepted;
     }
 
-    function toggleAccetta(cb) {
-      localStorage.setItem('regole_' + BOAT_KEY, cb.checked ? '1' : '');
-      document.getElementById('accettaStatus').style.display = cb.checked ? 'block' : 'none';
-      unlockCrew(cb.checked);
+    function proceedToCrew() {
+      document.getElementById('step2').classList.add('active');
+      document.getElementById('step3').classList.add('active');
+      document.getElementById('accettazione').style.display = 'none';
+      document.getElementById('crewlist').style.display = 'block';
+      loadCrewList('oceanis');
     }
 
     function downloadCrewPDFValidated(boat, boatName) {
