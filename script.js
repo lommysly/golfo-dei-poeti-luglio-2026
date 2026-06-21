@@ -752,3 +752,10 @@ function generateCrewPDF(members, boatName, departureDate, arrivalDate) {
     if (!dd.contains(e.target)) dd.classList.remove('open');
   });
 })();
+
+
+
+
+// end of file
+
+
