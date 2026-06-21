@@ -1,5 +1,6 @@
 /* ══════════════════════════════════════════════════
    GOLFO DEI POETI WEEKEND — Script
+   Luglio 2026
    ══════════════════════════════════════════════════ */
 
 /* ── Google Sheets API ──────────────────────────── */
@@ -757,6 +758,7 @@ function generateCrewPDF(members, boatName, departureDate, arrivalDate) {
 
 
 // end of file
+
 
 
 
