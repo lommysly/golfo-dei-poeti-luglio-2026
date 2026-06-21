@@ -3,7 +3,7 @@
    ══════════════════════════════════════════════════ */
 
 /* ── Google Sheets API ──────────────────────────── */
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxP4UKTts8LtwOAp3VIYeqjKPLUbKlYYM2zec9tMakjmFTgjKIK1hEOgA7BJRBmCcM2/exec';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyAnJF9btUcKFHJc-aQ-LPRSaFvOI0J2_iGq-0-ouPA08i65FgwNjTmiiFjWGG7bWL8/exec';
 const ADMIN_PASSWORDS = {
   atlantica: 'Skipper2026',
   oceanis:   'Skipper2026'
