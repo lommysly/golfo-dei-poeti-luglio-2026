@@ -5,9 +5,8 @@
 /* ── Google Sheets API ──────────────────────────── */
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxP4UKTts8LtwOAp3VIYeqjKPLUbKlYYM2zec9tMakjmFTgjKIK1hEOgA7BJRBmCcM2/exec';
 const ADMIN_PASSWORDS = {
-  lagoon:    'Skipper2026',
-  oceanis:   'Skipper2026',
-  atlantica: 'Skipper2026'
+  atlantica: 'Skipper2026',
+  oceanis:   'Skipper2026'
 };
 
 /* ── Stato live equipaggio ──────────────────────── */
@@ -167,7 +166,7 @@ function toggleAccettaBoat(cb, boat) {
 
 /* ── Crew List — selezione barca ───────────────── */
 function selectBoat(boat) {
-  const boatNames = { lagoon: '⛵ Lagoon 40', oceanis: '⛵ Beneteau Oceanis 48' };
+  const boatNames = { atlantica: '⛵ Atlantica 45', oceanis: '⛵ Sharel (Oceanis 48)' };
   document.getElementById('crewBoatSelect').style.display = 'none';
   const formArea = document.getElementById('crewFormArea');
   formArea.style.display = 'block';
@@ -207,7 +206,7 @@ function backToBoatSelect() {
 }
 
 /* ── Crew member row template ─────────────────── */
-let memberCount = { lagoon: 0, oceanis: 0 };
+let memberCount = { atlantica: 0, oceanis: 0 };
 const CREW_FIELDS = ['nome','cognome','sesso','nascita','comuneNascita','provNascita','nazionalita','via','citta','prov','cap','tipoDoc','numDoc','scadDoc','ruolo','cf'];
 
 function saveToStorage(boat) {
