@@ -228,9 +228,7 @@
 
   <script src="script.js?v=20260525i"></script>
   <script>
-    document.getElementById('navBurger').addEventListener('click', () => {
-      document.getElementById('navMobile').classList.toggle('open');
-    });
+    const BOAT_KEY = 'atlantica';
 
     function checkAcceptance() {
       const accepted = document.getElementById('acceptRules').checked;
@@ -242,114 +240,25 @@
       document.getElementById('step3').classList.add('active');
       document.getElementById('accettazione').style.display = 'none';
       document.getElementById('crewlist').style.display = 'block';
-      loadCrewList('atlantica');
+      // I membri sono già caricati nel DOMContentLoaded; non serve ricaricarli.
+      // Scorri automaticamente alla sezione crew list.
+      document.getElementById('crewlist').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // Crew list functions
-    let crewData = {};
-
-    function loadCrewList(boat) {
-      try {
-        crewData = JSON.parse(localStorage.getItem('crew_' + boat) || '{}');
-      } catch(e) {
-        crewData = {};
+    window.addEventListener('DOMContentLoaded', () => {
+      // Carica dati salvati in localStorage e popola il form
+      const saved = (() => { try { return JSON.parse(localStorage.getItem('crew_' + BOAT_KEY)) || []; } catch(e) { return []; } })();
+      if (saved.length > 0) {
+        saved.forEach(data => addMember(BOAT_KEY, data));
+        const btn = document.getElementById('btnSalva-' + BOAT_KEY);
+        if (btn) btn.innerHTML = '✏️ Modifica i miei dati';
+      } else {
+        addMember(BOAT_KEY);
       }
-      renderMembers(boat);
-    }
-
-    function renderMembers(boat) {
-      const container = document.getElementById('members-' + boat);
-      container.innerHTML = '';
-      
-      const members = crewData.members || [];
-      if (members.length === 0) {
-        addMember(boat);
-        return;
-      }
-      
-      members.forEach((member, idx) => {
-        const div = document.createElement('div');
-        div.className = 'crew-member-card';
-        div.innerHTML = `
-          <div class="cm-header">
-            <span class="cm-num">${idx + 1}</span>
-            <button class="cm-delete" onclick="deleteMember('${boat}', ${idx})">Elimina</button>
-          </div>
-          <div class="cm-body">
-            <div class="cm-row">
-              <label>Nome</label>
-              <input type="text" value="${member.nome || ''}" onchange="updateMember('${boat}', ${idx}, 'nome', this.value)" />
-            </div>
-            <div class="cm-row">
-              <label>Cognome</label>
-              <input type="text" value="${member.cognome || ''}" onchange="updateMember('${boat}', ${idx}, 'cognome', this.value)" />
-            </div>
-            <div class="cm-row">
-              <label>Data di nascita</label>
-              <input type="date" value="${member.dataNascita || ''}" onchange="updateMember('${boat}', ${idx}, 'dataNascita', this.value)" />
-            </div>
-            <div class="cm-row">
-              <label>Luogo di nascita</label>
-              <input type="text" value="${member.luogoNascita || ''}" onchange="updateMember('${boat}', ${idx}, 'luogoNascita', this.value)" />
-            </div>
-            <div class="cm-row">
-              <label>Nazionalità</label>
-              <input type="text" value="${member.nazionalita || ''}" onchange="updateMember('${boat}', ${idx}, 'nazionalita', this.value)" />
-            </div>
-            <div class="cm-row">
-              <label>Documento</label>
-              <input type="text" value="${member.documento || ''}" onchange="updateMember('${boat}', ${idx}, 'documento', this.value)" />
-            </div>
-          </div>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    function addMember(boat) {
-      if (!crewData.members) crewData.members = [];
-      crewData.members.push({
-        nome: '',
-        cognome: '',
-        dataNascita: '',
-        luogoNascita: '',
-        nazionalita: '',
-        documento: ''
-      });
-      saveCrewData(boat);
-      renderMembers(boat);
-    }
-
-    function updateMember(boat, idx, field, value) {
-      crewData.members[idx][field] = value;
-      saveCrewData(boat);
-    }
-
-    function deleteMember(boat, idx) {
-      if (confirm('Eliminare questo membro?')) {
-        crewData.members.splice(idx, 1);
-        saveCrewData(boat);
-        renderMembers(boat);
-      }
-    }
-
-    function saveCrewData(boat) {
-      try {
-        localStorage.setItem('crew_' + boat, JSON.stringify(crewData));
-      } catch(e) {}
-    }
-
-    function saveMemberToSheets(boat) {
-      const status = document.getElementById('saveStatus-' + boat);
-      status.style.display = 'block';
-      status.textContent = 'Salvataggio in corso...';
-      
-      // Placeholder - implementare salvataggio su Google Sheets
-      setTimeout(() => {
-        status.textContent = '✅ Dati salvati con successo!';
-        document.getElementById('step4').classList.add('active');
-      }, 1000);
-    }
+      document.getElementById('step1').classList.add('done');
+      // Carica stato live dell'equipaggio da Google Sheets
+      loadCrewStatus(BOAT_KEY);
+    });
   </script>
 </body>
 </html>

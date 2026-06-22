@@ -4,7 +4,10 @@
    ══════════════════════════════════════════════════ */
 
 /* ── Google Sheets API ──────────────────────────── */
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyAnJF9btUcKFHJc-aQ-LPRSaFvOI0J2_iGq-0-ouPA08i65FgwNjTmiiFjWGG7bWL8/exec';
+const SHEETS_URL = {
+  atlantica: 'https://script.google.com/macros/s/AKfycbyAnJF9btUcKFHJc-aQ-LPRSaFvOI0J2_iGq-0-ouPA08i65FgwNjTmiiFjWGG7bWL8/exec',
+  oceanis:   'https://script.google.com/macros/s/AKfycbyzQrNKZzN8vT6ykT3aY7qsBxLiepMoNvYDzXMgZs0VGZiLGeSrCjrJ5b-29YjHhGShAw/exec'
+};
 const ADMIN_PASSWORDS = {
   atlantica: 'Skipper2026',
   oceanis:   'Skipper2026'
@@ -17,7 +20,7 @@ async function loadCrewStatus(boat, listId, countId) {
   if (!listEl) return;
   listEl.innerHTML = '<span style="color:rgba(255,255,255,.3); font-size:.85rem;">Caricamento...</span>';
   try {
-    const res = await fetch(SHEETS_URL + '?boat=' + boat);
+    const res = await fetch(SHEETS_URL[boat] + '?boat=' + boat);
     const json = await res.json();
     const members = (json.members || []).filter(m => m.nome && m.nome.trim());
     if (members.length === 0) {
@@ -544,7 +547,7 @@ async function saveMemberToSheets(boat) {
   }
   const form = document.createElement('form');
   form.method = 'POST';
-  form.action = SHEETS_URL;
+  form.action = SHEETS_URL[boat];
   form.target = '_submitFrame';
   form.style.display = 'none';
   const input = document.createElement('input');
@@ -595,7 +598,7 @@ window._showFormAgain = function(boat) {
 function adminDownloadPDF(boat) {
   const pwd = prompt('Password amministratore:');
   if (pwd !== ADMIN_PASSWORDS[boat]) { alert('Password errata.'); return; }
-  const url = SHEETS_URL + '?action=pdf&boat=' + boat;
+  const url = SHEETS_URL[boat] + '?action=pdf&boat=' + boat;
   const a = document.createElement('a');
   a.href = url;
   a.target = '_blank';

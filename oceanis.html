@@ -313,18 +313,6 @@
   <script>
     const BOAT_KEY = 'oceanis';
 
-    function updateCounter() {
-      const n = document.getElementById('members-oceanis').querySelectorAll('.crew-member-row').length;
-      document.getElementById('crewCounter').textContent = n + (n === 1 ? ' membro aggiunto' : ' membri aggiunti');
-      document.getElementById('step3').classList.toggle('done', n > 0);
-      document.getElementById('step4').classList.toggle('active', n > 0);
-    }
-
-    function addMemberAndCount(boat, prefill) {
-      addMember(boat, prefill);
-      updateCounter();
-    }
-
     function checkAcceptance() {
       const accepted = document.getElementById('acceptRules').checked;
       document.getElementById('btnProceed').disabled = !accepted;
@@ -335,31 +323,24 @@
       document.getElementById('step3').classList.add('active');
       document.getElementById('accettazione').style.display = 'none';
       document.getElementById('crewlist').style.display = 'block';
-      loadCrewList('oceanis');
-    }
-
-    function downloadCrewPDFValidated(boat, boatName) {
-      saveMemberToSheets(boat);
+      // I membri sono già caricati nel DOMContentLoaded; non serve ricaricarli.
+      // Scorri automaticamente alla sezione crew list.
+      document.getElementById('crewlist').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      const accepted = localStorage.getItem('regole_' + BOAT_KEY) === '1';
-      if (accepted) {
-        document.getElementById('checkRegole').checked = true;
-        document.getElementById('accettaStatus').style.display = 'block';
-      }
-      unlockCrew(accepted);
-      const saved = (() => { try { return JSON.parse(localStorage.getItem('crew_oceanis')) || []; } catch(e) { return []; } })();
+      // Carica dati salvati in localStorage e popola il form
+      const saved = (() => { try { return JSON.parse(localStorage.getItem('crew_' + BOAT_KEY)) || []; } catch(e) { return []; } })();
       if (saved.length > 0) {
-        saved.forEach(data => addMemberAndCount('oceanis', data));
-        const btn = document.getElementById('btnSalva-oceanis');
+        saved.forEach(data => addMember(BOAT_KEY, data));
+        const btn = document.getElementById('btnSalva-' + BOAT_KEY);
         if (btn) btn.innerHTML = '✏️ Modifica i miei dati';
       } else {
-        addMemberAndCount('oceanis');
+        addMember(BOAT_KEY);
       }
-      updateCounter();
       document.getElementById('step1').classList.add('done');
-      loadCrewStatus('oceanis');
+      // Carica stato live dell'equipaggio da Google Sheets
+      loadCrewStatus(BOAT_KEY);
     });
   </script>
 </body>
