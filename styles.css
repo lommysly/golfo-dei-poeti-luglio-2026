@@ -1189,6 +1189,25 @@ body {
   font-weight: 700; color: #fff; line-height: 1.05; margin: 8px 0 12px;
 }
 .page-hero-sub { color: rgba(255,255,255,.65); font-size: 1rem; max-width: 560px; }
+.page-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+  .page-hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-hero-actions .btn-primary,
+  .page-hero-actions .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+}
 
 /* ──────────────────── PAGE LINKS (home cards) ───────────── */
 .page-links { padding: 100px 0; background: var(--ocean); }
