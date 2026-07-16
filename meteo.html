@@ -85,9 +85,11 @@
         <a href="esperienza.html">L'Esperienza</a>
         <a href="organizzazione.html">Organizzazione</a>
         <a href="sicurezza.html">Sicurezza</a>
+        <a href="rotta.html">🗺️ Rotta</a>
         <div class="dropdown" id="navDropdown">
           <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
           <div class="dropdown-menu">
+            <a href="crewlist.html">Crew List</a>
             <a href="checkin-atlantica.html">Check-in Atlantica</a>
             <a href="checkin-oceanis.html">Check-in Sharel</a>
             <a href="meteo.html" class="active">Meteo Operativo</a>
@@ -101,6 +103,8 @@
       <a href="esperienza.html">L'Esperienza</a>
       <a href="organizzazione.html">Organizzazione</a>
       <a href="sicurezza.html">Sicurezza</a>
+      <a href="crewlist.html">Crew List</a>
+      <a href="rotta.html">🗺️ Rotta</a>
       <a href="valigia.html">Valigia Intelligente</a>
       <a href="meteo.html" style="color:var(--turq);font-weight:700;">Meteo</a>
     </div>
@@ -127,59 +131,144 @@
 
     <!-- STATUS BANNER -->
     <div class="status-banner">
-      <div class="sb-icon">☀️</div>
+      <div class="sb-icon">⛵</div>
       <div>
-        <div class="sb-title">Condizioni estive ideali</div>
-        <div class="sb-sub">Alta pressione stabile · mare calmo · temperature estive · brezze termiche pomeridiane</div>
+        <div class="sb-title">Weekend navigabile, sabato notte la piu' comoda</div>
+        <div class="sb-sub">Caldo pieno, brezze leggere, mare quasi piatto venerdi, un po' di onda corta sabato pomeriggio e piu' residuo domenica.</div>
       </div>
-      <div class="sb-badge">FAVOREVOLE</div>
+      <div class="sb-badge">BUONO</div>
     </div>
 
     <!-- CHECK PILLS -->
     <div class="check-row">
-      <div class="check-pill"><span class="cp-icon">✅</span> Alta pressione sul Tirreno</div>
-      <div class="check-pill"><span class="cp-icon">✅</span> Temperature 22–30°C</div>
-      <div class="check-pill"><span class="cp-icon">✅</span> Mare calmo / poco mosso</div>
-      <div class="check-pill"><span class="cp-icon">✅</span> Vento 5–12 nodi (brezze)</div>
-      <div class="check-pill"><span class="cp-icon">✅</span> Zero fronti in vista</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Massime 31–33°C</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Alba 05:53–05:55 · tramonto 20:58–21:00</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Vento leggero 2–7 kn, locali brezze</div>
+      <div class="check-pill"><span class="cp-icon">✅</span> Onda 0.15–0.22 m ven, 0.32–0.66 m sab, 0.42–0.86 m dom</div>
+      <div class="check-pill"><span class="cp-icon">🌙</span> Luna crescente 14% → 32%, visibile fino a tarda sera</div>
     </div>
 
     <!-- FORECAST GRID -->
     <div class="section-title"><span>Forecast</span> — Panoramica</div>
     <div class="forecast-grid">
       <div class="fc-day">
-        <div class="fc-date">Ven 27</div>
+        <div class="fc-date">Ven 17</div>
         <div class="fc-icon">🌤</div>
-        <div class="fc-temp">28°C</div>
-        <div class="fc-wind">SW 8 kn</div>
-        <div class="fc-sea">0.2 m</div>
-        <div class="fc-note">Imbarco 14:00</div>
+        <div class="fc-temp">24.6–31.1°C</div>
+        <div class="fc-wind">S / SSW 2–7 kn</div>
+        <div class="fc-sea">0.14–0.22 m</div>
+        <div class="fc-note">Alba 05:53 · tramonto 21:00</div>
       </div>
       <div class="fc-day active-day">
-        <div class="fc-date">Sab 28</div>
-        <div class="fc-icon">☀️</div>
-        <div class="fc-temp">30°C</div>
-        <div class="fc-wind">W 10 kn</div>
-        <div class="fc-sea">0.3 m</div>
-        <div class="fc-note">Calette &amp; Cena</div>
+        <div class="fc-date">Sab 18</div>
+        <div class="fc-icon">🌫️</div>
+        <div class="fc-temp">25.4–31.4°C</div>
+        <div class="fc-wind">ESE / S 2–6 kn</div>
+        <div class="fc-sea">0.32–0.66 m</div>
+        <div class="fc-note">Possibile foschia al mattino</div>
       </div>
       <div class="fc-day">
-        <div class="fc-date">Dom 29</div>
-        <div class="fc-icon">☀️</div>
-        <div class="fc-temp">29°C</div>
-        <div class="fc-wind">SW 6 kn</div>
-        <div class="fc-sea">0.2 m</div>
-        <div class="fc-note">Rientro</div>
+        <div class="fc-date">Dom 19</div>
+        <div class="fc-icon">⛅</div>
+        <div class="fc-temp">25.5–32.6°C</div>
+        <div class="fc-wind">E mattino, SW pomeriggio 2–6 kn</div>
+        <div class="fc-sea">0.42–0.86 m</div>
+        <div class="fc-note">Piu' onda residua in rientro</div>
       </div>
     </div>
 
     <!-- TEMPERATURA ACQUA -->
     <div class="section-title"><span>Temperatura</span> dell'Acqua</div>
     <div class="water-card">
-      <div class="wc-temp">23–25°C</div>
+      <div class="wc-temp">24–25°C</div>
       <div>
         <div class="wc-label">Golfo dei Poeti · 17-19 Luglio 2026</div>
-        <div class="wc-desc">Acqua calda e invitante. Perfetta per snorkeling, bagno e doccia da marinaio. 🏊‍♂️</div>
+        <div class="wc-desc">Acqua estiva piena: snorkeling e bagno comodi in tutto il weekend, con sensazione migliore venerdi e sabato quando il mare resta piu' corto e ordinato.</div>
+      </div>
+    </div>
+
+    <div class="section-title"><span>Rade</span> — Dove dormire in base a questo meteo</div>
+    <div class="pp-timeline">
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Prima scelta · Sabato notte</div>
+            <div class="pp-day-label">RADA PIU' COMODA</div>
+            <div class="pp-day-route">Cala del Terrizzo / lato est Palmaria</div>
+          </div>
+          <div class="pp-pills">
+            <div class="pp-pill sea">🌊 notte 0.14 m</div>
+            <div class="pp-pill wind">💨 vento debole 0.5–4 kn</div>
+            <div class="pp-pill sun">🌅 alba pulita verso ENE</div>
+          </div>
+          <div class="pp-desc">E' il punto piu' lineare per questa finestra: sabato sera il vento cala molto e la notte diventa quasi piatta. Resti vicino a Locanda Lorena e hai una rada piu' protetta rispetto ai lati aperti di Palmaria e Fiascherino.</div>
+        </div>
+      </div>
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Seconda scelta · Venerdi notte</div>
+            <div class="pp-day-label">RADA FACILE</div>
+            <div class="pp-day-route">Baia Blu / San Terenzo</div>
+          </div>
+          <div class="pp-pills">
+            <div class="pp-pill sea">🌊 0.14–0.18 m la sera</div>
+            <div class="pp-pill wind">💨 2–5 kn</div>
+            <div class="pp-pill temp">🌡️ notte 25–28°C</div>
+          </div>
+          <div class="pp-desc">Per venerdi e' una rada semplice e tranquilla: acqua quasi piatta, termica modesta e alba bellissima verso Tellaro e il lato est del golfo. Migliore dei lati aperti a ponente se volete una prima notte piu' riposante.</div>
+        </div>
+      </div>
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Da evitare per la notte</div>
+            <div class="pp-day-label">ESPOSTE</div>
+            <div class="pp-day-route">Pozzale, Maramozza, lati aperti a sud-ovest</div>
+          </div>
+          <div class="pp-pills">
+            <div class="pp-pill warn">⚠️ piu' onda corta sab/dom</div>
+          </div>
+          <div class="pp-desc">Bene per bagno e soste diurne, meno per dormirci. Sabato pomeriggio e domenica rimane piu' moto ondoso residuo; meglio usarle come spot da giornata e spostarsi poi in una rada piu' coperta per la notte.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title"><span>Sole &amp; Luna</span> — Punti migliori</div>
+    <div class="pp-timeline">
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Miglior alba</div>
+            <div class="pp-day-label">SOLE</div>
+            <div class="pp-day-route">Baia Blu · San Terenzo · Tellaro</div>
+          </div>
+          <div class="pp-desc">Il sole sorge tra <strong>05:53 e 05:55</strong> da ENE. I punti migliori sono il lato est del golfo: Baia Blu, San Terenzo e Tellaro. Se dormite a est, avete luce frontale sull'acqua e profilo dei borghi che si accende subito.</div>
+        </div>
+      </div>
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Miglior tramonto</div>
+            <div class="pp-day-label">SOLE</div>
+            <div class="pp-day-route">Portovenere · San Pietro · lato ovest Palmaria</div>
+          </div>
+          <div class="pp-desc">Il sole tramonta tra <strong>20:58 e 21:00</strong> verso WNW. I punti piu' forti sono il fronte di Portovenere, la chiesa di San Pietro e la parte ovest/sud-ovest di Palmaria, con Tino e Tinetto che lavorano bene in silhouette.</div>
+        </div>
+      </div>
+      <div class="pp-day">
+        <div class="pp-day-card">
+          <div class="pp-day-header">
+            <div class="pp-day-date">Luna visibile</div>
+            <div class="pp-day-label">LUNA CRESCENTE</div>
+            <div class="pp-day-route">17–19 Luglio · 14% → 32%</div>
+          </div>
+          <div class="pp-pills">
+            <div class="pp-pill sun">🌙 rise 09:27 / 10:41 / 11:52</div>
+            <div class="pp-pill sea">🌙 set 22:52 / 23:12 / 23:31</div>
+          </div>
+          <div class="pp-desc">La luna c'e', ma non e' una luna da nottata piena: e' crescente e resta piu' elegante nel tardo pomeriggio e nella prima serata. Per il <strong>moonset serale</strong> rendono meglio Portovenere, San Pietro e il lato ovest di Palmaria. Per il <strong>moonrise diurno</strong> sono migliori Baia Blu, San Terenzo e Tellaro, con vista aperta a est.</div>
+        </div>
       </div>
     </div>
 
@@ -192,22 +281,23 @@
           <div class="pp-day-header">
             <div class="pp-day-date">Venerdì 17 Luglio</div>
             <div class="pp-day-label">GIORNO 1</div>
-            <div class="pp-day-route">Porto Mirabello → Porto Venere</div>
+            <div class="pp-day-route">Porto Mirabello → Lerici / Baia Blu</div>
           </div>
           <div class="pp-pills">
-            <div class="pp-pill sun">☀️ Sole</div>
-            <div class="pp-pill wind">💨 SW 6-10 kn</div>
-            <div class="pp-pill sea">🌊 Mare calmo</div>
-            <div class="pp-pill temp">🌡️ 28°C</div>
+            <div class="pp-pill sun">🌤 sole con nubi alte</div>
+            <div class="pp-pill wind">💨 S / SSW 2–7 kn</div>
+            <div class="pp-pill sea">🌊 0.14–0.22 m</div>
+            <div class="pp-pill temp">🌡️ 24.6–31.1°C</div>
           </div>
           <div class="pp-desc">
-            <strong>14:00 — Imbarco</strong> a Porto Mirabello, La Spezia. Briefing di sicurezza e sistemazione a bordo.<br/>
-            <strong>18:30 — Uscita</strong> in rada di Porto Venere per l'aperitivo al tramonto.<br/>
-            <strong>20:30 — Cena</strong> in rada o a terra a Porto Venere (opzionale).
+            <strong>14:00 — Imbarco operativo</strong> a Porto Mirabello. Caldo pieno e vento leggero: finestra facile per sistemazione, briefing e prima uscita.<br/>
+            <strong>18:30 — Aperitivo in rada</strong> tra Lerici e Baia Blu, con mare corto e quasi piatto in serata.<br/>
+            <strong>Notte consigliata:</strong> Baia Blu / San Terenzo, che con questo scenario resta una delle rade piu' comode del golfo.
           </div>
           <div class="pp-spots">
             <span class="pp-spot">⚓ Porto Mirabello</span>
-            <span class="pp-spot">🌅 Porto Venere</span>
+            <span class="pp-spot">🌅 Baia Blu</span>
+            <span class="pp-spot">🌄 San Terenzo</span>
           </div>
         </div>
       </div>
@@ -217,26 +307,25 @@
           <div class="pp-day-header">
             <div class="pp-day-date">Sabato 18 Luglio</div>
             <div class="pp-day-label">GIORNO 2</div>
-            <div class="pp-day-route">Porto Venere → Isola Palmaria → Lerici</div>
+            <div class="pp-day-route">Lerici → Palmaria → Portovenere / Terrizzo</div>
           </div>
           <div class="pp-pills">
-            <div class="pp-pill sun">☀️ Sole pieno</div>
-            <div class="pp-pill wind">💨 W 8-12 kn</div>
-            <div class="pp-pill sea">🌊 Mare poco mosso</div>
-            <div class="pp-pill temp">🌡️ 30°C</div>
+            <div class="pp-pill sun">🌫️ foschia presto, poi caldo pieno</div>
+            <div class="pp-pill wind">💨 ESE / S 2–6 kn</div>
+            <div class="pp-pill sea">🌊 0.32–0.66 m</div>
+            <div class="pp-pill temp">🌡️ 25.4–31.4°C</div>
           </div>
           <div class="pp-desc">
-            <strong>Mattina — Navigazione</strong> verso le calette dell'isola della Palmaria (Cala del Terrizzo, Pozzale, Maramozza). Snorkeling e relax.<br/>
-            <strong>Pranzo — A bordo</strong> con prodotti locali.<br/>
-            <strong>Pomeriggio — Rotta</strong> verso Lerici / Baia Blu per l'ancoraggio notturno.<br/>
-            <strong>20:00 — Cena</strong> alla Locanda Lorena sull'isola della Palmaria (prenotazione obbligatoria).
+            <strong>Mattina — Partenza tranquilla</strong> con possibile foschia leggera ma vento ancora ordinato. Buona finestra per calette e snorkeling tra Terrizzo e Fornace.<br/>
+            <strong>Pomeriggio — Più onda corta</strong> rispetto a venerdi, ma sempre gestibile per spostamenti brevi dentro il golfo.<br/>
+            <strong>20:00 — Cena</strong> alla Locanda Lorena. <strong>Notte migliore del weekend</strong> davanti a Palmaria lato Terrizzo / canale riparato.
           </div>
           <div class="pp-spots">
             <span class="pp-spot">🏖️ Cala del Terrizzo</span>
+            <span class="pp-spot">🤿 Cala della Fornace</span>
             <span class="pp-spot">🏖️ Il Pozzale</span>
-            <span class="pp-spot">🏖️ Cala Maramozza</span>
             <span class="pp-spot">🍽️ Locanda Lorena</span>
-            <span class="pp-spot">⚓ Baia Blu / Lerici</span>
+            <span class="pp-spot">⚓ Terrizzo / lato est Palmaria</span>
           </div>
         </div>
       </div>
@@ -246,18 +335,18 @@
           <div class="pp-day-header">
             <div class="pp-day-date">Domenica 19 Luglio</div>
             <div class="pp-day-label">GIORNO 3</div>
-            <div class="pp-day-route">Lerici → Tellaro → Porto Mirabello</div>
+            <div class="pp-day-route">Palmaria / Lerici → Tellaro → Porto Mirabello</div>
           </div>
           <div class="pp-pills">
-            <div class="pp-pill sun">☀️ Sole</div>
-            <div class="pp-pill wind">💨 SW 5-8 kn</div>
-            <div class="pp-pill sea">🌊 Mare calmo</div>
-            <div class="pp-pill temp">🌡️ 29°C</div>
+            <div class="pp-pill sun">⛅ velature leggere</div>
+            <div class="pp-pill wind">💨 E al mattino, SW 4–6 kn dopo</div>
+            <div class="pp-pill sea">🌊 0.42–0.86 m</div>
+            <div class="pp-pill temp">🌡️ 25.5–32.6°C</div>
           </div>
           <div class="pp-desc">
-            <strong>Mattina — Bagno</strong> e colazione in rada.<br/>
-            <strong>11:00 — Passaggio</strong> a Tellaro per un giro nel borgo marinario.<br/>
-            <strong>13:00 — Rientro</strong> a Porto Mirabello. Disimbarco entro le 15:00.
+            <strong>Mattina — Ultimo bagno</strong> se il punto scelto e' ben riparato, ma con piu' onda residua rispetto ai due giorni precedenti.<br/>
+            <strong>11:00 — Passaggio</strong> su Tellaro o San Terenzo se il mare resta ordinato sotto costa.<br/>
+            <strong>Pomeriggio — Rientro</strong> a Porto Mirabello con margine, senza inseguire soste troppo aperte a sud-ovest.
           </div>
           <div class="pp-spots">
             <span class="pp-spot">🏘️ Tellaro</span>
@@ -271,7 +360,7 @@
     <!-- NOTE -->
     <div class="meteo-note">
       <span>ℹ️</span>
-      <div><strong>Aggiornamento finale 48h prima della partenza.</strong> Consulta <strong>Windy.com</strong> (modelli GFS/ECMWF/ICON) e <strong>Navily</strong> per le previsioni definitive. In caso di peggioramento, il programma viene adattato in sicurezza.</div>
+      <div><strong>Aggiornamento basato su Open-Meteo forecast e marine per La Spezia / Golfo dei Poeti.</strong> La finestra migliore per dormire in rada e' sabato notte lato Terrizzo. Per il tramonto rende meglio Portovenere / San Pietro; per l'alba meglio Tellaro, San Terenzo e Baia Blu. La luna e' crescente, visibile soprattutto dal pomeriggio fino a circa le 23:00.</div>
     </div>
 
   </div>

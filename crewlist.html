@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crew List — Golfo dei Poeti Weekend</title>
+  <meta name="description" content="Scegli la tua barca, leggi le regole di bordo, compila la crew list e invia i tuoi dati per il weekend nel Golfo dei Poeti." />
+  <meta property="og:title" content="Crew List — Golfo dei Poeti Weekend" />
+  <meta property="og:description" content="Pagina guidata per Atlantica e Sharel: regole, accettazione, dati equipaggio e passaggio finale alla valigia." />
+  <meta property="og:image" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/img/sailboat.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/crewlist.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Crew List — Golfo dei Poeti Weekend" />
+  <meta name="twitter:description" content="Scegli la tua barca, accetta le regole e compila la crew list del weekend." />
+  <meta name="twitter:image" content="https://lommysly.github.io/golfo-dei-poeti-luglio-2026/img/sailboat.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+</head>
+<body data-post-submit-redirect="valigia.html">
+
+<nav class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><span class="logo-icon">—</span><span>Golfo dei Poeti Weekend</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="esperienza.html">L'Esperienza</a>
+      <a href="organizzazione.html">Organizzazione</a>
+      <a href="sicurezza.html">Sicurezza</a>
+      <a href="crewlist.html" class="active">Crew List</a>
+      <div class="dropdown" id="navDropdown">
+        <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
+        <div class="dropdown-menu">
+          <a href="valigia.html">Valigia Intelligente</a>
+          <a href="checkin-atlantica.html">Check-in Atlantica</a>
+          <a href="checkin-oceanis.html">Check-in Sharel</a>
+          <a href="meteo.html">Meteo Operativo</a>
+        </div>
+      </div>
+    </div>
+    <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="esperienza.html">L'Esperienza</a>
+    <a href="organizzazione.html">Organizzazione</a>
+    <a href="sicurezza.html">Sicurezza</a>
+    <a href="crewlist.html" style="color:var(--turq);font-weight:700;">Crew List</a>
+    <a href="valigia.html">Valigia Intelligente</a>
+    <a href="meteo.html">Meteo</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <video class="page-hero-video" autoplay muted loop playsinline poster="img/oceanis48.jpg">
+    <source src="img/hero-video.mp4" type="video/mp4">
+  </video>
+  <div class="page-hero-bg" style="background-color:#0b3c5d;"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <a href="index.html" class="back-link">← Torna alla Home</a>
+    <span class="label light">Documentazione</span>
+    <h1 class="page-hero-title">Crew List</h1>
+    <p class="page-hero-sub">Scegli la tua barca, leggi le regole essenziali, accettale e invia i tuoi dati. Subito dopo atterri sulla pagina della valigia intelligente.</p>
+  </div>
+</div>
+
+<section class="crewlist" id="crewlist" style="padding-top:60px;">
+  <div class="container-wide">
+    <div class="crew-regole-banner" id="crbBanner">
+      <span class="crb-icon">!</span>
+      <span>Flusso guidato in 4 passi: <strong>scegli la barca</strong>, leggi le regole essenziali, <strong>accetta</strong> e compila la tua Crew List. Dopo l'invio andrai direttamente a <a href="valigia.html">Valigia Intelligente</a>.</span>
+    </div>
+
+    <div class="crew-boat-select reveal-up" id="crewBoatSelect">
+      <p class="crew-select-label">Su quale barca sei imbarcato?</p>
+      <div class="crew-boat-cards">
+        <button class="crew-boat-card" onclick="selectBoat('atlantica')">
+          <div class="cbc-img" style="background-image:url('img/atlantica.jpg')"></div>
+          <div class="cbc-body">
+            <div class="cbc-type">Monoscafo · 10 posti</div>
+            <div class="cbc-name">Atlantica 45</div>
+            <div class="cbc-cta">Entra e compila →</div>
+          </div>
+        </button>
+        <button class="crew-boat-card" onclick="selectBoat('oceanis')">
+          <div class="cbc-img" style="background-image:url('img/oceanis48.jpg')"></div>
+          <div class="cbc-body">
+            <div class="cbc-type">Monoscafo · 12 posti</div>
+            <div class="cbc-name">Sharel (Oceanis 48)</div>
+            <div class="cbc-cta">Entra e compila →</div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="crew-form-area" id="crewFormArea" style="display:none;">
+      <div class="crew-form-header">
+        <button class="crew-back-btn" onclick="backToBoatSelect()">← Cambia barca</button>
+        <div class="crew-form-title" id="crewFormTitle"></div>
+      </div>
+
+      <div class="crew-panel" id="crew-atlantica">
+        <div id="crewStatusPanel-atlantica" style="margin-bottom:28px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:20px 24px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; gap:12px; flex-wrap:wrap;">
+            <span style="font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.45);">Equipaggio Atlantica — stato compilazione</span>
+            <button onclick="loadCrewStatus('atlantica','crewStatusList-atlantica','crewStatusCount-atlantica')" style="background:none; border:none; color:rgba(255,255,255,.4); font-size:.75rem; cursor:pointer; padding:4px 8px;">↺ Aggiorna</button>
+          </div>
+          <div id="crewStatusList-atlantica" style="display:flex; flex-wrap:wrap; gap:10px;">
+            <span style="color:rgba(255,255,255,.3); font-size:.85rem;">Caricamento...</span>
+          </div>
+          <div id="crewStatusCount-atlantica" style="margin-top:14px; font-size:.78rem; color:rgba(255,255,255,.4);"></div>
+        </div>
+
+        <div class="crew-rules-grid">
+          <div class="crew-rule-card">
+            <h4>Sicurezza</h4>
+            <p>Mai correre a piedi nudi, soprattutto se bagnati. In navigazione tieni sempre una mano libera e segui le indicazioni dello skipper.</p>
+          </div>
+          <div class="crew-rule-card">
+            <h4>Convivenza</h4>
+            <p>Ordine, pulizia, rispetto del sonno e musica solo con il consenso di tutti. La barca e' uno spazio condiviso.</p>
+          </div>
+          <div class="crew-rule-card">
+            <h4>Cauzione</h4>
+            <p>Atlantica prevede una cauzione rimborsabile di <strong>€3.500</strong>. Assicurazione cauzione opzionale a decisione di gruppo.</p>
+          </div>
+        </div>
+        <div class="crew-rule-note">
+          Queste sono le regole essenziali di Atlantica. Per i dettagli completi puoi leggere la pagina dedicata: <a href="atlantica.html">Atlantica 45 →</a>
+        </div>
+
+        <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:18px 20px; margin:16px 0 24px;">
+          <label style="display:flex; align-items:flex-start; gap:12px; cursor:pointer;">
+            <input type="checkbox" id="checkRegole-atlantica" onchange="toggleAccettaBoat(this,'atlantica')" style="width:20px; height:20px; margin-top:2px; accent-color:var(--turq); cursor:pointer; flex-shrink:0;" />
+            <span style="font-size:.9rem; color:rgba(255,255,255,.8); line-height:1.5;">Ho letto e accetto le <strong>Regole di Bordo di Atlantica 45</strong> e posso procedere con l'invio dei miei dati.</span>
+          </label>
+          <div id="accettaStatus-atlantica" style="display:none; margin-top:10px; color:var(--turq); font-size:.85rem; font-weight:600;">✓ Regole accettate</div>
+        </div>
+
+        <div class="crew-locked" id="locked-atlantica">
+          <div class="crew-locked-icon">🔒</div>
+          <p><strong>Atlantica 45</strong>: prima conferma l'accettazione delle regole qui sopra. Appena lo fai, il modulo si apre e puoi inserire i tuoi dati.</p>
+        </div>
+
+        <div class="crew-unlocked" id="unlocked-atlantica" style="display:none;">
+          <div class="crew-members" id="members-atlantica"></div>
+          <div class="save-status" id="saveStatus-atlantica" style="display:none; margin:12px 0; padding:12px 16px; background:rgba(28,167,168,.15); border:1px solid var(--turq); border-radius:10px; color:#fff; font-size:.9rem;"></div>
+          <button class="btn-add-member" id="btnAdd-atlantica" onclick="addMember('atlantica')">+ Aggiungi membro</button>
+          <div class="crew-actions">
+            <button class="btn-dl-pdf" id="btnSalva-atlantica" onclick="saveMemberToSheets('atlantica')">Invia i miei dati</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="crew-panel" id="crew-oceanis">
+        <div id="crewStatusPanel-oceanis" style="margin-bottom:28px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:20px 24px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; gap:12px; flex-wrap:wrap;">
+            <span style="font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.45);">Equipaggio Sharel — stato compilazione</span>
+            <button onclick="loadCrewStatus('oceanis','crewStatusList-oceanis','crewStatusCount-oceanis')" style="background:none; border:none; color:rgba(255,255,255,.4); font-size:.75rem; cursor:pointer; padding:4px 8px;">↺ Aggiorna</button>
+          </div>
+          <div id="crewStatusList-oceanis" style="display:flex; flex-wrap:wrap; gap:10px;">
+            <span style="color:rgba(255,255,255,.3); font-size:.85rem;">Caricamento...</span>
+          </div>
+          <div id="crewStatusCount-oceanis" style="margin-top:14px; font-size:.78rem; color:rgba(255,255,255,.4);"></div>
+        </div>
+
+        <div class="crew-rules-grid">
+          <div class="crew-rule-card">
+            <h4>Sicurezza</h4>
+            <p>Non fare nulla che metta a rischio te o gli altri. Niente droghe a bordo, attenzione ai movimenti e agli spazi in coperta.</p>
+          </div>
+          <div class="crew-rule-card">
+            <h4>Vita di bordo</h4>
+            <p>Rispetta cabine, turni, quiet zone e consumi di acqua ed energia. La barca non aspetta nessuno: gli orari contano.</p>
+          </div>
+          <div class="crew-rule-card">
+            <h4>Cauzione</h4>
+            <p>Sharel prevede una cauzione rimborsabile di <strong>€4.000</strong>. Assicurazione cauzione opzionale a decisione di gruppo.</p>
+          </div>
+        </div>
+        <div class="crew-rule-note">
+          Queste sono le regole essenziali di Sharel. Per leggere tutto nel dettaglio puoi aprire la pagina dedicata: <a href="oceanis.html">Sharel (Oceanis 48) →</a>
+        </div>
+
+        <div style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:18px 20px; margin:16px 0 24px;">
+          <label style="display:flex; align-items:flex-start; gap:12px; cursor:pointer;">
+            <input type="checkbox" id="checkRegole-oceanis" onchange="toggleAccettaBoat(this,'oceanis')" style="width:20px; height:20px; margin-top:2px; accent-color:var(--turq); cursor:pointer; flex-shrink:0;" />
+            <span style="font-size:.9rem; color:rgba(255,255,255,.8); line-height:1.5;">Ho letto e accetto le <strong>Regole di Bordo di Sharel (Oceanis 48)</strong> e posso procedere con l'invio dei miei dati.</span>
+          </label>
+          <div id="accettaStatus-oceanis" style="display:none; margin-top:10px; color:var(--turq); font-size:.85rem; font-weight:600;">✓ Regole accettate</div>
+        </div>
+
+        <div class="crew-locked" id="locked-oceanis">
+          <div class="crew-locked-icon">🔒</div>
+          <p><strong>Sharel (Oceanis 48)</strong>: prima conferma l'accettazione delle regole qui sopra. Appena lo fai, il modulo si apre e puoi inserire i tuoi dati.</p>
+        </div>
+
+        <div class="crew-unlocked" id="unlocked-oceanis" style="display:none;">
+          <div class="crew-members" id="members-oceanis"></div>
+          <div class="save-status" id="saveStatus-oceanis" style="display:none; margin:12px 0; padding:12px 16px; background:rgba(28,167,168,.15); border:1px solid var(--turq); border-radius:10px; color:#fff; font-size:.9rem;"></div>
+          <button class="btn-add-member" id="btnAdd-oceanis" onclick="addMember('oceanis')">+ Aggiungi membro</button>
+          <div class="crew-actions">
+            <button class="btn-dl-pdf" id="btnSalva-oceanis" onclick="saveMemberToSheets('oceanis')">Invia i miei dati</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-logo">Golfo dei Poeti Weekend</div>
+    <p>Weekend 17–19 Luglio 2026</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="crewlist.html">Crew List</a>
+      <a href="organizzazione.html">Organizzazione</a>
+      <a href="valigia.html">Valigia</a>
+    </div>
+    <p class="footer-copy">© 2026 Golfo dei Poeti Weekend · Tutti i diritti riservati</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const queryBoat = new URLSearchParams(window.location.search).get('boat');
+    if (queryBoat === 'atlantica' || queryBoat === 'oceanis') {
+      selectBoat(queryBoat);
+    }
+  });
+</script>
+</body>
+</html>

@@ -36,6 +36,7 @@
         <div class="dropdown" id="navDropdown">
           <a href="javascript:void(0)" class="dropdown-toggle">Strumenti <span style="font-size:.7em">▼</span></a>
           <div class="dropdown-menu">
+            <a href="crewlist.html">Crew List</a>
             <a href="checkin-atlantica.html">Check-in Atlantica</a>
             <a href="checkin-oceanis.html">Check-in Sharel</a>
             <a href="meteo.html">Meteo Operativo</a>
@@ -50,6 +51,7 @@
       <a href="esperienza.html">L'Esperienza</a>
       <a href="organizzazione.html">Organizzazione</a>
       <a href="sicurezza.html">Sicurezza</a>
+      <a href="crewlist.html">Crew List</a>
       <a href="valigia.html">Valigia Intelligente</a>
       <a href="meteo.html">Meteo</a>
     </div>
@@ -209,7 +211,7 @@
   </section>
 
   <!-- CREW LIST -->
-  <section class="crewlist-section" id="crewlist" style="display:none">
+  <section class="crewlist-section crewlist-locked" id="crewlist">
     <div class="container">
       <div class="section-header centered">
         <span class="label">Documentazione</span>
@@ -217,11 +219,15 @@
         <p class="section-desc">Compila i dati di ogni membro dell'equipaggio dell'Atlantica 45.</p>
       </div>
 
+      <div class="crewlist-lock-note" id="crewlistLockNote">
+        Questo e' il <strong>modulo dedicato ad Atlantica 45</strong>. Per compilarlo e salvarlo devi prima accettare le regole di bordo nel blocco qui sopra.
+      </div>
+
       <div class="crew-members" id="members-atlantica"></div>
       <div class="save-status" id="saveStatus-atlantica" style="display:none; margin:12px 0; padding:12px 16px; background:rgba(28,167,168,.15); border:1px solid var(--turq); border-radius:10px; color:#fff; font-size:.9rem;"></div>
       <div class="crew-actions">
-        <button class="btn-dl-pdf" id="btnSalva-atlantica" onclick="saveMemberToSheets('atlantica')">💾 Salva i miei dati</button>
-        <button class="btn-secondary" onclick="addMember('atlantica')">+ Aggiungi membro</button>
+        <button class="btn-dl-pdf" id="btnSalva-atlantica" onclick="saveMemberToSheets('atlantica')" disabled>💾 Salva i miei dati</button>
+        <button class="btn-secondary" id="btnAdd-atlantica" onclick="addMember('atlantica')" disabled>+ Aggiungi membro</button>
       </div>
     </div>
   </section>
@@ -236,12 +242,14 @@
     }
 
     function proceedToCrew() {
+      document.getElementById('crewlist').classList.remove('crewlist-locked');
+      document.getElementById('btnSalva-atlantica').disabled = false;
+      document.getElementById('btnAdd-atlantica').disabled = false;
+      const lockNote = document.getElementById('crewlistLockNote');
+      if (lockNote) lockNote.style.display = 'none';
       document.getElementById('step2').classList.add('active');
       document.getElementById('step3').classList.add('active');
       document.getElementById('accettazione').style.display = 'none';
-      document.getElementById('crewlist').style.display = 'block';
-      // I membri sono già caricati nel DOMContentLoaded; non serve ricaricarli.
-      // Scorri automaticamente alla sezione crew list.
       document.getElementById('crewlist').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 

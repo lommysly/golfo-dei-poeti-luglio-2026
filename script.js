@@ -166,6 +166,16 @@ function toggleAccettaBoat(cb, boat) {
   localStorage.setItem('regole_' + boat, cb.checked ? '1' : '');
   const status = document.getElementById('accettaStatus-' + boat);
   if (status) status.style.display = cb.checked ? 'block' : 'none';
+  setCrewPanelUnlocked(boat, cb.checked);
+}
+
+function setCrewPanelUnlocked(boat, unlocked) {
+  const lockedBox = document.getElementById('locked-' + boat);
+  const unlockedBox = document.getElementById('unlocked-' + boat);
+  if (lockedBox && unlockedBox) {
+    lockedBox.style.display = unlocked ? 'none' : 'flex';
+    unlockedBox.style.display = unlocked ? 'block' : 'none';
+  }
 }
 
 /* ── Crew List — selezione barca ───────────────── */
@@ -197,6 +207,7 @@ function selectBoat(boat) {
   if (cb) cb.checked = accepted;
   const st = document.getElementById('accettaStatus-' + boat);
   if (st) st.style.display = accepted ? 'block' : 'none';
+  setCrewPanelUnlocked(boat, accepted);
   // carica dashboard stato equipaggio
   loadCrewStatus(boat, 'crewStatusList-' + boat, 'crewStatusCount-' + boat);
   // scroll smooth al form
@@ -477,6 +488,12 @@ function handleCounterClick(boat, el) {
 
 /* ── Salva membro su Google Sheets ──────────────── */
 async function saveMemberToSheets(boat) {
+  const regoleAccettate = localStorage.getItem('regole_' + boat) === '1';
+  if (!regoleAccettate) {
+    alert('Leggi e accetta prima le regole di bordo della tua barca.');
+    return;
+  }
+
   const container = document.getElementById('members-' + boat);
   const rows = container.querySelectorAll('.crew-member-row');
   if (rows.length === 0) { alert('Compila almeno un membro prima di salvare.'); return; }
@@ -568,16 +585,27 @@ async function saveMemberToSheets(boat) {
   if (addBtn2) addBtn2.style.display = 'none';
   if (crewActions2) crewActions2.style.display = 'none';
   if (statusEl2) {
+    const redirectUrl = document.body.dataset.postSubmitRedirect || '';
+    const redirectMessage = redirectUrl
+      ? `<span style="font-size:.82rem; opacity:.75;">Tra pochi secondi andrai alla pagina con i consigli per la valigia.</span>`
+      : `<span style="font-size:.82rem; opacity:.75;">Puoi chiudere questa pagina. I tuoi dati sono stati salvati.</span><br>
+      <button onclick="window._showFormAgain('${boat}')" style="margin-top:12px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:#fff; padding:7px 16px; border-radius:8px; cursor:pointer; font-size:.82rem;">✏️ Modifica i miei dati</button>`;
     statusEl2.innerHTML = `
       <div style="font-size:1.4rem; margin-bottom:8px;">✅</div>
       <strong>${nome} ${cognome}</strong> — dati inviati correttamente.<br>
-      <span style="font-size:.82rem; opacity:.75;">Puoi chiudere questa pagina. I tuoi dati sono stati salvati.</span><br>
-      <button onclick="window._showFormAgain('${boat}')" style="margin-top:12px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:#fff; padding:7px 16px; border-radius:8px; cursor:pointer; font-size:.82rem;">✏️ Modifica i miei dati</button>
+      ${redirectMessage}
     `;
     statusEl2.style.display = 'block';
     statusEl2.style.textAlign = 'center';
   }
   if (btn) { btn.textContent = '✅ Dati salvati!'; btn.style.background = 'var(--turq)'; btn.disabled = false; }
+
+  const redirectUrl = document.body.dataset.postSubmitRedirect || '';
+  if (redirectUrl) {
+    setTimeout(() => {
+      window.location.href = redirectUrl;
+    }, 1800);
+  }
 }
 
 /* ── Mostra di nuovo il form dopo il salvataggio ── */
