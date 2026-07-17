@@ -195,8 +195,6 @@ function selectBoat(boat) {
     const saved = loadFromStorage(boat);
     if (saved.length > 0) {
       saved.forEach(data => addMember(boat, data));
-      const btn = document.getElementById('btnSalva-' + boat);
-      if (btn) { btn.innerHTML = '✏️ Modifica i miei dati'; }
     } else {
       addMember(boat);
     }
@@ -239,6 +237,44 @@ function saveToStorage(boat) {
 function loadFromStorage(boat) {
   try { return JSON.parse(localStorage.getItem('crew_' + boat)) || []; }
   catch(e) { return []; }
+}
+
+function normalizeCrewFieldValue(el) {
+  if (!el) return;
+  const tag = (el.tagName || '').toUpperCase();
+  if (tag === 'INPUT') {
+    const type = (el.type || '').toLowerCase();
+    if (type === 'date') return;
+    if (type === 'number') return;
+    if (el.dataset.field === 'cap') {
+      el.value = (el.value || '').replace(/[^0-9]/g, '');
+      return;
+    }
+    el.value = (el.value || '').toUpperCase();
+    return;
+  }
+  if (tag === 'SELECT') {
+    if (el.value) el.value = el.value.toUpperCase();
+  }
+}
+
+function crewPayloadFingerprint(data) {
+  const parts = [
+    data.boat || '',
+    data.nome || '',
+    data.sesso || '',
+    data.nascita || '',
+    data.luogo || '',
+    data.nazionalita || '',
+    data.residenza || '',
+    data.cap || '',
+    data.tipoDoc || '',
+    data.numDoc || '',
+    data.scadDoc || '',
+    data.ruolo || '',
+    data.cf || ''
+  ];
+  return parts.join('|').toUpperCase();
 }
 
 function addMember(boat, prefill) {
@@ -336,20 +372,27 @@ function addMember(boat, prefill) {
   if (prefill) {
     CREW_FIELDS.forEach(f => {
       const el = row.querySelector(`[data-field="${f}"]`);
-      if (el && prefill[f]) el.value = prefill[f];
+      if (el && prefill[f]) {
+        el.value = prefill[f];
+        normalizeCrewFieldValue(el);
+      }
     });
     tryCalcCF(row);
   }
   // Auto-calcolo CF e autosave
   const cfTriggers = ['nome','cognome','sesso','nascita','comuneNascita','cf'];
-  const upperFields = ['cf','numDoc','prov','provNascita'];
   row.querySelectorAll('input, select').forEach(el => {
     const field = el.dataset.field;
-    if (upperFields.includes(field)) {
-      el.addEventListener('input', () => { el.value = el.value.toUpperCase(); });
-    }
-    el.addEventListener('input', () => { if (cfTriggers.includes(field)) tryCalcCF(row); saveToStorage(boat); });
-    el.addEventListener('change', () => { if (cfTriggers.includes(field)) tryCalcCF(row); saveToStorage(boat); });
+    el.addEventListener('input', () => {
+      normalizeCrewFieldValue(el);
+      if (cfTriggers.includes(field)) tryCalcCF(row);
+      saveToStorage(boat);
+    });
+    el.addEventListener('change', () => {
+      normalizeCrewFieldValue(el);
+      if (cfTriggers.includes(field)) tryCalcCF(row);
+      saveToStorage(boat);
+    });
   });
 }
 
@@ -499,6 +542,7 @@ async function saveMemberToSheets(boat) {
   if (rows.length === 0) { alert('Compila almeno un membro prima di salvare.'); return; }
 
   const row = rows[0];
+  row.querySelectorAll('input, select').forEach(normalizeCrewFieldValue);
   const get = f => row.querySelector(`[data-field="${f}"]`)?.value.trim() || '';
   const nome    = get('nome');
   const cognome = get('cognome');
@@ -536,12 +580,27 @@ async function saveMemberToSheets(boat) {
   if (nome.length < 2)    { alert('Nome troppo corto — verifica di aver inserito il nome completo.'); return; }
   if (cognome.length < 2) { alert('Cognome troppo corto — verifica di aver inserito il cognome completo.'); return; }
 
+  const sentKey = 'crew_sent_' + boat;
+  const submissionIdKey = 'crew_submission_id_' + boat;
+  const payloadHashKey = 'crew_last_payload_hash_' + boat;
+  const alreadySent = localStorage.getItem(sentKey) === '1';
+  let submissionId = localStorage.getItem(submissionIdKey);
+  if (!submissionId) {
+    submissionId = 'crew-' + boat + '-' + Date.now();
+    localStorage.setItem(submissionIdKey, submissionId);
+  }
+
   const btn = document.getElementById('btnSalva-' + boat);
-  if (btn) { btn.textContent = 'Invio in corso...'; btn.disabled = true; }
+  if (btn) {
+    btn.textContent = alreadySent ? 'Aggiornamento in corso...' : 'Invio in corso...';
+    btn.disabled = true;
+  }
 
   const nomeCompleto = nome + ' ' + cognome;
   const data = {
     boat,
+    mode: alreadySent ? 'update' : 'create',
+    submissionId,
     nome: nomeCompleto, sesso,
     nascita, luogo: comuneNascita + (get('provNascita') ? ' (' + get('provNascita') + ')' : ''),
     nazionalita: get('nazionalita'),
@@ -550,6 +609,17 @@ async function saveMemberToSheets(boat) {
     scadDoc: get('scadDoc'), ruolo: get('ruolo'), cf: get('cf'),
     regolaAccettata: true
   };
+
+  const newHash = crewPayloadFingerprint(data);
+  const oldHash = localStorage.getItem(payloadHashKey) || '';
+  if (alreadySent && oldHash && oldHash === newHash) {
+    alert('Nessuna modifica rilevata: i dati sono gia inviati.');
+    if (btn) {
+      btn.textContent = '✏️ Aggiorna i miei dati';
+      btn.disabled = false;
+    }
+    return;
+  }
 
   saveToStorage(boat);
 
@@ -584,28 +654,28 @@ async function saveMemberToSheets(boat) {
   if (container2) container2.style.display = 'none';
   if (addBtn2) addBtn2.style.display = 'none';
   if (crewActions2) crewActions2.style.display = 'none';
+  localStorage.setItem(sentKey, '1');
+  localStorage.setItem(payloadHashKey, newHash);
   if (statusEl2) {
     const redirectUrl = document.body.dataset.postSubmitRedirect || '';
     const redirectMessage = redirectUrl
-      ? `<span style="font-size:.82rem; opacity:.75;">Tra pochi secondi andrai alla pagina con i consigli per la valigia.</span>`
-      : `<span style="font-size:.82rem; opacity:.75;">Puoi chiudere questa pagina. I tuoi dati sono stati salvati.</span><br>
-      <button onclick="window._showFormAgain('${boat}')" style="margin-top:12px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:#fff; padding:7px 16px; border-radius:8px; cursor:pointer; font-size:.82rem;">✏️ Modifica i miei dati</button>`;
+      ? `<span style="font-size:.82rem; opacity:.75;">Se noti un errore, premi <strong>Modifica e reinvia</strong>. Quando hai finito, vai alla pagina Valigia.</span><br>
+      <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:12px;">
+        <button onclick="window._showFormAgain('${boat}')" style="background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:#fff; padding:7px 16px; border-radius:8px; cursor:pointer; font-size:.82rem;">✏️ Modifica e reinvia</button>
+        <a href="${redirectUrl}" style="display:inline-flex; align-items:center; justify-content:center; background:var(--turq); border:1px solid rgba(0,0,0,.15); color:#fff; text-decoration:none; padding:7px 16px; border-radius:8px; font-size:.82rem;">🎒 Vai a Valigia</a>
+      </div>`
+      : `<span style="font-size:.82rem; opacity:.75;">Puoi chiudere questa pagina. Se noti errori, premi Modifica e reinvia.</span><br>
+      <button onclick="window._showFormAgain('${boat}')" style="margin-top:12px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); color:#fff; padding:7px 16px; border-radius:8px; cursor:pointer; font-size:.82rem;">✏️ Modifica e reinvia</button>`;
     statusEl2.innerHTML = `
       <div style="font-size:1.4rem; margin-bottom:8px;">✅</div>
-      <strong>${nome} ${cognome}</strong> — dati inviati correttamente.<br>
+      <strong>${nome} ${cognome}</strong> — dati inviati.<br>
+      <span style="font-size:.82rem; opacity:.75;">Se reinvii con lo stesso nominativo/codice fiscale, il backend puo' aggiornare la riga esistente in base alla configurazione Google.</span><br>
       ${redirectMessage}
     `;
     statusEl2.style.display = 'block';
     statusEl2.style.textAlign = 'center';
   }
-  if (btn) { btn.textContent = '✅ Dati salvati!'; btn.style.background = 'var(--turq)'; btn.disabled = false; }
-
-  const redirectUrl = document.body.dataset.postSubmitRedirect || '';
-  if (redirectUrl) {
-    setTimeout(() => {
-      window.location.href = redirectUrl;
-    }, 1800);
-  }
+  if (btn) { btn.textContent = '✅ Dati inviati'; btn.style.background = 'var(--turq)'; btn.disabled = false; }
 }
 
 /* ── Mostra di nuovo il form dopo il salvataggio ── */
@@ -619,7 +689,7 @@ window._showFormAgain = function(boat) {
   if (addBtn) addBtn.style.display = '';
   if (crewActions) crewActions.style.display = '';
   if (statusEl) { statusEl.style.display = 'none'; statusEl.innerHTML = ''; }
-  if (btn) { btn.innerHTML = '✏️ Modifica i miei dati'; btn.style.background = ''; btn.disabled = false; }
+  if (btn) { btn.innerHTML = '✏️ Aggiorna i miei dati'; btn.style.background = ''; btn.disabled = false; }
 };
 
 /* ── Admin: genera PDF da Apps Script (crew list completa da Sheets) ── */
